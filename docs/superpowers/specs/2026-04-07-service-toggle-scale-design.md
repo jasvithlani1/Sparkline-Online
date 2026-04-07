@@ -5,7 +5,7 @@ Status: Approved in conversation, pending final spec review
 
 ## Goal
 
-Reduce the size of the entire interactive toggle card inside the `HOW CAN WE SERVE YOU?` section by roughly 60%, while leaving the section heading, background video, overlay, and surrounding banner composition unchanged.
+Reduce the size of the entire interactive toggle card inside the `HOW CAN WE SERVE YOU?` section by roughly 50%, while leaving the section heading, background video, overlay, and surrounding banner composition unchanged.
 
 ## Chosen Approach
 
@@ -61,6 +61,6 @@ Required verification:
 
 ## Risks
 
-- a literal 60% reduction can make desktop copy feel too small if not balanced per breakpoint
+- a literal 50% reduction can make desktop copy feel too small if not balanced per breakpoint
 - aggressive downsizing can reduce touch comfort on mobile if row height is cut too far
 - shrinking only internal elements without reducing width enough can leave the card looking sparse
