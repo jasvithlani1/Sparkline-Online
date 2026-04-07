@@ -1,15 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { navLinks } from "@/lib/content";
 
+const NAVBAR_SCROLL_THRESHOLD = 24;
+
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => {
+      setIsScrolled(window.scrollY > NAVBAR_SCROLL_THRESHOLD);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
+    };
+  }, []);
 
   return (
-    <header className="absolute inset-x-0 top-4 z-30 px-3 sm:px-4 md:top-5 md:px-6">
-      <div className="glass-shell mx-auto flex w-full max-w-[1010px] flex-col rounded-2xl px-3 py-2.5 text-white sm:px-4 sm:py-3 md:px-5 md:py-4">
+    <header
+      data-testid="site-navbar"
+      className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4 md:px-6 md:pt-4"
+    >
+      <div
+        data-testid="site-navbar-shell"
+        className={`mx-auto flex w-full max-w-[1010px] flex-col rounded-2xl border px-3 py-2.5 text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:px-4 sm:py-3 md:px-5 md:py-4 ${
+          isScrolled
+            ? "border-white/10 bg-[#0d1730]/88 shadow-[0_14px_40px_rgba(4,10,24,0.28)] backdrop-blur-xl"
+            : "glass-shell border-white/12 bg-white/8 shadow-[0_10px_30px_rgba(5,12,28,0.12)] backdrop-blur-md"
+        }`}
+      >
         <div className="flex items-center justify-between gap-3 sm:gap-4">
           <a href="#" className="flex items-center">
             <Image
@@ -53,7 +79,7 @@ export function Navbar() {
             </a>
             <button
               type="button"
-              aria-label="Open navigation menu"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-controls="mobile-nav-panel"
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((open) => !open)}

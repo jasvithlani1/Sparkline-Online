@@ -67,10 +67,12 @@ describe("Home page", () => {
     expect(
       screen.getByRole("heading", { name: /creative marketing/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/supercharged/i)).toBeInTheDocument();
+    expect(screen.getByTestId("hero-second-line")).toHaveTextContent(/supercharged/i);
     expect(screen.getByText(/haven demo:/i)).toBeInTheDocument();
     expect(screen.getByText(/how can we serve you\?/i)).toBeInTheDocument();
     expect(screen.getByText(/trusted by the bold/i)).toBeInTheDocument();
+    expect(screen.getByText(/^shape the future\.$/i)).toBeInTheDocument();
+    expect(screen.queryByText(/^future\.$/i)).not.toBeInTheDocument();
     expect(screen.getByText(/our work/i)).toBeInTheDocument();
     expect(brandLink).toBeInTheDocument();
     expect(brandLogo).toHaveAttribute("src", "/logos/sparkline-marketing-firm.svg");
@@ -78,7 +80,6 @@ describe("Home page", () => {
     expect(brandLogo).toHaveClass("sm:w-[70px]");
     expect(brandLogo).toHaveClass("md:w-[84px]");
     expect(brandLogo).toHaveClass("lg:w-[91px]");
-    expect(screen.getByText(/^SPARKLINE$/i)).toBeInTheDocument();
     const ctaButton = screen.getByRole("link", { name: /book a call/i });
     expect(ctaButton).toBeInTheDocument();
     expect(ctaButton).toHaveClass("inline-flex");
@@ -111,14 +112,14 @@ describe("Home page", () => {
     const submarineFrame = screen.getByTestId("service-submarine-frame");
     const submarineImage = screen.getByAltText("");
 
-    expect(submarineFrame).toHaveClass("max-w-[300px]");
+    expect(submarineFrame).toHaveClass("max-w-[340px]");
     expect(submarineFrame).toHaveClass("ml-auto");
     expect(submarineFrame).toHaveClass("mr-[calc((100vw-100%)/-2)]");
-    expect(submarineFrame).toHaveClass("-mt-[4.5rem]");
-    expect(submarineFrame).toHaveClass("h-[128px]");
-    expect(submarineFrame).toHaveClass("sm:max-w-[420px]");
-    expect(submarineFrame).toHaveClass("sm:h-[188px]");
-    expect(submarineFrame).toHaveClass("sm:-mt-[5.75rem]");
+    expect(submarineFrame).toHaveClass("-mt-[6rem]");
+    expect(submarineFrame).toHaveClass("h-[154px]");
+    expect(submarineFrame).toHaveClass("sm:max-w-[440px]");
+    expect(submarineFrame).toHaveClass("sm:h-[220px]");
+    expect(submarineFrame).toHaveClass("sm:-mt-[8rem]");
     expect(submarineFrame).toHaveClass("md:max-w-[560px]");
     expect(submarineFrame).toHaveClass("md:h-[316px]");
     expect(submarineFrame).toHaveClass("md:-mt-[12rem]");
@@ -126,6 +127,20 @@ describe("Home page", () => {
     expect(submarineFrame).toHaveClass("lg:h-[367px]");
     expect(submarineFrame).toHaveClass("lg:-mt-[15.5rem]");
     expect(submarineImage).toHaveClass("object-right");
+  });
+
+  it("renders trusted-by logos as two masked marquee rows with opposite directions", () => {
+    render(<Home />);
+
+    const marquee = screen.getByTestId("trusted-by-marquee");
+    const rowOne = screen.getByTestId("trusted-by-row-0");
+    const rowTwo = screen.getByTestId("trusted-by-row-1");
+
+    expect(marquee).toHaveClass("overflow-hidden");
+    expect(rowOne).toHaveClass("logo-marquee-track");
+    expect(rowTwo).toHaveClass("logo-marquee-track--reverse");
+    expect(screen.getByTestId("trusted-by-marquee-left-mask")).toBeInTheDocument();
+    expect(screen.getByTestId("trusted-by-marquee-right-mask")).toBeInTheDocument();
   });
 
   it("renders a service banner background video with poster and dual sources", () => {
@@ -144,6 +159,62 @@ describe("Home page", () => {
     expect(serviceVideoOverlay).toHaveClass("bg-black/[0.44]");
     expect(webmSource).toHaveAttribute("src", "/videos/service-banner-ocean.webm");
     expect(mp4Source).toHaveAttribute("src", "/videos/service-banner-ocean.mp4");
+  });
+
+  it("renders the service options list and toggles the active service", () => {
+    render(<Home />);
+
+    const strategyButton = screen.getByRole("button", { name: /^strategy$/i });
+    const developmentButton = screen.getByRole("button", { name: /^development$/i });
+
+    expect(strategyButton).toHaveAttribute("aria-pressed", "true");
+    expect(
+      screen.getByText(/Helping you with top notch strategy for GTM/i),
+    ).toBeInTheDocument();
+
+    fireEvent.click(developmentButton);
+
+    expect(developmentButton).toHaveAttribute("aria-pressed", "true");
+    expect(
+      screen.getByText(/Develop products, websites and manage them for you/i),
+    ).toBeInTheDocument();
+  });
+
+  it("shrinks the service toggle card footprint by about half", () => {
+    render(<Home />);
+
+    const serviceHeading = screen.getByRole("heading", { name: /how can we serve you\?/i, level: 2 });
+    const serviceFrame = serviceHeading.parentElement;
+    const toggle = screen.getByTestId("service-options-toggle");
+    const strategyButton = screen.getByRole("button", { name: /^strategy$/i });
+    const iconWrapper = strategyButton.firstElementChild as HTMLElement;
+    const title = strategyButton.querySelector("span");
+    const description = strategyButton.querySelector("p");
+
+    expect(serviceFrame).toHaveClass("min-h-[280px]");
+    expect(serviceFrame).toHaveClass("sm:min-h-[340px]");
+    expect(serviceFrame).toHaveClass("md:min-h-[520px]");
+    expect(serviceFrame).toHaveClass("lg:min-h-[596px]");
+    expect(toggle).toHaveClass("max-w-[360px]");
+    expect(toggle).toHaveClass("mt-24");
+    expect(toggle).toHaveClass("sm:mt-28");
+    expect(toggle).toHaveClass("md:mt-36");
+    expect(toggle).toHaveClass("lg:mt-44");
+    expect(toggle).toHaveClass("p-2");
+    expect(toggle).toHaveClass("sm:p-[10px]");
+    expect(toggle).toHaveClass("md:p-3");
+    expect(strategyButton).toHaveClass("gap-1.5");
+    expect(strategyButton).toHaveClass("sm:gap-2");
+    expect(iconWrapper).toHaveClass("h-6");
+    expect(iconWrapper).toHaveClass("w-6");
+    expect(iconWrapper).toHaveClass("sm:h-7");
+    expect(iconWrapper).toHaveClass("sm:w-7");
+    expect(title).toHaveClass("text-[15px]");
+    expect(title).toHaveClass("sm:text-[20px]");
+    expect(title).toHaveClass("md:text-[24px]");
+    expect(description).toHaveClass("text-[12px]");
+    expect(description).toHaveClass("sm:text-[14px]");
+    expect(description).toHaveClass("max-w-[280px]");
   });
 
   it("gives the second hero line its own text box to avoid clipping", () => {
@@ -185,6 +256,69 @@ describe("Home page", () => {
 
     expect(mobileNavPanel).toBeInTheDocument();
     expect(within(mobileNavPanel).getByRole("link", { name: /^services$/i })).toBeInTheDocument();
+  });
+
+  it("keeps the navbar fixed and darkens it after scroll", () => {
+    render(<Home />);
+
+    const navbar = screen.getByTestId("site-navbar");
+    const navbarShell = screen.getByTestId("site-navbar-shell");
+
+    expect(navbar).toHaveClass("fixed");
+    expect(navbarShell).toHaveClass("bg-white/8");
+    expect(navbarShell).not.toHaveClass("bg-[#0d1730]/88");
+
+    Object.defineProperty(window, "scrollY", {
+      value: 80,
+      writable: true,
+      configurable: true,
+    });
+    fireEvent.scroll(window);
+
+    expect(navbarShell).toHaveClass("bg-[#0d1730]/88");
+    expect(navbarShell).toHaveClass("shadow-[0_14px_40px_rgba(4,10,24,0.28)]");
+  });
+
+  it("replaces the legacy footer with the selected Paper footer structure", () => {
+    render(<Home />);
+
+    const footer = screen.getByRole("contentinfo");
+    const footerGrid = screen.getByTestId("footer-top-grid");
+    const footerTopImage = screen.getByTestId("footer-top-image");
+    const legalRow = screen.getByTestId("footer-legal-row");
+    const legalBar = legalRow.parentElement as HTMLElement;
+
+    expect(within(footer).getByText(/^company$/i)).toBeInTheDocument();
+    expect(within(footer).getByText(/^get in touch$/i)).toBeInTheDocument();
+    expect(within(footer).getByText(/^background$/i)).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^home$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^about us$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^faq$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^mail us$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^contact us$/i })).toBeInTheDocument();
+    expect(
+      within(footer).getByText(/Sparkling Marketing Firm is a Specialized marketing firm/i),
+    ).toBeInTheDocument();
+    expect(within(footer).getByText(/Connect with us on our socials/i)).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /instagram/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /pinterest/i })).toBeInTheDocument();
+    expect(
+      within(footer).getByText(/©2026 SPARKLINE MARKETING FIRM All Rights Reserved\./i),
+    ).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /privacy policy/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /terms of service/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /accessibility/i })).toBeInTheDocument();
+    expect(footerGrid).toHaveClass("md:grid-cols-2");
+    expect(footerTopImage).toHaveClass("bg-top");
+    expect(footerTopImage).toHaveStyle({
+      backgroundImage:
+        "url(https://app.paper.design/file-assets/01KNBNYP6N270CJVTY2FR1GV5J/01KNM3TZFN7NEMTXCM43KXZS5B.png)",
+    });
+    expect(legalBar).toHaveClass("bg-[#01031A]");
+    expect(legalRow).toHaveClass("text-white");
+    expect(legalRow).toHaveClass("lg:flex-row");
+    expect(screen.queryByText(/Currently we're Online/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^agency$/i)).not.toBeInTheDocument();
   });
 
   it("keeps the hero locked to a single viewport with a looping background video and no submarine image", () => {

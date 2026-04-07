@@ -67,3 +67,24 @@ a {
   background: linear-gradient(180deg, rgba(6, 11, 26, 0), rgba(6, 11, 26, 0.98));
   pointer-events: none;
 }
+
+@keyframes logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: logo-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee-track--reverse {
+  animation-direction: reverse;
+}

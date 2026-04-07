@@ -24,8 +24,7 @@ export const trustedBy = {
   lines: [
     "From breakout startups to industry giants,",
     "we partner with ambitious companies looking to",
-    "shape the",
-    "future.",
+    "shape the future.",
   ],
   logos: [
     "Antimetal",
@@ -46,6 +45,34 @@ export const trustedBy = {
     "WorkOS",
   ],
 };
+
+export const serviceOptions = [
+  {
+    id: "strategy",
+    title: "Strategy",
+    description: "Helping you with top notch strategy for GTM",
+  },
+  {
+    id: "story-voice",
+    title: "Story/ Voice",
+    description: "Create the brand story and brand voice",
+  },
+  {
+    id: "design",
+    title: "Design",
+    description: "Help the company in creative way",
+  },
+  {
+    id: "development",
+    title: "Development",
+    description: "Develop products, websites and manage them for you",
+  },
+  {
+    id: "media-video",
+    title: "Media & video",
+    description: "Content, social media, videography anything you ask for",
+  },
+] as const;
 
 export const workGallery = {
   eyebrow: "OUR WORK",
@@ -70,22 +97,32 @@ export const workGallery = {
 };
 
 export const footerContent = {
-  brand: ["SPARKLINE", "MARKETING FIRM"],
+  companyHeading: "Company",
   company: [
-    "Work",
-    "Pricing",
-    "Studio",
-    "Use cases",
-    "Insights",
-    "Playground",
-    "Reach out",
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "#about-us" },
+    { label: "FAQ", href: "#faq" },
   ],
-  socials: ["LinkedIn", "Dribbble"],
-  statement:
-    "SPARKLING MARKETING FIRM is open for business, talks and coffee Monday-Friday.",
-  status: "Currently we're Online",
-  locations: [
-    ["LOCATION", "Verd Lunda 4,", "8230, Ayhjal"],
-    ["LOCATION", "Verd Lunda 4,", "8230, Ayhjal"],
+  getInTouchHeading: "Get in Touch",
+  getInTouch: [
+    { label: "Mail Us", href: "mailto:hello@sparklinemarketingfirm.com" },
+    { label: "Contact Us", href: "#contact-us" },
   ],
-};
+  backgroundHeading: "Background",
+  background: {
+    body: "Sparkling Marketing Firm is a Specialized marketing firm where creativity and marketing is supercharged.",
+    socialsLabel: "Connect with us on our socials.",
+  },
+  socials: [
+    { label: "Instagram", href: "https://www.instagram.com" },
+    { label: "Pinterest", href: "https://www.pinterest.com" },
+  ],
+  legal: {
+    copyright: "©2026 SPARKLINE MARKETING FIRM All Rights Reserved.",
+    links: [
+      { label: "Privacy Policy", href: "#privacy-policy" },
+      { label: "Terms of Service", href: "#terms-of-service" },
+      { label: "Accessibility", href: "#accessibility" },
+    ],
+  },
+} as const;
