@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
 
 vi.mock("next/image", () => ({
@@ -74,9 +74,10 @@ describe("Home page", () => {
     expect(screen.getByText(/our work/i)).toBeInTheDocument();
     expect(brandLink).toBeInTheDocument();
     expect(brandLogo).toHaveAttribute("src", "/logos/sparkline-marketing-firm.svg");
-    expect(brandLogo).toHaveClass("w-[67px]");
-    expect(brandLogo).toHaveClass("sm:w-[79px]");
-    expect(brandLogo).toHaveClass("md:w-[91px]");
+    expect(brandLogo).toHaveClass("w-[58px]");
+    expect(brandLogo).toHaveClass("sm:w-[70px]");
+    expect(brandLogo).toHaveClass("md:w-[84px]");
+    expect(brandLogo).toHaveClass("lg:w-[91px]");
     expect(screen.getByText(/^SPARKLINE$/i)).toBeInTheDocument();
     const ctaButton = screen.getByRole("link", { name: /book a call/i });
     expect(ctaButton).toBeInTheDocument();
@@ -104,21 +105,34 @@ describe("Home page", () => {
     );
   });
 
-  it("keeps the service banner submarine smaller and slightly higher", () => {
+  it("keeps the service banner submarine oversized but responsive", () => {
     render(<Home />);
 
     const submarineFrame = screen.getByTestId("service-submarine-frame");
+    const submarineImage = screen.getByAltText("");
 
-    expect(submarineFrame).toHaveClass("max-w-[260px]");
-    expect(submarineFrame).toHaveClass("md:max-w-[464px]");
-    expect(submarineFrame).toHaveClass("md:h-[262px]");
-    expect(submarineFrame).toHaveClass("md:-mt-[9rem]");
+    expect(submarineFrame).toHaveClass("max-w-[300px]");
+    expect(submarineFrame).toHaveClass("ml-auto");
+    expect(submarineFrame).toHaveClass("mr-[calc((100vw-100%)/-2)]");
+    expect(submarineFrame).toHaveClass("-mt-[4.5rem]");
+    expect(submarineFrame).toHaveClass("h-[128px]");
+    expect(submarineFrame).toHaveClass("sm:max-w-[420px]");
+    expect(submarineFrame).toHaveClass("sm:h-[188px]");
+    expect(submarineFrame).toHaveClass("sm:-mt-[5.75rem]");
+    expect(submarineFrame).toHaveClass("md:max-w-[560px]");
+    expect(submarineFrame).toHaveClass("md:h-[316px]");
+    expect(submarineFrame).toHaveClass("md:-mt-[12rem]");
+    expect(submarineFrame).toHaveClass("lg:max-w-[650px]");
+    expect(submarineFrame).toHaveClass("lg:h-[367px]");
+    expect(submarineFrame).toHaveClass("lg:-mt-[15.5rem]");
+    expect(submarineImage).toHaveClass("object-right");
   });
 
   it("renders a service banner background video with poster and dual sources", () => {
     render(<Home />);
 
     const serviceVideo = screen.getByTestId("service-banner-video");
+    const serviceVideoOverlay = screen.getByTestId("service-banner-video-overlay");
     const webmSource = serviceVideo.querySelector('source[type="video/webm"]');
     const mp4Source = serviceVideo.querySelector('source[type="video/mp4"]');
 
@@ -127,6 +141,7 @@ describe("Home page", () => {
     expect(serviceVideo).toHaveAttribute("playsinline");
     expect(serviceVideo).toHaveAttribute("preload", "metadata");
     expect(serviceVideo).toHaveProperty("muted", true);
+    expect(serviceVideoOverlay).toHaveClass("bg-black/[0.44]");
     expect(webmSource).toHaveAttribute("src", "/videos/service-banner-ocean.webm");
     expect(mp4Source).toHaveAttribute("src", "/videos/service-banner-ocean.mp4");
   });
@@ -140,14 +155,36 @@ describe("Home page", () => {
     expect(heroSecondLine).toHaveClass("pb-[0.08em]");
   });
 
-  it("scales the hero headline up by about twenty percent", () => {
+  it("keeps the navbar compact and the hero readable on smaller screens", () => {
     render(<Home />);
 
+    const brandLogo = screen.getByAltText(/sparkline marketing firm/i);
+    const ctaButton = screen.getByRole("link", { name: /book a call/i });
+    const menuButton = screen.getByRole("button", { name: /open navigation menu/i });
+    const heroContent = screen.getByTestId("hero-content");
     const heroHeading = screen.getByRole("heading", { level: 1 });
 
-    expect(heroHeading).toHaveClass("text-[65px]");
-    expect(heroHeading).toHaveClass("sm:text-[82px]");
-    expect(heroHeading).toHaveClass("md:text-[96px]");
+    expect(brandLogo).toHaveClass("w-[58px]");
+    expect(brandLogo).toHaveClass("sm:w-[70px]");
+    expect(brandLogo).toHaveClass("md:w-[84px]");
+    expect(ctaButton).toHaveClass("text-[13px]");
+    expect(ctaButton).toHaveClass("sm:text-[15px]");
+    expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    expect(heroContent).toHaveClass("-translate-y-8");
+    expect(heroContent).toHaveClass("sm:-translate-y-12");
+    expect(heroContent).toHaveClass("md:-translate-y-16");
+    expect(heroHeading).toHaveClass("text-[48px]");
+    expect(heroHeading).toHaveClass("sm:text-[72px]");
+    expect(heroHeading).toHaveClass("md:text-[88px]");
+    expect(heroHeading).toHaveClass("lg:text-[96px]");
+
+    fireEvent.click(menuButton);
+
+    expect(menuButton).toHaveAttribute("aria-expanded", "true");
+    const mobileNavPanel = screen.getByTestId("mobile-nav-panel");
+
+    expect(mobileNavPanel).toBeInTheDocument();
+    expect(within(mobileNavPanel).getByRole("link", { name: /^services$/i })).toBeInTheDocument();
   });
 
   it("keeps the hero locked to a single viewport with a looping background video and no submarine image", () => {
@@ -159,8 +196,10 @@ describe("Home page", () => {
 
     expect(heroSection).toHaveClass("h-[100svh]");
     expect(heroSection).toHaveClass("min-h-[100svh]");
-    expect(heroContent).toHaveClass("-translate-y-20");
-    expect(heroContent).toHaveClass("md:-translate-y-20");
+    expect(heroContent).toHaveClass("-translate-y-8");
+    expect(heroContent).toHaveClass("sm:-translate-y-12");
+    expect(heroContent).toHaveClass("md:-translate-y-16");
+    expect(heroContent).toHaveClass("lg:-translate-y-20");
     expect(heroVideo).toHaveAttribute("autoplay");
     expect(heroVideo).toHaveAttribute("loop");
     expect(heroVideo).toHaveAttribute("playsinline");
