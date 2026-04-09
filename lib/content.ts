@@ -15,7 +15,7 @@ export const featuredIntro = {
     "technologies",
   ],
   body:
-    "In November 2025, Haven Demo achieved mission success after deploying from the Bandwagon-4 rideshare mission.",
+    "In November 2025, Haven Demo marked a major milestone with a successful deployment on the Bandwagon-4 rideshare mission. The mission reached its intended outcome in orbit, confirming that the platform performed as planned after deployment. That result turned a key launch moment into a clear operational success for the program. It also marked an important step forward for Haven Demo as the work continues.",
   cta: "Learn more",
 };
 
@@ -82,19 +82,55 @@ export const workGallery = {
   ],
   projects: [
     {
+      id: "firecrawl-1",
       name: "Firecrawl",
+      date: "September 4, 2025",
       meta: "Website · Branding",
+      description:
+        "A sharper launch-ready web presence built to make the product story easier to trust, share, and remember across every touchpoint.",
+      ctaLabel: "View Project",
       image: "/images/work-firecrawl.png",
       imageClassName: "object-contain object-center scale-[1.12]",
     },
     {
+      id: "blackalgo-1",
       name: "Blackalgo",
+      date: "August 19, 2025",
       meta: "Website · Branding · Product",
+      description:
+        "An editorial product showcase designed to present the brand with more conviction, clarity, and momentum from first impression to final CTA.",
+      ctaLabel: "View Project",
+      image: "/images/work-blackalgo.png",
+      imageClassName: "object-cover object-center",
+    },
+    {
+      id: "firecrawl-2",
+      name: "Firecrawl",
+      date: "July 8, 2025",
+      meta: "Website · Branding",
+      description:
+        "A campaign-ready adaptation of the same visual system, tuned for a more immersive project narrative and stronger motion-led presentation.",
+      ctaLabel: "View Project",
+      image: "/images/work-firecrawl.png",
+      imageClassName: "object-contain object-center scale-[1.12]",
+    },
+    {
+      id: "blackalgo-2",
+      name: "Blackalgo",
+      date: "June 13, 2025",
+      meta: "Website · Branding · Product",
+      description:
+        "A wider editorial treatment that gives the product more room to breathe while keeping the brand language crisp, premium, and highly legible.",
+      ctaLabel: "View Project",
       image: "/images/work-blackalgo.png",
       imageClassName: "object-cover object-center",
     },
   ],
-};
+  cta: {
+    label: "View All Projects",
+    href: "#portfolio",
+  },
+} as const;
 
 export const footerContent = {
   companyHeading: "Company",

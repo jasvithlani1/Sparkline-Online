@@ -60,20 +60,30 @@ afterAll(() => {
 
 describe("Home page", () => {
   it("renders the approved landing page sections and copy", () => {
-    render(<Home />);
+    const { container } = render(<Home />);
+    const main = container.querySelector("main");
     const brandLink = screen.getByRole("link", { name: /sparkline marketing firm/i });
     const brandLogo = screen.getByAltText(/sparkline marketing firm/i);
+    const featureIntro = screen.getByTestId("feature-intro");
+    const featureIntroContent = screen.getByTestId("feature-intro-content");
 
     expect(
       screen.getByRole("heading", { name: /creative marketing/i, level: 1 }),
     ).toBeInTheDocument();
     expect(screen.getByTestId("hero-second-line")).toHaveTextContent(/supercharged/i);
-    expect(screen.getByText(/haven demo:/i)).toBeInTheDocument();
     expect(screen.getByText(/how can we serve you\?/i)).toBeInTheDocument();
     expect(screen.getByText(/trusted by the bold/i)).toBeInTheDocument();
     expect(screen.getByText(/^shape the future\.$/i)).toBeInTheDocument();
     expect(screen.queryByText(/^future\.$/i)).not.toBeInTheDocument();
     expect(screen.getByText(/our work/i)).toBeInTheDocument();
+    expect(screen.queryByText(/haven demo:/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(/marked a major milestone with a successful deployment/i),
+    ).toBeInTheDocument();
+    expect(featureIntroContent).toHaveClass("max-w-[1308px]");
+    expect(featureIntroContent).not.toHaveClass("max-w-[415px]");
+    expect(within(featureIntro).getByRole("link", { name: /learn more/i })).toBeInTheDocument();
+    expect(main).toHaveClass("bg-white");
     expect(brandLink).toBeInTheDocument();
     expect(brandLogo).toHaveAttribute("src", "/logos/sparkline-marketing-firm.svg");
     expect(brandLogo).toHaveClass("w-[58px]");
@@ -126,6 +136,13 @@ describe("Home page", () => {
     expect(submarineFrame).toHaveClass("lg:max-w-[650px]");
     expect(submarineFrame).toHaveClass("lg:h-[367px]");
     expect(submarineFrame).toHaveClass("lg:-mt-[15.5rem]");
+    expect(submarineFrame).toHaveClass("group/service-submarine");
+    expect(submarineImage).toHaveClass("motion-reduce:transform-none");
+    expect(submarineImage).toHaveClass("motion-safe:transition-transform");
+    expect(submarineImage).toHaveClass("motion-safe:duration-500");
+    expect(submarineImage).toHaveClass("motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]");
+    expect(submarineImage).toHaveClass("group-hover/service-submarine:translate-x-3");
+    expect(submarineImage).toHaveClass("group-hover/service-submarine:-translate-y-2");
     expect(submarineImage).toHaveClass("object-right");
   });
 
@@ -135,30 +152,87 @@ describe("Home page", () => {
     const marquee = screen.getByTestId("trusted-by-marquee");
     const rowOne = screen.getByTestId("trusted-by-row-0");
     const rowTwo = screen.getByTestId("trusted-by-row-1");
+    const leftMask = screen.getByTestId("trusted-by-marquee-left-mask");
+    const rightMask = screen.getByTestId("trusted-by-marquee-right-mask");
 
     expect(marquee).toHaveClass("overflow-hidden");
     expect(rowOne).toHaveClass("logo-marquee-track");
     expect(rowTwo).toHaveClass("logo-marquee-track--reverse");
-    expect(screen.getByTestId("trusted-by-marquee-left-mask")).toBeInTheDocument();
-    expect(screen.getByTestId("trusted-by-marquee-right-mask")).toBeInTheDocument();
+    expect(leftMask).toHaveClass("bg-[linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))]");
+    expect(rightMask).toHaveClass("bg-[linear-gradient(270deg,#FFFFFF,rgba(255,255,255,0))]");
   });
 
-  it("renders a service banner background video with poster and dual sources", () => {
+  it("renders the work gallery as an editorial carousel with masks and a CTA", () => {
+    render(<Home />);
+
+    const cards = screen.getAllByTestId("work-gallery-card");
+    const carousel = screen.getByTestId("work-gallery-carousel");
+    const track = screen.getByTestId("work-gallery-track");
+    const dots = screen.getAllByTestId("work-gallery-dot");
+    const cta = screen.getByRole("link", { name: /view all projects/i });
+
+    expect(cards).toHaveLength(4);
+    expect(cards[0]).toHaveClass("rounded-[28px]");
+    expect(cards[0]).toHaveClass("bg-white");
+    expect(cards[0].getAttribute("style") ?? "").not.toContain("clip-path");
+    expect(within(cards[0]).getByText(/view project/i)).toBeInTheDocument();
+    expect(within(cards[0]).queryByText(/website · branding/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId("work-gallery-dot-nav")).toBeInTheDocument();
+    expect(dots).toHaveLength(4);
+    expect(dots[0]).toHaveClass("bg-[#2C6BFF]");
+    expect(dots[1]).toHaveClass("bg-black/18");
+    expect(carousel).toHaveClass("overflow-x-auto");
+    expect(track).toHaveClass("flex");
+    expect(track).toHaveClass("w-max");
+    expect(screen.getByTestId("work-gallery-left-mask")).toHaveClass(
+      "bg-[linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))]",
+    );
+    expect(screen.getByTestId("work-gallery-right-mask")).toHaveClass(
+      "bg-[linear-gradient(270deg,#FFFFFF,rgba(255,255,255,0))]",
+    );
+    expect(cta).toHaveAttribute("href", "#portfolio");
+    expect(cta).toHaveClass("inline-flex");
+    expect(cta).toHaveClass("items-center");
+    expect(cta).toHaveClass("justify-center");
+    expect(cta).toHaveClass("whitespace-nowrap");
+    expect(cta).toHaveClass("text-white");
+    expect(cta).toHaveStyle({
+      paddingInline: "12px",
+      paddingBlock: "12px",
+      borderRadius: "8px",
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: "#FFFFFF29",
+      color: "#FFFFFF",
+      fontSize: "16px",
+      lineHeight: "20px",
+      fontWeight: "600",
+      fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
+    });
+    expect(cta.getAttribute("style")).toContain(
+      "linear-gradient(in oklab 180deg, oklab(0.431 -0.018 -0.204) 1.39%, oklab(0.513 -0.023 -0.216) 101.39%)",
+    );
+    expect(cta.getAttribute("style")).toContain(
+      "#FFFFFF14 0px 0.5px 0.5px inset, #2157E033 0px 1px 1px, #2157E033 0px 1px 1px, #2157E066 0px 2px 5px -2px, #0F64F2 0px 0px 0px 1px",
+    );
+  });
+
+  it("renders the service banner background video with the new poster and mp4 source", () => {
     render(<Home />);
 
     const serviceVideo = screen.getByTestId("service-banner-video");
     const serviceVideoOverlay = screen.getByTestId("service-banner-video-overlay");
-    const webmSource = serviceVideo.querySelector('source[type="video/webm"]');
     const mp4Source = serviceVideo.querySelector('source[type="video/mp4"]');
+    const webmSource = serviceVideo.querySelector('source[type="video/webm"]');
 
-    expect(serviceVideo).toHaveAttribute("poster", "/images/service-banner-ocean-poster.webp");
+    expect(serviceVideo).toHaveAttribute("poster", "/images/service-banner-background-poster.webp");
     expect(serviceVideo).toHaveAttribute("loop");
     expect(serviceVideo).toHaveAttribute("playsinline");
     expect(serviceVideo).toHaveAttribute("preload", "metadata");
     expect(serviceVideo).toHaveProperty("muted", true);
     expect(serviceVideoOverlay).toHaveClass("bg-black/[0.44]");
-    expect(webmSource).toHaveAttribute("src", "/videos/service-banner-ocean.webm");
-    expect(mp4Source).toHaveAttribute("src", "/videos/service-banner-ocean.mp4");
+    expect(mp4Source).toHaveAttribute("src", "/videos/service-banner-background.mp4");
+    expect(webmSource).toBeNull();
   });
 
   it("renders the service options list and toggles the active service", () => {
@@ -190,12 +264,16 @@ describe("Home page", () => {
     const iconWrapper = strategyButton.firstElementChild as HTMLElement;
     const title = strategyButton.querySelector("span");
     const description = strategyButton.querySelector("p");
+    const divider = toggle.firstElementChild as HTMLElement;
 
     expect(serviceFrame).toHaveClass("min-h-[280px]");
     expect(serviceFrame).toHaveClass("sm:min-h-[340px]");
     expect(serviceFrame).toHaveClass("md:min-h-[520px]");
     expect(serviceFrame).toHaveClass("lg:min-h-[596px]");
     expect(toggle).toHaveClass("max-w-[360px]");
+    expect(toggle).toHaveClass("bg-white/62");
+    expect(toggle).toHaveClass("border-white/38");
+    expect(toggle).toHaveClass("backdrop-blur-md");
     expect(toggle).toHaveClass("mt-24");
     expect(toggle).toHaveClass("sm:mt-28");
     expect(toggle).toHaveClass("md:mt-36");
@@ -203,18 +281,22 @@ describe("Home page", () => {
     expect(toggle).toHaveClass("p-2");
     expect(toggle).toHaveClass("sm:p-[10px]");
     expect(toggle).toHaveClass("md:p-3");
+    expect(divider).toHaveClass("divide-black/10");
     expect(strategyButton).toHaveClass("gap-1.5");
     expect(strategyButton).toHaveClass("sm:gap-2");
     expect(iconWrapper).toHaveClass("h-6");
     expect(iconWrapper).toHaveClass("w-6");
     expect(iconWrapper).toHaveClass("sm:h-7");
     expect(iconWrapper).toHaveClass("sm:w-7");
+    expect(iconWrapper).toHaveClass("bg-[#2C6BFF]/10");
     expect(title).toHaveClass("text-[15px]");
     expect(title).toHaveClass("sm:text-[20px]");
     expect(title).toHaveClass("md:text-[24px]");
+    expect(title).toHaveClass("text-[#2C6BFF]");
     expect(description).toHaveClass("text-[12px]");
     expect(description).toHaveClass("sm:text-[14px]");
     expect(description).toHaveClass("max-w-[280px]");
+    expect(description).toHaveClass("text-black/72");
   });
 
   it("gives the second hero line its own text box to avoid clipping", () => {
@@ -337,7 +419,7 @@ describe("Home page", () => {
     expect(heroVideo).toHaveAttribute("autoplay");
     expect(heroVideo).toHaveAttribute("loop");
     expect(heroVideo).toHaveAttribute("playsinline");
-    expect(heroVideo).toHaveAttribute("src", "/videos/hero-background.webm");
+    expect(heroVideo).toHaveAttribute("src", "/videos/hero-background.mp4");
     expect(heroVideo).toHaveProperty("muted", true);
     expect(screen.queryByTestId("hero-submarine-frame")).not.toBeInTheDocument();
     expect(screen.queryByTestId("hero-submarine-image")).not.toBeInTheDocument();

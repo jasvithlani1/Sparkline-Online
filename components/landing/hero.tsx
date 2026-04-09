@@ -7,7 +7,7 @@ export function Hero() {
       <video
         data-testid="hero-background-video"
         className="absolute inset-0 z-0 h-full w-full object-cover"
-        src="/videos/hero-background.webm"
+        src="/videos/hero-background.mp4"
         autoPlay
         muted
         loop

@@ -4,7 +4,7 @@ import { ServiceBannerVideo } from "@/components/landing/service-banner-video";
 
 export function ServiceBanner() {
   return (
-    <section id="services" className="bg-[#FDFCF4] px-5 py-8 sm:px-6 sm:py-10 md:px-8 md:py-14">
+    <section id="services" className="bg-white px-5 py-8 sm:px-6 sm:py-10 md:px-8 md:py-14">
       <div className="relative mx-auto max-w-[1310px]">
         <div className="relative min-h-[280px] overflow-hidden rounded-[2px] sm:min-h-[340px] md:min-h-[520px] lg:min-h-[596px]">
           <ServiceBannerVideo />
@@ -20,14 +20,14 @@ export function ServiceBanner() {
         </div>
         <div
           data-testid="service-submarine-frame"
-          className="pointer-events-none relative ml-auto mr-[calc((100vw-100%)/-2)] -mt-[6rem] h-[154px] w-full max-w-[340px] sm:-mt-[8rem] sm:h-[220px] sm:max-w-[440px] md:-mt-[12rem] md:h-[316px] md:max-w-[560px] lg:-mt-[15.5rem] lg:h-[367px] lg:max-w-[650px]"
+          className="group/service-submarine pointer-events-auto relative ml-auto mr-[calc((100vw-100%)/-2)] -mt-[6rem] h-[154px] w-full max-w-[340px] sm:-mt-[8rem] sm:h-[220px] sm:max-w-[440px] md:-mt-[12rem] md:h-[316px] md:max-w-[560px] lg:-mt-[15.5rem] lg:h-[367px] lg:max-w-[650px]"
         >
           <Image
             src="/images/service-submarine.webp"
             alt=""
             fill
             sizes="(min-width: 1280px) 650px, (min-width: 768px) 560px, (min-width: 640px) 440px, 340px"
-            className="object-contain object-right"
+            className="object-contain object-right motion-reduce:transform-none motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/service-submarine:translate-x-3 group-hover/service-submarine:-translate-y-2"
           />
         </div>
       </div>

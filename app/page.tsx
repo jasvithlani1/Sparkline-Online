@@ -8,7 +8,7 @@ import { WorkGallery } from "@/components/landing/work-gallery";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FDFCF4]">
+    <main className="min-h-screen bg-white">
       <div className="relative">
         <Navbar />
         <Hero />

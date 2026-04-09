@@ -6,7 +6,7 @@ import { serviceOptions } from "@/lib/content";
 type ServiceOptionId = (typeof serviceOptions)[number]["id"];
 
 function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: boolean }) {
-  const stroke = isActive ? "#2C6BFF" : "rgba(255,255,255,0.62)";
+  const stroke = isActive ? "#2C6BFF" : "rgba(16,18,24,0.72)";
 
   switch (id) {
     case "strategy":
@@ -73,9 +73,9 @@ export function ServiceOptionsToggle() {
   return (
     <div
       data-testid="service-options-toggle"
-      className="relative z-20 mt-24 ml-4 w-[calc(100%-2rem)] max-w-[360px] rounded-[20px] border border-white/12 bg-[#0b1225]/62 p-2 shadow-[0_18px_36px_rgba(3,8,22,0.24)] backdrop-blur-md sm:mt-28 sm:ml-7 sm:w-[calc(100%-3.5rem)] sm:p-[10px] md:mt-36 md:ml-[72px] md:w-full md:p-3 lg:mt-44 lg:ml-[103px]"
+      className="relative z-20 mt-24 ml-4 w-[calc(100%-2rem)] max-w-[360px] rounded-[20px] border border-white/38 bg-white/62 p-2 shadow-[0_16px_32px_rgba(15,23,42,0.14)] backdrop-blur-md sm:mt-28 sm:ml-7 sm:w-[calc(100%-3.5rem)] sm:p-[10px] md:mt-36 md:ml-[72px] md:w-full md:p-3 lg:mt-44 lg:ml-[103px]"
     >
-      <div className="divide-y divide-white/12">
+      <div className="divide-y divide-black/10">
         {serviceOptions.map((option) => {
           const isActive = option.id === activeId;
 
@@ -90,7 +90,7 @@ export function ServiceOptionsToggle() {
               >
                 <div
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-xl transition-colors sm:h-7 sm:w-7 ${
-                    isActive ? "bg-white/8" : "bg-transparent"
+                    isActive ? "bg-[#2C6BFF]/10" : "bg-black/6"
                   }`}
                 >
                   <ServiceOptionIcon id={option.id} isActive={isActive} />
@@ -99,20 +99,20 @@ export function ServiceOptionsToggle() {
                   <div className="flex items-center justify-between gap-3">
                     <span
                       className={`text-[15px] leading-none tracking-[-0.03em] sm:text-[20px] md:text-[24px] ${
-                        isActive ? "text-[#2C6BFF]" : "text-white/78"
+                        isActive ? "text-[#2C6BFF]" : "text-black/78"
                       }`}
                     >
                       {option.title}
                     </span>
                     <span
                       className={`mt-0.5 h-[2px] w-6 shrink-0 rounded-full transition-colors sm:w-8 ${
-                        isActive ? "bg-[#2C6BFF]" : "bg-white/14"
+                        isActive ? "bg-[#2C6BFF]" : "bg-black/12"
                       }`}
                     />
                   </div>
                   <p
                     className={`mt-1.5 max-w-[280px] text-[12px] leading-[1.35] transition-colors sm:text-[14px] ${
-                      isActive ? "text-white/88" : "text-white/34"
+                      isActive ? "text-black/72" : "text-black/48"
                     }`}
                   >
                     {option.description}

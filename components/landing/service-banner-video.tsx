@@ -54,11 +54,10 @@ export function ServiceBannerVideo() {
       loop
       playsInline
       preload="metadata"
-      poster="/images/service-banner-ocean-poster.webp"
+      poster="/images/service-banner-background-poster.webp"
       aria-hidden="true"
     >
-      <source src="/videos/service-banner-ocean.webm" type="video/webm" />
-      <source src="/videos/service-banner-ocean.mp4" type="video/mp4" />
+      <source src="/videos/service-banner-background.mp4" type="video/mp4" />
     </video>
   );
 }

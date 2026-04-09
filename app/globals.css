@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdfcf4;
+  --background: #ffffff;
   --foreground: #2a2c2f;
   --hero-ink: #060b1a;
   --footer-navy: #273854;
@@ -87,4 +87,12 @@ a {
 
 .logo-marquee-track--reverse {
   animation-direction: reverse;
+}
+
+.work-gallery-scrollbar {
+  scrollbar-width: none;
+}
+
+.work-gallery-scrollbar::-webkit-scrollbar {
+  display: none;
 }
