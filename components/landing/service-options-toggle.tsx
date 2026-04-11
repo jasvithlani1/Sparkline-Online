@@ -6,12 +6,12 @@ import { serviceOptions } from "@/lib/content";
 type ServiceOptionId = (typeof serviceOptions)[number]["id"];
 
 function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: boolean }) {
-  const stroke = isActive ? "#2C6BFF" : "rgba(16,18,24,0.72)";
+  const stroke = isActive ? "#9A8CFF" : "rgba(255,255,255,0.96)";
 
   switch (id) {
     case "strategy":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <circle cx="24" cy="21" r="15" fill="none" stroke={stroke} strokeWidth="3.5" />
           <circle cx="24" cy="21" r="7" fill={stroke} opacity="0.9" />
           <path d="M6 42H42" fill="none" stroke={stroke} strokeWidth="3.5" strokeLinecap="round" />
@@ -19,7 +19,7 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
       );
     case "story-voice":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
             d="M11 30C8 27 6 23 6 19C6 12 12 7 20 7H28C36 7 42 12 42 19C42 26 36 31 28 31H19L10 37L11 30Z"
             fill="none"
@@ -32,7 +32,7 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
       );
     case "design":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <rect x="7" y="9" width="14" height="14" rx="2.8" fill="none" stroke={stroke} strokeWidth="3.2" />
           <rect x="27" y="9" width="14" height="10" rx="2.8" fill="none" stroke={stroke} strokeWidth="3.2" />
           <rect x="7" y="27" width="14" height="12" rx="2.8" fill="none" stroke={stroke} strokeWidth="3.2" />
@@ -41,9 +41,9 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
       );
     case "development":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
-            d="M8 12L19 6V42L8 36V12ZM29 6L40 12V36L29 42V6ZM19 6L29 11V42L19 37V6Z"
+            d="M8 12L18 7L28 12L38 7V35L28 40L18 35L8 40V12ZM18 7V35M28 12V40"
             fill="none"
             stroke={stroke}
             strokeWidth="3.2"
@@ -53,15 +53,14 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
       );
     case "media-video":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
-            d="M9 19H27V33H9V19ZM27 23L40 17V35L27 29"
+            d="M8 28L28 20L31 29L11 37L8 28ZM28 20L36 15L39 24L31 29M17 33L21 41M12 35L15 42"
             fill="none"
             stroke={stroke}
             strokeWidth="3.2"
             strokeLinejoin="round"
           />
-          <path d="M13 15L17 10M21 15L25 10" fill="none" stroke={stroke} strokeWidth="3.2" strokeLinecap="round" />
         </svg>
       );
   }
@@ -73,51 +72,43 @@ export function ServiceOptionsToggle() {
   return (
     <div
       data-testid="service-options-toggle"
-      className="relative z-20 mt-24 ml-4 w-[calc(100%-2rem)] max-w-[360px] rounded-[20px] border border-white/38 bg-white/62 p-2 shadow-[0_16px_32px_rgba(15,23,42,0.14)] backdrop-blur-md sm:mt-28 sm:ml-7 sm:w-[calc(100%-3.5rem)] sm:p-[10px] md:mt-36 md:ml-[72px] md:w-full md:p-3 lg:mt-44 lg:ml-[103px]"
+      className="relative z-20 mt-24 ml-0 w-full max-w-[307px] sm:mt-28 md:mt-36 md:ml-[72px] lg:mt-44 lg:ml-[103px]"
     >
-      <div className="divide-y divide-black/10">
+      <div>
         {serviceOptions.map((option) => {
           const isActive = option.id === activeId;
 
           return (
-            <div key={option.id} className="py-1.5 first:pt-0 last:pb-0 sm:py-2">
+            <div
+              key={option.id}
+              className="border-b border-white/90 last:border-b-0"
+            >
               <button
                 type="button"
                 aria-label={option.title}
                 aria-pressed={isActive}
                 onClick={() => setActiveId(option.id)}
-                className="flex w-full items-start gap-1.5 text-left sm:gap-2"
+                className={`relative flex w-full flex-col items-start px-3 py-3 text-left sm:px-4 sm:py-4 md:px-5 md:py-5 ${
+                  isActive ? "before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-[#7A6BFF]" : ""
+                }`}
               >
-                <div
-                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-xl transition-colors sm:h-7 sm:w-7 ${
-                    isActive ? "bg-[#2C6BFF]/10" : "bg-black/6"
-                  }`}
-                >
+                <div className="flex items-center gap-3 sm:gap-4">
                   <ServiceOptionIcon id={option.id} isActive={isActive} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-3">
-                    <span
-                      className={`text-[15px] leading-none tracking-[-0.03em] sm:text-[20px] md:text-[24px] ${
-                        isActive ? "text-[#2C6BFF]" : "text-black/78"
-                      }`}
-                    >
-                      {option.title}
-                    </span>
-                    <span
-                      className={`mt-0.5 h-[2px] w-6 shrink-0 rounded-full transition-colors sm:w-8 ${
-                        isActive ? "bg-[#2C6BFF]" : "bg-black/12"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`mt-1.5 max-w-[280px] text-[12px] leading-[1.35] transition-colors sm:text-[14px] ${
-                      isActive ? "text-black/72" : "text-black/48"
+                  <span
+                    className={`text-[13px] leading-none tracking-[-0.04em] sm:text-[15px] md:text-[17px] ${
+                      isActive ? "text-[#9A8CFF]" : "text-white"
                     }`}
                   >
-                    {option.description}
-                  </p>
+                    {option.title}
+                  </span>
                 </div>
+                <p
+                  className={`mt-2.5 max-w-[26ch] text-[11px] leading-[1.2] tracking-[-0.03em] sm:text-[13px] md:mt-3 md:max-w-[28ch] md:text-[14px] ${
+                    isActive ? "text-white" : "text-white"
+                  }`}
+                >
+                  {option.description}
+                </p>
               </button>
             </div>
           );

@@ -60,17 +60,16 @@ export function Navbar() {
               className="inline-flex items-center justify-center whitespace-nowrap text-[13px] text-white transition-transform hover:-translate-y-0.5 sm:text-[15px] md:text-base"
               style={{
                 paddingInline: "12px",
-                paddingBlock: "12px",
+                paddingBlock: "10px",
                 borderRadius: "8px",
-                backgroundImage:
-                  "linear-gradient(in oklab 180deg, oklab(43.1% -0.018 -0.204) 1.39%, oklab(51.3% -0.023 -0.216) 101.39%)",
+                backgroundImage: "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
                 borderWidth: "1px",
                 borderStyle: "solid",
                 borderColor: "#FFFFFF29",
                 boxShadow:
-                  "#FFFFFF14 0px 0.5px 0.5px inset, #2157E033 0px 1px 1px, #2157E033 0px 1px 1px, #2157E066 0px 2px 5px -2px, #0F64F2 0px 0px 0px 1px",
-                fontSize: "16px",
-                lineHeight: "20px",
+                  "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
+                fontSize: "15px",
+                lineHeight: "18px",
                 fontWeight: 600,
                 fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
               }}

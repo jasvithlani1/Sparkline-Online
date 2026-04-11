@@ -201,80 +201,78 @@ export function WorkGallery() {
   const loopProjects = [...workGallery.projects, ...workGallery.projects];
 
   return (
-    <section id="portfolio" className="bg-white px-5 py-14 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:py-24">
-      <div className="mx-auto flex max-w-[1208px] flex-col gap-10 sm:gap-12 md:gap-14">
-        <SectionHeading eyebrow={workGallery.eyebrow} lines={workGallery.lines} />
-        <div className="relative">
-          <div
-            data-testid="work-gallery-left-mask"
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[linear-gradient(90deg,#FFFFFF,rgba(255,255,255,0))] sm:w-16"
-          />
-          <div
-            data-testid="work-gallery-right-mask"
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[linear-gradient(270deg,#FFFFFF,rgba(255,255,255,0))] sm:w-16"
-          />
-          <div
-            ref={carouselRef}
-            data-testid="work-gallery-carousel"
-            className="work-gallery-scrollbar relative cursor-grab overflow-x-auto overscroll-x-contain active:cursor-grabbing"
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerEnd}
-            onPointerCancel={handlePointerEnd}
-            onPointerLeave={handlePointerEnd}
-            onWheel={pauseTemporarily}
-            onTouchStart={pauseTemporarily}
-          >
-            <div data-testid="work-gallery-track" className="flex w-max gap-6 pr-6 sm:gap-8 sm:pr-8">
-              {loopProjects.map((project, index) => {
-                const isClone = index >= workGallery.projects.length;
+    <section
+      id="portfolio"
+      data-testid="work-gallery-section"
+      className="py-14 sm:py-16 md:py-20 lg:py-24"
+    >
+      <div className="mx-auto flex max-w-[1208px] flex-col gap-10 px-5 sm:gap-12 sm:px-6 md:gap-14 md:px-8">
+        <SectionHeading eyebrow={workGallery.eyebrow} lines={workGallery.lines} tone="dark" />
+      </div>
+      <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 sm:mt-12 md:mt-14">
+        <div
+          ref={carouselRef}
+          data-testid="work-gallery-carousel"
+          className="work-gallery-scrollbar relative cursor-grab overflow-x-auto overscroll-x-contain px-5 active:cursor-grabbing sm:px-6 md:px-8"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerEnd}
+          onPointerCancel={handlePointerEnd}
+          onPointerLeave={handlePointerEnd}
+          onWheel={pauseTemporarily}
+          onTouchStart={pauseTemporarily}
+        >
+          <div data-testid="work-gallery-track" className="flex w-max gap-6 pr-5 sm:gap-8 sm:pr-6 md:pr-8">
+            {loopProjects.map((project, index) => {
+              const isClone = index >= workGallery.projects.length;
 
-                return (
-                  <article
-                    key={`${project.id}-${isClone ? "clone" : "real"}`}
-                    data-testid={isClone ? undefined : "work-gallery-card"}
-                    data-work-gallery-index={index % workGallery.projects.length}
-                    aria-hidden={isClone}
-                    className="w-[min(88vw,900px)] shrink-0 overflow-hidden rounded-[28px] bg-white px-5 py-5 shadow-[0_24px_60px_rgba(34,47,48,0.08)] sm:px-8 sm:py-8"
-                  >
-                    <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-stretch">
-                      <div className="relative aspect-[750/530] overflow-hidden rounded-[20px] bg-[#EEF0EE]">
-                        <Image
-                          src={project.image}
-                          alt={project.name}
-                          fill
-                          draggable={false}
-                          sizes="(min-width: 1024px) 55vw, 88vw"
-                          className={project.imageClassName}
-                        />
-                      </div>
-                      <div className="flex min-h-full flex-col justify-between gap-8 py-2 lg:px-2">
-                        <div className="space-y-6">
-                          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#222F30]/50 sm:text-[12px]">
-                            {project.date}
+              return (
+                <article
+                  key={`${project.id}-${isClone ? "clone" : "real"}`}
+                  data-testid={isClone ? undefined : "work-gallery-card"}
+                  data-work-gallery-index={index % workGallery.projects.length}
+                  aria-hidden={isClone}
+                  className="w-[min(86vw,1080px)] shrink-0 overflow-hidden rounded-[28px] bg-[#0A1F57] px-5 py-5 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:px-8 sm:py-8"
+                >
+                  <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-stretch">
+                    <div className="relative aspect-[750/530] overflow-hidden rounded-[20px] bg-[#EEF0EE]">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        draggable={false}
+                        sizes="(min-width: 1280px) 60vw, (min-width: 1024px) 66vw, 86vw"
+                        className={project.imageClassName}
+                      />
+                    </div>
+                    <div className="flex min-h-full flex-col justify-between gap-8 py-2 lg:px-2">
+                      <div className="space-y-6">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/52 sm:text-[12px]">
+                          {project.date}
+                        </p>
+                        <div className="space-y-4">
+                          <h3 className="max-w-[12ch] text-[30px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[38px]">
+                            {project.name}
+                          </h3>
+                          <p className="max-w-[48ch] text-[15px] leading-6 text-white/80 sm:text-[17px] sm:leading-7">
+                            {project.description}
                           </p>
-                          <div className="space-y-4">
-                            <h3 className="max-w-[12ch] text-[30px] leading-[0.95] tracking-[-0.04em] text-[#222F30]/85 sm:text-[38px]">
-                              {project.name}
-                            </h3>
-                            <p className="max-w-[48ch] text-[15px] leading-6 text-[#222F30]/78 sm:text-[17px] sm:leading-7">
-                              {project.description}
-                            </p>
-                          </div>
                         </div>
-                        <div className="flex items-end border-t border-black/8 pt-5">
-                          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#222F30]/75 sm:text-[12px]">
-                            {project.ctaLabel}
-                          </span>
-                        </div>
+                      </div>
+                      <div className="flex items-end border-t border-white/12 pt-5">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/76 sm:text-[12px]">
+                          {project.ctaLabel}
+                        </span>
                       </div>
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
+      </div>
+      <div className="mx-auto mt-10 flex max-w-[1208px] flex-col gap-10 px-5 sm:mt-12 sm:gap-12 sm:px-6 md:mt-14 md:gap-14 md:px-8">
         <div data-testid="work-gallery-dot-nav" className="flex justify-center gap-3">
           {workGallery.projects.map((project, index) => (
             <button
@@ -285,7 +283,7 @@ export function WorkGallery() {
               aria-pressed={activeIndex === index}
               onClick={() => jumpToIndex(index)}
               className={`h-2.5 w-2.5 rounded-full transition-colors duration-200 ${
-                activeIndex === index ? "bg-[#2C6BFF]" : "bg-black/18"
+                activeIndex === index ? "bg-[#2C6BFF]" : "bg-white/38"
               }`}
             />
           ))}
@@ -296,18 +294,17 @@ export function WorkGallery() {
             className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5"
             style={{
               paddingInline: "12px",
-              paddingBlock: "12px",
+              paddingBlock: "10px",
               borderRadius: "8px",
-              backgroundImage:
-                "linear-gradient(in oklab 180deg, oklab(43.1% -0.018 -0.204) 1.39%, oklab(51.3% -0.023 -0.216) 101.39%)",
+              backgroundImage: "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
               borderWidth: "1px",
               borderStyle: "solid",
               borderColor: "#FFFFFF29",
               boxShadow:
-                "#FFFFFF14 0px 0.5px 0.5px inset, #2157E033 0px 1px 1px, #2157E033 0px 1px 1px, #2157E066 0px 2px 5px -2px, #0F64F2 0px 0px 0px 1px",
+                "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
               color: "#FFFFFF",
-              fontSize: "16px",
-              lineHeight: "20px",
+              fontSize: "15px",
+              lineHeight: "18px",
               fontWeight: 600,
               fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
             }}

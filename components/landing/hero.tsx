@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Hero() {
   return (
     <section
@@ -17,6 +19,19 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-[340px] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_85%)] opacity-40" />
       <div className="absolute inset-x-0 bottom-0 z-10 h-[140px] bg-[linear-gradient(180deg,rgba(6,11,26,0),rgba(6,11,26,0.98))]" />
       <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(6,11,26,0.25)_0%,rgba(6,11,26,0.16)_38%,rgba(6,11,26,0.72)_100%)]" />
+      <div
+        data-testid="hero-bottom-artwork"
+        className="pointer-events-none absolute inset-x-0 -bottom-4 z-10 flex justify-center px-4 sm:px-6 md:px-8"
+      >
+        <Image
+          src="/images/hero-bottom-artwork.png"
+          alt="Decorative underwater artwork"
+          width={5056}
+          height={1584}
+          priority
+          className="h-auto w-full max-w-[840px] opacity-95"
+        />
+      </div>
       <div
         data-testid="hero-content"
         className="relative z-20 mx-auto flex h-full max-w-[1440px] -translate-y-8 flex-col items-center justify-center px-4 pt-24 text-center sm:-translate-y-12 sm:px-6 sm:pt-28 md:-translate-y-16 md:px-8 md:pt-32 lg:-translate-y-20 lg:pt-36"

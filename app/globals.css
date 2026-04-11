@@ -78,6 +78,31 @@ a {
   }
 }
 
+@keyframes service-submarine-bubble {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.72);
+  }
+
+  20% {
+    opacity: 0.55;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--bubble-drift-x, 0px), -34px, 0) scale(1.08);
+  }
+}
+
+.service-submarine-bubble {
+  animation-name: service-submarine-bubble;
+  animation-duration: var(--bubble-duration, 4.6s);
+  animation-timing-function: ease-out;
+  animation-delay: var(--bubble-delay, 0s);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
 .logo-marquee-track {
   display: flex;
   width: max-content;

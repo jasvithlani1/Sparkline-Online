@@ -14,9 +14,14 @@ export default function Home() {
         <Hero />
       </div>
       <FeatureIntro />
-      <ServiceBanner />
-      <LogoGrid />
-      <WorkGallery />
+      <div
+        data-testid="midpage-gradient-band"
+        className="bg-[linear-gradient(180deg,#0B349F_0%,#050C1E_100%)]"
+      >
+        <ServiceBanner />
+        <LogoGrid />
+        <WorkGallery />
+      </div>
       <Footer />
     </main>
   );
