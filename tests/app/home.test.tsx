@@ -107,11 +107,11 @@ describe("Home page", () => {
     expect(workGallerySection).not.toHaveClass("bg-white");
     expect(main).toHaveClass("bg-white");
     expect(brandLink).toBeInTheDocument();
-    expect(brandLogo).toHaveAttribute("src", "/logos/sparkline-marketing-firm.svg");
-    expect(brandLogo).toHaveClass("w-[58px]");
-    expect(brandLogo).toHaveClass("sm:w-[70px]");
-    expect(brandLogo).toHaveClass("md:w-[84px]");
-    expect(brandLogo).toHaveClass("lg:w-[91px]");
+    expect(brandLogo).toHaveAttribute("src", "/logos/sparkline-new-logo.svg");
+    expect(brandLogo).toHaveClass("w-[108px]");
+    expect(brandLogo).toHaveClass("sm:w-[126px]");
+    expect(brandLogo).toHaveClass("md:w-[146px]");
+    expect(brandLogo).toHaveClass("lg:w-[162px]");
     const ctaButton = screen.getByRole("link", { name: /book a call/i });
     expect(ctaButton).toBeInTheDocument();
     expect(ctaButton).toHaveClass("inline-flex");
@@ -349,9 +349,9 @@ describe("Home page", () => {
     const heroContent = screen.getByTestId("hero-content");
     const heroHeading = screen.getByRole("heading", { level: 1 });
 
-    expect(brandLogo).toHaveClass("w-[58px]");
-    expect(brandLogo).toHaveClass("sm:w-[70px]");
-    expect(brandLogo).toHaveClass("md:w-[84px]");
+    expect(brandLogo).toHaveClass("w-[108px]");
+    expect(brandLogo).toHaveClass("sm:w-[126px]");
+    expect(brandLogo).toHaveClass("md:w-[146px]");
     expect(ctaButton).toHaveClass("text-[13px]");
     expect(ctaButton).toHaveClass("sm:text-[15px]");
     expect(menuButton).toHaveAttribute("aria-expanded", "false");
@@ -428,7 +428,7 @@ describe("Home page", () => {
     expect(footer).toHaveClass("bg-[oklch(15.6%_0.042_266.4)]");
     expect(footerLogo).toHaveAttribute(
       "src",
-      "https://app.paper.design/file-assets/01KNBNYP6N270CJVTY2FR1GV5J/01KNXFQ01SPKABAC6T65W71EJ2.png",
+      "/logos/sparkline-new-logo.svg",
     );
     expect(footerGraphic).toHaveAttribute(
       "src",
@@ -454,6 +454,8 @@ describe("Home page", () => {
     expect(heroBottomArtwork).toHaveClass("inset-x-0");
     expect(heroBottomArtwork).toHaveClass("-bottom-4");
     expect(heroBottomArtworkImage).toHaveAttribute("src", "/images/hero-bottom-artwork.png");
+    expect(heroBottomArtworkImage).toHaveClass("hero-bottom-float");
+    expect(heroBottomArtworkImage).toHaveClass("motion-reduce:animate-none");
     expect(heroBottomArtworkImage).toHaveClass("max-w-[840px]");
     expect(heroContent).toHaveClass("-translate-y-8");
     expect(heroContent).toHaveClass("sm:-translate-y-12");

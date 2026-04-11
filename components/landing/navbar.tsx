@@ -39,12 +39,12 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-3 sm:gap-4">
           <a href="#" className="flex items-center">
             <Image
-              src="/logos/sparkline-marketing-firm.svg"
+              src="/logos/sparkline-new-logo.svg"
               alt="SPARKLINE MARKETING FIRM"
-              width={240}
-              height={109}
+              width={278}
+              height={56}
               priority
-              className="h-auto w-[58px] sm:w-[70px] md:w-[84px] lg:w-[91px]"
+              className="h-auto w-[108px] sm:w-[126px] md:w-[146px] lg:w-[162px]"
             />
           </a>
           <nav className="hidden items-center gap-5 text-sm text-white/72 lg:flex">

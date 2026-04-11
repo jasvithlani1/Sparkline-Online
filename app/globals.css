@@ -78,6 +78,28 @@ a {
   }
 }
 
+@keyframes hero-bottom-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(0, -18px, 0) rotate(-0.8deg);
+  }
+
+  50% {
+    transform: translate3d(0, -28px, 0) rotate(0deg) scale(1.015);
+  }
+
+  75% {
+    transform: translate3d(0, -16px, 0) rotate(0.7deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
 @keyframes service-submarine-bubble {
   0% {
     opacity: 0;
@@ -112,6 +134,12 @@ a {
 
 .logo-marquee-track--reverse {
   animation-direction: reverse;
+}
+
+.hero-bottom-float {
+  animation: hero-bottom-float 5.6s cubic-bezier(0.37, 0, 0.22, 1) infinite;
+  transform-origin: center bottom;
+  will-change: transform;
 }
 
 .work-gallery-scrollbar {

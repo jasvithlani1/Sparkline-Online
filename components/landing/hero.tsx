@@ -29,7 +29,7 @@ export function Hero() {
           width={5056}
           height={1584}
           priority
-          className="h-auto w-full max-w-[840px] opacity-95"
+          className="hero-bottom-float h-auto w-full max-w-[840px] opacity-95 motion-reduce:animate-none"
         />
       </div>
       <div

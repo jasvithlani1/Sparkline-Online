@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const logoImageUrl =
-  "https://app.paper.design/file-assets/01KNBNYP6N270CJVTY2FR1GV5J/01KNXFQ01SPKABAC6T65W71EJ2.png";
+  "/logos/sparkline-new-logo.svg";
 const footerGraphicUrl =
   "https://app.paper.design/file-assets/01KNBNYP6N270CJVTY2FR1GV5J/01KNXFZD87Z01RFEZ99922PQC3.png";
 
@@ -36,13 +36,13 @@ export function Footer() {
     >
       <div className="mx-auto flex max-w-[1440px] flex-col px-[30px] pt-16 pb-28 sm:pt-20 md:pt-24 md:pb-40 lg:pt-[120px] lg:pb-[320px]">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-[164px]">
-          <div className="w-full max-w-[190px] shrink-0 lg:-mt-8">
+          <div className="w-full max-w-[220px] shrink-0">
             <Image
               src={logoImageUrl}
               alt="Sparkline Marketing Firm"
-              width={156}
-              height={156}
-              className="h-[156px] w-[156px]"
+              width={278}
+              height={56}
+              className="h-auto w-[190px]"
             />
             <p className="mt-[10px] text-[12px] leading-[14px] text-white">Make Things You Love</p>
           </div>
