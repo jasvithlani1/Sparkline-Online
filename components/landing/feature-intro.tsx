@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { featuredIntro } from "@/lib/content";
 
 export function FeatureIntro() {
@@ -14,12 +15,12 @@ export function FeatureIntro() {
         <p className="text-[17px] leading-7 sm:text-lg md:text-[18px] md:leading-[1.35]">
           {featuredIntro.body}
         </p>
-        <a href="#portfolio" className="inline-flex items-center gap-2 text-sm text-white/72">
+        <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm text-white/72">
           <span aria-hidden="true" className="text-lg leading-none">
             ›
           </span>
           {featuredIntro.cta}
-        </a>
+        </Link>
       </div>
     </section>
   );

@@ -2,13 +2,46 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navLinks } from "@/lib/content";
 
 const NAVBAR_SCROLL_THRESHOLD = 24;
 
+function NavLink({
+  href,
+  isHomePage,
+  className,
+  onClick,
+  children,
+}: {
+  href: string;
+  isHomePage: boolean;
+  className?: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) {
+  if (href.startsWith("#")) {
+    const resolvedHref = isHomePage ? href : `/${href}`;
+    return (
+      <a href={resolvedHref} className={className} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const updateScrollState = () => {
@@ -26,18 +59,18 @@ export function Navbar() {
   return (
     <header
       data-testid="site-navbar"
-      className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4 md:px-6 md:pt-4"
+      className="fixed inset-x-0 top-0 z-40"
     >
       <div
         data-testid="site-navbar-shell"
-        className={`mx-auto flex w-full max-w-[1010px] flex-col rounded-2xl border px-3 py-2.5 text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:px-4 sm:py-3 md:px-5 md:py-4 ${
+        className={`flex w-full flex-col border-b px-4 py-2.5 text-white transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:px-6 sm:py-3 md:px-8 md:py-4 ${
           isScrolled
             ? "border-white/10 bg-[#0d1730]/88 shadow-[0_14px_40px_rgba(4,10,24,0.28)] backdrop-blur-xl"
-            : "glass-shell border-white/12 bg-white/8 shadow-[0_10px_30px_rgba(5,12,28,0.12)] backdrop-blur-md"
+            : "border-white/12 bg-white/8 shadow-[0_10px_30px_rgba(5,12,28,0.12)] backdrop-blur-md"
         }`}
       >
         <div className="flex items-center justify-between gap-3 sm:gap-4">
-          <a href="#" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <Image
               src="/logos/sparkline-new-logo.svg"
               alt="SPARKLINE MARKETING FIRM"
@@ -46,17 +79,22 @@ export function Navbar() {
               priority
               className="h-auto w-[108px] sm:w-[126px] md:w-[146px] lg:w-[162px]"
             />
-          </a>
+          </Link>
           <nav className="hidden items-center gap-5 text-sm text-white/72 lg:flex">
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className="transition-colors hover:text-white">
+              <NavLink
+                key={link.label}
+                href={link.href}
+                isHomePage={isHomePage}
+                className="transition-colors hover:text-white"
+              >
                 {link.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
             <a
-              href="#contact-us"
+              href={isHomePage ? "#contact-us" : "/#contact-us"}
               className="inline-flex items-center justify-center whitespace-nowrap text-[13px] text-white transition-transform hover:-translate-y-0.5 sm:text-[15px] md:text-base"
               style={{
                 paddingInline: "12px",
@@ -99,14 +137,15 @@ export function Navbar() {
             className="mt-3 grid gap-1 rounded-2xl border border-white/12 bg-[#0d1730]/95 p-2 text-sm text-white/82 shadow-[0_16px_40px_rgba(0,0,0,0.28)] lg:hidden"
           >
             {navLinks.map((link) => (
-              <a
+              <NavLink
                 key={link.label}
                 href={link.href}
+                isHomePage={isHomePage}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="rounded-xl px-3 py-2.5 transition-colors hover:bg-white/8 hover:text-white"
               >
                 {link.label}
-              </a>
+              </NavLink>
             ))}
           </div>
         ) : null}

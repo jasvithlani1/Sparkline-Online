@@ -1,10 +1,9 @@
 export const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "About Us", href: "#about-us" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Contact Us", href: "#contact-us" },
-  { label: "Blogs", href: "#blogs" },
-  { label: "Reviews", href: "#reviews" },
 ] as const;
 
 export const featuredIntro = {
@@ -128,9 +127,52 @@ export const workGallery = {
   ],
   cta: {
     label: "View All Projects",
-    href: "#portfolio",
+    href: "/portfolio",
   },
 } as const;
+
+export const blogPosts = [
+  {
+    id: "blog-1",
+    title: "How to Build a High-Converting Landing Page",
+    date: "March 28, 2026",
+    category: "Marketing",
+    description:
+      "A practical breakdown of the elements that make landing pages convert — from layout hierarchy to micro-copy, backed by patterns we've seen across dozens of launches.",
+    image: "/images/work-firecrawl.png",
+    imageClassName: "object-contain object-center scale-[1.12]",
+  },
+  {
+    id: "blog-2",
+    title: "The Role of Brand Voice in Product-Led Growth",
+    date: "March 14, 2026",
+    category: "Branding",
+    description:
+      "Why a distinctive brand voice accelerates organic acquisition and how to develop one that resonates with your ideal customer profile without sounding generic.",
+    image: "/images/work-blackalgo.png",
+    imageClassName: "object-cover object-center",
+  },
+  {
+    id: "blog-3",
+    title: "Design Systems That Scale With Your Startup",
+    date: "February 20, 2026",
+    category: "Design",
+    description:
+      "Lessons learned building design systems for fast-moving teams — what to standardize early, what to leave flexible, and how to keep velocity high.",
+    image: "/images/work-firecrawl.png",
+    imageClassName: "object-contain object-center scale-[1.12]",
+  },
+  {
+    id: "blog-4",
+    title: "Video Content Strategy for B2B SaaS in 2026",
+    date: "February 5, 2026",
+    category: "Media & Video",
+    description:
+      "Short-form, long-form, product demos — which video formats actually drive pipeline for B2B companies and how to produce them without a massive budget.",
+    image: "/images/work-blackalgo.png",
+    imageClassName: "object-cover object-center",
+  },
+] as const;
 
 export const footerContent = {
   companyHeading: "Company",

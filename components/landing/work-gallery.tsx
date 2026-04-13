@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { workGallery } from "@/lib/content";
@@ -232,7 +233,7 @@ export function WorkGallery() {
                   data-testid={isClone ? undefined : "work-gallery-card"}
                   data-work-gallery-index={index % workGallery.projects.length}
                   aria-hidden={isClone}
-                  className="w-[min(86vw,1080px)] shrink-0 overflow-hidden rounded-[28px] bg-[#0A1F57] px-5 py-5 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:px-8 sm:py-8"
+                  className="w-[min(80vw,880px)] shrink-0 overflow-hidden rounded-[24px] bg-[#0A1F57] px-4 py-4 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:px-6 sm:py-6"
                 >
                   <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-stretch">
                     <div className="relative aspect-[750/530] overflow-hidden rounded-[20px] bg-[#EEF0EE]">
@@ -289,7 +290,7 @@ export function WorkGallery() {
           ))}
         </div>
         <div className="flex justify-center">
-          <a
+          <Link
             href={workGallery.cta.href}
             className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5"
             style={{
@@ -310,7 +311,7 @@ export function WorkGallery() {
             }}
           >
             {workGallery.cta.label}
-          </a>
+          </Link>
         </div>
       </div>
     </section>
