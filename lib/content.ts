@@ -3,7 +3,7 @@ export const navLinks = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "About Us", href: "#about-us" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Contact Us", href: "#contact-us" },
+  { label: "Contact Us", href: "/contact" },
 ] as const;
 
 export const featuredIntro = {
@@ -184,7 +184,7 @@ export const footerContent = {
   getInTouchHeading: "Get in Touch",
   getInTouch: [
     { label: "Mail Us", href: "mailto:hello@sparklinemarketingfirm.com" },
-    { label: "Contact Us", href: "#contact-us" },
+    { label: "Contact Us", href: "/contact" },
   ],
   backgroundHeading: "Background",
   background: {
