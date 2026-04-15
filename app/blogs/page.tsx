@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { BlogList } from "@/components/blogs/blog-list";
@@ -10,12 +11,27 @@ export default function BlogsPage() {
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
-      <section className="pt-32 pb-12 sm:pt-36 sm:pb-14 md:pt-40 md:pb-16">
-        <div className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px]">
+
+      {/* Full-viewport hero with submarine image */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src="/images/blog-hero.jpg"
+          alt="Submarine submerged in deep blue water with light rays piercing the surface"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[65%_center] sm:object-center"
+        />
+
+        {/* Gradient overlay — matches work/portfolio hero for seamless blend into bg-[#050C1E] */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
+
+        {/* Hero text */}
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
             OUR BLOG
           </p>
-          <h1 className="mt-4 text-[36px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[48px] md:text-[56px]">
+          <h1 className="mt-4 text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
             Blogs
           </h1>
           <p className="mt-4 max-w-[48ch] text-[16px] leading-7 text-white/60 sm:text-[17px]">
@@ -23,10 +39,13 @@ export default function BlogsPage() {
           </p>
         </div>
       </section>
-      <BlogList />
-      <div className="pt-16 sm:pt-20 md:pt-24">
-        <Footer />
-      </div>
+
+      {/* Blog posts */}
+      <section className="py-16 sm:py-20 md:py-24">
+        <BlogList />
+      </section>
+
+      <Footer />
     </main>
   );
 }

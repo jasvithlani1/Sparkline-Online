@@ -26,8 +26,6 @@ export function ProjectList() {
             <div className="flex flex-col gap-2 p-4">
               <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/50 sm:text-[11px]">
                 <span className="font-mono">{project.date}</span>
-                <span className="text-white/25">|</span>
-                <span className="font-mono">{project.meta}</span>
               </div>
 
               <h2 className="text-[18px] leading-[1.15] tracking-[-0.03em] text-white sm:text-[20px]">

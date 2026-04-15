@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# oversized raw source assets (archived locally, not shipped)
+public/videos/source/contact-water-light-source.mp4
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
