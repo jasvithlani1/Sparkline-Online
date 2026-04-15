@@ -1,5 +1,5 @@
 export const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "About Us", href: "#about-us" },
   { label: "Blogs", href: "/blogs" },
@@ -44,6 +44,104 @@ export const trustedBy = {
     "WorkOS",
   ],
 };
+
+export const ourServices = {
+  eyebrow: "OUR SERVICES",
+  intro:
+    "Whether you are looking to launch a new website, update your image, or do a brand overhaul, we are the team for the job. Every mission begins by listening to your needs and thoroughly understanding what needs to be done. We work in partnership with you to formulate a custom flight plan focused on maximum results. Then, we roll up our sleeves and bring your ideas to life. An account manager serves as your single point of contact, keeping the lines of communication flowing and updating you on our progress every step of the way. Enhance your online presence with our tailored digital marketing services. We leverage strategic solutions to amplify your brand's reach and impact. In the end, we want to achieve your goals, celebrate your success, and prepare for our next mission together.",
+  cards: [
+    {
+      id: "strategy-media",
+      title: "Strategy\n& Media",
+      items: [
+        "Brand Strategy",
+        "Content Strategy",
+        "Digital Strategy",
+        "Social Strategy",
+        "Marketing Strategy",
+        "Go-to-Market Strategy",
+        "Media Strategy, Planning, Buying",
+        "Media Reconciliation",
+        "Analytics & Reporting",
+      ],
+    },
+    {
+      id: "website-development",
+      title: "Website Development",
+      items: [
+        "User Experience (UX)",
+        "User Interface (UI)",
+        "Responsive Design",
+        "Website Animation",
+        "Web Development",
+        "Web Design",
+        "Landing Pages",
+        "eCommerce",
+      ],
+    },
+    {
+      id: "branding-design",
+      title: "Branding\n& Design",
+      items: [
+        "Brand Workshops",
+        "Brand Messaging",
+        "Story Development",
+        "Logo Design",
+        "Collateral",
+        "Illustrations",
+        "Graphic Design",
+        "Environmental Design",
+        "Trade Shows",
+      ],
+    },
+    {
+      id: "video-production",
+      title: "Video\nProduction",
+      items: [
+        "Concept Development",
+        "Storyboarding",
+        "Scripting",
+        "Animated Video",
+        "Cinematography",
+        "Corporate Video",
+        "Case Study Video",
+        "Testimonial Video",
+        "Podcasting",
+      ],
+    },
+    {
+      id: "digital-email",
+      title: "Digital\n& Email",
+      items: [
+        "SEM/SEO",
+        "Paid Social",
+        "Audience Targeting",
+        "Monitoring & Reporting",
+        "Social Analytics",
+        "Email Marketing",
+        "YouTube Advertising",
+        "Display Ads",
+        "Remarketing",
+      ],
+    },
+    {
+      id: "programmatic-solutions",
+      title: "Programmatic Solutions",
+      items: [
+        "OTT",
+        "CTV",
+        "Programmatic Media",
+        "Omnichannel",
+        "Campaigns",
+        "Precision Targeting",
+        "Addressable",
+        "Mobile",
+        "Video",
+      ],
+    },
+  ],
+  ctaLabel: "Learn More",
+} as const;
 
 export const serviceOptions = [
   {

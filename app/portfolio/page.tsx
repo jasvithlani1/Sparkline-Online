@@ -24,6 +24,9 @@ export default function PortfolioPage() {
           <source src="/videos/portfolio-hero.mp4" type="video/mp4" />
         </video>
 
+        {/* Dark tint for text legibility */}
+        <div className="absolute inset-0 bg-black/40" />
+
         {/* Gradient overlay for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
 

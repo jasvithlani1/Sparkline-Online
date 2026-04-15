@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { BlogList } from "@/components/blogs/blog-list";
@@ -12,16 +11,21 @@ export default function BlogsPage() {
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
 
-      {/* Full-viewport hero with submarine image */}
+      {/* Full-viewport video hero */}
       <section className="relative h-screen w-full overflow-hidden">
-        <Image
-          src="/images/blog-hero.jpg"
-          alt="Submarine submerged in deep blue water with light rays piercing the surface"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[65%_center] sm:object-center"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        >
+          <source src="/videos/blog-hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark tint for text legibility */}
+        <div className="absolute inset-0 bg-black/30" />
 
         {/* Gradient overlay — matches work/portfolio hero for seamless blend into bg-[#050C1E] */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />

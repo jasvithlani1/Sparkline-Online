@@ -51,7 +51,7 @@ export function ServiceBanner() {
           <div
             data-testid="service-submarine-bubbles"
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-10 overflow-visible motion-reduce:hidden"
+            className="pointer-events-none absolute inset-0 z-10 translate-x-[10%] overflow-visible motion-reduce:hidden sm:translate-x-0"
           >
             {submarineBubbles.map((bubble) => (
               <span
