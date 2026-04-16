@@ -180,6 +180,7 @@ export const workGallery = {
   projects: [
     {
       id: "firecrawl-1",
+      slug: "firecrawl-launch",
       name: "Firecrawl",
       date: "September 4, 2025",
       meta: "Website · Branding",
@@ -188,9 +189,68 @@ export const workGallery = {
       ctaLabel: "View Project",
       image: "/images/work-firecrawl.png",
       imageClassName: "object-contain object-center scale-[1.12]",
+      intro:
+        "Firecrawl needed a launch site that did more than describe the product — it had to make a noisy category feel simple and make the product feel inevitable. We rebuilt the narrative, system, and surface in parallel so every page reinforced the same promise.",
+      tagline: "CLARITY AT LAUNCH",
+      summary:
+        "Our team took Firecrawl's dense technical story and translated it into a tightly scoped website that leads with the outcome, proves it with real examples, and gets out of the way. The result is a site that holds up at the top of the funnel and still rewards the reader who goes deep.",
+      services: [
+        "Brand Strategy",
+        "Visual Identity",
+        "Website Design",
+        "Web Development",
+        "Copywriting",
+        "Motion",
+      ],
+      sections: [
+        {
+          heading: "Homepage",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Firecrawl homepage screen",
+              className: "object-contain object-center",
+            },
+          ],
+        },
+        {
+          heading: "Product Pages",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Firecrawl product page screen",
+              className: "object-contain object-center",
+            },
+          ],
+        },
+        {
+          heading: "Visual System",
+          type: "grid" as const,
+          images: [
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Visual identity sample 1",
+              className: "object-contain object-center",
+            },
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Visual identity sample 2",
+              className: "object-contain object-center",
+            },
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Visual identity sample 3",
+              className: "object-contain object-center",
+            },
+          ],
+        },
+      ],
     },
     {
       id: "blackalgo-1",
+      slug: "blackalgo-showcase",
       name: "Blackalgo",
       date: "August 19, 2025",
       meta: "Website · Branding · Product",
@@ -199,9 +259,68 @@ export const workGallery = {
       ctaLabel: "View Project",
       image: "/images/work-blackalgo.png",
       imageClassName: "object-cover object-center",
+      intro:
+        "Blackalgo came to us mid-scale, with a serious product and a brand that didn't yet match its ambition. We reshaped how the company looks, sounds, and moves online — turning the homepage into a statement of intent and the product pages into closers.",
+      tagline: "EDITORIAL CONVICTION",
+      summary:
+        "We gave Blackalgo a voice with a point of view and a visual system that reads as confident without shouting. Every section was designed to move a specific kind of reader one step closer to a conversation with the team.",
+      services: [
+        "Brand Positioning",
+        "Visual Identity",
+        "Website Design",
+        "Web Development",
+        "Product UI",
+        "Copywriting",
+      ],
+      sections: [
+        {
+          heading: "Homepage",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Blackalgo homepage",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+        {
+          heading: "Product Surface",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Blackalgo product UI",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+        {
+          heading: "Brand System",
+          type: "grid" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Brand system 1",
+              className: "object-cover object-center",
+            },
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Brand system 2",
+              className: "object-cover object-center",
+            },
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Brand system 3",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+      ],
     },
     {
       id: "firecrawl-2",
+      slug: "firecrawl-campaign",
       name: "Firecrawl",
       date: "July 8, 2025",
       meta: "Website · Branding",
@@ -210,9 +329,56 @@ export const workGallery = {
       ctaLabel: "View Project",
       image: "/images/work-firecrawl.png",
       imageClassName: "object-contain object-center scale-[1.12]",
+      intro:
+        "A campaign extension of the core Firecrawl site, built to carry a specific launch story across paid, organic, and owned surfaces with the same visual language turned up a notch.",
+      tagline: "THE CAMPAIGN CUT",
+      summary:
+        "We stretched the Firecrawl system into motion-led hero moments, paired landing pages, and social-native assets so a single narrative could run everywhere the audience was already looking — without diluting the core brand.",
+      services: [
+        "Campaign Strategy",
+        "Landing Pages",
+        "Motion Design",
+        "Social Assets",
+        "Copywriting",
+      ],
+      sections: [
+        {
+          heading: "Campaign Hero",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Campaign hero",
+              className: "object-contain object-center",
+            },
+          ],
+        },
+        {
+          heading: "Landing Pages",
+          type: "grid" as const,
+          images: [
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Landing page variant 1",
+              className: "object-contain object-center",
+            },
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Landing page variant 2",
+              className: "object-contain object-center",
+            },
+            {
+              src: "/images/work-firecrawl.png",
+              alt: "Landing page variant 3",
+              className: "object-contain object-center",
+            },
+          ],
+        },
+      ],
     },
     {
       id: "blackalgo-2",
+      slug: "blackalgo-editorial",
       name: "Blackalgo",
       date: "June 13, 2025",
       meta: "Website · Branding · Product",
@@ -221,6 +387,63 @@ export const workGallery = {
       ctaLabel: "View Project",
       image: "/images/work-blackalgo.png",
       imageClassName: "object-cover object-center",
+      intro:
+        "An editorial expansion of the Blackalgo brand, built to let the product lead while the surrounding typography, spacing, and rhythm quietly elevate it into something that reads as premium on first glance.",
+      tagline: "ROOM TO BREATHE",
+      summary:
+        "We slowed the site down on purpose — larger type, deeper whitespace, tighter pairings — so the product screens could occupy the page with confidence. The result still converts, but it also reads like a piece of considered editorial work.",
+      services: [
+        "Editorial Direction",
+        "Typographic System",
+        "Website Design",
+        "Web Development",
+        "Photography Art Direction",
+      ],
+      sections: [
+        {
+          heading: "Homepage",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Homepage editorial layout",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+        {
+          heading: "Feature Pages",
+          type: "image" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Feature detail page",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+        {
+          heading: "Editorial Grid",
+          type: "grid" as const,
+          images: [
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Editorial image 1",
+              className: "object-cover object-center",
+            },
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Editorial image 2",
+              className: "object-cover object-center",
+            },
+            {
+              src: "/images/work-blackalgo.png",
+              alt: "Editorial image 3",
+              className: "object-cover object-center",
+            },
+          ],
+        },
+      ],
     },
   ],
   cta: {
@@ -232,6 +455,7 @@ export const workGallery = {
 export const blogPosts = [
   {
     id: "blog-1",
+    slug: "how-to-build-a-high-converting-landing-page",
     title: "How to Build a High-Converting Landing Page",
     date: "March 28, 2026",
     category: "Marketing",
@@ -239,9 +463,12 @@ export const blogPosts = [
       "A practical breakdown of the elements that make landing pages convert — from layout hierarchy to micro-copy, backed by patterns we've seen across dozens of launches.",
     image: "/images/work-firecrawl.png",
     imageClassName: "object-contain object-center scale-[1.12]",
+    body: "A landing page is the single most leveraged surface in a marketing funnel — it's the moment where a stranger decides whether your product is worth another click. High-converting pages share a disciplined structure: a promise above the fold that names the customer, their problem, and your specific mechanism for solving it, followed by proof, objection handling, and a low-friction path to act. Hierarchy matters more than cleverness — one dominant headline, one dominant call to action, and one dominant visual. Micro-copy on buttons, form fields, and sub-headlines quietly does half the convincing; generic copy like 'Submit' or 'Get Started' leaves conversion on the table. Pair that with fast loading, tight vertical rhythm, and social proof placed near decision points, and you'll consistently outperform pages that try to say everything at once.",
+    videoId: "r2CbbBLVaPk",
   },
   {
     id: "blog-2",
+    slug: "the-role-of-brand-voice-in-product-led-growth",
     title: "The Role of Brand Voice in Product-Led Growth",
     date: "March 14, 2026",
     category: "Branding",
@@ -249,9 +476,12 @@ export const blogPosts = [
       "Why a distinctive brand voice accelerates organic acquisition and how to develop one that resonates with your ideal customer profile without sounding generic.",
     image: "/images/work-blackalgo.png",
     imageClassName: "object-cover object-center",
+    body: "Product-led growth is often framed as a distribution mechanic, but the companies that compound fastest are the ones whose voice is unmistakable the moment you land on their homepage or open their docs. Voice is what makes a feature announcement feel like news from a friend instead of a press release, and what turns a support article into something worth sharing. A strong voice comes from specificity — real opinions, concrete nouns, a willingness to sound like one person wrote it rather than a committee. The fastest way to develop one is to write how your best customer talks, record a few real conversations, and ruthlessly cut the generic SaaS filler. Consistency across product, docs, emails, and social compounds trust, and trust is what turns free users into champions who bring the next hundred accounts with them.",
+    videoId: "dQw4w9WgXcQ",
   },
   {
     id: "blog-3",
+    slug: "design-systems-that-scale-with-your-startup",
     title: "Design Systems That Scale With Your Startup",
     date: "February 20, 2026",
     category: "Design",
@@ -259,9 +489,12 @@ export const blogPosts = [
       "Lessons learned building design systems for fast-moving teams — what to standardize early, what to leave flexible, and how to keep velocity high.",
     image: "/images/work-firecrawl.png",
     imageClassName: "object-contain object-center scale-[1.12]",
+    body: "The common failure mode of early-stage design systems is ambition — teams try to lock down everything and end up with a rigid library that fights every new feature. The systems that actually scale start small and earn their complexity: tokens for color, type, and spacing first, then a handful of primitives (button, input, surface, stack), and only then real components. Leave room for escape hatches — a documented way to override a token or build a one-off — so the system accelerates velocity instead of throttling it. Treat the design system like product infrastructure, not a style guide: version it, document breaking changes, and let the people building real features own the primitives they touch daily. The payoff isn't visual consistency for its own sake; it's the shipping speed your team inherits when every new screen starts from a known floor.",
+    videoId: "wBUEp_vCHXM",
   },
   {
     id: "blog-4",
+    slug: "video-content-strategy-for-b2b-saas-in-2026",
     title: "Video Content Strategy for B2B SaaS in 2026",
     date: "February 5, 2026",
     category: "Media & Video",
@@ -269,6 +502,8 @@ export const blogPosts = [
       "Short-form, long-form, product demos — which video formats actually drive pipeline for B2B companies and how to produce them without a massive budget.",
     image: "/images/work-blackalgo.png",
     imageClassName: "object-cover object-center",
+    body: "B2B video in 2026 is no longer about polish — it's about signal density. The highest-performing formats aren't 60-second hero films; they're tight product walkthroughs, founder POVs shot on a phone, and 30-second demo clips that show exactly what the tool does and why it matters. Short-form lives on LinkedIn and YouTube Shorts, seeding awareness at the top of the funnel, while 8–15 minute long-form deep dives on YouTube convert researchers into qualified pipeline because they answer real questions buyers are already searching. The production bar that matters is clear audio, good framing, and ruthless editing — expensive cameras are optional, but respect for the viewer's time is not. Repurpose aggressively: every long-form video should spin out four to six short-form clips, a blog post, and a handful of social posts. That's how small teams produce the appearance of a much larger content engine.",
+    videoId: "2lAe1cqCOXo",
   },
 ] as const;
 

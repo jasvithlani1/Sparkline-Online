@@ -21,6 +21,7 @@ export default function BlogsPage() {
           preload="auto"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         >
+          <source src="/videos/blog-hero.webm" type="video/webm" />
           <source src="/videos/blog-hero.mp4" type="video/mp4" />
         </video>
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { workGallery } from "@/lib/content";
 
 export function ProjectList() {
@@ -6,10 +7,11 @@ export function ProjectList() {
     <div data-testid="project-list" className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {workGallery.projects.map((project) => (
-          <article
+          <Link
             key={project.id}
+            href={`/portfolio/${project.slug}`}
             data-testid="project-card"
-            className="group overflow-hidden rounded-xl bg-[#0A1F57] transition-transform duration-300 hover:-translate-y-1"
+            className="group block overflow-hidden rounded-xl bg-[#0A1F57] transition-transform duration-300 hover:-translate-y-1"
           >
             {/* 1:1 Image */}
             <div className="relative aspect-square w-full overflow-hidden">
@@ -46,7 +48,7 @@ export function ProjectList() {
                 </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </div>

@@ -21,6 +21,7 @@ export default function PortfolioPage() {
           playsInline
           className="pointer-events-none absolute inset-0 h-[110%] w-full object-cover object-top"
         >
+          <source src="/videos/portfolio-hero.webm" type="video/webm" />
           <source src="/videos/portfolio-hero.mp4" type="video/mp4" />
         </video>
 

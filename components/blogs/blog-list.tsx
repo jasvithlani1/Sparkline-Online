@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { blogPosts } from "@/lib/content";
 
 const ALL = "All";
@@ -75,9 +76,10 @@ export function BlogList() {
         </p>
       ) : (
         filtered.map((post) => (
-          <article
+          <Link
             key={post.id}
-            className="group border-t border-white/10 py-8 first:border-t-0 sm:py-10 md:py-12"
+            href={`/blogs/${post.slug}`}
+            className="group block border-t border-white/10 py-8 first:border-t-0 sm:py-10 md:py-12"
           >
             <div className="flex flex-col gap-6 md:flex-row md:gap-10 lg:gap-14">
               <div className="relative aspect-[750/530] w-full shrink-0 overflow-hidden rounded-2xl bg-[#0A1F57] transition-transform duration-300 group-hover:scale-[1.03] md:aspect-auto md:h-[198px] md:w-[280px] lg:h-[240px] lg:w-[340px]">
@@ -116,7 +118,7 @@ export function BlogList() {
                 </div>
               </div>
             </div>
-          </article>
+          </Link>
         ))
       )}
     </div>

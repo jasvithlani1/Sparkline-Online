@@ -1,0 +1,204 @@
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Footer } from "@/components/landing/footer";
+import { Navbar } from "@/components/landing/navbar";
+import { workGallery } from "@/lib/content";
+
+export function generateStaticParams() {
+  return workGallery.projects.map((project) => ({ slug: project.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = workGallery.projects.find((entry) => entry.slug === slug);
+  if (!project) return { title: "Portfolio — Sparkline Marketing Firm" };
+  return {
+    title: `${project.name} — Sparkline Marketing Firm`,
+    description: project.description,
+  };
+}
+
+export default async function PortfolioProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const projects = workGallery.projects;
+  const index = projects.findIndex((entry) => entry.slug === slug);
+  if (index === -1) notFound();
+
+  const project = projects[index];
+  const next = projects[(index + 1) % projects.length];
+
+  return (
+    <main className="min-h-screen bg-[#050C1E]">
+      <Navbar />
+
+      {/* Full-viewport hero image with title + intro */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          priority
+          sizes="100vw"
+          className={`${project.imageClassName}`}
+        />
+
+        {/* Dark tint for legibility */}
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
+
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
+            {project.meta}
+          </p>
+          <h1 className="hero-copy mt-4 text-[48px] leading-[1.02] tracking-[-0.04em] sm:text-[72px] md:text-[96px]">
+            {project.name}
+          </h1>
+          <p className="mt-5 max-w-[64ch] text-[16px] leading-7 text-white/75 sm:text-[17px] md:text-[18px]">
+            {project.intro}
+          </p>
+        </div>
+      </section>
+
+      {/* Tagline, summary, services */}
+      <section className="px-5 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
+        <div className="mx-auto max-w-[1208px]">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
+          >
+            <span aria-hidden="true">&larr;</span>
+            Back to Portfolio
+          </Link>
+
+          <div className="mt-10 grid grid-cols-1 gap-12 md:mt-12 md:grid-cols-[2fr_1fr] md:gap-16">
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-3">
+                <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+                  {project.tagline}
+                </h2>
+                <span
+                  aria-hidden="true"
+                  className="h-[2px] w-16 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+                />
+              </div>
+              <p className="max-w-[62ch] text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+                {project.summary}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h3 className="font-mono text-[12px] uppercase tracking-[0.22em] text-white/55">
+                Services
+              </h3>
+              <ul className="flex flex-col gap-2 text-[15px] leading-[1.5] text-white/80 md:text-[16px]">
+                {project.services.map((service) => (
+                  <li key={service}>{service}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content sections */}
+      {project.sections.map((section, idx) => (
+        <section
+          key={`${section.heading}-${idx}`}
+          className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24"
+        >
+          <div className="mx-auto max-w-[1310px]">
+            <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-12">
+              <h2 className="text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[40px]">
+                {section.heading}
+              </h2>
+              <span
+                aria-hidden="true"
+                className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+              />
+            </div>
+
+            {section.type === "image" ? (
+              <div className="mt-8 overflow-hidden rounded-2xl bg-[#0A1F57] md:mt-10">
+                <div className="relative aspect-[16/9] w-full">
+                  <Image
+                    src={section.images[0].src}
+                    alt={section.images[0].alt}
+                    fill
+                    sizes="(min-width: 1280px) 1280px, 100vw"
+                    className={section.images[0].className}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3 md:mt-10 md:gap-6">
+                {section.images.map((img, i) => (
+                  <div
+                    key={`${img.src}-${i}`}
+                    className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#0A1F57]"
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(min-width: 640px) 33vw, 100vw"
+                      className={img.className}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {/* Up next */}
+      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+        <div className="mx-auto max-w-[1310px]">
+          <Link
+            href={`/portfolio/${next.slug}`}
+            className="group relative block overflow-hidden rounded-2xl border border-white/10"
+          >
+            <div className="relative aspect-[21/9] w-full bg-[#0A1F57]">
+              <Image
+                src={next.image}
+                alt={next.name}
+                fill
+                sizes="(min-width: 1280px) 1280px, 100vw"
+                className={`${next.imageClassName} transition-transform duration-500 group-hover:scale-[1.03]`}
+              />
+              <div className="absolute inset-0 bg-black/55 transition-colors duration-500 group-hover:bg-black/45" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/70 sm:text-[12px]">
+                  Up Next
+                </p>
+                <h3 className="hero-copy text-[36px] leading-[1.02] tracking-[-0.03em] sm:text-[56px] md:text-[72px]">
+                  {next.name}
+                </h3>
+                <span className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/80">
+                  View Project
+                  <span
+                    aria-hidden="true"
+                    className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
