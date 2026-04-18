@@ -143,6 +143,296 @@ export const ourServices = {
   ctaLabel: "Learn More",
 } as const;
 
+export const serviceDetails = {
+  "strategy-media": {
+    slug: "strategy-media",
+    eyebrow: "STRATEGY & MEDIA",
+    title: "Every great campaign begins with strategy.",
+    lead:
+      "A sharp value proposition is the engine behind every brand that cuts through. Before we design a pixel or place a dollar, we pressure-test who you are, who you're for, and why anyone should care.",
+    intro:
+      "Brand, voice, campaigns, and channel planning should all reinforce one central idea. We run discovery, audience research, and competitive analysis to isolate that idea — then build a plan that turns it into measurable growth.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "We've partnered with founder-led startups and category leaders alike, shaping launches, repositionings, and full go-to-market rollouts. Every engagement is led by senior strategists — no handoffs, no junior-only rooms.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "Nobody knows who you are in a crowded category.",
+        "You're launching a product and need a narrative people actually remember.",
+        "Market share is slipping to a louder competitor.",
+        "Your paid spend isn't tied to a clear funnel.",
+        "You can't hire the talent you want because the story isn't sharp.",
+        "Internal teams disagree on what the brand even stands for.",
+        "ROI is a guess, not a dashboard.",
+        "You're in every channel and winning in none of them.",
+      ],
+    },
+    cornerstones: {
+      heading: "Strategic cornerstones",
+      items: [
+        "Business goals and KPIs",
+        "Audience segments and jobs-to-be-done",
+        "Brand origin and point of view",
+        "Competitive positioning",
+        "Channel and media architecture",
+        "Messaging pillars",
+        "Success metrics",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "Discovery workshops, stakeholder interviews, analytics audits, and competitive teardowns feed a single strategy doc your team can actually use. We stand it up, then stay close — quarterly reviews, live dashboards, and tight feedback loops with creative and media.",
+    },
+    cta: {
+      heading: "Ready to sharpen the story?",
+      body:
+        "Most teams have the product. They just need the plan. Let's build yours.",
+    },
+  },
+  "website-development": {
+    slug: "website-development",
+    eyebrow: "WEBSITE DEVELOPMENT",
+    title: "Sites that ship fast and convert harder.",
+    lead:
+      "Your website is the single asset every channel points to. We build ones that load instantly, read beautifully, and move real numbers — not just portfolio shots.",
+    intro:
+      "We design and engineer websites as product, not decoration. That means interaction design, accessibility, performance budgets, and a CMS your marketing team will actually enjoy using.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "Designers and engineers in the same room from day one. No throw-it-over-the-wall. We've launched marketing sites, docs, eCommerce storefronts, and interactive landing experiences that sit in the top percentile for Core Web Vitals.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "Your current site looks tired and converts worse.",
+        "Marketing can't update pages without waiting on engineering.",
+        "Page speed is hurting SEO and paid landing performance.",
+        "You're rebuilding and the roadmap keeps slipping.",
+        "Design looks great in Figma and falls apart in the browser.",
+        "Mobile experience is an afterthought.",
+        "Analytics and experimentation were never wired in properly.",
+      ],
+    },
+    cornerstones: {
+      heading: "Build cornerstones",
+      items: [
+        "UX research and information architecture",
+        "Accessible, responsive UI systems",
+        "Motion and interaction design",
+        "Headless CMS and editor experience",
+        "Performance budgets and Core Web Vitals",
+        "Analytics, tagging, and experimentation",
+        "Launch QA and monitoring",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "We start with a product-minded discovery — goals, audiences, content model — then move into parallel design and engineering sprints. You see a real, clickable site from week one, not a deck.",
+    },
+    cta: {
+      heading: "Ready for a site that pulls its weight?",
+      body:
+        "Bring the idea. We'll ship the build — design, dev, CMS, and the analytics stack behind it.",
+    },
+  },
+  "branding-design": {
+    slug: "branding-design",
+    eyebrow: "BRANDING & DESIGN",
+    title: "Brands people actually remember.",
+    lead:
+      "A brand is more than a logo — it's the compounding asset every other investment rides on. We build identities with a point of view, a voice, and the discipline to hold up across every surface.",
+    intro:
+      "Most brands blend in because they were never defined past a moodboard. We go deep on story, visual system, and verbal identity — then hand you the toolkit and training to keep it coherent as you grow.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "A studio-sized team with agency range. Our senior creative directors have shaped brands from seed to Series C and rebranded public companies without losing what made them work.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "Your brand looks different on every surface.",
+        "The identity hasn't kept up with the product.",
+        "You're pre-launch and need a full visual and verbal system.",
+        "Team can't describe the brand in one sentence without arguing.",
+        "Competitors are starting to look identical — and you're one of them.",
+        "Sales collateral, pitch decks, and the site feel like three different companies.",
+      ],
+    },
+    cornerstones: {
+      heading: "Identity cornerstones",
+      items: [
+        "Brand strategy and positioning",
+        "Verbal identity and messaging",
+        "Logo and wordmark system",
+        "Typography and color systems",
+        "Iconography and illustration",
+        "Motion principles",
+        "Guidelines and team training",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "Immersion workshops, competitive audits, and audience research feed a positioning brief. From there it's identity exploration, system design, and rollout — with your team in the room at every milestone so nothing lands cold.",
+    },
+    cta: {
+      heading: "Ready to build something people remember?",
+      body:
+        "Whether it's a new mark or a full overhaul, we'll make sure it's worth switching to.",
+    },
+  },
+  "video-production": {
+    slug: "video-production",
+    eyebrow: "VIDEO PRODUCTION",
+    title: "Video that earns the watch.",
+    lead:
+      "Attention is the scarcest resource in marketing. We make video that holds it — from brand films and product launches to social-first edits built for the feed.",
+    intro:
+      "Concept, script, shoot, edit, motion, sound — handled in-house by a crew that's done this at every budget level. We plan around the story, not the other way around.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "Directors, writers, and animators who've shipped campaigns for consumer brands, B2B SaaS, and entertainment. We match the format and tone to the channel — not just the brief.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "You have a product launch and nothing to show it with.",
+        "Your paid ads rely on the same tired stock footage.",
+        "Sales needs case study and testimonial video — fast.",
+        "Events and trade shows need loop reels and sizzle.",
+        "YouTube and social channels have no consistent rhythm.",
+        "Internal comms video looks ten years older than it needs to.",
+      ],
+    },
+    cornerstones: {
+      heading: "Production cornerstones",
+      items: [
+        "Concept and script development",
+        "Storyboarding and pre-production",
+        "Cinematography and directing",
+        "2D and 3D animation",
+        "Motion graphics and VFX",
+        "Sound design and scoring",
+        "Post, color, and platform delivery",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "We scope against the story, not the shot list. Once the concept is approved we run a tight production calendar — pre-pro, shoot days, edits — with clear checkpoints and revision rounds baked in.",
+    },
+    cta: {
+      heading: "Roll tape?",
+      body:
+        "Tell us what you're launching. We'll tell you what we'd shoot.",
+    },
+  },
+  "digital-email": {
+    slug: "digital-email",
+    eyebrow: "DIGITAL & EMAIL",
+    title: "Performance channels, run by people who read the data.",
+    lead:
+      "Paid, SEO, email, and lifecycle — connected, measured, and optimized as one system. We treat media as a product team, not a monthly report.",
+    intro:
+      "Campaigns, creative, targeting, and tracking are one loop. We build it end-to-end — audience research through to attribution — so the investment compounds instead of leaking.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "A media team that writes the ads, builds the landing pages, and reads the dashboards. Nothing is outsourced to a black box and the numbers are the numbers.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "CAC keeps climbing and you can't pinpoint why.",
+        "SEO stagnated after the last core update.",
+        "Email feels like a newsletter instead of a revenue channel.",
+        "Creative testing is ad-hoc with no structure.",
+        "Attribution is a guess across Meta, Google, and GA4.",
+        "Agency reporting never matches your CRM.",
+      ],
+    },
+    cornerstones: {
+      heading: "Channel cornerstones",
+      items: [
+        "SEO and content strategy",
+        "Paid search and shopping",
+        "Paid social and creative testing",
+        "YouTube and display",
+        "Email and lifecycle",
+        "Landing page and CRO",
+        "Measurement and attribution",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "Week-one audit across every channel, funnel, and tracking layer. We rebuild what's broken, plan the 90-day sprint, and run weekly optimization standups with your team.",
+    },
+    cta: {
+      heading: "Ready to stop guessing?",
+      body:
+        "Send us the dashboards. We'll send back a plan.",
+    },
+  },
+  "programmatic-solutions": {
+    slug: "programmatic-solutions",
+    eyebrow: "PROGRAMMATIC SOLUTIONS",
+    title: "Omnichannel media, bought intelligently.",
+    lead:
+      "CTV, OTT, audio, display, and mobile — bought programmatically with real audiences and real attribution. We plan media like a portfolio, not a media plan.",
+    intro:
+      "Programmatic is only powerful if the targeting, creative, and measurement are all running in the same loop. We stand up the stack, run the campaigns, and give you a reporting view your CFO will actually believe.",
+    whyUs: {
+      heading: "Why Sparkline",
+      body:
+        "Independent media buyers with deep DSP experience across The Trade Desk, DV360, and Amazon. Transparent fees, transparent data, no resold inventory.",
+    },
+    problems: {
+      heading: "Problems we solve",
+      items: [
+        "Linear TV is shrinking and you need a real CTV strategy.",
+        "Awareness campaigns don't connect to conversion data.",
+        "Targeting is too broad and burning budget.",
+        "You've got retail, B2B, and brand layers with no shared plan.",
+        "Frequency is out of control on one channel and zero on another.",
+        "Measurement is disconnected from the buying platform.",
+      ],
+    },
+    cornerstones: {
+      heading: "Programmatic cornerstones",
+      items: [
+        "CTV and OTT planning",
+        "Programmatic display and native",
+        "Digital audio and podcast",
+        "Retargeting and audience curation",
+        "Addressable and geo-targeted",
+        "Brand lift and incrementality",
+        "Transparent reporting and reconciliation",
+      ],
+    },
+    process: {
+      heading: "How we work",
+      body:
+        "We model the media mix, set up the DSP and pixels, launch with clean creative, and optimize weekly against business outcomes — not just vanity metrics.",
+    },
+    cta: {
+      heading: "Ready for media that moves the P&L?",
+      body:
+        "Share the goal and the budget. We'll show you what the plan looks like.",
+    },
+  },
+} as const;
+
+export type ServiceDetailSlug = keyof typeof serviceDetails;
+
 export const serviceOptions = [
   {
     id: "strategy",

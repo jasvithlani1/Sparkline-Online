@@ -55,7 +55,7 @@ export function OurServices() {
               </ul>
               <div>
                 <Link
-                  href="/contact"
+                  href={`/services/${card.id}`}
                   className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5"
                   style={{
                     paddingInline: "16px",
