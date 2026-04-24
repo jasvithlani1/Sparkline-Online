@@ -63,6 +63,21 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
           />
         </svg>
       );
+    case "brand-strategy":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+          <circle cx="24" cy="24" r="16" fill="none" stroke={stroke} strokeWidth="3.2" />
+          <circle cx="24" cy="24" r="7" fill="none" stroke={stroke} strokeWidth="3.2" />
+          <path
+            d="M32 16L24 24M24 24L38 10M24 24L18 34"
+            fill="none"
+            stroke={stroke}
+            strokeWidth="3.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
   }
 }
 
@@ -88,7 +103,7 @@ export function ServiceOptionsToggle() {
                 aria-label={option.title}
                 aria-pressed={isActive}
                 onClick={() => setActiveId(option.id)}
-                className={`relative flex w-full flex-col items-start px-3 py-3 text-left sm:px-4 sm:py-4 md:px-5 md:py-5 ${
+                className={`relative flex w-full flex-col items-start px-3 py-3 text-left transition-transform duration-150 active:scale-[0.96] sm:px-4 sm:py-4 md:px-5 md:py-5 ${
                   isActive ? "before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-[#7A6BFF]" : ""
                 }`}
               >

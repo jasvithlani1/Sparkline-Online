@@ -1,8 +1,25 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { ourServices, serviceDetails } from "@/lib/content";
+
+const BRAND = "SPARKLINE MARKETING FIRM";
+
+function withBrandBold(text: string) {
+  const parts = text.split(BRAND);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => (
+    <Fragment key={i}>
+      {part}
+      {i < parts.length - 1 ? (
+        <strong className="font-semibold text-white">{BRAND}</strong>
+      ) : null}
+    </Fragment>
+  ));
+}
 
 type ServiceCard = (typeof ourServices.cards)[number];
 
@@ -63,18 +80,18 @@ export default async function ServiceDetailPage({
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
               {detail.eyebrow}
             </p>
-            <h1 className="hero-copy max-w-[20ch] text-[44px] leading-[1.02] tracking-[-0.04em] text-white sm:text-[64px] md:text-[88px] lg:text-[104px]">
+            <h1 className="hero-copy max-w-[22ch] text-balance text-[36px] leading-[1.05] tracking-[-0.04em] text-white sm:text-[52px] md:text-[68px] lg:text-[80px]">
               {detail.title}
             </h1>
             <span
               aria-hidden="true"
               className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
-            <p className="max-w-[72ch] text-[17px] leading-[1.7] text-white/80 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
-              {detail.lead}
+            <p className="max-w-[72ch] text-pretty text-[17px] leading-[1.7] text-white/80 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
+              {withBrandBold(detail.lead)}
             </p>
-            <p className="max-w-[72ch] text-[16px] leading-[1.7] text-white/65 sm:text-[17px] md:text-[18px]">
-              {detail.intro}
+            <p className="max-w-[72ch] text-pretty text-[16px] leading-[1.7] text-white/65 sm:text-[17px] md:text-[18px]">
+              {withBrandBold(detail.intro)}
             </p>
           </div>
         </div>
@@ -85,7 +102,7 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
             <div className="flex flex-col gap-3">
-              <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+              <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                 {detail.whyUs.heading}
               </h2>
               <span
@@ -93,8 +110,8 @@ export default async function ServiceDetailPage({
                 className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
               />
             </div>
-            <p className="max-w-[62ch] text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
-              {detail.whyUs.body}
+            <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+              {withBrandBold(detail.whyUs.body)}
             </p>
           </div>
         </div>
@@ -118,7 +135,7 @@ export default async function ServiceDetailPage({
       <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
         <div className="mx-auto max-w-[1208px]">
           <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-14">
-            <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+            <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
               {detail.problems.heading}
             </h2>
             <span
@@ -149,7 +166,7 @@ export default async function ServiceDetailPage({
           <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-10 md:grid-cols-2 md:gap-16 md:pt-14">
             <div>
               <div className="flex flex-col gap-3">
-                <h2 className="text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
+                <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
                   {detail.cornerstones.heading}
                 </h2>
                 <span
@@ -174,8 +191,8 @@ export default async function ServiceDetailPage({
 
             <div>
               <div className="flex flex-col gap-3">
-                <h2 className="text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
-                  Areas of expertise
+                <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
+                  Our Specialties
                 </h2>
                 <span
                   aria-hidden="true"
@@ -183,7 +200,7 @@ export default async function ServiceDetailPage({
                 />
               </div>
               <ul className="mt-8 flex flex-wrap gap-2">
-                {card.items.map((item) => (
+                {((detail as { specialties?: readonly string[] }).specialties ?? card.items).map((item) => (
                   <li
                     key={item}
                     className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[14px] leading-[1.2] text-white/80 md:text-[15px]"
@@ -216,7 +233,7 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
             <div className="flex flex-col gap-3">
-              <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+              <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                 {detail.process.heading}
               </h2>
               <span
@@ -224,27 +241,33 @@ export default async function ServiceDetailPage({
                 className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
               />
             </div>
-            <p className="max-w-[62ch] text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
-              {detail.process.body}
+            <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+              {withBrandBold(detail.process.body)}
             </p>
           </div>
         </div>
       </section>
 
+      {(detail as { faq?: readonly { id: string; question: string; answer: string }[] }).faq ? (
+        <Faq
+          items={(detail as { faq: readonly { id: string; question: string; answer: string }[] }).faq}
+        />
+      ) : null}
+
       {/* CTA */}
       <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
         <div className="mx-auto max-w-[1208px]">
           <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
-            <h2 className="hero-copy text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
+            <h2 className="hero-copy text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
               {detail.cta.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-[16px] leading-7 text-white/70 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto mt-5 max-w-[58ch] text-pretty text-[16px] leading-7 text-white/70 sm:text-[17px] md:text-[18px]">
               {detail.cta.body}
             </p>
             <div className="mt-8 flex justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
                 style={{
                   paddingInline: "20px",
                   paddingBlock: "12px",
@@ -262,7 +285,7 @@ export default async function ServiceDetailPage({
                   fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
                 }}
               >
-                Contact the crew
+                {(detail.cta as { label?: string }).label ?? "Contact the crew"}
               </Link>
             </div>
           </div>

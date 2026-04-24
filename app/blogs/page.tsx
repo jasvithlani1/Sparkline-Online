@@ -36,10 +36,10 @@ export default function BlogsPage() {
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
             OUR BLOG
           </p>
-          <h1 className="mt-4 text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
+          <h1 className="mt-4 text-balance text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
             Blogs
           </h1>
-          <p className="mt-4 max-w-[48ch] text-[16px] leading-7 text-white/60 sm:text-[17px]">
+          <p className="mt-4 max-w-[48ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
             Insights, strategies, and stories from our team.
           </p>
         </div>

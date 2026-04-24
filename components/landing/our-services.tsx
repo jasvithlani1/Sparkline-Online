@@ -1,5 +1,36 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { ourServices } from "@/lib/content";
+
+const BRAND = "SPARKLINE MARKETING FIRM";
+const PARAGRAPH_BOLD: Record<number, readonly string[]> = {
+  1: ["Digital Marketing", "Brand Strategy", "Website Design & Development"],
+  2: ["Branding & Design", "Social Media", "Content Creation"],
+};
+
+function renderWithBold(text: string, phrases: readonly string[]) {
+  const hits = phrases
+    .map((phrase) => ({ phrase, start: text.indexOf(phrase) }))
+    .filter((hit) => hit.start !== -1)
+    .sort((a, b) => a.start - b.start);
+
+  if (hits.length === 0) return text;
+
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+  hits.forEach((hit, i) => {
+    if (hit.start < cursor) return;
+    parts.push(text.slice(cursor, hit.start));
+    parts.push(
+      <strong key={i} className="font-semibold text-white">
+        {hit.phrase}
+      </strong>,
+    );
+    cursor = hit.start + hit.phrase.length;
+  });
+  parts.push(text.slice(cursor));
+  return <Fragment>{parts}</Fragment>;
+}
 
 export function OurServices() {
   return (
@@ -15,16 +46,26 @@ export function OurServices() {
         >
           <div className="flex flex-col gap-4">
             <h2 className="hero-copy text-[44px] leading-[0.95] tracking-[-0.01em] sm:text-[60px] md:text-[72px] lg:text-[84px]">
-              OUR SERVICES
+              OUR CORE SERVICES
             </h2>
             <span
               aria-hidden="true"
               className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
           </div>
-          <p className="max-w-[1024px] text-[16px] leading-[1.7] text-white/72 sm:text-[17px] md:text-[18px] md:leading-[1.72]">
-            {ourServices.intro}
-          </p>
+          <div className="flex max-w-[1024px] flex-col gap-5 sm:gap-6">
+            {ourServices.intro.map((paragraph, index) => {
+              const phrases = [BRAND, ...(PARAGRAPH_BOLD[index] ?? [])];
+              return (
+                <p
+                  key={index}
+                  className="text-pretty text-[16px] leading-[1.7] text-white/72 sm:text-[17px] md:text-[18px] md:leading-[1.72]"
+                >
+                  {renderWithBold(paragraph, phrases)}
+                </p>
+              );
+            })}
+          </div>
         </div>
 
         <div className="mt-12 h-px w-full bg-white/10 md:mt-14" />
@@ -41,7 +82,7 @@ export function OurServices() {
             >
               <div className="flex flex-col gap-4">
                 <h3
-                  className="hero-copy whitespace-pre-line text-[28px] leading-[1] tracking-[-0.005em] sm:text-[32px] md:text-[38px]"
+                  className="hero-copy whitespace-pre-line text-balance text-[28px] leading-[1] tracking-[-0.005em] sm:text-[32px] md:text-[38px]"
                   style={{ fontFamily: "var(--font-cal-sans), Arial, sans-serif" }}
                 >
                   {card.title}
@@ -56,7 +97,7 @@ export function OurServices() {
               <div>
                 <Link
                   href={`/services/${card.id}`}
-                  className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
                   style={{
                     paddingInline: "16px",
                     paddingBlock: "10px",
@@ -79,6 +120,8 @@ export function OurServices() {
             </article>
           ))}
         </div>
+
+        <div className="h-px w-full bg-white/10" />
       </div>
     </section>
   );

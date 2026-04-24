@@ -1,3 +1,4 @@
+import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { OurServices } from "@/components/landing/our-services";
@@ -32,18 +33,19 @@ export default function ServicesPage() {
         {/* Hero text */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            WHAT WE DO
+            How We Help Brands Grow
           </p>
-          <h1 className="mt-4 text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
+          <h1 className="mt-4 text-balance text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
             Services
           </h1>
-          <p className="mt-4 max-w-[48ch] text-[16px] leading-7 text-white/60 sm:text-[17px]">
-            Strategy, design, development, and media — all under one crew.
+          <p className="mt-4 max-w-[52ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
+            Strategic marketing, branding, web development, and content solutions that help brands grow with clarity and impact.
           </p>
         </div>
       </section>
 
       <OurServices />
+      <Faq />
       <Footer />
     </main>
   );

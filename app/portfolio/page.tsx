@@ -34,13 +34,13 @@ export default function PortfolioPage() {
         {/* Hero text */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            OUR WORK
+            WORK HIGHLIGHTS
           </p>
-          <h1 className="mt-4 text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
+          <h1 className="mt-4 text-balance text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
             Portfolio
           </h1>
-          <p className="mt-4 max-w-[48ch] text-[16px] leading-7 text-white/60 sm:text-[17px]">
-            A selection of the best projects crafted by our team.
+          <p className="mt-4 max-w-[48ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
+            Explore a selection of standout projects delivered by our team, showcasing strategic thinking, creative excellence, and results-driven execution.
           </p>
         </div>
       </section>

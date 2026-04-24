@@ -59,10 +59,10 @@ export default async function PortfolioProjectPage({
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
             {project.meta}
           </p>
-          <h1 className="hero-copy mt-4 text-[48px] leading-[1.02] tracking-[-0.04em] sm:text-[72px] md:text-[96px]">
+          <h1 className="hero-copy mt-4 text-balance text-[48px] leading-[1.02] tracking-[-0.04em] sm:text-[72px] md:text-[96px]">
             {project.name}
           </h1>
-          <p className="mt-5 max-w-[64ch] text-[16px] leading-7 text-white/75 sm:text-[17px] md:text-[18px]">
+          <p className="mt-5 max-w-[64ch] text-pretty text-[16px] leading-7 text-white/75 sm:text-[17px] md:text-[18px]">
             {project.intro}
           </p>
         </div>
@@ -82,7 +82,7 @@ export default async function PortfolioProjectPage({
           <div className="mt-10 grid grid-cols-1 gap-12 md:mt-12 md:grid-cols-[2fr_1fr] md:gap-16">
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-3">
-                <h2 className="text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+                <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                   {project.tagline}
                 </h2>
                 <span
@@ -90,7 +90,7 @@ export default async function PortfolioProjectPage({
                   className="h-[2px] w-16 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
                 />
               </div>
-              <p className="max-w-[62ch] text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+              <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
                 {project.summary}
               </p>
             </div>
@@ -117,7 +117,7 @@ export default async function PortfolioProjectPage({
         >
           <div className="mx-auto max-w-[1310px]">
             <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-12">
-              <h2 className="text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[40px]">
+              <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[40px]">
                 {section.heading}
               </h2>
               <span
@@ -165,7 +165,7 @@ export default async function PortfolioProjectPage({
         <div className="mx-auto max-w-[1310px]">
           <Link
             href={`/portfolio/${next.slug}`}
-            className="group relative block overflow-hidden rounded-2xl border border-white/10"
+            className="group relative block overflow-hidden rounded-2xl outline outline-1 -outline-offset-1 outline-white/10"
           >
             <div className="relative aspect-[21/9] w-full bg-[#0A1F57]">
               <Image
@@ -180,7 +180,7 @@ export default async function PortfolioProjectPage({
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/70 sm:text-[12px]">
                   Up Next
                 </p>
-                <h3 className="hero-copy text-[36px] leading-[1.02] tracking-[-0.03em] sm:text-[56px] md:text-[72px]">
+                <h3 className="hero-copy text-balance text-[36px] leading-[1.02] tracking-[-0.03em] sm:text-[56px] md:text-[72px]">
                   {next.name}
                 </h3>
                 <span className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/80">

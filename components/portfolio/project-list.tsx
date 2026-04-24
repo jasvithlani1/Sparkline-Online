@@ -14,7 +14,7 @@ export function ProjectList() {
             className="group block overflow-hidden rounded-xl bg-[#0A1F57] transition-transform duration-300 hover:-translate-y-1"
           >
             {/* 1:1 Image */}
-            <div className="relative aspect-square w-full overflow-hidden">
+            <div className="relative aspect-square w-full overflow-hidden outline outline-1 -outline-offset-1 outline-white/10">
               <Image
                 src={project.image}
                 alt={project.name}
@@ -30,11 +30,11 @@ export function ProjectList() {
                 <span className="font-mono">{project.date}</span>
               </div>
 
-              <h2 className="text-[18px] leading-[1.15] tracking-[-0.03em] text-white sm:text-[20px]">
+              <h2 className="text-balance text-[18px] leading-[1.15] tracking-[-0.03em] text-white sm:text-[20px]">
                 {project.name}
               </h2>
 
-              <p className="text-[13px] leading-5 text-white/70 sm:text-[14px] sm:leading-6 line-clamp-2">
+              <p className="text-pretty text-[13px] leading-5 text-white/70 sm:text-[14px] sm:leading-6 line-clamp-2">
                 {project.description}
               </p>
 

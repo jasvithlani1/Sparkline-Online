@@ -95,7 +95,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={isHomePage ? "#contact-us" : "/#contact-us"}
-              className="inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-[13px] text-white transition-transform hover:-translate-y-0.5 sm:px-3 sm:py-2.5 sm:text-[15px] md:text-base"
+              className="inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-[13px] text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96] sm:px-3 sm:py-2.5 sm:text-[15px] md:text-base"
               style={{
                 borderRadius: "8px",
                 backgroundImage: "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
@@ -117,7 +117,7 @@ export function Navbar() {
               aria-controls="mobile-nav-panel"
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((open) => !open)}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition-colors hover:bg-white/12 sm:h-11 sm:w-11 lg:hidden"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition-[background-color,transform] duration-200 hover:bg-white/12 active:scale-[0.96] sm:h-11 sm:w-11 lg:hidden"
             >
               <span className="flex flex-col gap-1.5">
                 <span className="block h-px w-4 bg-current" />

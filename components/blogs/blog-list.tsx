@@ -82,7 +82,7 @@ export function BlogList() {
             className="group block border-t border-white/10 py-8 first:border-t-0 sm:py-10 md:py-12"
           >
             <div className="flex flex-col gap-6 md:flex-row md:gap-10 lg:gap-14">
-              <div className="relative aspect-[750/530] w-full shrink-0 overflow-hidden rounded-2xl bg-[#0A1F57] transition-transform duration-300 group-hover:scale-[1.03] md:aspect-auto md:h-[198px] md:w-[280px] lg:h-[240px] lg:w-[340px]">
+              <div className="relative aspect-[750/530] w-full shrink-0 overflow-hidden rounded-2xl bg-[#0A1F57] outline outline-1 -outline-offset-1 outline-white/10 transition-transform duration-300 group-hover:scale-[1.03] md:aspect-auto md:h-[198px] md:w-[280px] lg:h-[240px] lg:w-[340px]">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -99,11 +99,11 @@ export function BlogList() {
                   <span className="font-mono">{post.category}</span>
                 </div>
 
-                <h2 className="text-[26px] leading-[1.1] tracking-[-0.03em] text-white sm:text-[30px] md:text-[34px]">
+                <h2 className="text-balance text-[26px] leading-[1.1] tracking-[-0.03em] text-white sm:text-[30px] md:text-[34px]">
                   {post.title}
                 </h2>
 
-                <p className="max-w-[54ch] text-[15px] leading-6 text-white/70 sm:text-[16px] sm:leading-7">
+                <p className="max-w-[54ch] text-pretty text-[15px] leading-6 text-white/70 sm:text-[16px] sm:leading-7">
                   {post.description}
                 </p>
 

@@ -13,17 +13,19 @@ export const featuredIntro = {
     "Haven-1 space station",
     "technologies",
   ],
-  body:
-    "In November 2025, Haven Demo marked a major milestone with a successful deployment on the Bandwagon-4 rideshare mission. The mission reached its intended outcome in orbit, confirming that the platform performed as planned after deployment. That result turned a key launch moment into a clear operational success for the program. It also marked an important step forward for Haven Demo as the work continues.",
+  body: [
+    "SPARKLINE MARKETING FIRM helps ambitious businesses build stronger brands, reach the right audience, and turn digital presence into measurable growth. We deliver strategic, creative, and performance-focused solutions that help companies stand out, build credibility, and connect with customers in meaningful and lasting ways.",
+    "Our expertise spans Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Creation. Every solution is tailored to your goals, combining insight, innovation, and execution to create a consistent brand experience. With SPARKLINE MARKETING FIRM, you gain a trusted creative and strategic partner dedicated to helping your business grow with confidence in a competitive digital landscape.",
+  ],
   cta: "Learn more",
 };
 
 export const trustedBy = {
-  eyebrow: "Trusted by the bold",
+  eyebrow: "TRUSTED BY VISIONARY BRANDS",
   lines: [
-    "From breakout startups to industry giants,",
-    "we partner with ambitious companies looking to",
-    "shape the future.",
+    "From emerging businesses to established industry leaders,",
+    "we partner with ambitious companies focused on driving",
+    "growth and shaping the future.",
   ],
   logos: [
     "Antimetal",
@@ -47,96 +49,106 @@ export const trustedBy = {
 
 export const ourServices = {
   eyebrow: "OUR SERVICES",
-  intro:
-    "Whether you are looking to launch a new website, update your image, or do a brand overhaul, we are the team for the job. Every mission begins by listening to your needs and thoroughly understanding what needs to be done. We work in partnership with you to formulate a custom flight plan focused on maximum results. Then, we roll up our sleeves and bring your ideas to life. An account manager serves as your single point of contact, keeping the lines of communication flowing and updating you on our progress every step of the way. Enhance your online presence with our tailored digital marketing services. We leverage strategic solutions to amplify your brand's reach and impact. In the end, we want to achieve your goals, celebrate your success, and prepare for our next mission together.",
+  intro: [
+    "SPARKLINE MARKETING FIRM delivers strategic and creative solutions designed to help businesses grow with confidence in a competitive digital landscape. Our services are built to create a strong, consistent brand presence while supporting long-term business goals through purposeful execution and measurable impact.",
+    "From Digital Marketing and Brand Strategy to Website Design & Development, we help brands build visibility, define their market position, and create meaningful customer experiences. Our team focuses on developing tailored strategies and high-performing digital platforms that strengthen credibility and drive engagement.",
+    "We also specialise in Branding & Design, Social Media, and Content Creation to ensure your business communicates with clarity and consistency across every touchpoint. Whether you need a stronger visual identity, a more engaging online presence, or content that connects with the right audience, SPARKLINE MARKETING FIRM provides integrated solutions that bring strategy, creativity, and performance together to help your brand stand out and grow with lasting impact.",
+  ],
   cards: [
     {
       id: "strategy-media",
-      title: "Strategy\n& Media",
+      title: "Digital\nMarketing",
       items: [
-        "Brand Strategy",
-        "Content Strategy",
-        "Digital Strategy",
-        "Social Strategy",
-        "Marketing Strategy",
-        "Go-to-Market Strategy",
-        "Media Strategy, Planning, Buying",
-        "Media Reconciliation",
-        "Analytics & Reporting",
+        "Search Marketing",
+        "Paid Advertising",
+        "Email Campaigns",
+        "Lead Generation",
+        "Conversion Optimisation",
+        "Marketing Analytics",
+        "Audience Targeting",
+        "Campaign Strategy",
+        "Funnel Planning",
+        "Performance Reporting",
       ],
     },
     {
       id: "website-development",
-      title: "Website Development",
+      title: "Website Design\n& Development",
       items: [
-        "User Experience (UX)",
-        "User Interface (UI)",
+        "UX Design",
+        "UI Design",
         "Responsive Design",
-        "Website Animation",
-        "Web Development",
-        "Web Design",
+        "Custom Development",
         "Landing Pages",
-        "eCommerce",
+        "eCommerce Development",
+        "CMS Integration",
+        "Website Maintenance",
+        "Performance Optimisation",
+        "Website Redesign",
       ],
     },
     {
       id: "branding-design",
-      title: "Branding\n& Design",
+      title: "Content\nCreation",
       items: [
-        "Brand Workshops",
+        "Website Copy",
+        "Blog Writing",
+        "Social Content",
+        "Ad Copy",
         "Brand Messaging",
-        "Story Development",
-        "Logo Design",
-        "Collateral",
-        "Illustrations",
-        "Graphic Design",
-        "Environmental Design",
-        "Trade Shows",
+        "Video Scripts",
+        "Email Content",
+        "SEO Content",
+        "Creative Copy",
+        "Content Strategy",
       ],
     },
     {
       id: "video-production",
-      title: "Video\nProduction",
+      title: "Social Media\nManagement",
       items: [
-        "Concept Development",
-        "Storyboarding",
-        "Scripting",
-        "Animated Video",
-        "Cinematography",
-        "Corporate Video",
-        "Case Study Video",
-        "Testimonial Video",
-        "Podcasting",
+        "Content Planning",
+        "Post Scheduling",
+        "Audience Engagement",
+        "Community Management",
+        "Social Campaigns",
+        "Profile Optimisation",
+        "Hashtag Strategy",
+        "Performance Tracking",
+        "Trend Monitoring",
+        "Monthly Reporting",
       ],
     },
     {
       id: "digital-email",
-      title: "Digital\n& Email",
+      title: "Branding\n& Design",
       items: [
-        "SEM/SEO",
-        "Paid Social",
-        "Audience Targeting",
-        "Monitoring & Reporting",
-        "Social Analytics",
-        "Email Marketing",
-        "YouTube Advertising",
-        "Display Ads",
-        "Remarketing",
+        "Logo Design",
+        "Visual Identity",
+        "Brand Guidelines",
+        "Creative Direction",
+        "Typography Systems",
+        "Colour Palette",
+        "Brand Collateral",
+        "Design Systems",
+        "Marketing Assets",
+        "Visual Consistency",
       ],
     },
     {
       id: "programmatic-solutions",
-      title: "Programmatic Solutions",
+      title: "Brand\nStrategy",
       items: [
-        "OTT",
-        "CTV",
-        "Programmatic Media",
-        "Omnichannel",
-        "Campaigns",
-        "Precision Targeting",
-        "Addressable",
-        "Mobile",
-        "Video",
+        "Brand Positioning",
+        "Market Research",
+        "Audience Analysis",
+        "Competitive Analysis",
+        "Messaging Framework",
+        "Voice Development",
+        "Growth Planning",
+        "Go-To-Market",
+        "Campaign Direction",
+        "Strategic Planning",
       ],
     },
   ],
@@ -153,12 +165,12 @@ export const serviceDetails = {
     intro:
       "Brand, voice, campaigns, and channel planning should all reinforce one central idea. We run discovery, audience research, and competitive analysis to isolate that idea — then build a plan that turns it into measurable growth.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
         "We've partnered with founder-led startups and category leaders alike, shaping launches, repositionings, and full go-to-market rollouts. Every engagement is led by senior strategists — no handoffs, no junior-only rooms.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
         "Nobody knows who you are in a crowded category.",
         "You're launching a product and need a narrative people actually remember.",
@@ -171,7 +183,7 @@ export const serviceDetails = {
       ],
     },
     cornerstones: {
-      heading: "Strategic cornerstones",
+      heading: "What We Build On",
       items: [
         "Business goals and KPIs",
         "Audience segments and jobs-to-be-done",
@@ -183,7 +195,7 @@ export const serviceDetails = {
       ],
     },
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
         "Discovery workshops, stakeholder interviews, analytics audits, and competitive teardowns feed a single strategy doc your team can actually use. We stand it up, then stay close — quarterly reviews, live dashboards, and tight feedback loops with creative and media.",
     },
@@ -195,50 +207,124 @@ export const serviceDetails = {
   },
   "website-development": {
     slug: "website-development",
-    eyebrow: "WEBSITE DEVELOPMENT",
-    title: "Sites that ship fast and convert harder.",
+    eyebrow: "WEBSITE DESIGN & DEVELOPMENT",
+    title: "Websites designed to impress, perform, and convert.",
     lead:
-      "Your website is the single asset every channel points to. We build ones that load instantly, read beautifully, and move real numbers — not just portfolio shots.",
+      "At SPARKLINE MARKETING FIRM, we create websites that do more than look good. Our website design and development services focus on building modern, user-friendly, and responsive websites that reflect your brand professionally.",
     intro:
-      "We design and engineer websites as product, not decoration. That means interaction design, accessibility, performance budgets, and a CMS your marketing team will actually enjoy using.",
+      "We combine clean design, smooth functionality, and strategic structure to help your business attract attention, improve user experience, and drive meaningful conversions online.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
-        "Designers and engineers in the same room from day one. No throw-it-over-the-wall. We've launched marketing sites, docs, eCommerce storefronts, and interactive landing experiences that sit in the top percentile for Core Web Vitals.",
+        "Creative design, strategic thinking, and seamless development come together to build websites that look professional, perform smoothly, and support real business growth. We focus on user experience, brand consistency, and conversion-driven results.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
-        "Your current site looks tired and converts worse.",
-        "Marketing can't update pages without waiting on engineering.",
-        "Page speed is hurting SEO and paid landing performance.",
-        "You're rebuilding and the roadmap keeps slipping.",
-        "Design looks great in Figma and falls apart in the browser.",
-        "Mobile experience is an afterthought.",
-        "Analytics and experimentation were never wired in properly.",
+        "Outdated website design affecting brand credibility badly",
+        "Poor mobile responsiveness reducing user experience quality",
+        "Slow loading speeds causing visitors to leave",
+        "Confusing navigation making information hard to find",
+        "Low conversions despite steady website traffic",
+        "Weak branding creating an inconsistent online presence",
+        "Poor user engagement across important website pages",
+        "Difficult content updates without technical support",
       ],
     },
     cornerstones: {
-      heading: "Build cornerstones",
+      heading: "What We Build On",
       items: [
-        "UX research and information architecture",
-        "Accessible, responsive UI systems",
-        "Motion and interaction design",
-        "Headless CMS and editor experience",
-        "Performance budgets and Core Web Vitals",
-        "Analytics, tagging, and experimentation",
-        "Launch QA and monitoring",
+        "UX research and site planning",
+        "Responsive and accessible website design",
+        "Clean layouts and intuitive navigation",
+        "Custom development and CMS integration",
+        "Fast loading speed and performance",
+        "SEO-friendly structure and on-page setup",
+        "Testing, launch support, and monitoring",
       ],
     },
+    specialties: [
+      "User Experience (UX) Design",
+      "User Interface (UI) Design",
+      "Responsive Website Design",
+      "Website Animation Design",
+      "Custom Web Development",
+      "Creative Web Design",
+      "High-Converting Landing Pages",
+      "eCommerce Website Development",
+    ],
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
-        "We start with a product-minded discovery — goals, audiences, content model — then move into parallel design and engineering sprints. You see a real, clickable site from week one, not a deck.",
+        "We begin by understanding your goals, audience, and website needs, then move into strategic design and development. From the start, you see a clear, functional website taking shape with purpose.",
     },
+    faq: [
+      {
+        id: "services",
+        question: "What website design and development services does SPARKLINE MARKETING FIRM offer?",
+        answer:
+          "SPARKLINE MARKETING FIRM offers custom website design, responsive development, landing page creation, eCommerce website development, user experience improvements, and website performance optimization tailored to your business goals.",
+      },
+      {
+        id: "responsive",
+        question: "Will my website be mobile-friendly?",
+        answer:
+          "Yes, every website is designed to be fully responsive, ensuring it looks professional and functions smoothly across desktops, tablets, and mobile devices.",
+      },
+      {
+        id: "redesign",
+        question: "Can you redesign my existing website?",
+        answer:
+          "Yes, we can redesign outdated websites to improve visual appeal, functionality, user experience, and overall performance while aligning the design with your current brand identity.",
+      },
+      {
+        id: "timeline",
+        question: "How long does it take to build a website?",
+        answer:
+          "The timeline depends on the size, features, and complexity of the project. A standard business website usually takes a few weeks, while larger or custom websites may require more time.",
+      },
+      {
+        id: "custom-vs-template",
+        question: "Do you create custom websites or use templates?",
+        answer:
+          "We focus on creating strategic, professionally designed websites that reflect your brand and business needs. Depending on the project, we may use a custom approach or a tailored framework.",
+      },
+      {
+        id: "ecommerce",
+        question: "Can you build eCommerce websites?",
+        answer:
+          "Yes, we develop eCommerce websites that are visually appealing, easy to manage, and designed to provide a smooth shopping experience for your customers.",
+      },
+      {
+        id: "performance",
+        question: "Will my website be optimized for speed and performance?",
+        answer:
+          "Yes, we build websites with clean structure, optimized elements, and performance-focused practices to help improve loading speed and overall user experience.",
+      },
+      {
+        id: "self-update",
+        question: "Can I update the website myself after launch?",
+        answer:
+          "Yes, we can build your website on a user-friendly platform that allows you to manage content, update text, add images, and make basic changes easily.",
+      },
+      {
+        id: "seo",
+        question: "Do you also help with SEO during website development?",
+        answer:
+          "Yes, we follow SEO-friendly website structure practices, including clean coding, organized page layouts, mobile responsiveness, and other foundations that support better search visibility.",
+      },
+      {
+        id: "why-us",
+        question: "Why should I choose SPARKLINE MARKETING FIRM for website design and development?",
+        answer:
+          "SPARKLINE MARKETING FIRM combines creative design, strategic thinking, and functional development to build websites that not only look professional but also support business growth and conversions.",
+      },
+    ],
     cta: {
-      heading: "Ready for a site that pulls its weight?",
+      heading: "Ready for a website that performs with purpose?",
       body:
-        "Bring the idea. We'll ship the build — design, dev, CMS, and the analytics stack behind it.",
+        "Bring your vision to life with strategic design, expert development, seamless CMS integration, and performance-driven analytics.",
+      label: "Contact Now",
     },
   },
   "branding-design": {
@@ -250,12 +336,12 @@ export const serviceDetails = {
     intro:
       "Most brands blend in because they were never defined past a moodboard. We go deep on story, visual system, and verbal identity — then hand you the toolkit and training to keep it coherent as you grow.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
         "A studio-sized team with agency range. Our senior creative directors have shaped brands from seed to Series C and rebranded public companies without losing what made them work.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
         "Your brand looks different on every surface.",
         "The identity hasn't kept up with the product.",
@@ -266,7 +352,7 @@ export const serviceDetails = {
       ],
     },
     cornerstones: {
-      heading: "Identity cornerstones",
+      heading: "What We Build On",
       items: [
         "Brand strategy and positioning",
         "Verbal identity and messaging",
@@ -278,7 +364,7 @@ export const serviceDetails = {
       ],
     },
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
         "Immersion workshops, competitive audits, and audience research feed a positioning brief. From there it's identity exploration, system design, and rollout — with your team in the room at every milestone so nothing lands cold.",
     },
@@ -297,12 +383,12 @@ export const serviceDetails = {
     intro:
       "Concept, script, shoot, edit, motion, sound — handled in-house by a crew that's done this at every budget level. We plan around the story, not the other way around.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
         "Directors, writers, and animators who've shipped campaigns for consumer brands, B2B SaaS, and entertainment. We match the format and tone to the channel — not just the brief.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
         "You have a product launch and nothing to show it with.",
         "Your paid ads rely on the same tired stock footage.",
@@ -313,7 +399,7 @@ export const serviceDetails = {
       ],
     },
     cornerstones: {
-      heading: "Production cornerstones",
+      heading: "What We Build On",
       items: [
         "Concept and script development",
         "Storyboarding and pre-production",
@@ -325,7 +411,7 @@ export const serviceDetails = {
       ],
     },
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
         "We scope against the story, not the shot list. Once the concept is approved we run a tight production calendar — pre-pro, shoot days, edits — with clear checkpoints and revision rounds baked in.",
     },
@@ -344,12 +430,12 @@ export const serviceDetails = {
     intro:
       "Campaigns, creative, targeting, and tracking are one loop. We build it end-to-end — audience research through to attribution — so the investment compounds instead of leaking.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
         "A media team that writes the ads, builds the landing pages, and reads the dashboards. Nothing is outsourced to a black box and the numbers are the numbers.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
         "CAC keeps climbing and you can't pinpoint why.",
         "SEO stagnated after the last core update.",
@@ -360,7 +446,7 @@ export const serviceDetails = {
       ],
     },
     cornerstones: {
-      heading: "Channel cornerstones",
+      heading: "What We Build On",
       items: [
         "SEO and content strategy",
         "Paid search and shopping",
@@ -372,7 +458,7 @@ export const serviceDetails = {
       ],
     },
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
         "Week-one audit across every channel, funnel, and tracking layer. We rebuild what's broken, plan the 90-day sprint, and run weekly optimization standups with your team.",
     },
@@ -391,12 +477,12 @@ export const serviceDetails = {
     intro:
       "Programmatic is only powerful if the targeting, creative, and measurement are all running in the same loop. We stand up the stack, run the campaigns, and give you a reporting view your CFO will actually believe.",
     whyUs: {
-      heading: "Why Sparkline",
+      heading: "Why SPARKLINE MARKETING FIRM",
       body:
         "Independent media buyers with deep DSP experience across The Trade Desk, DV360, and Amazon. Transparent fees, transparent data, no resold inventory.",
     },
     problems: {
-      heading: "Problems we solve",
+      heading: "What We Improve",
       items: [
         "Linear TV is shrinking and you need a real CTV strategy.",
         "Awareness campaigns don't connect to conversion data.",
@@ -407,7 +493,7 @@ export const serviceDetails = {
       ],
     },
     cornerstones: {
-      heading: "Programmatic cornerstones",
+      heading: "What We Build On",
       items: [
         "CTV and OTT planning",
         "Programmatic display and native",
@@ -419,7 +505,7 @@ export const serviceDetails = {
       ],
     },
     process: {
-      heading: "How we work",
+      heading: "How We Build",
       body:
         "We model the media mix, set up the DSP and pixels, launch with clean creative, and optimize weekly against business outcomes — not just vanity metrics.",
     },
@@ -433,39 +519,84 @@ export const serviceDetails = {
 
 export type ServiceDetailSlug = keyof typeof serviceDetails;
 
+export const faqSection = {
+  eyebrow: "FAQ",
+  lines: [
+    "Answers to the questions we hear most from founders, marketers, and teams considering working with us.",
+  ],
+  items: [
+    {
+      id: "services",
+      question: "What services does SPARKLINE MARKETING FIRM offer?",
+      answer:
+        "SPARKLINE MARKETING FIRM offers Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Creation to help businesses grow their visibility, strengthen their brand, and achieve measurable results.",
+    },
+    {
+      id: "growth",
+      question: "How can SPARKLINE MARKETING FIRM help my business grow?",
+      answer:
+        "We help businesses grow by creating strategic marketing solutions that improve brand positioning, attract the right audience, increase engagement, and support long-term business success across digital platforms.",
+    },
+    {
+      id: "customised",
+      question: "Do you provide customised marketing solutions for different industries?",
+      answer:
+        "Yes, SPARKLINE MARKETING FIRM develops tailored strategies based on your business goals, target audience, and industry requirements to ensure every solution is relevant, effective, and results-driven.",
+    },
+    {
+      id: "brand-and-web",
+      question: "Can you handle both branding and website development together?",
+      answer:
+        "Absolutely. We provide integrated branding and website design solutions so your business can maintain a consistent identity, professional appearance, and strong digital presence across every touchpoint.",
+    },
+    {
+      id: "why-us",
+      question: "Why should I choose SPARKLINE MARKETING FIRM?",
+      answer:
+        "SPARKLINE MARKETING FIRM combines strategy, creativity, and execution to deliver professional marketing solutions that help businesses stand out, connect with customers, and grow with confidence.",
+    },
+  ],
+} as const;
+
 export const serviceOptions = [
   {
     id: "strategy",
-    title: "Strategy",
-    description: "Helping you with top notch strategy for GTM",
+    title: "Digital Marketing",
+    description: "Drive targeted traffic, boost visibility, and generate leads strategically.",
   },
   {
     id: "story-voice",
-    title: "Story/ Voice",
-    description: "Create the brand story and brand voice",
+    title: "Website Design & Development",
+    description: "Build modern, user-focused websites that convert visitors into customers.",
   },
   {
     id: "design",
-    title: "Design",
-    description: "Help the company in creative way",
+    title: "Content Creation",
+    description: "Create compelling content that connects and drives action.",
   },
   {
     id: "development",
-    title: "Development",
-    description: "Develop products, websites and manage them for you",
+    title: "Social Media Management",
+    description: "Strengthen your presence through strategic social media.",
   },
   {
     id: "media-video",
-    title: "Media & video",
-    description: "Content, social media, videography anything you ask for",
+    title: "Branding & Design",
+    description: "Build a powerful brand identity with creative consistency.",
+  },
+  {
+    id: "brand-strategy",
+    title: "Brand Design",
+    description: "Create clear brand direction for lasting growth.",
   },
 ] as const;
 
 export const workGallery = {
-  eyebrow: "OUR WORK",
+  eyebrow: "WORK HIGHLIGHTS",
   lines: [
-    "A selection of the best projects",
-    "crafted by the OUR team.",
+    "Explore a selection of standout projects delivered by our team,",
+    "showcasing strategic thinking, creative excellence,",
+    "and results-driven execution.",
   ],
   projects: [
     {

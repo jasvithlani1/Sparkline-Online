@@ -1,3 +1,4 @@
+import { Faq } from "@/components/landing/faq";
 import { FeatureIntro } from "@/components/landing/feature-intro";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
@@ -21,6 +22,7 @@ export default function Home() {
         <ServiceBanner />
         <LogoGrid />
         <WorkGallery />
+        <Faq />
       </div>
       <Footer />
     </main>

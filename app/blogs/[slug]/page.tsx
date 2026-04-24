@@ -52,11 +52,11 @@ export default async function BlogPostPage({
             <span>{post.category}</span>
           </div>
 
-          <h1 className="mt-4 text-[36px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[48px] md:text-[60px]">
+          <h1 className="mt-4 text-balance text-[36px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[48px] md:text-[60px]">
             {post.title}
           </h1>
 
-          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[#0A1F57] md:mt-12">
+          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[#0A1F57] outline outline-1 -outline-offset-1 outline-white/10 md:mt-12">
             <Image
               src={post.image}
               alt={post.title}
@@ -67,7 +67,7 @@ export default async function BlogPostPage({
             />
           </div>
 
-          <p className="mt-10 text-[17px] leading-[1.75] text-white/78 sm:text-[18px] md:mt-12 md:text-[19px] md:leading-[1.8]">
+          <p className="mt-10 text-pretty text-[17px] leading-[1.75] text-white/78 sm:text-[18px] md:mt-12 md:text-[19px] md:leading-[1.8]">
             {post.body}
           </p>
 
