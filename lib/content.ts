@@ -15,7 +15,7 @@ export const featuredIntro = {
   ],
   body: [
     "SPARKLINE MARKETING FIRM helps ambitious businesses build stronger brands, reach the right audience, and turn digital presence into measurable growth. We deliver strategic, creative, and performance-focused solutions that help companies stand out, build credibility, and connect with customers in meaningful and lasting ways.",
-    "Our expertise spans Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Creation. Every solution is tailored to your goals, combining insight, innovation, and execution to create a consistent brand experience. With SPARKLINE MARKETING FIRM, you gain a trusted creative and strategic partner dedicated to helping your business grow with confidence in a competitive digital landscape.",
+    "Our expertise spans Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Marketing. Every solution is tailored to your goals, combining insight, innovation, and execution to create a consistent brand experience. With SPARKLINE MARKETING FIRM, you gain a trusted creative and strategic partner dedicated to helping your business grow with confidence in a competitive digital landscape.",
   ],
   cta: "Learn more",
 };
@@ -52,11 +52,11 @@ export const ourServices = {
   intro: [
     "SPARKLINE MARKETING FIRM delivers strategic and creative solutions designed to help businesses grow with confidence in a competitive digital landscape. Our services are built to create a strong, consistent brand presence while supporting long-term business goals through purposeful execution and measurable impact.",
     "From Digital Marketing and Brand Strategy to Website Design & Development, we help brands build visibility, define their market position, and create meaningful customer experiences. Our team focuses on developing tailored strategies and high-performing digital platforms that strengthen credibility and drive engagement.",
-    "We also specialise in Branding & Design, Social Media, and Content Creation to ensure your business communicates with clarity and consistency across every touchpoint. Whether you need a stronger visual identity, a more engaging online presence, or content that connects with the right audience, SPARKLINE MARKETING FIRM provides integrated solutions that bring strategy, creativity, and performance together to help your brand stand out and grow with lasting impact.",
+    "We also specialise in Branding & Design, Social Media, and Content Marketing to ensure your business communicates with clarity and consistency across every touchpoint. Whether you need a stronger visual identity, a more engaging online presence, or content that connects with the right audience, SPARKLINE MARKETING FIRM provides integrated solutions that bring strategy, creativity, and performance together to help your brand stand out and grow with lasting impact.",
   ],
   cards: [
     {
-      id: "strategy-media",
+      id: "digital-marketing",
       title: "Digital\nMarketing",
       items: [
         "Search Marketing",
@@ -72,7 +72,7 @@ export const ourServices = {
       ],
     },
     {
-      id: "website-development",
+      id: "website-design-development",
       title: "Website Design\n& Development",
       items: [
         "UX Design",
@@ -88,8 +88,8 @@ export const ourServices = {
       ],
     },
     {
-      id: "branding-design",
-      title: "Content\nCreation",
+      id: "content-marketing",
+      title: "Content\nMarketing",
       items: [
         "Website Copy",
         "Blog Writing",
@@ -104,7 +104,7 @@ export const ourServices = {
       ],
     },
     {
-      id: "video-production",
+      id: "social-media-management",
       title: "Social Media\nManagement",
       items: [
         "Content Planning",
@@ -120,7 +120,7 @@ export const ourServices = {
       ],
     },
     {
-      id: "digital-email",
+      id: "branding-design",
       title: "Branding\n& Design",
       items: [
         "Logo Design",
@@ -136,7 +136,7 @@ export const ourServices = {
       ],
     },
     {
-      id: "programmatic-solutions",
+      id: "brand-strategy",
       title: "Brand\nStrategy",
       items: [
         "Brand Positioning",
@@ -156,57 +156,131 @@ export const ourServices = {
 } as const;
 
 export const serviceDetails = {
-  "strategy-media": {
-    slug: "strategy-media",
-    eyebrow: "STRATEGY & MEDIA",
-    title: "Every great campaign begins with strategy.",
+  "digital-marketing": {
+    slug: "digital-marketing",
+    eyebrow: "DIGITAL MARKETING",
+    title: "Drive Growth With Smarter Digital Marketing",
     lead:
-      "A sharp value proposition is the engine behind every brand that cuts through. Before we design a pixel or place a dollar, we pressure-test who you are, who you're for, and why anyone should care.",
+      "Digital marketing helps your business reach the right audience, build brand visibility, and turn online interest into real enquiries, leads, and sales. With the right strategy, every campaign works harder to support long-term growth and stronger market presence.",
     intro:
-      "Brand, voice, campaigns, and channel planning should all reinforce one central idea. We run discovery, audience research, and competitive analysis to isolate that idea — then build a plan that turns it into measurable growth.",
+      "Our digital marketing services combine strategy, creativity, and performance-focused execution across search, content, paid campaigns, and social platforms. We create tailored solutions that help businesses connect, compete, and grow with confidence online.",
     whyUs: {
       heading: "Why SPARKLINE MARKETING FIRM",
       body:
-        "We've partnered with founder-led startups and category leaders alike, shaping launches, repositionings, and full go-to-market rollouts. Every engagement is led by senior strategists — no handoffs, no junior-only rooms.",
+        "Choose a digital marketing team that blends strategy, creativity, and performance. Tailored campaigns increase visibility, attract quality leads, strengthen brand presence, and support long-term business growth with measurable results.",
     },
     problems: {
       heading: "What We Improve",
       items: [
-        "Nobody knows who you are in a crowded category.",
-        "You're launching a product and need a narrative people actually remember.",
-        "Market share is slipping to a louder competitor.",
-        "Your paid spend isn't tied to a clear funnel.",
-        "You can't hire the talent you want because the story isn't sharp.",
-        "Internal teams disagree on what the brand even stands for.",
-        "ROI is a guess, not a dashboard.",
-        "You're in every channel and winning in none of them.",
+        "Low website traffic and weak visibility",
+        "Poor quality leads from online campaigns",
+        "Inconsistent brand presence across digital channels",
+        "Low conversion rates from website visitors",
+        "Ineffective ad spend with limited returns",
+        "Weak social media engagement and reach",
+        "Lack of clear digital growth strategy",
+        "Difficulty standing out in competitive markets",
       ],
     },
     cornerstones: {
-      heading: "What We Build On",
+      heading: "Key Focus Areas",
       items: [
-        "Business goals and KPIs",
-        "Audience segments and jobs-to-be-done",
-        "Brand origin and point of view",
-        "Competitive positioning",
-        "Channel and media architecture",
-        "Messaging pillars",
-        "Success metrics",
+        "Audience First Strategy",
+        "Data Driven Decisions",
+        "Reach More Channels",
+        "Conversion Focused Campaigns",
+        "Keep Branding Consistent",
+        "Performance Based Optimisation",
+        "Scalable Growth Planning",
       ],
     },
+    specialties: [
+      "Search Engine Optimisation",
+      "Pay Per Click",
+      "Social Media Marketing",
+      "Content Marketing",
+      "Email Marketing",
+      "Conversion Optimisation",
+      "Brand Strategy",
+      "Lead Generation",
+      "Performance Analytics",
+    ],
     process: {
-      heading: "How We Build",
+      heading: "How We Build Results",
       body:
-        "Discovery workshops, stakeholder interviews, analytics audits, and competitive teardowns feed a single strategy doc your team can actually use. We stand it up, then stay close — quarterly reviews, live dashboards, and tight feedback loops with creative and media.",
+        "We begin by understanding your business, audience, and growth goals, then build a tailored digital marketing strategy around them. From planning and execution to optimisation and reporting, every step is focused on increasing visibility, generating quality leads, and delivering measurable results.",
     },
+    faq: [
+      {
+        id: "services",
+        question: "What digital marketing services does SPARKLINE MARKETING FIRM offer?",
+        answer:
+          "SPARKLINE MARKETING FIRM offers tailored digital marketing services including SEO, paid advertising, social media marketing, content strategy, lead generation, and performance tracking to help businesses grow online with clarity and measurable results.",
+      },
+      {
+        id: "growth",
+        question: "How can digital marketing help my business grow?",
+        answer:
+          "Digital marketing helps your business increase online visibility, attract the right audience, generate quality leads, and improve conversions through targeted strategies designed to support long-term growth and stronger brand presence.",
+      },
+      {
+        id: "small-biz",
+        question: "Is digital marketing suitable for small businesses?",
+        answer:
+          "Yes, digital marketing is highly effective for small businesses because it allows you to reach specific audiences, manage budgets efficiently, and compete more strategically in your market with measurable performance.",
+      },
+      {
+        id: "results-timeline",
+        question: "How long does it take to see results from digital marketing?",
+        answer:
+          "The timeline depends on your goals, competition, and chosen channels. Some campaigns can generate early traction quickly, while long-term strategies like SEO and brand growth typically build stronger results over time.",
+      },
+      {
+        id: "customised",
+        question: "Do you create customised digital marketing strategies?",
+        answer:
+          "Yes, SPARKLINE MARKETING FIRM develops customised digital marketing strategies based on your business goals, target audience, market position, and growth opportunities to ensure every campaign is aligned with your objectives.",
+      },
+      {
+        id: "channels",
+        question: "Which digital marketing channels are best for my business?",
+        answer:
+          "The best channels depend on your industry, audience, and goals. These may include search engines, social media, paid ads, email marketing, or content marketing, chosen strategically to maximise visibility and engagement.",
+      },
+      {
+        id: "lead-quality",
+        question: "Can digital marketing help generate better quality leads?",
+        answer:
+          "Yes, a well-planned digital marketing strategy helps attract more relevant audiences, improving the chances of generating higher quality leads that are more likely to convert into customers.",
+      },
+      {
+        id: "reporting",
+        question: "Do you provide reporting and performance insights?",
+        answer:
+          "Yes, SPARKLINE MARKETING FIRM provides reporting and performance insights so you can understand campaign progress, audience behaviour, and opportunities for further optimisation and growth.",
+      },
+      {
+        id: "why-us",
+        question: "Why choose SPARKLINE MARKETING FIRM for digital marketing?",
+        answer:
+          "SPARKLINE MARKETING FIRM combines strategy, creativity, and performance-focused execution to deliver digital marketing solutions that improve visibility, strengthen engagement, and support meaningful business growth.",
+      },
+      {
+        id: "get-started",
+        question: "How do I get started with your digital marketing services?",
+        answer:
+          "Getting started is simple. Reach out to SPARKLINE MARKETING FIRM to discuss your goals, and we will guide you through the next steps with a tailored approach built around your business needs.",
+      },
+    ],
     cta: {
-      heading: "Ready to sharpen the story?",
+      heading: "Ready To Scale Smarter",
       body:
-        "Most teams have the product. They just need the plan. Let's build yours.",
+        "Ready to scale smarter with digital marketing that drives visibility, quality leads, and growth.",
+      label: "Contact Now",
     },
   },
-  "website-development": {
-    slug: "website-development",
+  "website-design-development": {
+    slug: "website-design-development",
     eyebrow: "WEBSITE DESIGN & DEVELOPMENT",
     title: "Websites designed to impress, perform, and convert.",
     lead:
@@ -327,192 +401,491 @@ export const serviceDetails = {
       label: "Contact Now",
     },
   },
+  "content-marketing": {
+    slug: "content-marketing",
+    eyebrow: "CONTENT MARKETING",
+    title: "Strategic Content That Drives Results",
+    lead:
+      "Content marketing helps your brand stay visible, relevant, and trusted through meaningful messaging that speaks directly to your audience and supports every stage of the buyer journey.",
+    intro:
+      "From website copy and blogs to campaign content and lead-focused assets, we create strategic content that builds authority, improves engagement, and supports long-term business growth.",
+    whyUs: {
+      heading: "Why SPARKLINE MARKETING FIRM",
+      body:
+        "We deliver content marketing with purpose, combining strategy, creativity, and audience insight to create meaningful content that builds trust, strengthens brand presence, and supports consistent business growth.",
+    },
+    problems: {
+      heading: "Solutions We Deliver",
+      items: [
+        "Low website traffic from weak content",
+        "Inconsistent brand messaging across all platforms",
+        "Poor engagement from unclear content strategy",
+        "Content that fails to generate leads",
+        "Lack of trust-building content for audiences",
+        "Irregular publishing that slows brand growth",
+      ],
+    },
+    cornerstones: {
+      heading: "Content Success Elements",
+      items: [
+        "Audience Focused Messaging",
+        "Strategic Content Planning",
+        "Consistent Brand Voice",
+        "Value Driven Content",
+        "Search Friendly Writing",
+        "Lead Focused Content",
+        "Long Term Growth",
+      ],
+    },
+    specialtiesHeading: "Professional Strengths",
+    specialties: [
+      "Blog Writing",
+      "Website Copy",
+      "SEO Content",
+      "Email Content",
+      "Social Captions",
+      "Brand Messaging",
+      "Landing Pages",
+      "Article Writing",
+      "Content Strategy",
+    ],
+    process: {
+      heading: "Our Workflow",
+      body:
+        "We start with your goals, audience, and brand voice, then create strategic content that informs, engages, and supports consistent visibility, stronger trust, and measurable growth.",
+    },
+    faq: [
+      {
+        id: "what-includes",
+        question: "What do content marketing services include?",
+        answer:
+          "Content marketing services include strategy, blog writing, website copy, landing page content, email content, social media copy, and other assets designed to attract, engage, and convert your target audience.",
+      },
+      {
+        id: "importance",
+        question: "Why is content marketing important for a business?",
+        answer:
+          "Content marketing helps businesses build trust, improve online visibility, educate potential customers, and support long-term growth through consistent and valuable communication.",
+      },
+      {
+        id: "how-helps",
+        question: "How can SPARKLINE MARKETING FIRM help my business with content marketing?",
+        answer:
+          "SPARKLINE MARKETING FIRM creates strategic content tailored to your brand, audience, and goals, helping you strengthen your message, improve engagement, and drive meaningful business results.",
+      },
+      {
+        id: "seo",
+        question: "Do you create SEO-friendly content?",
+        answer:
+          "Yes, we create content that is written for both users and search engines, helping your business improve visibility while keeping the messaging clear, relevant, and engaging.",
+      },
+      {
+        id: "industries",
+        question: "What types of businesses can benefit from content marketing?",
+        answer:
+          "Almost every business can benefit from content marketing, especially those looking to increase brand awareness, improve search visibility, generate leads, and build customer trust.",
+      },
+      {
+        id: "frequency",
+        question: "How often should content be published?",
+        answer:
+          "The ideal publishing frequency depends on your goals, industry, and audience, but consistency is key for building momentum and maintaining visibility over time.",
+      },
+      {
+        id: "leads",
+        question: "Can content marketing help generate leads?",
+        answer:
+          "Yes, well-planned content marketing can attract the right audience, answer their questions, build confidence, and encourage them to take action.",
+      },
+      {
+        id: "brand-voice",
+        question: "Do you write content in our brand voice?",
+        answer:
+          "Yes, we create content that aligns with your brand tone, messaging style, and business identity to ensure consistency across all channels.",
+      },
+      {
+        id: "results-timeline",
+        question: "How long does it take to see results from content marketing?",
+        answer:
+          "Content marketing is a long-term strategy, but with the right approach, businesses often begin seeing improvements in engagement, visibility, and lead quality over time.",
+      },
+      {
+        id: "why-us",
+        question: "Why choose SPARKLINE MARKETING FIRM for content marketing services?",
+        answer:
+          "SPARKLINE MARKETING FIRM combines strategy, creativity, and audience understanding to deliver content that supports growth, strengthens your brand, and creates lasting impact.",
+      },
+    ],
+    cta: {
+      heading: "Powerful Content Starts Here",
+      body:
+        "Build stronger visibility, trust, and growth through strategic content.",
+      label: "Contact Now",
+    },
+  },
+  "social-media-management": {
+    slug: "social-media-management",
+    eyebrow: "SOCIAL MEDIA MARKETING",
+    title: "Grow Faster Through Social Media",
+    lead:
+      "Social media marketing helps your brand connect with the right audience through meaningful content, consistent engagement, and platform-specific strategy. It builds visibility, trust, and stronger customer relationships across every stage of the buyer journey.",
+    intro:
+      "From brand awareness to lead generation, social media creates opportunities to grow your reach, increase interaction, and turn attention into measurable business results.",
+    whyUs: {
+      heading: "Why SPARKLINE MARKETING FIRM",
+      body:
+        "Choose us for social media marketing that blends strategy, creativity, and consistency to build visibility, engage the right audience, and turn everyday interactions into measurable brand growth.",
+    },
+    problems: {
+      heading: "What We Improve",
+      items: [
+        "Low engagement across your social media platforms",
+        "Inconsistent posting that weakens brand visibility online",
+        "Poor content strategy limiting audience growth potential",
+        "Lack of quality leads from social campaigns",
+        "Weak brand presence in competitive social spaces",
+        "Unclear messaging affecting trust and customer action",
+      ],
+    },
+    cornerstones: {
+      heading: "Social Media Priorities",
+      items: [
+        "Audience First Approach",
+        "Consistent Brand Voice",
+        "Creative Content Planning",
+        "Platform Specific Strategy",
+        "Engagement Driven Execution",
+        "Performance Based Optimisation",
+        "Growth Focused Reporting",
+      ],
+    },
+    specialtiesHeading: "Our Specialisations",
+    specialties: [
+      "Content Strategy",
+      "Social Media Management",
+      "Paid Campaigns",
+      "Community Engagement",
+      "Brand Messaging",
+      "Audience Targeting",
+      "Creative Direction",
+      "Performance Tracking",
+      "Platform Optimisation",
+    ],
+    process: {
+      heading: "How We Deliver",
+      body:
+        "We begin with your goals, audience, and brand voice, then build a tailored social media strategy, create engaging content, manage execution consistently, and track performance to improve reach, engagement, and results.",
+    },
+    faq: [
+      {
+        id: "what-includes",
+        question: "What does social media marketing include?",
+        answer:
+          "Social media marketing includes strategy, content creation, posting, audience engagement, campaign management, and performance tracking across relevant social platforms.",
+      },
+      {
+        id: "platforms",
+        question: "Which social media platforms do you manage?",
+        answer:
+          "SPARKLINE MARKETING FIRM manages platforms such as Facebook, Instagram, LinkedIn, X, and other channels based on your business goals and audience.",
+      },
+      {
+        id: "business-impact",
+        question: "How can social media marketing help my business?",
+        answer:
+          "It helps increase brand awareness, build trust, engage your audience, drive website traffic, and generate more leads or sales over time.",
+      },
+      {
+        id: "content",
+        question: "Do you create content for social media pages?",
+        answer:
+          "Yes, we create branded content tailored to your business, including captions, creatives, campaign ideas, and platform-specific posting strategies.",
+      },
+      {
+        id: "frequency",
+        question: "How often will you post on our social media accounts?",
+        answer:
+          "Posting frequency depends on your package, goals, and platform strategy. We recommend a consistent schedule for stronger visibility and engagement.",
+      },
+      {
+        id: "leads",
+        question: "Can social media marketing generate leads?",
+        answer:
+          "Yes, a well-planned social media strategy can attract the right audience, improve engagement, and turn interest into qualified leads.",
+      },
+      {
+        id: "paid-ads",
+        question: "Do you offer paid social media advertising too?",
+        answer:
+          "Yes, SPARKLINE MARKETING FIRM can support paid social campaigns to expand reach, target ideal customers, and improve campaign performance.",
+      },
+      {
+        id: "measure",
+        question: "How do you measure social media success?",
+        answer:
+          "We track key metrics such as reach, engagement, follower growth, clicks, conversions, and overall campaign performance.",
+      },
+      {
+        id: "small-biz",
+        question: "Is social media marketing suitable for small businesses?",
+        answer:
+          "Yes, social media marketing is highly effective for small businesses looking to build awareness, connect with local audiences, and grow affordably.",
+      },
+      {
+        id: "why-us",
+        question: "Why choose SPARKLINE MARKETING FIRM for social media marketing?",
+        answer:
+          "SPARKLINE MARKETING FIRM combines strategy, creativity, and consistent execution to help businesses grow their presence and achieve meaningful results through social media.",
+      },
+    ],
+    cta: {
+      heading: "Social Growth Starts Here",
+      body:
+        "Build stronger connections, increase visibility, and turn social media into measurable business growth.",
+      label: "Contact Now",
+    },
+  },
   "branding-design": {
     slug: "branding-design",
-    eyebrow: "BRANDING & DESIGN",
-    title: "Brands people actually remember.",
+    eyebrow: "BRAND DESIGN SERVICES",
+    title: "Designing Brands With Lasting Impact",
     lead:
-      "A brand is more than a logo — it's the compounding asset every other investment rides on. We build identities with a point of view, a voice, and the discipline to hold up across every surface.",
+      "Brand & Design services help shape how your business looks, feels, and connects with people. From logo creation to visual identity systems, we craft designs that reflect your values and make your brand more memorable.",
     intro:
-      "Most brands blend in because they were never defined past a moodboard. We go deep on story, visual system, and verbal identity — then hand you the toolkit and training to keep it coherent as you grow.",
+      "Our approach combines strategy, creativity, and consistency to build a strong visual presence across every touchpoint. We create brand assets that not only look professional but also support recognition, trust, and long-term business growth.",
     whyUs: {
       heading: "Why SPARKLINE MARKETING FIRM",
       body:
-        "A studio-sized team with agency range. Our senior creative directors have shaped brands from seed to Series C and rebranded public companies without losing what made them work.",
+        "Choose us for strategic creativity, clear brand positioning, modern design expertise, and results-focused execution that helps your business stand out, connect with the right audience, and grow confidently.",
     },
     problems: {
-      heading: "What We Improve",
+      heading: "Challenges We Address",
       items: [
-        "Your brand looks different on every surface.",
-        "The identity hasn't kept up with the product.",
-        "You're pre-launch and need a full visual and verbal system.",
-        "Team can't describe the brand in one sentence without arguing.",
-        "Competitors are starting to look identical — and you're one of them.",
-        "Sales collateral, pitch decks, and the site feel like three different companies.",
+        "Inconsistent brand visuals across digital platforms",
+        "Weak brand identity causing low market recall",
+        "Outdated design reducing trust and engagement",
+        "Unclear messaging affecting audience connection badly",
+        "Poor visual presentation hurting brand credibility",
+        "Lack of distinction in competitive market space",
       ],
     },
     cornerstones: {
-      heading: "What We Build On",
+      heading: "Core Brand Elements",
       items: [
-        "Brand strategy and positioning",
-        "Verbal identity and messaging",
-        "Logo and wordmark system",
-        "Typography and color systems",
-        "Iconography and illustration",
-        "Motion principles",
-        "Guidelines and team training",
+        "Clear Brand Positioning",
+        "Distinct Visual Identity",
+        "Consistent Brand Messaging",
+        "Memorable Logo Systems",
+        "Purpose Driven Design",
+        "Audience Focused Creativity",
+        "Strong Brand Recognition",
       ],
     },
+    specialties: [
+      "Brand Identity Design",
+      "Logo Design Systems",
+      "Visual Brand Strategy",
+      "Packaging Design Concepts",
+      "Marketing Collateral Design",
+      "Social Media Creatives",
+      "Typography and Colour Styling",
+      "Brand Guidelines Development",
+      "Creative Asset Design",
+    ],
     process: {
-      heading: "How We Build",
+      heading: "How We Deliver",
       body:
-        "Immersion workshops, competitive audits, and audience research feed a positioning brief. From there it's identity exploration, system design, and rollout — with your team in the room at every milestone so nothing lands cold.",
+        "We begin by understanding your brand vision, audience, and goals, then turn those insights into strategic design concepts. From identity creation to final assets, we build visuals that are clear, consistent, and impactful.",
     },
+    faq: [
+      {
+        id: "includes",
+        question: "What is included in your branding and design service?",
+        answer:
+          "Our branding and design service includes brand strategy, logo design, visual identity creation, colour palette selection, typography direction, brand guidelines, and creative assets designed to build a strong and consistent brand presence.",
+      },
+      {
+        id: "importance",
+        question: "Why is branding important for a business?",
+        answer:
+          "Branding helps your business create a clear identity, build trust, improve recognition, and stand out in a competitive market. It gives people a reason to remember your business and connect with it.",
+      },
+      {
+        id: "scope",
+        question: "Do you only create logos or complete brand identities?",
+        answer:
+          "We create much more than logos. Our service focuses on complete brand identity development, including visual systems, brand styling, and supporting design elements that bring consistency across all platforms.",
+      },
+      {
+        id: "redesign",
+        question: "Can you redesign an existing brand?",
+        answer:
+          "Yes, we can refresh or fully redesign your existing brand. Whether your current branding feels outdated, inconsistent, or no longer aligns with your business direction, we can create a stronger and more modern identity.",
+      },
+      {
+        id: "process-start",
+        question: "How do you start the branding process?",
+        answer:
+          "We begin by understanding your business, target audience, brand values, goals, and market position. This helps us develop creative concepts that reflect your vision and support long-term growth.",
+      },
+      {
+        id: "uniqueness",
+        question: "Will my branding be unique to my business?",
+        answer:
+          "Yes, every branding project is created specifically for your business. We focus on building a distinct identity that reflects your personality, values, and positioning rather than using generic design styles.",
+      },
+      {
+        id: "guidelines",
+        question: "Do you provide brand guidelines after the project?",
+        answer:
+          "Yes, we can provide brand guidelines that outline how to use your logo, colours, fonts, imagery, and other visual elements to maintain consistency across all marketing and communication materials.",
+      },
+      {
+        id: "digital-print",
+        question: "Can you create branding for digital and print use?",
+        answer:
+          "Yes, we design brand assets for both digital and print applications, including website visuals, social media graphics, business cards, brochures, packaging concepts, and other branded materials.",
+      },
+      {
+        id: "timeline",
+        question: "How long does a branding and design project take?",
+        answer:
+          "Project timelines depend on the scope of work, but most branding and design projects are completed in stages. After understanding your requirements, we provide a clear timeline for delivery.",
+      },
+      {
+        id: "why-us",
+        question: "Why choose SPARKLINE MARKETING FIRM for branding and design?",
+        answer:
+          "SPARKLINE MARKETING FIRM combines strategy, creativity, and modern design thinking to create brands that are professional, memorable, and aligned with business growth. We focus on clarity, consistency, and real brand impact.",
+      },
+    ],
     cta: {
-      heading: "Ready to build something people remember?",
+      heading: "Ready to build a brand?",
       body:
-        "Whether it's a new mark or a full overhaul, we'll make sure it's worth switching to.",
+        "Create a distinctive brand identity with strategic design, clear messaging, and visuals that leave a lasting impression.",
+      label: "Contact Now",
     },
   },
-  "video-production": {
-    slug: "video-production",
-    eyebrow: "VIDEO PRODUCTION",
-    title: "Video that earns the watch.",
+  "brand-strategy": {
+    slug: "brand-strategy",
+    eyebrow: "BRAND STRATEGY",
+    title: "Clarity Behind Every Brand",
     lead:
-      "Attention is the scarcest resource in marketing. We make video that holds it — from brand films and product launches to social-first edits built for the feed.",
+      "Brand strategy gives your business a clear direction, stronger positioning, and a consistent voice across every touchpoint. It helps you connect with the right audience while building trust, recognition, and long term value.",
     intro:
-      "Concept, script, shoot, edit, motion, sound — handled in-house by a crew that's done this at every budget level. We plan around the story, not the other way around.",
+      "We create thoughtful brand strategies that define who you are, what you stand for, and how your business should be seen in a competitive market.",
     whyUs: {
       heading: "Why SPARKLINE MARKETING FIRM",
       body:
-        "Directors, writers, and animators who've shipped campaigns for consumer brands, B2B SaaS, and entertainment. We match the format and tone to the channel — not just the brief.",
+        "Brand strategy that brings clarity, consistency, and direction, helping your business stand out, connect with the right audience, and grow with confidence.",
     },
     problems: {
-      heading: "What We Improve",
+      heading: "Brand Issues We Resolve",
       items: [
-        "You have a product launch and nothing to show it with.",
-        "Your paid ads rely on the same tired stock footage.",
-        "Sales needs case study and testimonial video — fast.",
-        "Events and trade shows need loop reels and sizzle.",
-        "YouTube and social channels have no consistent rhythm.",
-        "Internal comms video looks ten years older than it needs to.",
+        "Unclear brand positioning in competitive markets",
+        "Inconsistent messaging across channels and campaigns",
+        "Low audience trust and brand recognition",
+        "Difficulty connecting with ideal customers",
+        "Weak brand identity limiting business growth",
+        "Confused direction in marketing decisions",
       ],
     },
     cornerstones: {
-      heading: "What We Build On",
+      heading: "Strategic Brand Pillars",
       items: [
-        "Concept and script development",
-        "Storyboarding and pre-production",
-        "Cinematography and directing",
-        "2D and 3D animation",
-        "Motion graphics and VFX",
-        "Sound design and scoring",
-        "Post, color, and platform delivery",
+        "Clear Brand Positioning",
+        "Audience Focused Direction",
+        "Consistent Brand Messaging",
+        "Strong Market Differentiation",
+        "Purpose Led Identity",
+        "Long Term Brand Growth",
+        "Strategic Communication Framework",
       ],
     },
+    specialtiesHeading: "Our Specialisations",
+    specialties: [
+      "Brand Positioning",
+      "Market Research",
+      "Audience Insights",
+      "Messaging Strategy",
+      "Brand Voice",
+      "Competitive Analysis",
+      "Visual Direction",
+      "Growth Planning",
+      "Identity Development",
+    ],
     process: {
-      heading: "How We Build",
+      heading: "Our Strategic Approach",
       body:
-        "We scope against the story, not the shot list. Once the concept is approved we run a tight production calendar — pre-pro, shoot days, edits — with clear checkpoints and revision rounds baked in.",
+        "We begin with discovery, research, and audience insight, then shape a clear brand strategy that aligns your positioning, messaging, and direction for long-term growth.",
     },
+    faq: [
+      {
+        id: "what-is",
+        question: "What is brand strategy?",
+        answer:
+          "Brand strategy is a long term plan that defines how your business is positioned, communicated, and perceived by your target audience.",
+      },
+      {
+        id: "importance",
+        question: "Why is brand strategy important for my business?",
+        answer:
+          "A clear brand strategy helps your business stand out, build trust, connect with the right audience, and create consistent growth across all channels.",
+      },
+      {
+        id: "includes",
+        question: "What does SPARKLINE MARKETING FIRM include in brand strategy services?",
+        answer:
+          "SPARKLINE MARKETING FIRM provides brand positioning, audience research, messaging development, market analysis, brand direction, and strategic planning.",
+      },
+      {
+        id: "needs",
+        question: "How do I know if my business needs brand strategy?",
+        answer:
+          "If your brand feels unclear, inconsistent, outdated, or struggles to connect with customers, a brand strategy can help create stronger direction.",
+      },
+      {
+        id: "marketing-results",
+        question: "Can brand strategy help improve marketing results?",
+        answer:
+          "Yes, a strong brand strategy gives your marketing more clarity and consistency, helping campaigns perform better and attract the right customers.",
+      },
+      {
+        id: "new-vs-established",
+        question: "Is brand strategy only for new businesses?",
+        answer:
+          "No, brand strategy is valuable for both new and established businesses looking to refine their identity, reposition in the market, or support growth.",
+      },
+      {
+        id: "timeline",
+        question: "How long does the brand strategy process take?",
+        answer:
+          "The timeline depends on your business goals, industry, and project scope, but most brand strategy projects are completed in a structured phase-based process.",
+      },
+      {
+        id: "voice-messaging",
+        question: "Will brand strategy help define my brand voice and messaging?",
+        answer:
+          "Yes, brand strategy helps shape your tone, messaging, and communication style so your business speaks clearly and consistently to your audience.",
+      },
+      {
+        id: "why-us",
+        question: "What makes SPARKLINE MARKETING FIRM different for brand strategy?",
+        answer:
+          "SPARKLINE MARKETING FIRM focuses on creating practical, research driven brand strategies that support visibility, consistency, and long term business growth.",
+      },
+      {
+        id: "future-growth",
+        question: "Can brand strategy support future business growth?",
+        answer:
+          "Yes, a well built brand strategy creates a strong foundation for expansion, stronger customer relationships, and more confident business decisions.",
+      },
+    ],
     cta: {
-      heading: "Roll tape?",
+      heading: "Strategy That Moves Brands Forward",
       body:
-        "Tell us what you're launching. We'll tell you what we'd shoot.",
-    },
-  },
-  "digital-email": {
-    slug: "digital-email",
-    eyebrow: "DIGITAL & EMAIL",
-    title: "Performance channels, run by people who read the data.",
-    lead:
-      "Paid, SEO, email, and lifecycle — connected, measured, and optimized as one system. We treat media as a product team, not a monthly report.",
-    intro:
-      "Campaigns, creative, targeting, and tracking are one loop. We build it end-to-end — audience research through to attribution — so the investment compounds instead of leaking.",
-    whyUs: {
-      heading: "Why SPARKLINE MARKETING FIRM",
-      body:
-        "A media team that writes the ads, builds the landing pages, and reads the dashboards. Nothing is outsourced to a black box and the numbers are the numbers.",
-    },
-    problems: {
-      heading: "What We Improve",
-      items: [
-        "CAC keeps climbing and you can't pinpoint why.",
-        "SEO stagnated after the last core update.",
-        "Email feels like a newsletter instead of a revenue channel.",
-        "Creative testing is ad-hoc with no structure.",
-        "Attribution is a guess across Meta, Google, and GA4.",
-        "Agency reporting never matches your CRM.",
-      ],
-    },
-    cornerstones: {
-      heading: "What We Build On",
-      items: [
-        "SEO and content strategy",
-        "Paid search and shopping",
-        "Paid social and creative testing",
-        "YouTube and display",
-        "Email and lifecycle",
-        "Landing page and CRO",
-        "Measurement and attribution",
-      ],
-    },
-    process: {
-      heading: "How We Build",
-      body:
-        "Week-one audit across every channel, funnel, and tracking layer. We rebuild what's broken, plan the 90-day sprint, and run weekly optimization standups with your team.",
-    },
-    cta: {
-      heading: "Ready to stop guessing?",
-      body:
-        "Send us the dashboards. We'll send back a plan.",
-    },
-  },
-  "programmatic-solutions": {
-    slug: "programmatic-solutions",
-    eyebrow: "PROGRAMMATIC SOLUTIONS",
-    title: "Omnichannel media, bought intelligently.",
-    lead:
-      "CTV, OTT, audio, display, and mobile — bought programmatically with real audiences and real attribution. We plan media like a portfolio, not a media plan.",
-    intro:
-      "Programmatic is only powerful if the targeting, creative, and measurement are all running in the same loop. We stand up the stack, run the campaigns, and give you a reporting view your CFO will actually believe.",
-    whyUs: {
-      heading: "Why SPARKLINE MARKETING FIRM",
-      body:
-        "Independent media buyers with deep DSP experience across The Trade Desk, DV360, and Amazon. Transparent fees, transparent data, no resold inventory.",
-    },
-    problems: {
-      heading: "What We Improve",
-      items: [
-        "Linear TV is shrinking and you need a real CTV strategy.",
-        "Awareness campaigns don't connect to conversion data.",
-        "Targeting is too broad and burning budget.",
-        "You've got retail, B2B, and brand layers with no shared plan.",
-        "Frequency is out of control on one channel and zero on another.",
-        "Measurement is disconnected from the buying platform.",
-      ],
-    },
-    cornerstones: {
-      heading: "What We Build On",
-      items: [
-        "CTV and OTT planning",
-        "Programmatic display and native",
-        "Digital audio and podcast",
-        "Retargeting and audience curation",
-        "Addressable and geo-targeted",
-        "Brand lift and incrementality",
-        "Transparent reporting and reconciliation",
-      ],
-    },
-    process: {
-      heading: "How We Build",
-      body:
-        "We model the media mix, set up the DSP and pixels, launch with clean creative, and optimize weekly against business outcomes — not just vanity metrics.",
-    },
-    cta: {
-      heading: "Ready for media that moves the P&L?",
-      body:
-        "Share the goal and the budget. We'll show you what the plan looks like.",
+        "Drive growth and build trust with a clear brand strategy that moves forward.",
+      label: "Contact Now",
     },
   },
 } as const;
@@ -529,7 +902,7 @@ export const faqSection = {
       id: "services",
       question: "What services does SPARKLINE MARKETING FIRM offer?",
       answer:
-        "SPARKLINE MARKETING FIRM offers Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Creation to help businesses grow their visibility, strengthen their brand, and achieve measurable results.",
+        "SPARKLINE MARKETING FIRM offers Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Marketing to help businesses grow their visibility, strengthen their brand, and achieve measurable results.",
     },
     {
       id: "growth",
@@ -571,7 +944,7 @@ export const serviceOptions = [
   },
   {
     id: "design",
-    title: "Content Creation",
+    title: "Content Marketing",
     description: "Create compelling content that connects and drives action.",
   },
   {

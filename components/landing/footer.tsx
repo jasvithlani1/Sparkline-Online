@@ -14,7 +14,7 @@ const footerColumns = [
       { label: "Website Design & Development", href: "/services" },
       { label: "Branding & Design", href: "/services" },
       { label: "Social Media", href: "/services" },
-      { label: "Content Creation", href: "/services" },
+      { label: "Content Marketing", href: "/services" },
     ],
   },
   {

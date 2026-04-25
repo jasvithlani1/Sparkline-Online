@@ -110,7 +110,7 @@ export default async function ServiceDetailPage({
                 className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
               />
             </div>
-            <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+            <p className="max-w-[62ch] whitespace-pre-line text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
               {withBrandBold(detail.whyUs.body)}
             </p>
           </div>
@@ -192,7 +192,7 @@ export default async function ServiceDetailPage({
             <div>
               <div className="flex flex-col gap-3">
                 <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
-                  Our Specialties
+                  {(detail as { specialtiesHeading?: string }).specialtiesHeading ?? "Our Specialties"}
                 </h2>
                 <span
                   aria-hidden="true"

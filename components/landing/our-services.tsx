@@ -5,7 +5,7 @@ import { ourServices } from "@/lib/content";
 const BRAND = "SPARKLINE MARKETING FIRM";
 const PARAGRAPH_BOLD: Record<number, readonly string[]> = {
   1: ["Digital Marketing", "Brand Strategy", "Website Design & Development"],
-  2: ["Branding & Design", "Social Media", "Content Creation"],
+  2: ["Branding & Design", "Social Media", "Content Marketing"],
 };
 
 function renderWithBold(text: string, phrases: readonly string[]) {

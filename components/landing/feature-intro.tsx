@@ -4,7 +4,7 @@ import { featuredIntro } from "@/lib/content";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 const SERVICES =
-  "Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Creation";
+  "Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Marketing";
 
 function renderWithBold(paragraph: string, phrases: readonly string[]) {
   const hits = phrases
