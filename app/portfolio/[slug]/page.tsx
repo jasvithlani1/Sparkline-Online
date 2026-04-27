@@ -90,16 +90,22 @@ export default async function PortfolioProjectPage({
                   className="h-[2px] w-16 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
                 />
               </div>
-              <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+              <p className="max-w-[62ch] whitespace-pre-line text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
                 {project.summary}
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h3 className="font-mono text-[12px] uppercase tracking-[0.22em] text-white/55">
-                Services
-              </h3>
-              <ul className="flex flex-col gap-2 text-[15px] leading-[1.5] text-white/80 md:text-[16px]">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+                  Services
+                </h3>
+                <span
+                  aria-hidden="true"
+                  className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+                />
+              </div>
+              <ul className="flex flex-col gap-2.5 text-[16px] font-medium leading-[1.5] text-white md:text-[17px]">
                 {project.services.map((service) => (
                   <li key={service}>{service}</li>
                 ))}
@@ -139,17 +145,27 @@ export default async function PortfolioProjectPage({
                 </div>
               </div>
             ) : (
-              <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3 md:mt-10 md:gap-6">
+              <div
+                className={`mt-8 grid grid-cols-1 gap-5 md:mt-10 md:gap-6 ${
+                  section.images.length === 4 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+                }`}
+              >
                 {section.images.map((img, i) => (
                   <div
                     key={`${img.src}-${i}`}
-                    className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#0A1F57]"
+                    className={`relative overflow-hidden rounded-2xl bg-[#0A1F57] ${
+                      section.images.length === 4 ? "aspect-[16/9]" : "aspect-[3/4]"
+                    }`}
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
-                      sizes="(min-width: 640px) 33vw, 100vw"
+                      sizes={
+                        section.images.length === 4
+                          ? "(min-width: 640px) 50vw, 100vw"
+                          : "(min-width: 640px) 33vw, 100vw"
+                      }
                       className={img.className}
                     />
                   </div>
@@ -161,7 +177,7 @@ export default async function PortfolioProjectPage({
       ))}
 
       {/* Up next */}
-      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
         <div className="mx-auto max-w-[1310px]">
           <Link
             href={`/portfolio/${next.slug}`}
@@ -195,6 +211,47 @@ export default async function PortfolioProjectPage({
               </div>
             </div>
           </Link>
+        </div>
+      </section>
+
+      {/* Closing CTA */}
+      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+        <div className="mx-auto max-w-[1208px]">
+          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/55 sm:text-[12px]">
+              Have a project in mind?
+            </p>
+            <h2 className="hero-copy mt-4 text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
+              Let&apos;s build your next standout story.
+            </h2>
+            <p className="mx-auto mt-5 max-w-[58ch] text-pretty text-[16px] leading-7 text-white/70 sm:text-[17px] md:text-[18px]">
+              Bring your goals, brand, and ambition. We&apos;ll bring the strategy, design, and execution to make it happen.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
+                style={{
+                  paddingInline: "20px",
+                  paddingBlock: "12px",
+                  borderRadius: "8px",
+                  backgroundImage:
+                    "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                  borderColor: "#FFFFFF29",
+                  boxShadow:
+                    "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
+                  fontSize: "15px",
+                  lineHeight: "18px",
+                  fontWeight: 600,
+                  fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
+                }}
+              >
+                Contact Now
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
