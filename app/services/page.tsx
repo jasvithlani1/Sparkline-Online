@@ -30,18 +30,6 @@ export default function ServicesPage() {
         {/* Gradient overlay — blends bottom of video into page background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/50 via-transparent to-[#050C1E]" />
 
-        {/* Hero text */}
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            How We Help Brands Grow
-          </p>
-          <h1 className="mt-4 text-balance text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
-            Services
-          </h1>
-          <p className="mt-4 max-w-[52ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
-            Strategic marketing, branding, web development, and content solutions that help brands grow with clarity and impact.
-          </p>
-        </div>
       </section>
 
       <OurServices />

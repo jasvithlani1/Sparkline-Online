@@ -31,22 +31,10 @@ export default function PortfolioPage() {
         {/* Gradient overlay for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
 
-        {/* Hero text */}
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            WORK HIGHLIGHTS
-          </p>
-          <h1 className="mt-4 text-balance text-[42px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[56px] md:text-[72px]">
-            Portfolio
-          </h1>
-          <p className="mt-4 max-w-[48ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
-            Explore a selection of standout projects delivered by our team, showcasing strategic thinking, creative excellence, and results-driven execution.
-          </p>
-        </div>
       </section>
 
       {/* Projects */}
-      <section className="py-16 sm:py-20 md:py-24">
+      <section className="py-10 sm:py-12 md:py-14">
         <ProjectList />
       </section>
 

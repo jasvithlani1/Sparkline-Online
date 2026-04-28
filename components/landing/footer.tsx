@@ -27,6 +27,14 @@ const footerColumns = [
     ],
   },
   {
+    heading: "CONTACT",
+    links: [
+      { label: "+91 98765 43210", href: "tel:+919876543210" },
+      { label: "hello@sparklinemarketingfirm.com", href: "mailto:hello@sparklinemarketingfirm.com" },
+      { label: "Bengaluru, India · Working remote-first", href: "/contact" },
+    ],
+  },
+  {
     heading: "FOLLOW US",
     links: [
       { label: "Facebook", href: "#" },
@@ -35,15 +43,67 @@ const footerColumns = [
       { label: "X", href: "#" },
     ],
   },
-  {
-    heading: "CONTACT",
-    links: [
-      { label: "Phone Number", href: "/contact" },
-      { label: "Email Address", href: "/contact" },
-      { label: "Business Address", href: "/contact" },
-    ],
-  },
 ] as const;
+
+function ContactIcon({ kind }: { kind: "phone" | "email" | "address" }) {
+  const cls = "h-[14px] w-[14px] shrink-0";
+  switch (kind) {
+    case "phone":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      );
+    case "email":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg>
+      );
+    case "address":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      );
+  }
+}
+
+function SocialIcon({ name }: { name: string }) {
+  const cls = "h-[18px] w-[18px]";
+  switch (name) {
+    case "Facebook":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="currentColor">
+          <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.91h-2.33V22c4.78-.76 8.43-4.92 8.43-9.94Z" />
+        </svg>
+      );
+    case "Instagram":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "LinkedIn":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="currentColor">
+          <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM.22 8h4.56v14H.22V8Zm7.45 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.48 3.04 5.48 6.99V22h-4.56v-6.18c0-1.47-.03-3.36-2.05-3.36-2.05 0-2.36 1.6-2.36 3.25V22H7.67V8Z" />
+        </svg>
+      );
+    case "X":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className={cls} fill="currentColor">
+          <path d="M18.244 2H21.5l-7.46 8.523L23 22h-6.86l-5.37-6.99L4.6 22H1.34l7.98-9.116L1 2h7.04l4.86 6.39L18.244 2Zm-1.2 18h1.9L7.06 4H5.05l11.99 16Z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 export function Footer() {
   return (
@@ -69,18 +129,56 @@ export function Footer() {
           <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-2 lg:flex lg:items-start lg:justify-between lg:gap-x-10">
             {footerColumns.map((column) => (
               <div key={column.heading} className="min-w-0">
-                <h2 className="mb-[17.5px] text-[14px] leading-[18px] text-white">{column.heading}</h2>
-                <div className="space-y-[17.5px]">
-                  {column.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="block text-[14px] leading-[18px] text-white transition-opacity hover:opacity-80"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
+                <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
+                  {column.heading}
+                </h2>
+                {column.heading === "FOLLOW US" ? (
+                  <div className="flex items-center gap-3">
+                    {column.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        aria-label={link.label}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/30 hover:bg-white/[0.08] active:scale-[0.96]"
+                      >
+                        <SocialIcon name={link.label} />
+                      </a>
+                    ))}
+                  </div>
+                ) : column.heading === "CONTACT" ? (
+                  <div className="space-y-[14px]">
+                    {column.links.map((link, i) => {
+                      const kind = (["phone", "email", "address"] as const)[i] ?? "phone";
+                      return (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          className="flex items-start gap-2.5 text-[14px] leading-[1.45] text-white transition-opacity hover:opacity-80"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="mt-[3px] inline-flex text-[#B08CFF]"
+                          >
+                            <ContactIcon kind={kind} />
+                          </span>
+                          <span className="break-words">{link.label}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="space-y-[17.5px]">
+                    {column.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        className="block text-[14px] leading-[18px] text-white transition-opacity hover:opacity-80"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { SectionHeading } from "@/components/landing/section-heading";
 import { faqSection } from "@/lib/content";
 
 type FaqItem = { id: string; question: string; answer: string };
@@ -17,69 +15,50 @@ export function Faq({
   lines = faqSection.lines,
   items = faqSection.items,
 }: FaqProps = {}) {
-  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
-
   return (
     <section
       id="faq"
       data-testid="faq-section"
-      className="py-14 sm:py-16 md:py-20 lg:py-24"
+      className="py-10 sm:py-12 md:py-14 lg:py-16"
     >
-      <div className="mx-auto flex max-w-[1208px] flex-col gap-10 px-5 sm:gap-12 sm:px-6 md:gap-14 md:px-8">
-        <SectionHeading eyebrow={eyebrow} lines={lines} tone="dark" />
+      <div className="mx-auto flex max-w-[1370px] flex-col gap-10 px-5 sm:gap-12 sm:px-6 md:gap-14 md:px-8">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 text-center sm:gap-5 md:gap-6">
+          <p className="text-[14px] uppercase tracking-[0.28em] text-white/55 sm:text-[16px] sm:tracking-[0.32em] md:text-[18px]">
+            {eyebrow}
+          </p>
+          <p className="text-balance text-[28px] leading-[1.2] text-white/88 sm:text-[32px] sm:leading-[1.22] md:text-[40px] md:leading-[1.22]">
+            {lines.join(" ").replace(/\s+/g, " ").trim()}
+          </p>
+        </div>
 
-        <div className="mx-auto w-full max-w-[880px]">
-          <ul className="flex flex-col">
-            {items.map((item, index) => {
-              const isOpen = openId === item.id;
-              const isFirst = index === 0;
-              return (
-                <li
-                  key={item.id}
-                  className={`border-b border-white/10 ${isFirst ? "border-t border-white/10" : ""}`}
-                >
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-panel-${item.id}`}
-                    id={`faq-trigger-${item.id}`}
-                    onClick={() => setOpenId(isOpen ? null : item.id)}
-                    className="group flex w-full items-center justify-between gap-6 py-5 text-left transition-colors sm:py-6"
-                  >
-                    <span className="text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-white/90 transition-colors group-hover:text-white sm:text-[19px] md:text-[21px]">
-                      {item.question}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition-[background-color,border-color,transform] duration-200 group-hover:border-white/30 group-hover:bg-white/[0.08] group-active:scale-[0.96]"
-                    >
-                      <span className="block h-px w-3.5 bg-current" />
-                      <span
-                        className={`absolute block h-3.5 w-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
-                          isOpen ? "scale-y-0" : "scale-y-100"
-                        }`}
-                      />
-                    </span>
-                  </button>
+        <div className="grid grid-cols-12 gap-5">
+          {items.map((item, i) => {
+            const total = items.length;
+            const remainderLg = total % 3;
+            const remainderMd = total % 2;
+            const fromEnd = total - 1 - i;
 
-                  <div
-                    id={`faq-panel-${item.id}`}
-                    role="region"
-                    aria-labelledby={`faq-trigger-${item.id}`}
-                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
-                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="max-w-[70ch] pb-6 pr-12 text-pretty text-[15px] leading-[1.7] text-white/70 sm:text-[16px] md:text-[17px]">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+            let lgSpan = "lg:col-span-4";
+            if (remainderLg === 1 && fromEnd < 4) lgSpan = "lg:col-span-3";
+            if (remainderLg === 2 && fromEnd < 2) lgSpan = "lg:col-span-6";
+
+            let mdSpan = "md:col-span-6";
+            if (remainderMd === 1 && fromEnd === 0) mdSpan = "md:col-span-12";
+
+            return (
+              <article
+                key={item.id}
+                className={`col-span-12 ${mdSpan} ${lgSpan} rounded-[14px] bg-white/[0.04] p-6 outline outline-1 -outline-offset-1 outline-white/8 backdrop-blur-sm sm:p-7`}
+              >
+                <h3 className="text-pretty text-[15px] font-semibold leading-[1.4] tracking-[-0.005em] text-white sm:text-[16px]">
+                  {item.question}
+                </h3>
+                <p className="mt-3 text-pretty text-[14px] leading-[1.55] text-white/68 sm:text-[15px]">
+                  {item.answer}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

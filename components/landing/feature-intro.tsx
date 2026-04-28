@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import Link from "next/link";
 import { featuredIntro } from "@/lib/content";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
@@ -35,7 +34,7 @@ export function FeatureIntro() {
     <section
       id="about-us"
       data-testid="feature-intro"
-      className="bg-[#050C1E] px-5 pt-12 pb-12 sm:px-6 sm:pt-14 sm:pb-14 md:px-8 md:pt-18 md:pb-18 lg:pt-20 lg:pb-20"
+      className="bg-[#050C1E] px-5 pt-8 pb-8 sm:px-6 sm:pt-10 sm:pb-10 md:px-8 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14"
     >
       <div
         data-testid="feature-intro-content"
@@ -64,12 +63,6 @@ export function FeatureIntro() {
             );
           })}
         </div>
-        <Link href="/about" className="inline-flex items-center gap-2 text-sm text-white/72 transition-colors hover:text-white">
-          <span aria-hidden="true" className="text-lg leading-none">
-            ›
-          </span>
-          {featuredIntro.cta}
-        </Link>
       </div>
     </section>
   );

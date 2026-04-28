@@ -37,7 +37,7 @@ export function OurServices() {
     <section
       id="our-services"
       data-testid="our-services"
-      className="scroll-mt-24 bg-[#050C1E] px-5 pt-16 pb-20 sm:px-6 sm:pt-20 sm:pb-24 md:scroll-mt-28 md:px-8 md:pt-24 md:pb-28 lg:pt-28 lg:pb-32"
+      className="scroll-mt-24 bg-[#050C1E] px-5 pt-12 pb-12 sm:px-6 sm:pt-14 sm:pb-14 md:scroll-mt-28 md:px-8 md:pt-16 md:pb-16 lg:pt-20 lg:pb-20"
     >
       <div className="mx-auto max-w-[1310px]">
         <div
@@ -45,7 +45,7 @@ export function OurServices() {
           className="flex flex-col gap-6 text-white md:gap-8"
         >
           <div className="flex flex-col gap-4">
-            <h2 className="hero-copy text-[44px] leading-[0.95] tracking-[-0.01em] sm:text-[60px] md:text-[72px] lg:text-[84px]">
+            <h2 className="hero-copy text-[44px] leading-[0.95] tracking-[0.02em] sm:text-[60px] md:text-[72px] lg:text-[84px]">
               OUR CORE SERVICES
             </h2>
             <span
@@ -80,14 +80,17 @@ export function OurServices() {
               data-testid="our-services-card"
               className="flex h-full flex-col gap-6 border-b border-white/10 px-0 py-10 last:border-b-0 sm:px-8 sm:py-12 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-child(odd)]:border-r sm:[&:nth-child(odd)]:border-r-white/10 sm:[&:nth-last-child(-n+2)]:border-b-0 md:px-10 md:py-14 lg:!border-r lg:!border-r-white/10 lg:[&:nth-child(3n)]:!border-r-0 lg:[&:nth-last-child(-n+3)]:border-b-0"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex w-fit flex-col gap-4">
                 <h3
-                  className="hero-copy whitespace-pre-line text-balance text-[28px] leading-[1] tracking-[-0.005em] sm:text-[32px] md:text-[38px]"
+                  className="hero-copy w-fit min-w-[11ch] whitespace-pre-line text-balance text-[28px] leading-[1] tracking-[-0.005em] sm:text-[32px] md:text-[38px]"
                   style={{ fontFamily: "var(--font-cal-sans), Arial, sans-serif" }}
                 >
                   {card.title}
                 </h3>
-                <span aria-hidden="true" className="h-px w-full bg-white/10" />
+                <span
+                  aria-hidden="true"
+                  className="h-[2px] w-full rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+                />
               </div>
               <ul className="flex flex-1 flex-col gap-2 text-[15px] leading-[1.45] text-white/70 md:text-[16px]">
                 {card.items.map((item) => (

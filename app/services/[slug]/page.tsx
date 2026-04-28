@@ -66,17 +66,9 @@ export default async function ServiceDetailPage({
       <Navbar />
 
       {/* Text-only hero + intro */}
-      <section className="px-5 pt-32 pb-16 sm:px-6 sm:pt-36 sm:pb-20 md:px-8 md:pt-44 md:pb-24">
+      <section className="px-5 pt-32 pb-10 sm:px-6 sm:pt-36 sm:pb-12 md:px-8 md:pt-44 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
-          >
-            <span aria-hidden="true">&larr;</span>
-            Back to Services
-          </Link>
-
-          <div className="mt-10 flex flex-col gap-6 md:mt-14 md:gap-8">
+          <div className="flex flex-col gap-6 md:gap-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
               {detail.eyebrow}
             </p>
@@ -87,10 +79,10 @@ export default async function ServiceDetailPage({
               aria-hidden="true"
               className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
-            <p className="max-w-[72ch] text-pretty text-[17px] leading-[1.7] text-white/80 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
+            <p className="text-pretty text-[17px] leading-[1.7] text-white/80 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
               {withBrandBold(detail.lead)}
             </p>
-            <p className="max-w-[72ch] text-pretty text-[16px] leading-[1.7] text-white/65 sm:text-[17px] md:text-[18px]">
+            <p className="text-pretty text-[16px] leading-[1.7] text-white/65 sm:text-[17px] md:text-[18px]">
               {withBrandBold(detail.intro)}
             </p>
           </div>
@@ -98,7 +90,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Why Sparkline */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
             <div className="flex flex-col gap-3">
@@ -118,7 +110,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Image placeholder — banner after Why Sparkline */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1310px]">
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#0A1740_0%,#050C1E_100%)]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(143,87,255,0.22),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(76,47,255,0.22),transparent_55%)]" />
@@ -132,7 +124,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Problems we solve */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-14">
             <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
@@ -161,7 +153,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Cornerstones + Expertise */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-10 md:grid-cols-2 md:gap-16 md:pt-14">
             <div>
@@ -178,7 +170,7 @@ export default async function ServiceDetailPage({
                 {detail.cornerstones.items.map((item, i) => (
                   <li
                     key={item}
-                    className="flex items-baseline gap-5 border-b border-white/10 py-3 last:border-b-0"
+                    className="flex items-baseline gap-5 py-3"
                   >
                     <span className="font-mono text-[12px] tracking-[0.18em] text-white/40">
                       {String(i + 1).padStart(2, "0")}
@@ -215,7 +207,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Image placeholder — banner after Cornerstones */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1310px]">
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#0A1740_0%,#050C1E_100%)]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(143,87,255,0.22),transparent_55%),radial-gradient(circle_at_20%_80%,rgba(76,47,255,0.22),transparent_55%)]" />
@@ -229,7 +221,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Process */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
             <div className="flex flex-col gap-3">
@@ -255,7 +247,7 @@ export default async function ServiceDetailPage({
       ) : null}
 
       {/* CTA */}
-      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+      <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
           <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
             <h2 className="hero-copy text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">

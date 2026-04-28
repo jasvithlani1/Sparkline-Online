@@ -69,7 +69,7 @@ export default async function PortfolioProjectPage({
       </section>
 
       {/* Tagline, summary, services */}
-      <section className="px-5 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
+      <section className="px-5 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14">
         <div className="mx-auto max-w-[1208px]">
           <Link
             href="/portfolio"
@@ -119,7 +119,7 @@ export default async function PortfolioProjectPage({
       {project.sections.map((section, idx) => (
         <section
           key={`${section.heading}-${idx}`}
-          className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24"
+          className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14"
         >
           <div className="mx-auto max-w-[1310px]">
             <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-12">
@@ -177,7 +177,7 @@ export default async function PortfolioProjectPage({
       ))}
 
       {/* Up next */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1310px]">
           <Link
             href={`/portfolio/${next.slug}`}
@@ -215,7 +215,7 @@ export default async function PortfolioProjectPage({
       </section>
 
       {/* Closing CTA */}
-      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+      <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
           <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/55 sm:text-[12px]">

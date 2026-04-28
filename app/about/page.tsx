@@ -17,23 +17,10 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Text-only hero */}
-      <section className="px-5 pt-32 pb-16 sm:px-6 sm:pt-36 sm:pb-20 md:px-8 md:pt-44 md:pb-24">
-        <div className="mx-auto max-w-[1208px]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            ABOUT US
-          </p>
-          <h1 className="hero-copy mt-4 max-w-[20ch] text-balance text-[44px] leading-[1.02] tracking-[-0.04em] text-white sm:text-[64px] md:text-[88px] lg:text-[104px]">
-            A creative partner for measurable growth.
-          </h1>
-          <span
-            aria-hidden="true"
-            className="mt-8 block h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)] md:mt-10"
-          />
-        </div>
-      </section>
+      <section className="pt-32 sm:pt-36 md:pt-44" />
 
       {/* Body — reuse featuredIntro with bold emphasis */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="flex flex-col gap-6 text-white sm:gap-8">
             {featuredIntro.body.map((paragraph, index) => (
@@ -56,7 +43,7 @@ export default function AboutPage() {
       </section>
 
       {/* What we do — services overview */}
-      <section className="px-5 pb-16 sm:px-6 sm:pb-20 md:px-8 md:pb-24">
+      <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-14">
             <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
@@ -96,7 +83,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-5 pb-20 sm:px-6 sm:pb-24 md:px-8 md:pb-28">
+      <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
           <div className="rounded-2xl outline outline-1 -outline-offset-1 outline-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
             <h2 className="hero-copy text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">

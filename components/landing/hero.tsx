@@ -32,18 +32,6 @@ export function Hero() {
           className="hero-bottom-float h-auto w-full max-w-[840px] opacity-95 motion-reduce:animate-none"
         />
       </div>
-      <div
-        data-testid="hero-content"
-        className="relative z-20 mx-auto flex h-full max-w-[1440px] -translate-y-8 flex-col items-center justify-center px-4 pt-24 text-center sm:-translate-y-12 sm:px-6 sm:pt-28 md:-translate-y-16 md:px-8 md:pt-32 lg:-translate-y-20 lg:pt-36"
-      >
-        <div className="flex flex-col items-center">
-          <h1 className="hero-copy max-w-[960px] text-balance text-[44px] leading-[1.04] tracking-[-0.04em] sm:text-[64px] md:mt-10 md:text-[80px] lg:mt-14 lg:text-[88px]">
-            <span data-testid="hero-second-line" className="inline-block pb-[0.08em]">
-              Creative Digital Solutions for Modern Business Growth
-            </span>
-          </h1>
-        </div>
-      </div>
     </section>
   );
 }

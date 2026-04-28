@@ -43,17 +43,7 @@ export default function ContactPage() {
       >
         <div className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
           {/* Header */}
-          <div className="mb-12 md:mb-16">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px]">
-              GET IN TOUCH
-            </p>
-            <h1 className="mt-4 text-balance text-[36px] leading-[1.08] tracking-[-0.04em] text-white sm:text-[48px] md:text-[56px]">
-              Contact Us
-            </h1>
-            <p className="mt-4 max-w-[48ch] text-pretty text-[16px] leading-7 text-white/60 sm:text-[17px]">
-              Have a project in mind? We&apos;d love to hear from you.
-            </p>
-          </div>
+          <div className="mb-12 md:mb-16" />
 
           <div className="grid gap-12 lg:grid-cols-[340px_1fr] lg:gap-20">
             {/* Contact info — left */}

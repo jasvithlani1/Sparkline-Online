@@ -205,7 +205,7 @@ export function WorkGallery() {
     <section
       id="portfolio"
       data-testid="work-gallery-section"
-      className="py-14 sm:py-16 md:py-20 lg:py-24"
+      className="py-10 sm:py-12 md:py-14 lg:py-16"
     >
       <div className="mx-auto flex max-w-[1208px] flex-col gap-10 px-5 sm:gap-12 sm:px-6 md:gap-14 md:px-8">
         <SectionHeading eyebrow={workGallery.eyebrow} lines={workGallery.lines} tone="dark" />
