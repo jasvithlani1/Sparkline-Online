@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({
             {detail.problems.items.map((problem) => (
               <li
                 key={problem}
-                className="flex gap-3 border-b border-white/5 py-3"
+                className="flex gap-3 py-3"
               >
                 <span
                   aria-hidden="true"

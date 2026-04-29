@@ -26,8 +26,11 @@ export function BlogList() {
         data-testid="blog-list-header"
         className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12"
       >
-        <h2 className="text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[40px] md:text-[48px]">
-          Blogs
+        <h2
+          className="hero-copy text-[44px] leading-[0.95] tracking-[0.02em] sm:text-[60px] md:text-[72px] lg:text-[84px]"
+          style={{ wordSpacing: "0.25em" }}
+        >
+          BLOGS
         </h2>
         <label className="relative inline-flex items-center self-start sm:self-auto">
           <span className="sr-only">Filter by category</span>
@@ -79,7 +82,7 @@ export function BlogList() {
           <Link
             key={post.id}
             href={`/blogs/${post.slug}`}
-            className="group block border-t border-white/10 py-8 first:border-t-0 sm:py-10 md:py-12"
+            className="group block border-t border-white/10 py-8 sm:py-10 md:py-12"
           >
             <div className="flex flex-col gap-6 md:flex-row md:gap-10 lg:gap-14">
               <div className="relative aspect-[750/530] w-full shrink-0 overflow-hidden rounded-2xl bg-[#0A1F57] outline outline-1 -outline-offset-1 outline-white/10 transition-transform duration-300 group-hover:scale-[1.03] md:aspect-auto md:h-[198px] md:w-[280px] lg:h-[240px] lg:w-[340px]">

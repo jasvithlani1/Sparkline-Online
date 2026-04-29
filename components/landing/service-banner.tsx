@@ -24,7 +24,7 @@ const submarineBubbles: Array<{
 
 export function ServiceBanner() {
   return (
-    <section id="services" className="px-5 pt-0 pb-8 sm:px-6 sm:pt-0 sm:pb-10 md:px-8 md:pt-0 md:pb-14">
+    <section id="services" className="px-5 pt-0 pb-2 sm:px-6 sm:pt-0 sm:pb-3 md:px-8 md:pt-0 md:pb-4">
       <div className="relative mx-auto max-w-[1310px]">
         <div
           data-testid="service-banner-shell"
@@ -72,12 +72,25 @@ export function ServiceBanner() {
               />
             ))}
           </div>
+          <div
+            data-testid="service-submarine-fan"
+            aria-hidden="true"
+            className="submarine-fan-spin pointer-events-none absolute right-[2%] top-[14%] z-[4] h-[22px] w-[22px] sm:right-[3%] sm:top-[16%] sm:h-[32px] sm:w-[32px] md:right-[4%] md:top-[18%] md:h-[46px] md:w-[46px] lg:right-[5%] lg:top-[20%] lg:h-[60px] lg:w-[60px]"
+          >
+            <Image
+              src="/images/submarine-fan.webp"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 60px, (min-width: 768px) 46px, (min-width: 640px) 32px, 22px"
+              className="h-full w-full object-contain drop-shadow-[0_0_10px_rgba(78,108,170,0.4)]"
+            />
+          </div>
           <Image
             src="/images/service-submarine.webp"
             alt=""
             fill
             sizes="(min-width: 1280px) 650px, (min-width: 768px) 560px, (min-width: 640px) 440px, 340px"
-            className="h-full w-full object-contain object-right motion-reduce:transform-none motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/service-submarine:translate-x-3 group-hover/service-submarine:-translate-y-2"
+            className="relative z-[5] h-full w-full object-contain object-right motion-reduce:transform-none motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/service-submarine:translate-x-3 group-hover/service-submarine:-translate-y-2"
           />
         </div>
       </div>

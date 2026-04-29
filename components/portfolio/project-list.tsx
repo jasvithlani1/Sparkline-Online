@@ -5,6 +5,15 @@ import { workGallery } from "@/lib/content";
 export function ProjectList() {
   return (
     <div data-testid="project-list" className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
+      <div className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12">
+        <h2
+          className="hero-copy text-[44px] leading-[0.95] tracking-[0.02em] sm:text-[60px] md:text-[72px] lg:text-[84px]"
+          style={{ wordSpacing: "0.25em" }}
+        >
+          PORTFOLIO
+        </h2>
+      </div>
+      <div className="h-px w-full bg-white/10" />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {workGallery.projects.map((project) => (
           <Link

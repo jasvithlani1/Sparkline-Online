@@ -22,8 +22,8 @@ const footerColumns = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Our Services", href: "/services" },
-      { label: "Terms & Conditions", href: "#" },
-      { label: "Privacy Policy", href: "#" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Privacy Policy", href: "/privacy" },
     ],
   },
   {
@@ -184,7 +184,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="relative z-10 mt-16 border-t border-white/10 pt-6 sm:mt-20 md:mt-24 lg:mt-28">
+        <div className="relative z-10 mt-8 border-t border-white/10 pt-6 sm:mt-10 md:mt-12 lg:mt-14">
           <p className="text-center text-[12px] leading-[1.6] text-white/60 sm:text-[13px]">
             © 2026 <span className="font-semibold text-white/80">SPARKLINE MARKETING FIRM</span>. All Rights Reserved.
           </p>

@@ -108,6 +108,29 @@ body {
   }
 }
 
+@keyframes submarine-fan-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submarine-fan-spin {
+  animation: submarine-fan-spin 0.015s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submarine-fan-spin {
+    animation: none;
+  }
+}
+
 @keyframes service-submarine-bubble {
   0% {
     opacity: 0;
