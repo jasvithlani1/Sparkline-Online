@@ -9,12 +9,12 @@ const footerColumns = [
   {
     heading: "OUR SERVICES",
     links: [
-      { label: "Digital Marketing", href: "/services" },
-      { label: "Brand Strategy", href: "/services" },
-      { label: "Website Design & Development", href: "/services" },
-      { label: "Branding & Design", href: "/services" },
-      { label: "Social Media", href: "/services" },
-      { label: "Content Marketing", href: "/services" },
+      { label: "Digital Marketing", href: "/services/digital-marketing" },
+      { label: "Brand Strategy", href: "/services/brand-strategy" },
+      { label: "Website Design & Development", href: "/services/website-design-development" },
+      { label: "Branding & Design", href: "/services/branding-design" },
+      { label: "Social Media", href: "/services/social-media-management" },
+      { label: "Content Marketing", href: "/services/content-marketing" },
     ],
   },
   {
