@@ -27,7 +27,7 @@ export function BlogList() {
         className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12"
       >
         <h2
-          className="hero-copy text-[44px] leading-[0.95] tracking-[0.02em] sm:text-[60px] md:text-[72px] lg:text-[84px]"
+          className="hero-copy text-[36px] leading-[1] tracking-[0.02em] sm:text-[52px] sm:leading-[0.95] md:text-[68px] lg:text-[80px]"
           style={{ wordSpacing: "0.25em" }}
         >
           BLOGS

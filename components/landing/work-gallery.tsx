@@ -273,7 +273,7 @@ export function WorkGallery() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-10 flex max-w-[1208px] flex-col gap-10 px-5 sm:mt-12 sm:gap-12 sm:px-6 md:mt-14 md:gap-14 md:px-8">
+      <div className="mx-auto mt-3 flex max-w-[1208px] flex-col gap-10 px-5 sm:mt-4 sm:gap-12 sm:px-6 md:mt-5 md:gap-14 md:px-8">
         <div data-testid="work-gallery-dot-nav" className="flex justify-center gap-3">
           {workGallery.projects.map((project, index) => (
             <button

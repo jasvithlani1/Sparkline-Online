@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Faq } from "@/components/landing/faq";
@@ -109,9 +110,20 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Image placeholder — banner after Why Sparkline */}
+      {/* Banner — after Why Sparkline */}
       <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1310px]">
+          {(detail as { bannerTop?: string }).bannerTop ? (
+            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#0A1740] outline outline-1 -outline-offset-1 outline-white/10">
+              <Image
+                src={(detail as { bannerTop: string }).bannerTop}
+                alt={`${detail.eyebrow} hero`}
+                fill
+                sizes="(min-width: 1280px) 1310px, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          ) : (
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#0A1740_0%,#050C1E_100%)]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(143,87,255,0.22),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(76,47,255,0.22),transparent_55%)]" />
             <div className="relative z-10 flex h-full items-center justify-center">
@@ -120,6 +132,7 @@ export default async function ServiceDetailPage({
               </span>
             </div>
           </div>
+          )}
         </div>
       </section>
 
@@ -206,9 +219,20 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Image placeholder — banner after Cornerstones */}
+      {/* Banner — after Cornerstones */}
       <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1310px]">
+          {(detail as { bannerBottom?: string }).bannerBottom ? (
+            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#0A1740] outline outline-1 -outline-offset-1 outline-white/10">
+              <Image
+                src={(detail as { bannerBottom: string }).bannerBottom}
+                alt={`${detail.eyebrow} workflow`}
+                fill
+                sizes="(min-width: 1280px) 1310px, 100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          ) : (
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#0A1740_0%,#050C1E_100%)]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(143,87,255,0.22),transparent_55%),radial-gradient(circle_at_20%_80%,rgba(76,47,255,0.22),transparent_55%)]" />
             <div className="relative z-10 flex h-full items-center justify-center">
@@ -217,6 +241,7 @@ export default async function ServiceDetailPage({
               </span>
             </div>
           </div>
+          )}
         </div>
       </section>
 

@@ -127,8 +127,16 @@ export function Footer() {
           </div>
 
           <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-2 lg:flex lg:items-start lg:justify-between lg:gap-x-10">
-            {footerColumns.map((column) => (
-              <div key={column.heading} className="min-w-0">
+            {footerColumns.map((column) => {
+              const fullWidthOnMobile =
+                column.heading === "CONTACT" || column.heading === "FOLLOW US";
+              return (
+              <div
+                key={column.heading}
+                className={`min-w-0 ${
+                  fullWidthOnMobile ? "col-span-2 md:col-span-1" : ""
+                }`}
+              >
                 <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
                   {column.heading}
                 </h2>
@@ -180,7 +188,8 @@ export function Footer() {
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

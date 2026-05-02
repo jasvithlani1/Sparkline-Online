@@ -40,32 +40,19 @@ export default async function PortfolioProjectPage({
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
 
-      {/* Full-viewport hero image with title + intro */}
-      <section className="relative h-screen w-full overflow-hidden">
+      {/* Hero image — natural aspect on mobile (no crop), full viewport on lg+ */}
+      <section className="relative mt-[56px] aspect-[16/10] w-full overflow-hidden bg-[#050C1E] sm:mt-[64px] sm:aspect-[16/9] md:mt-[80px] lg:aspect-auto lg:h-[calc(100svh-80px)]">
         <Image
           src={project.image}
           alt={project.name}
           fill
           priority
           sizes="100vw"
-          className={`${project.imageClassName}`}
+          className={`${project.imageClassName} max-lg:!object-contain`}
         />
 
-        {/* Dark tint for legibility */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
-
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
-            {project.meta}
-          </p>
-          <h1 className="hero-copy mt-4 text-balance text-[48px] leading-[1.02] tracking-[-0.04em] sm:text-[72px] md:text-[96px]">
-            {project.name}
-          </h1>
-          <p className="mt-5 max-w-[64ch] text-pretty text-[16px] leading-7 text-white/75 sm:text-[17px] md:text-[18px]">
-            {project.intro}
-          </p>
-        </div>
+        {/* Bottom gradient for clean blend into next section */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#050C1E]" />
       </section>
 
       {/* Tagline, summary, services */}

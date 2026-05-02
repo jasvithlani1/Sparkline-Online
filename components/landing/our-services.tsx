@@ -46,7 +46,7 @@ export function OurServices() {
         >
           <div className="flex flex-col gap-4">
             <h2
-              className="hero-copy text-[44px] leading-[0.95] tracking-[0.02em] sm:text-[60px] md:text-[72px] lg:text-[84px]"
+              className="hero-copy text-balance text-[32px] leading-[1] tracking-[0.02em] sm:text-[48px] sm:leading-[0.95] md:text-[64px] lg:text-[80px]"
               style={{ wordSpacing: "0.25em" }}
             >
               OUR CORE SERVICES

@@ -160,6 +160,8 @@ export const serviceDetails = {
     slug: "digital-marketing",
     eyebrow: "DIGITAL MARKETING",
     title: "Drive Growth With Smarter Digital Marketing",
+    bannerTop: "/images/digital-marketing-1.avif",
+    bannerBottom: "/images/digital-marketing-2.png",
     lead:
       "Digital marketing helps your business reach the right audience, build brand visibility, and turn online interest into real enquiries, leads, and sales. With the right strategy, every campaign works harder to support long-term growth and stronger market presence.",
     intro:
@@ -283,6 +285,8 @@ export const serviceDetails = {
     slug: "website-design-development",
     eyebrow: "WEBSITE DESIGN & DEVELOPMENT",
     title: "Websites designed to impress, perform, and convert.",
+    bannerTop: "/images/website-design-1.avif",
+    bannerBottom: "/images/website-design-2.avif",
     lead:
       "At SPARKLINE MARKETING FIRM, we create websites that do more than look good. Our website design and development services focus on building modern, user-friendly, and responsive websites that reflect your brand professionally.",
     intro:
@@ -405,6 +409,8 @@ export const serviceDetails = {
     slug: "content-marketing",
     eyebrow: "CONTENT MARKETING",
     title: "Strategic Content That Drives Results",
+    bannerTop: "/images/content-marketing-1.avif",
+    bannerBottom: "/images/content-marketing-2.avif",
     lead:
       "Content marketing helps your brand stay visible, relevant, and trusted through meaningful messaging that speaks directly to your audience and supports every stage of the buyer journey.",
     intro:
@@ -527,6 +533,8 @@ export const serviceDetails = {
     slug: "social-media-management",
     eyebrow: "SOCIAL MEDIA MARKETING",
     title: "Grow Faster Through Social Media",
+    bannerTop: "/images/social-media-1.avif",
+    bannerBottom: "/images/social-media-2.avif",
     lead:
       "Social media marketing helps your brand connect with the right audience through meaningful content, consistent engagement, and platform-specific strategy. It builds visibility, trust, and stronger customer relationships across every stage of the buyer journey.",
     intro:
@@ -649,6 +657,8 @@ export const serviceDetails = {
     slug: "branding-design",
     eyebrow: "BRAND DESIGN SERVICES",
     title: "Designing Brands With Lasting Impact",
+    bannerTop: "/images/branding-design-1.avif",
+    bannerBottom: "/images/branding-design-2.avif",
     lead:
       "Brand & Design services help shape how your business looks, feels, and connects with people. From logo creation to visual identity systems, we craft designs that reflect your values and make your brand more memorable.",
     intro:
@@ -770,6 +780,8 @@ export const serviceDetails = {
     slug: "brand-strategy",
     eyebrow: "BRAND STRATEGY",
     title: "Clarity Behind Every Brand",
+    bannerTop: "/images/brand-strategy-1.avif",
+    bannerBottom: "/images/brand-strategy-2.avif",
     lead:
       "Brand strategy gives your business a clear direction, stronger positioning, and a consistent voice across every touchpoint. It helps you connect with the right audience while building trust, recognition, and long term value.",
     intro:
