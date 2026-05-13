@@ -4,6 +4,40 @@ import { useState } from "react";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 
+const CONTACT_FORM_RECIPIENT = "info@sparklinemarketingfirm.com";
+
+type ContactFormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+function getFormValue(formData: FormData, field: keyof ContactFormValues) {
+  return String(formData.get(field) ?? "").trim();
+}
+
+export function buildContactMailtoUrl({
+  name,
+  email,
+  subject,
+  message,
+}: ContactFormValues) {
+  const normalizedSubject = subject.trim() || "New contact form message";
+  const body = [
+    `Name: ${name.trim()}`,
+    `Email: ${email.trim()}`,
+    `Subject: ${normalizedSubject}`,
+    "",
+    "Message:",
+    message.trim(),
+  ].join("\n");
+
+  return `mailto:${CONTACT_FORM_RECIPIENT}?subject=${encodeURIComponent(
+    `Website enquiry: ${normalizedSubject}`,
+  )}&body=${encodeURIComponent(body)}`;
+}
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
@@ -71,11 +105,11 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+14708412335"
                   style={{ color: "#ffffff" }}
                   className="mt-3 block text-[16px] transition-opacity hover:opacity-80"
                 >
-                  +91 98765 43210
+                  (470) 841-2335
                 </a>
               </div>
 
@@ -103,11 +137,11 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <a
-                  href="mailto:hello@sparklinemarketingfirm.com"
+                  href="mailto:info@sparklinemarketingfirm.com"
                   style={{ color: "#ffffff" }}
                   className="mt-3 block break-all text-[16px] transition-opacity hover:opacity-80"
                 >
-                  hello@sparklinemarketingfirm.com
+                  info@sparklinemarketingfirm.com
                 </a>
               </div>
 
@@ -135,11 +169,7 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <p className="mt-3 text-[16px] leading-7 text-white">
-                  Bengaluru, India
-                  <br />
-                  <span className="text-white">
-                    Working globally, remote-first.
-                  </span>
+                  2080 One White Oak Lane, Cumming, GA 30041
                 </p>
               </div>
             </div>
@@ -158,6 +188,15 @@ export default function ContactPage() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const mailtoUrl = buildContactMailtoUrl({
+                    name: getFormValue(formData, "name"),
+                    email: getFormValue(formData, "email"),
+                    subject: getFormValue(formData, "subject"),
+                    message: getFormValue(formData, "message"),
+                  });
+
+                  window.open(mailtoUrl, "_self");
                   setSubmitted(true);
                 }}
                 className="space-y-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"

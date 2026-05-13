@@ -400,31 +400,37 @@ describe("Home page", () => {
     const footerLogo = within(footer).getByAltText(/sparkline marketing firm/i);
     const footerGraphic = within(footer).getByTestId("footer-bottom-graphic");
 
-    expect(within(footer).getByText(/^features$/i)).toBeInTheDocument();
-    expect(within(footer).getByText(/^glyphs$/i)).toBeInTheDocument();
-    expect(within(footer).getByText(/^community$/i)).toBeInTheDocument();
-    expect(within(footer).getByText(/^about$/i)).toBeInTheDocument();
-    expect(within(footer).getByText(/^socials$/i)).toBeInTheDocument();
-    expect(within(footer).getByText(/make things you love/i)).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^create$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^produce$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^extend$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^learn$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^tools$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^buy$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^eula$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^forum$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^events$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^news$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^resources$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^contact$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^press$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^privacy$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^vpat$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^instagram$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("heading", { name: /^our services$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("heading", { name: /^quick links$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("heading", { name: /^contact$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("heading", { name: /^follow us$/i })).toBeInTheDocument();
+    expect(within(footer).getByText(/delivers strategic marketing/i)).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^digital marketing$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^brand strategy$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^website design & development$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^branding & design$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^social media$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^content marketing$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^about us$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^our services$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^terms & conditions$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^privacy policy$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^\(470\) 841-2335$/i })).toHaveAttribute(
+      "href",
+      "tel:+14708412335",
+    );
+    expect(within(footer).getByRole("link", { name: /^info@sparklinemarketingfirm\.com$/i })).toHaveAttribute(
+      "href",
+      "mailto:info@sparklinemarketingfirm.com",
+    );
+    expect(within(footer).getByRole("link", { name: /^2080 one white oak lane, cumming, ga 30041$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^instagram$/i })).toHaveAttribute(
+      "href",
+      "https://www.instagram.com/sparklinemarketingfirm",
+    );
     expect(within(footer).getByRole("link", { name: /^facebook$/i })).toBeInTheDocument();
     expect(within(footer).getByRole("link", { name: /^linkedin$/i })).toBeInTheDocument();
-    expect(within(footer).getByRole("link", { name: /^x \/ twitter$/i })).toBeInTheDocument();
+    expect(within(footer).getByRole("link", { name: /^x$/i })).toBeInTheDocument();
     expect(footer).toHaveClass("bg-[oklch(15.6%_0.042_266.4)]");
     expect(footerLogo).toHaveAttribute(
       "src",

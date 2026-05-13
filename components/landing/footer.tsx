@@ -29,16 +29,16 @@ const footerColumns = [
   {
     heading: "CONTACT",
     links: [
-      { label: "+91 98765 43210", href: "tel:+919876543210" },
-      { label: "hello@sparklinemarketingfirm.com", href: "mailto:hello@sparklinemarketingfirm.com" },
-      { label: "Bengaluru, India · Working remote-first", href: "/contact" },
+      { label: "(470) 841-2335", href: "tel:+14708412335" },
+      { label: "info@sparklinemarketingfirm.com", href: "mailto:info@sparklinemarketingfirm.com" },
+      { label: "2080 One White Oak Lane, Cumming, GA 30041", href: "/contact" },
     ],
   },
   {
     heading: "FOLLOW US",
     links: [
       { label: "Facebook", href: "#" },
-      { label: "Instagram", href: "#" },
+      { label: "Instagram", href: "https://www.instagram.com/sparklinemarketingfirm" },
       { label: "LinkedIn", href: "#" },
       { label: "X", href: "#" },
     ],
