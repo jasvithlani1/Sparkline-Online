@@ -24,7 +24,6 @@ const rubyBio = [
 const founders = [
   {
     name: "Ashlan Leazer",
-    role: "Co-Founder",
     portrait: "/images/about-ashlan-leazer.jpeg",
     bio: ashlanBio,
     closing: "Carefully. Patiently. For the long run.",
@@ -32,7 +31,6 @@ const founders = [
   },
   {
     name: "Ruby",
-    role: "Co-Founder",
     portrait: "/images/about-second-founder.jpeg",
     bio: rubyBio,
     imageSide: "right",
@@ -85,9 +83,6 @@ function FounderProfile({
           <h2 className="mt-4 text-balance text-[36px] leading-[0.98] tracking-[-0.03em] text-white sm:text-[48px] md:text-[56px]">
             {founder.name}
           </h2>
-          <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.18em] text-white/50">
-            {founder.role}
-          </p>
           <div className="mt-8 space-y-5 text-pretty text-[15px] leading-[1.85] text-white/72 sm:text-[16px]">
             {founder.bio.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
@@ -131,7 +126,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
+      <section
+        data-testid="about-founders-section"
+        className="px-5 pb-0 sm:px-6 sm:pb-0 md:px-8 md:pb-2"
+      >
         <div className="mx-auto max-w-[1208px]">
           <div className="mb-10 flex flex-col gap-3 sm:mb-12 md:mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
@@ -152,7 +150,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer spacing="compactTop" />
     </main>
   );
 }

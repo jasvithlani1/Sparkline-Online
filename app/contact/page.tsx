@@ -73,7 +73,8 @@ export default function ContactPage() {
 
       <section
         id="contact-us"
-        className="relative z-10 pt-32 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-24"
+        data-testid="contact-page-section"
+        className="relative z-10 pt-32 pb-0 sm:pt-36 sm:pb-0 md:pt-40 md:pb-2"
       >
         <div className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
           {/* Header */}
@@ -301,7 +302,7 @@ export default function ContactPage() {
       </section>
 
       <div className="relative z-10">
-        <Footer />
+        <Footer spacing="compactTop" />
       </div>
     </main>
   );

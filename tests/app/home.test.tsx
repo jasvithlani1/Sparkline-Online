@@ -192,6 +192,30 @@ describe("Home page", () => {
     expect(rowTwo).toHaveClass("logo-marquee-track--reverse");
   });
 
+  it("tightens the space from trusted-by into work highlights", () => {
+    render(<Home />);
+
+    const trustedBySection = screen.getByTestId("trusted-by-section");
+    const workGallerySection = screen.getByTestId("work-gallery-section");
+
+    expect(trustedBySection).toHaveClass("pt-0");
+    expect(trustedBySection).toHaveClass("sm:pt-2");
+    expect(trustedBySection).toHaveClass("md:pt-3");
+    expect(trustedBySection).toHaveClass("lg:pt-4");
+    expect(trustedBySection).toHaveClass("pb-4");
+    expect(trustedBySection).toHaveClass("sm:pb-5");
+    expect(trustedBySection).toHaveClass("md:pb-6");
+    expect(trustedBySection).toHaveClass("lg:pb-8");
+    expect(workGallerySection).toHaveClass("pt-6");
+    expect(workGallerySection).toHaveClass("pb-10");
+    expect(workGallerySection).toHaveClass("sm:pt-7");
+    expect(workGallerySection).toHaveClass("sm:pb-12");
+    expect(workGallerySection).toHaveClass("md:pt-8");
+    expect(workGallerySection).toHaveClass("md:pb-14");
+    expect(workGallerySection).toHaveClass("lg:pt-8");
+    expect(workGallerySection).toHaveClass("lg:pb-16");
+  });
+
   it("renders the work gallery as an editorial carousel with masks and a CTA", () => {
     render(<Home />);
 

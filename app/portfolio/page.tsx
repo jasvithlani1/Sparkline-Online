@@ -34,11 +34,14 @@ export default function PortfolioPage() {
       </section>
 
       {/* Projects */}
-      <section className="py-10 sm:py-12 md:py-14">
+      <section
+        data-testid="portfolio-projects-section"
+        className="pt-10 pb-0 sm:pt-12 sm:pb-0 md:pt-14 md:pb-2"
+      >
         <ProjectList />
       </section>
 
-      <Footer />
+      <Footer spacing="compactTop" />
     </main>
   );
 }

@@ -105,13 +105,25 @@ function SocialIcon({ name }: { name: string }) {
   }
 }
 
-export function Footer() {
+type FooterProps = {
+  spacing?: "default" | "compactTop";
+};
+
+export function Footer({ spacing = "default" }: FooterProps = {}) {
+  const contentSpacingClass =
+    spacing === "compactTop"
+      ? "pt-8 pb-20 sm:pt-10 sm:pb-24 md:pt-12 md:pb-28 lg:pt-14 lg:pb-32"
+      : "pt-16 pb-20 sm:pt-20 sm:pb-24 md:pt-24 md:pb-28 lg:pt-[120px] lg:pb-32";
+
   return (
     <footer
       id="contact-us"
       className='relative overflow-hidden bg-[oklch(15.6%_0.042_266.4)] text-white [font-family:"Arial",system-ui,sans-serif]'
     >
-      <div className="mx-auto flex max-w-[1440px] flex-col px-[30px] pt-16 pb-20 sm:pt-20 sm:pb-24 md:pt-24 md:pb-28 lg:pt-[120px] lg:pb-32">
+      <div
+        data-testid="footer-content"
+        className={`mx-auto flex max-w-[1440px] flex-col px-[30px] ${contentSpacingClass}`}
+      >
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-[164px]">
           <div className="w-full max-w-[320px] shrink-0">
             <Image

@@ -268,6 +268,7 @@ export default async function ServiceDetailPage({
       {(detail as { faq?: readonly { id: string; question: string; answer: string }[] }).faq ? (
         <Faq
           items={(detail as { faq: readonly { id: string; question: string; answer: string }[] }).faq}
+          spacing="compactTop"
         />
       ) : null}
 

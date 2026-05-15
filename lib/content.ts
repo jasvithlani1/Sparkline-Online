@@ -905,7 +905,7 @@ export const serviceDetails = {
 export type ServiceDetailSlug = keyof typeof serviceDetails;
 
 export const faqSection = {
-  eyebrow: "FAQ",
+  eyebrow: "Frequently Asked Questions",
   lines: [
     "Answers to the questions we hear most from founders, marketers, and teams considering working with us.",
   ],
@@ -1337,7 +1337,7 @@ export const footerContent = {
   company: [
     { label: "Home", href: "/" },
     { label: "About Us", href: "#about-us" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Frequently Asked Questions", href: "#faq" },
   ],
   getInTouchHeading: "Get in Touch",
   getInTouch: [

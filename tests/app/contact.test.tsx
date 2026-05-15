@@ -105,4 +105,22 @@ describe("Contact page", () => {
       expect(link).toHaveAttribute("href", "/about");
     });
   });
+
+  it("keeps the contact content close to the footer", () => {
+    render(<ContactPage />);
+
+    const contactSection = screen.getByTestId("contact-page-section");
+    const footerContent = screen.getByTestId("footer-content");
+
+    expect(contactSection).toHaveClass("pt-32");
+    expect(contactSection).toHaveClass("pb-0");
+    expect(contactSection).toHaveClass("sm:pt-36");
+    expect(contactSection).toHaveClass("sm:pb-0");
+    expect(contactSection).toHaveClass("md:pt-40");
+    expect(contactSection).toHaveClass("md:pb-2");
+    expect(footerContent).toHaveClass("pt-8");
+    expect(footerContent).toHaveClass("sm:pt-10");
+    expect(footerContent).toHaveClass("md:pt-12");
+    expect(footerContent).toHaveClass("lg:pt-14");
+  });
 });

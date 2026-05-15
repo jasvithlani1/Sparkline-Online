@@ -33,7 +33,7 @@ export default function ServicesPage() {
       </section>
 
       <OurServices />
-      <Faq />
+      <Faq spacing="compactTop" />
       <Footer />
     </main>
   );

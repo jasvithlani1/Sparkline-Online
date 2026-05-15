@@ -7,7 +7,7 @@ export function LogoGrid() {
   return (
     <section
       data-testid="trusted-by-section"
-      className="pt-4 pb-10 sm:pt-6 sm:pb-12 md:pt-8 md:pb-14 lg:pt-10 lg:pb-16"
+      className="pt-0 pb-4 sm:pt-2 sm:pb-5 md:pt-3 md:pb-6 lg:pt-4 lg:pb-8"
     >
       <div className="mx-auto flex max-w-[1208px] flex-col items-center gap-12 px-5 sm:gap-14 sm:px-6 md:gap-16 md:px-8">
         <SectionHeading eyebrow={trustedBy.eyebrow} lines={trustedBy.lines} tone="dark" />

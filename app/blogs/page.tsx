@@ -34,11 +34,14 @@ export default function BlogsPage() {
       </section>
 
       {/* Blog posts */}
-      <section className="py-10 sm:py-12 md:py-14">
+      <section
+        data-testid="blog-posts-section"
+        className="pt-10 pb-0 sm:pt-12 sm:pb-0 md:pt-14 md:pb-2"
+      >
         <BlogList />
       </section>
 
-      <Footer />
+      <Footer spacing="compactTop" />
     </main>
   );
 }

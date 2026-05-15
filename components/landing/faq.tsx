@@ -9,21 +9,27 @@ type FaqProps = {
   eyebrow?: string;
   lines?: readonly string[];
   items?: readonly FaqItem[];
+  spacing?: "default" | "compactTop";
 };
 
 export function Faq({
   eyebrow = faqSection.eyebrow,
   lines = faqSection.lines,
   items = faqSection.items,
+  spacing = "default",
 }: FaqProps = {}) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
   const subline = lines.join(" ").replace(/\s+/g, " ").trim();
+  const spacingClass =
+    spacing === "compactTop"
+      ? "pt-0 pb-10 sm:pt-0 sm:pb-12 md:pt-0 md:pb-14 lg:pt-0 lg:pb-16"
+      : "py-10 sm:py-12 md:py-14 lg:py-16";
 
   return (
     <section
       id="faq"
       data-testid="faq-section"
-      className="py-10 sm:py-12 md:py-14 lg:py-16"
+      className={spacingClass}
     >
       <div className="mx-auto grid max-w-[1208px] grid-cols-1 gap-10 px-5 sm:px-6 md:gap-12 md:px-8 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div className="flex flex-col gap-5 lg:sticky lg:top-28 lg:self-start lg:gap-6">
