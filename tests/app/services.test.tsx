@@ -19,10 +19,16 @@ vi.mock("next/image", () => ({
 
 describe("Services pages", () => {
   it("moves the services FAQ section upward", () => {
-    render(<ServicesPage />);
+    const { container } = render(<ServicesPage />);
 
+    const heroVideo = container.querySelector('video');
     const faqSection = screen.getByTestId("faq-section");
 
+    expect(heroVideo).toHaveClass("top-0");
+    expect(heroVideo).toHaveClass("h-[76%]");
+    expect(heroVideo).toHaveClass("translate-y-0");
+    expect(heroVideo).toHaveClass("md:inset-0");
+    expect(heroVideo).toHaveClass("md:h-[110%]");
     expect(faqSection).toHaveClass("pt-0");
     expect(faqSection).toHaveClass("sm:pt-0");
     expect(faqSection).toHaveClass("md:pt-0");

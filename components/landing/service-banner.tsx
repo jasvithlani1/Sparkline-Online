@@ -23,22 +23,6 @@ export function ServiceBanner() {
             <ServiceOptionsToggle />
           </div>
         </div>
-        <div
-          data-testid="service-submarine-frame"
-          className="pointer-events-none relative ml-auto mr-[calc((100vw-100%)/-2-4rem)] -mt-[10rem] h-[220px] w-full max-w-[484px] translate-x-6 overflow-hidden sm:-mt-[13rem] sm:h-[320px] sm:max-w-[640px] sm:translate-x-10 md:-mt-[19.5rem] md:h-[460px] md:max-w-[820px] md:translate-x-16 lg:-mt-[24.5rem] lg:h-[532px] lg:max-w-[945px] lg:translate-x-24"
-        >
-          <video
-            data-testid="service-submarine-video"
-            src="/videos/submarine-bubbles.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-            className="h-full w-full object-cover object-left motion-reduce:hidden"
-          />
-        </div>
       </div>
     </section>
   );

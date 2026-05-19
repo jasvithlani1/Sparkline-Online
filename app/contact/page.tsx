@@ -55,7 +55,7 @@ export default function ContactPage() {
           playsInline
           preload="metadata"
           poster=""
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.28] mix-blend-screen"
+          className="absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover opacity-[0.28] mix-blend-screen md:inset-0 md:h-full"
         >
           <source src="/videos/contact-water-light.webm" type="video/webm" />
           <source src="/videos/contact-water-light.mp4" type="video/mp4" />

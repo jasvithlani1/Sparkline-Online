@@ -107,11 +107,17 @@ describe("Contact page", () => {
   });
 
   it("keeps the contact content close to the footer", () => {
-    render(<ContactPage />);
+    const { container } = render(<ContactPage />);
 
+    const backgroundVideo = container.querySelector('video');
     const contactSection = screen.getByTestId("contact-page-section");
     const footerContent = screen.getByTestId("footer-content");
 
+    expect(backgroundVideo).toHaveClass("top-0");
+    expect(backgroundVideo).toHaveClass("h-[76%]");
+    expect(backgroundVideo).toHaveClass("translate-y-0");
+    expect(backgroundVideo).toHaveClass("md:inset-0");
+    expect(backgroundVideo).toHaveClass("md:h-full");
     expect(contactSection).toHaveClass("pt-32");
     expect(contactSection).toHaveClass("pb-0");
     expect(contactSection).toHaveClass("sm:pt-36");

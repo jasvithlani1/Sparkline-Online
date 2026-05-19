@@ -138,42 +138,11 @@ describe("Home page", () => {
     );
   });
 
-  it("keeps the service banner submarine oversized with a decorative bubble overlay", () => {
+  it("does not render the temporary bottom-right service video overlay", () => {
     render(<Home />);
 
-    const submarineFrame = screen.getByTestId("service-submarine-frame");
-    const submarineImage = within(submarineFrame).getByAltText("");
-    const bubbleLayer = screen.getByTestId("service-submarine-bubbles");
-    const bubbles = screen.getAllByTestId("service-submarine-bubble");
-
-    expect(submarineFrame).toHaveClass("max-w-[340px]");
-    expect(submarineFrame).toHaveClass("ml-auto");
-    expect(submarineFrame).toHaveClass("mr-[calc((100vw-100%)/-2)]");
-    expect(submarineFrame).toHaveClass("-mt-[6rem]");
-    expect(submarineFrame).toHaveClass("h-[154px]");
-    expect(submarineFrame).toHaveClass("sm:max-w-[440px]");
-    expect(submarineFrame).toHaveClass("sm:h-[220px]");
-    expect(submarineFrame).toHaveClass("sm:-mt-[8rem]");
-    expect(submarineFrame).toHaveClass("md:max-w-[560px]");
-    expect(submarineFrame).toHaveClass("md:h-[316px]");
-    expect(submarineFrame).toHaveClass("md:-mt-[12rem]");
-    expect(submarineFrame).toHaveClass("lg:max-w-[650px]");
-    expect(submarineFrame).toHaveClass("lg:h-[367px]");
-    expect(submarineFrame).toHaveClass("lg:-mt-[15.5rem]");
-    expect(submarineFrame).toHaveClass("group/service-submarine");
-    expect(submarineImage).toHaveClass("motion-reduce:transform-none");
-    expect(submarineImage).toHaveClass("motion-safe:transition-transform");
-    expect(submarineImage).toHaveClass("motion-safe:duration-500");
-    expect(submarineImage).toHaveClass("motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]");
-    expect(submarineImage).toHaveClass("group-hover/service-submarine:translate-x-3");
-    expect(submarineImage).toHaveClass("group-hover/service-submarine:-translate-y-2");
-    expect(submarineImage).toHaveClass("object-right");
-    expect(bubbleLayer).toHaveClass("pointer-events-none");
-    expect(bubbleLayer).toHaveClass("absolute");
-    expect(bubbleLayer).toHaveClass("inset-0");
-    expect(bubbleLayer).toHaveClass("motion-reduce:hidden");
-    expect(bubbles).toHaveLength(8);
-    expect(bubbles[0]).toHaveClass("service-submarine-bubble");
+    expect(screen.queryByTestId("service-submarine-frame")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("service-submarine-video")).not.toBeInTheDocument();
   });
 
   it("renders trusted-by logos as two full-width marquee rows with opposite directions", () => {
@@ -491,6 +460,11 @@ describe("Home page", () => {
     expect(heroContent).toHaveClass("sm:-translate-y-12");
     expect(heroContent).toHaveClass("md:-translate-y-16");
     expect(heroContent).toHaveClass("lg:-translate-y-20");
+    expect(heroVideo).toHaveClass("top-0");
+    expect(heroVideo).toHaveClass("h-[76%]");
+    expect(heroVideo).toHaveClass("translate-y-0");
+    expect(heroVideo).toHaveClass("md:inset-0");
+    expect(heroVideo).toHaveClass("md:h-full");
     expect(heroVideo).toHaveAttribute("autoplay");
     expect(heroVideo).toHaveAttribute("loop");
     expect(heroVideo).toHaveAttribute("playsinline");

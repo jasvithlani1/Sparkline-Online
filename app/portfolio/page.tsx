@@ -19,7 +19,7 @@ export default function PortfolioPage() {
           loop
           muted
           playsInline
-          className="pointer-events-none absolute inset-0 h-[110%] w-full object-cover object-top"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover object-top md:inset-0 md:h-[110%]"
         >
           <source src="/videos/portfolio-hero.webm" type="video/webm" />
           <source src="/videos/portfolio-hero.mp4" type="video/mp4" />

@@ -18,11 +18,17 @@ vi.mock("next/image", () => ({
 
 describe("Portfolio page", () => {
   it("keeps the project list close to the footer", () => {
-    render(<PortfolioPage />);
+    const { container } = render(<PortfolioPage />);
 
+    const heroVideo = container.querySelector('video');
     const projectsSection = screen.getByTestId("portfolio-projects-section");
     const footerContent = screen.getByTestId("footer-content");
 
+    expect(heroVideo).toHaveClass("top-0");
+    expect(heroVideo).toHaveClass("h-[76%]");
+    expect(heroVideo).toHaveClass("translate-y-0");
+    expect(heroVideo).toHaveClass("md:inset-0");
+    expect(heroVideo).toHaveClass("md:h-[110%]");
     expect(projectsSection).toHaveClass("pt-10");
     expect(projectsSection).toHaveClass("pb-0");
     expect(projectsSection).toHaveClass("sm:pt-12");

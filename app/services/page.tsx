@@ -19,7 +19,7 @@ export default function ServicesPage() {
           loop
           muted
           playsInline
-          className="pointer-events-none absolute inset-0 h-[110%] w-full object-cover object-center"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover object-center md:inset-0 md:h-[110%]"
         >
           <source src="/videos/services-hero-v2.mp4" type="video/mp4" />
         </video>
