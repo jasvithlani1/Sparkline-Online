@@ -52,18 +52,16 @@ export const ourServices = {
   intro: [
     "SPARKLINE MARKETING FIRM delivers strategic and creative solutions designed to help businesses grow with confidence in a competitive digital landscape. Our services are built to create a strong, consistent brand presence while supporting long-term business goals through purposeful execution and measurable impact.",
     "From Digital Marketing and Brand Strategy to Website Design & Development, we help brands build visibility, define their market position, and create meaningful customer experiences. Our team focuses on developing tailored strategies and high-performing digital platforms that strengthen credibility and drive engagement.",
-    "We also specialise in Branding & Design, Social Media, and Content Marketing to ensure your business communicates with clarity and consistency across every touchpoint. Whether you need a stronger visual identity, a more engaging online presence, or content that connects with the right audience, SPARKLINE MARKETING FIRM provides integrated solutions that bring strategy, creativity, and performance together to help your brand stand out and grow with lasting impact.",
+    "We also specialise in Branding & Design, Social Media Management, and Content Marketing to ensure your business communicates with clarity and consistency across every touchpoint. Whether you need a stronger visual identity, a more engaging online presence, or content that connects with the right audience, SPARKLINE MARKETING FIRM provides integrated solutions that bring strategy, creativity, and performance together to help your brand stand out and grow with lasting impact.",
   ],
   cards: [
     {
       id: "digital-marketing",
       title: "Digital\nMarketing",
       items: [
-        "Search Marketing",
-        "Paid Advertising",
-        "Email Campaigns",
-        "Lead Generation",
-        "Conversion Optimisation",
+        "SEO & Search Marketing",
+        "Customer Acquisition",
+        "Conversion Optimization",
         "Marketing Analytics",
         "Audience Targeting",
         "Campaign Strategy",
@@ -75,15 +73,14 @@ export const ourServices = {
       id: "website-design-development",
       title: "Website Design\n& Development",
       items: [
-        "UX Design",
-        "UI Design",
+        "UX & UI Design",
         "Responsive Design",
         "Custom Development",
         "Landing Pages",
         "eCommerce Development",
         "CMS Integration",
         "Website Maintenance",
-        "Performance Optimisation",
+        "Performance Optimization",
         "Website Redesign",
       ],
     },
@@ -93,12 +90,11 @@ export const ourServices = {
       items: [
         "Website Copy",
         "Blog Writing",
-        "Social Content",
-        "Ad Copy",
+        "Email Campaigns",
         "Brand Messaging",
         "Video Scripts",
-        "Email Content",
-        "SEO Content",
+        "Email Marketing & Campaigns",
+        "Seo Content",
         "Creative Copy",
         "Content Strategy",
       ],
@@ -107,13 +103,13 @@ export const ourServices = {
       id: "social-media-management",
       title: "Social Media\nManagement",
       items: [
-        "Content Planning",
+        "Strategic Content Planning",
         "Post Scheduling",
         "Audience Engagement",
-        "Community Management",
         "Social Campaigns",
-        "Profile Optimisation",
-        "Hashtag Strategy",
+        "Community Management",
+        "Social Content",
+        "Profile Optimization",
         "Performance Tracking",
         "Trend Monitoring",
         "Monthly Reporting",
@@ -124,15 +120,13 @@ export const ourServices = {
       title: "Branding\n& Design",
       items: [
         "Logo Design",
-        "Visual Identity",
-        "Brand Guidelines",
+        "Brand Identity System",
         "Creative Direction",
         "Typography Systems",
-        "Colour Palette",
+        "Color Pallettes",
         "Brand Collateral",
         "Design Systems",
         "Marketing Assets",
-        "Visual Consistency",
       ],
     },
     {
@@ -145,8 +139,7 @@ export const ourServices = {
         "Competitive Analysis",
         "Messaging Framework",
         "Voice Development",
-        "Growth Planning",
-        "Go-To-Market",
+        "Go-To-Marketing",
         "Campaign Direction",
         "Strategic Planning",
       ],
@@ -907,38 +900,38 @@ export type ServiceDetailSlug = keyof typeof serviceDetails;
 export const faqSection = {
   eyebrow: "Frequently Asked Questions",
   lines: [
-    "Answers to the questions we hear most from founders, marketers, and teams considering working with us.",
+    "Common questions from businesses looking to grow their brand and digital presence.",
   ],
   items: [
     {
-      id: "services",
-      question: "What services does SPARKLINE MARKETING FIRM offer?",
+      id: "timeline",
+      question: "How long does it take to complete a project with Sparkline Marketing Firm?",
       answer:
-        "SPARKLINE MARKETING FIRM offers Digital Marketing, Brand Strategy, Website Design & Development, Branding & Design, Social Media, and Content Marketing to help businesses grow their visibility, strengthen their brand, and achieve measurable results.",
+        "Every project is unique, and timelines depend on the scope and complexity of the work. Whether it’s brand identity, website design, or development, we maintain complete transparency from the start and work closely with you to deliver high-quality, SEO-friendly results without unnecessary delays.",
     },
     {
       id: "growth",
-      question: "How can SPARKLINE MARKETING FIRM help my business grow?",
+      question: "How does Sparkline Marketing Firm measure the success of its work?",
       answer:
-        "We help businesses grow by creating strategic marketing solutions that improve brand positioning, attract the right audience, increase engagement, and support long-term business success across digital platforms.",
+        "Success looks different for every business and every project. Before we start any work we take the time to understand what success means specifically for you, whether that is increased organic traffic, stronger brand recognition, higher engagement or a more powerful digital presence. Everything we build is aligned to those goals so we are always working toward outcomes that actually matter to your business.",
     },
     {
       id: "customised",
-      question: "Do you provide customised marketing solutions for different industries?",
+      question: "Do I need to invest in all of your services or can I choose just one?",
       answer:
-        "Yes, SPARKLINE MARKETING FIRM develops tailored strategies based on your business goals, target audience, and industry requirements to ensure every solution is relevant, effective, and results-driven.",
+        "You are absolutely free to choose the services that make the most sense for your business right now. Some clients come to us for a full brand transformation while others need a focused content marketing strategy or a new website. Whatever stage your business is at we will work with you to identify exactly what you need and build around that.",
     },
     {
       id: "brand-and-web",
-      question: "Can you handle both branding and website development together?",
+      question: "What does the onboarding process look like when starting with Sparkline Marketing Firm?",
       answer:
-        "Absolutely. We provide integrated branding and website design solutions so your business can maintain a consistent identity, professional appearance, and strong digital presence across every touchpoint.",
+        "Getting started with Sparkline is a straightforward and collaborative process. It begins with an initial discovery call where we talk through your goals, your vision and the next steps for your project. From there we send over a simple onboarding form to gather everything we need to hit the ground running. Our onboarding process typically takes anywhere from one week to a month depending on the scope of your project. We use this time to make sure everything is set up correctly, cleaned up and fully aligned with your brand before we start building. Think of it as laying the right foundation so that everything we deliver from that point forward is done properly and to the highest standard.",
     },
     {
       id: "why-us",
-      question: "Why should I choose SPARKLINE MARKETING FIRM?",
+      question: "Does Sparkline Marketing Firm offer ongoing support after a project is completed?",
       answer:
-        "SPARKLINE MARKETING FIRM combines strategy, creativity, and execution to deliver professional marketing solutions that help businesses stand out, connect with customers, and grow with confidence.",
+        "Yes absolutely. Great marketing is not a one-time event, it is an ongoing process that evolves as your business grows. Many of our clients choose to continue working with Sparkline long after their initial project is complete through ongoing content marketing, social media management, website maintenance and brand strategy support. We love building long term relationships with our clients because that is where we do our best work, when we truly know your brand inside and out.",
     },
   ],
 } as const;
@@ -947,32 +940,32 @@ export const serviceOptions = [
   {
     id: "strategy",
     title: "Digital Marketing",
-    description: "Drive targeted traffic, boost visibility, and generate leads strategically.",
+    description: "Increase visibility, attract traffic, and drive measurable business growth.",
   },
   {
     id: "story-voice",
     title: "Website Design & Development",
-    description: "Build modern, user-focused websites that convert visitors into customers.",
+    description: "Build custom websites that turn visitors into loyal customers.",
   },
   {
     id: "design",
     title: "Content Marketing",
-    description: "Create compelling content that connects and drives action.",
+    description: "Create compelling content that builds awareness and drives organic growth.",
   },
   {
     id: "development",
     title: "Social Media Management",
-    description: "Strengthen your presence through strategic social media.",
+    description: "Elevate your brand, boost engagement, and grow across social platforms.",
   },
   {
     id: "media-video",
     title: "Branding & Design",
-    description: "Build a powerful brand identity with creative consistency.",
+    description: "Create bold branding that builds trust and makes your business stand out.",
   },
   {
     id: "brand-strategy",
-    title: "Brand Design",
-    description: "Create clear brand direction for lasting growth.",
+    title: "Brand Strategy",
+    description: "Refresh your brand with standout visuals, logos, and design elements.",
   },
 ] as const;
 

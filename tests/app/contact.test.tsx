@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import ContactPage, { buildContactMailtoUrl } from "@/app/contact/page";
 
 vi.mock("next/image", () => ({
@@ -94,8 +94,13 @@ describe("Contact page", () => {
       expect(link).toHaveAttribute("href", "mailto:info@sparklinemarketingfirm.com");
     });
     expect(
-      screen.getAllByText(/2080 One White Oak Lane, Cumming, GA 30041/i),
+      screen.getAllByText(/524 Sawnee Village Boulevard, Cumming, Georgia 30040/i),
     ).toHaveLength(2);
+    expect(
+      within(screen.getByRole("contentinfo")).getByRole("link", {
+        name: /^524 sawnee village boulevard, cumming, georgia 30040$/i,
+      }),
+    ).toBeInTheDocument();
   });
 
   it("links About Us navigation items to the About page", () => {

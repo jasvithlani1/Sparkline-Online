@@ -14,11 +14,13 @@ const ashlanBio = [
 ] as const;
 
 const rubyBio = [
-  "Hi, I am Ruby. I graduated from the University of Alabama with a degree in Marketing, and I started my career as a Marketing Specialist working on things like events, email marketing, and traditional marketing while also helping the company rebrand. That role gave me a real appreciation for how much thought goes into the way a business shows up and how people actually connect with it.",
-  "I then co-founded this company with my sister, Ashlan, because we wanted to build something that felt creative but still intentional, and genuinely helpful for the businesses we work with. We are big on making sure brands do not just look good, but actually feel like the people behind them.",
-  "What I love about marketing is that it never gets repetitive. Every business has its own personality, its own challenges, and its own way of doing things. Figuring that out is my favorite part. I enjoy helping shape a brand's voice, cleaning up how things show up online, and pulling all the moving pieces together so it feels more clear and cohesive.",
-  "Outside of work, I am usually traveling, exploring new places, or just finding inspiration in everyday life. I have always been drawn to creative environments, and that naturally spills into how I think about branding and marketing too.",
-  "At the end of the day, we care a lot about doing things the right way. We like working with people who are proud of what they are building and want their brand to actually reflect that. If we can help bring more clarity and confidence to that process, that is exactly what we are here for.",
+  "I have been to over 30 countries. I have stood in the Galapagos Islands and watched wildlife that exists nowhere else on earth. I have gotten lost in the streets of Ecuador and found myself completely absorbed in how people live, what they value and how they tell their story. That curiosity, the kind that makes you want to understand a place from the inside out, is exactly how I approach every brand I work with.",
+  "I studied Marketing at the University of Alabama and started my career as a Marketing Specialist working across events, email marketing and traditional marketing while helping a company navigate a full rebrand. That experience taught me how much thought goes into the way a business shows up and how people actually connect with it. I did not just learn marketing from a textbook. I learned it by being in the room where the decisions were made.",
+  "One of the projects that has meant the most to me was working alongside a pastor and his church in Bermuda. We built their website from the ground up and worked hard to capture the bright, colorful culture of the island and the warm, inviting atmosphere of their community. That project reminded me why this work matters. When you get it right, a brand does not just look good. It feels like the people behind it.",
+  "I cofounded Sparkline Marketing Firm with my sister Ashlan and honestly it is one of the things I am most proud of. We come from a big, close knit family and that shows up in everything we do. We push each other, challenge each other and keep each other sharp. Building something together with your person is a different kind of pride and I do not take it lightly.",
+  "What I love most about marketing is that it never gets repetitive. Every business has its own personality, its own challenges and its own way of seeing the world. My job is to figure that out and help it come through clearly. To shape the voice, clean up how things show up online and pull all the moving pieces together until it feels cohesive and true.",
+  "If you work with me you will get someone who is genuinely curious about your business, your story and the people you serve. Someone who has learned from traveling the world that the most powerful thing any brand can do is make people feel like they belong.",
+  "That is what I am here to help you build.",
 ] as const;
 
 const founders = [
@@ -28,9 +30,10 @@ const founders = [
     bio: ashlanBio,
     closing: "Carefully. Patiently. For the long run.",
     imageSide: "left",
+    imageClassName: "scale-[1.08]",
   },
   {
-    name: "Ruby",
+    name: "Ruby – Ruby Leazer",
     portrait: "/images/about-second-founder.jpeg",
     bio: rubyBio,
     imageSide: "right",
@@ -70,7 +73,9 @@ function FounderProfile({
               width={1600}
               height={1600}
               sizes="(min-width: 1024px) 35vw, (min-width: 768px) 42vw, 100vw"
-              className="aspect-[4/5] h-auto w-full object-cover object-center"
+              className={`aspect-[4/5] h-auto w-full object-cover object-center ${
+                "imageClassName" in founder ? founder.imageClassName : ""
+              }`}
               priority={index === 0}
             />
           </div>
@@ -117,10 +122,19 @@ export default function AboutPage() {
           </h1>
           <div className="mt-8 grid gap-6 text-pretty text-[17px] leading-[1.75] text-white/76 sm:text-[18px] md:grid-cols-2 md:gap-10 md:text-[19px] md:leading-[1.8]">
             <p>
-              <strong className="font-semibold text-white">{BRAND}</strong> was built for business owners who want marketing that feels intentional, human, and built to last. We combine strategy, creative direction, design, content, and digital execution so every touchpoint works together.
+              <strong className="font-semibold text-white">{BRAND}</strong> was built for business owners who want marketing that feels intentional, human and built to last. We help service based businesses build a clear, confident online presence that actually drives growth, not just noise.
             </p>
             <p>
-              We built Sparkline Marketing Firm with a long term mindset. We are not chasing quick wins or treating businesses like numbers in a pipeline. We work closely with real people running real companies, helping them become clearer, more visible, and more proud of what they are building.
+              We work with brands that offer real value but struggle to communicate it online. Our role is to bring clarity to the message, structure to the strategy and consistency to how businesses show up. Because when those three things are aligned, everything changes.
+            </p>
+            <p>
+              Sparkline was created after years of working inside a growing business and seeing firsthand how easily strong work gets overlooked when marketing lacks clarity. The problem was never the service or the effort. It was the message. Businesses were doing everything right but showing up online without direction, consistency or confidence.
+            </p>
+            <p>
+              From that experience we learned that real growth does not come from chasing trends or jumping into ads too early. It comes from having a clear message, a strategy that fits the stage of your business and a presence that people can trust.
+            </p>
+            <p>
+              Today Sparkline exists to help businesses grow in a way that feels aligned, intentional and sustainable. We are based in Atlanta, Georgia and proud to work with businesses across the United States and beyond, including clients as far as Bermuda. Wherever you are building, we are here to help you show up with clarity, consistency and confidence.
             </p>
           </div>
         </div>
@@ -147,6 +161,49 @@ export default function AboutPage() {
               index={index}
             />
           ))}
+        </div>
+      </section>
+
+      <section
+        data-testid="about-founders-moment"
+        className="px-5 pt-8 pb-10 sm:px-6 sm:pt-10 sm:pb-12 md:px-8 md:pt-12 md:pb-14"
+      >
+        <div className="mx-auto max-w-[1208px]">
+          <div
+            data-testid="about-founders-moment-grid"
+            className="grid gap-5 md:grid-cols-2 md:gap-6"
+          >
+            <figure className="space-y-4">
+              <div className="overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
+                <Image
+                  src="/images/about-founders-first.png"
+                  alt="Outdoor Sparkline founder moment"
+                  width={4032}
+                  height={3024}
+                  sizes="(min-width: 1024px) 590px, 100vw"
+                  className="aspect-[4/3] h-auto w-full object-cover object-center"
+                />
+              </div>
+              <figcaption className="text-center text-[15px] font-medium leading-[1.5] text-white/76 sm:text-[16px]">
+                Chief Morale Officers
+              </figcaption>
+            </figure>
+            <figure className="space-y-4">
+              <div className="overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
+                <Image
+                  src="/images/about-founders-birthday.jpg"
+                  alt="Ashlan and Ruby Leazer celebrating together"
+                  width={2048}
+                  height={1365}
+                  sizes="(min-width: 1024px) 590px, 100vw"
+                  className="aspect-[4/3] h-auto w-full object-cover object-center"
+                />
+              </div>
+              <figcaption className="text-center text-[15px] font-medium leading-[1.5] text-white/76 sm:text-[16px]">
+                Built Together, With Heart
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 

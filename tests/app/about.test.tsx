@@ -22,11 +22,16 @@ describe("About page", () => {
 
     const companyIntro = screen.getByTestId("about-company-intro");
     const foundersSection = screen.getByTestId("about-founders-section");
+    const foundersMoment = screen.getByTestId("about-founders-moment");
     const founderSections = screen.getAllByTestId("about-founder-profile");
     const footerContent = screen.getByTestId("footer-content");
 
     expect(companyIntro).toHaveTextContent(/where strategy meets care/i);
-    expect(companyIntro).toHaveTextContent(/we built sparkline marketing firm/i);
+    expect(companyIntro).toHaveTextContent(/service based businesses build a clear, confident online presence/i);
+    expect(companyIntro).toHaveTextContent(/bring clarity to the message, structure to the strategy/i);
+    expect(companyIntro).toHaveTextContent(/sparkline was created after years of working inside a growing business/i);
+    expect(companyIntro).toHaveTextContent(/clear message, a strategy that fits the stage of your business/i);
+    expect(companyIntro).toHaveTextContent(/clients as far as bermuda/i);
     expect(within(companyIntro).queryByRole("img")).not.toBeInTheDocument();
 
     expect(founderSections).toHaveLength(2);
@@ -34,6 +39,9 @@ describe("About page", () => {
     expect(
       within(founderSections[0]).getByRole("img", { name: /ashlan leazer/i }),
     ).toHaveAttribute("src", "/images/about-ashlan-leazer.jpeg");
+    expect(
+      within(founderSections[0]).getByRole("img", { name: /ashlan leazer/i }),
+    ).toHaveClass("scale-[1.08]");
     expect(
       within(founderSections[0]).getByRole("heading", { name: /ashlan leazer/i }),
     ).toBeInTheDocument();
@@ -45,21 +53,39 @@ describe("About page", () => {
     expect(founderSections[0]).toHaveTextContent(/carefully\. patiently\. for the long run\./i);
 
     expect(
-      within(founderSections[1]).getByRole("img", { name: /ruby/i }),
+      within(founderSections[1]).getByRole("img", { name: /ruby – ruby leazer/i }),
     ).toHaveAttribute("src", "/images/about-second-founder.jpeg");
     expect(
-      within(founderSections[1]).getByRole("heading", { name: /ruby/i }),
+      within(founderSections[1]).getByRole("heading", { name: /ruby – ruby leazer/i }),
     ).toBeInTheDocument();
     expect(within(founderSections[1]).queryByText(/^co-founder$/i)).not.toBeInTheDocument();
     expect(within(founderSections[1]).getByText(/02\s*\/\s*co-founder/i)).toBeInTheDocument();
+    expect(founderSections[1]).toHaveTextContent(/over 30 countries/i);
+    expect(founderSections[1]).toHaveTextContent(/galapagos islands/i);
     expect(founderSections[1]).toHaveTextContent(/university of alabama/i);
     expect(founderSections[1]).toHaveTextContent(/marketing specialist/i);
-    expect(founderSections[1]).toHaveTextContent(/co-founded this company with my sister, ashlan/i);
-    expect(founderSections[1]).toHaveTextContent(/clarity and confidence/i);
+    expect(founderSections[1]).toHaveTextContent(/pastor and his church in bermuda/i);
+    expect(founderSections[1]).toHaveTextContent(/cofounded sparkline marketing firm with my sister ashlan/i);
+    expect(founderSections[1]).toHaveTextContent(/cohesive and true/i);
+    expect(founderSections[1]).toHaveTextContent(/genuinely curious about your business/i);
+    expect(founderSections[1]).toHaveTextContent(/make people feel like they belong/i);
+    expect(founderSections[1]).toHaveTextContent(/that is what i am here to help you build/i);
 
     expect(foundersSection).toHaveClass("pb-0");
     expect(foundersSection).toHaveClass("sm:pb-0");
     expect(foundersSection).toHaveClass("md:pb-2");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /outdoor sparkline founder moment/i }),
+    ).toHaveAttribute("src", "/images/about-founders-first.png");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /outdoor sparkline founder moment/i }),
+    ).not.toHaveClass("rotate-90");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /ashlan and ruby leazer celebrating together/i }),
+    ).toHaveAttribute("src", "/images/about-founders-birthday.jpg");
+    expect(screen.getByTestId("about-founders-moment-grid")).toHaveClass("md:grid-cols-2");
+    expect(foundersMoment).toHaveTextContent(/chief morale officers/i);
+    expect(foundersMoment).toHaveTextContent(/built together, with heart/i);
     expect(footerContent).toHaveClass("pt-8");
     expect(footerContent).toHaveClass("sm:pt-10");
     expect(footerContent).toHaveClass("md:pt-12");

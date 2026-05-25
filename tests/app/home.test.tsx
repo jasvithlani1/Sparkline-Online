@@ -76,9 +76,9 @@ describe("Home page", () => {
     const workGallerySection = screen.getByTestId("work-gallery-section");
 
     expect(
-      screen.getByRole("heading", { name: /creative marketing/i, level: 1 }),
+      screen.getByRole("heading", { name: /marketing supercharged/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getByTestId("hero-second-line")).toHaveTextContent(/supercharged/i);
+    expect(screen.getByTestId("hero-second-line")).toHaveTextContent(/^Marketing Supercharged$/i);
     expect(screen.getByText(/how can we serve you\?/i)).toBeInTheDocument();
     expect(screen.getByText(/trusted by the bold/i)).toBeInTheDocument();
     expect(screen.getByText(/^shape the future\.$/i)).toBeInTheDocument();
@@ -272,19 +272,23 @@ describe("Home page", () => {
   it("renders the service options list and toggles the active service", () => {
     render(<Home />);
 
-    const strategyButton = screen.getByRole("button", { name: /^strategy$/i });
-    const developmentButton = screen.getByRole("button", { name: /^development$/i });
+    const digitalMarketingButton = screen.getByRole("button", { name: /^digital marketing$/i });
+    const websiteButton = screen.getByRole("button", {
+      name: /^website design & development$/i,
+    });
 
-    expect(strategyButton).toHaveAttribute("aria-pressed", "true");
+    expect(digitalMarketingButton).toHaveAttribute("aria-pressed", "true");
     expect(
-      screen.getByText(/Helping you with top notch strategy for GTM/i),
+      within(digitalMarketingButton).getByText(
+        /Increase visibility, attract traffic, and drive measurable business growth\./i,
+      ),
     ).toBeInTheDocument();
 
-    fireEvent.click(developmentButton);
+    fireEvent.click(websiteButton);
 
-    expect(developmentButton).toHaveAttribute("aria-pressed", "true");
+    expect(websiteButton).toHaveAttribute("aria-pressed", "true");
     expect(
-      screen.getByText(/Develop products, websites and manage them for you/i),
+      within(websiteButton).getByText(/Build custom websites that turn visitors into loyal customers\./i),
     ).toBeInTheDocument();
   });
 
@@ -294,10 +298,10 @@ describe("Home page", () => {
     const serviceHeading = screen.getByRole("heading", { name: /how can we serve you\?/i, level: 2 });
     const serviceFrame = serviceHeading.parentElement;
     const toggle = screen.getByTestId("service-options-toggle");
-    const strategyButton = screen.getByRole("button", { name: /^strategy$/i });
-    const iconWrapper = strategyButton.firstElementChild as HTMLElement;
-    const title = strategyButton.querySelector("span");
-    const description = strategyButton.querySelector("p");
+    const digitalMarketingButton = screen.getByRole("button", { name: /^digital marketing$/i });
+    const iconWrapper = digitalMarketingButton.firstElementChild as HTMLElement;
+    const title = digitalMarketingButton.querySelector("span");
+    const description = digitalMarketingButton.querySelector("p");
     const divider = toggle.firstElementChild as HTMLElement;
 
     expect(serviceFrame).toHaveClass("min-h-[280px]");
@@ -321,6 +325,44 @@ describe("Home page", () => {
     expect(description).toHaveClass("sm:text-[13px]");
     expect(description).toHaveClass("max-w-[26ch]");
     expect(description).toHaveClass("text-white");
+    expect(description).toHaveTextContent(
+      /Increase visibility, attract traffic, and drive measurable business growth\./i,
+    );
+
+    const websiteButton = screen.getByRole("button", { name: /^website design & development$/i });
+    fireEvent.click(websiteButton);
+    expect(websiteButton).toHaveAttribute("aria-pressed", "true");
+    expect(within(websiteButton).getByText(
+      /Build custom websites that turn visitors into loyal customers\./i,
+    )).toBeInTheDocument();
+
+    const contentMarketingButton = screen.getByRole("button", { name: /^content marketing$/i });
+    fireEvent.click(contentMarketingButton);
+    expect(contentMarketingButton).toHaveAttribute("aria-pressed", "true");
+    expect(within(contentMarketingButton).getByText(
+      /Create compelling content that builds awareness and drives organic growth\./i,
+    )).toBeInTheDocument();
+
+    const socialMediaButton = screen.getByRole("button", { name: /^social media management$/i });
+    fireEvent.click(socialMediaButton);
+    expect(socialMediaButton).toHaveAttribute("aria-pressed", "true");
+    expect(within(socialMediaButton).getByText(
+      /Elevate your brand, boost engagement, and grow across social platforms\./i,
+    )).toBeInTheDocument();
+
+    const brandingDesignButton = screen.getByRole("button", { name: /^branding & design$/i });
+    fireEvent.click(brandingDesignButton);
+    expect(brandingDesignButton).toHaveAttribute("aria-pressed", "true");
+    expect(within(brandingDesignButton).getByText(
+      /Create bold branding that builds trust and makes your business stand out\./i,
+    )).toBeInTheDocument();
+
+    const brandStrategyButton = screen.getByRole("button", { name: /^brand strategy$/i });
+    fireEvent.click(brandStrategyButton);
+    expect(brandStrategyButton).toHaveAttribute("aria-pressed", "true");
+    expect(within(brandStrategyButton).getByText(
+      /Refresh your brand with standout visuals, logos, and design elements\./i,
+    )).toBeInTheDocument();
   });
 
   it("gives the second hero line its own text box to avoid clipping", () => {
@@ -355,6 +397,12 @@ describe("Home page", () => {
     expect(heroHeading).toHaveClass("sm:text-[72px]");
     expect(heroHeading).toHaveClass("md:text-[88px]");
     expect(heroHeading).toHaveClass("lg:text-[96px]");
+    expect(heroHeading).toHaveClass("opacity-60");
+    expect(heroHeading).toHaveStyle({
+      fontFamily: '"Logotype", var(--font-cal-sans), Arial, Helvetica, sans-serif',
+      WebkitTextStroke: "1px rgba(255, 255, 255, 0.5)",
+      textShadow: "0 0 1px rgba(255, 255, 255, 0.5)",
+    });
 
     fireEvent.click(menuButton);
 
@@ -416,7 +464,11 @@ describe("Home page", () => {
       "href",
       "mailto:info@sparklinemarketingfirm.com",
     );
-    expect(within(footer).getByRole("link", { name: /^2080 one white oak lane, cumming, ga 30041$/i })).toBeInTheDocument();
+    expect(
+      within(footer).getByRole("link", {
+        name: /^524 sawnee village boulevard, cumming, georgia 30040$/i,
+      }),
+    ).toBeInTheDocument();
     expect(within(footer).getByRole("link", { name: /^instagram$/i })).toHaveAttribute(
       "href",
       "https://www.instagram.com/sparklinemarketingfirm",

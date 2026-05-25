@@ -170,7 +170,7 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <p className="mt-3 text-[16px] leading-7 text-white">
-                  2080 One White Oak Lane, Cumming, GA 30041
+                  524 Sawnee Village Boulevard, Cumming, Georgia 30040
                 </p>
               </div>
             </div>

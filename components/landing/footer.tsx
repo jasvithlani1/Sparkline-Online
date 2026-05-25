@@ -31,7 +31,7 @@ const footerColumns = [
     links: [
       { label: "(470) 841-2335", href: "tel:+14708412335" },
       { label: "info@sparklinemarketingfirm.com", href: "mailto:info@sparklinemarketingfirm.com" },
-      { label: "2080 One White Oak Lane, Cumming, GA 30041", href: "/contact" },
+      { label: "524 Sawnee Village Boulevard, Cumming, Georgia 30040", href: "/contact" },
     ],
   },
   {

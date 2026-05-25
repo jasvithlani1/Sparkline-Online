@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { ForceNewTabLinks } from "@/components/force-new-tab-links";
 import "./globals.css";
 
 const calSans = localFont({
@@ -21,11 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${calSans.variable} h-full antialiased`}>
-      <head>
-        <base target="_blank" />
-      </head>
       <body className="relative min-h-full w-full flex flex-col">
-        <ForceNewTabLinks />
         {children}
       </body>
     </html>
