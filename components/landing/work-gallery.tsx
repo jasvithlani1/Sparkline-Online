@@ -233,7 +233,7 @@ export function WorkGallery() {
                   data-testid={isClone ? undefined : "work-gallery-card"}
                   data-work-gallery-index={index % workGallery.projects.length}
                   aria-hidden={isClone}
-                  className="w-[min(80vw,880px)] shrink-0 overflow-hidden rounded-[32px] bg-[#0A1F57] px-4 py-4 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:rounded-[40px] sm:px-6 sm:py-6"
+                  className="w-[calc(100vw-2.5rem)] shrink-0 overflow-hidden rounded-[32px] bg-[#0A1F57] px-4 py-4 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:w-[min(80vw,880px)] sm:rounded-[40px] sm:px-6 sm:py-6"
                 >
                   <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-stretch">
                     <div className="relative aspect-[750/530] overflow-hidden rounded-2xl bg-[#EEF0EE] outline outline-1 -outline-offset-1 outline-white/10">

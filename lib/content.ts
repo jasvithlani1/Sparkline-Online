@@ -941,31 +941,37 @@ export const serviceOptions = [
     id: "strategy",
     title: "Digital Marketing",
     description: "Increase visibility, attract traffic, and drive measurable business growth.",
+    href: "/services/digital-marketing",
   },
   {
     id: "story-voice",
     title: "Website Design & Development",
     description: "Build custom websites that turn visitors into loyal customers.",
+    href: "/services/website-design-development",
   },
   {
     id: "design",
     title: "Content Marketing",
     description: "Create compelling content that builds awareness and drives organic growth.",
+    href: "/services/content-marketing",
   },
   {
     id: "development",
     title: "Social Media Management",
     description: "Elevate your brand, boost engagement, and grow across social platforms.",
+    href: "/services/social-media-management",
   },
   {
     id: "media-video",
     title: "Branding & Design",
     description: "Create bold branding that builds trust and makes your business stand out.",
+    href: "/services/branding-design",
   },
   {
     id: "brand-strategy",
     title: "Brand Strategy",
     description: "Refresh your brand with standout visuals, logos, and design elements.",
+    href: "/services/brand-strategy",
   },
 ] as const;
 

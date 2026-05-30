@@ -53,10 +53,10 @@ describe("About page", () => {
     expect(founderSections[0]).toHaveTextContent(/carefully\. patiently\. for the long run\./i);
 
     expect(
-      within(founderSections[1]).getByRole("img", { name: /ruby – ruby leazer/i }),
+      within(founderSections[1]).getByRole("img", { name: /ruby leazer/i }),
     ).toHaveAttribute("src", "/images/about-second-founder.jpeg");
     expect(
-      within(founderSections[1]).getByRole("heading", { name: /ruby – ruby leazer/i }),
+      within(founderSections[1]).getByRole("heading", { name: /ruby leazer/i }),
     ).toBeInTheDocument();
     expect(within(founderSections[1]).queryByText(/^co-founder$/i)).not.toBeInTheDocument();
     expect(within(founderSections[1]).getByText(/02\s*\/\s*co-founder/i)).toBeInTheDocument();

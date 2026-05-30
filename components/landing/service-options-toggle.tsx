@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 import { serviceOptions } from "@/lib/content";
 
 type ServiceOptionId = (typeof serviceOptions)[number]["id"];
@@ -82,8 +82,6 @@ function ServiceOptionIcon({ id, isActive }: { id: ServiceOptionId; isActive: bo
 }
 
 export function ServiceOptionsToggle() {
-  const [activeId, setActiveId] = useState<ServiceOptionId>(serviceOptions[0].id);
-
   return (
     <div
       data-testid="service-options-toggle"
@@ -91,19 +89,17 @@ export function ServiceOptionsToggle() {
     >
       <div>
         {serviceOptions.map((option) => {
-          const isActive = option.id === activeId;
+          const isActive = option.id === serviceOptions[0].id;
 
           return (
             <div
               key={option.id}
               className="border-b border-white/90 last:border-b-0"
             >
-              <button
-                type="button"
+              <Link
+                href={option.href}
                 aria-label={option.title}
-                aria-pressed={isActive}
-                onClick={() => setActiveId(option.id)}
-                className={`relative flex w-full flex-col items-start px-3 py-3 text-left transition-transform duration-150 active:scale-[0.96] sm:px-4 sm:py-4 md:px-5 md:py-5 ${
+                className={`relative flex w-full flex-col items-start px-3 py-3 text-left transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.96] sm:px-4 sm:py-4 md:px-5 md:py-5 ${
                   isActive ? "before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-[#7A6BFF]" : ""
                 }`}
               >
@@ -124,7 +120,7 @@ export function ServiceOptionsToggle() {
                 >
                   {option.description}
                 </p>
-              </button>
+              </Link>
             </div>
           );
         })}

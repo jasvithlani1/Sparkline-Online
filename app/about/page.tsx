@@ -33,7 +33,7 @@ const founders = [
     imageClassName: "scale-[1.08]",
   },
   {
-    name: "Ruby – Ruby Leazer",
+    name: "Ruby Leazer",
     portrait: "/images/about-second-founder.jpeg",
     bio: rubyBio,
     imageSide: "right",
@@ -82,7 +82,7 @@ function FounderProfile({
         </div>
 
         <div className={imageFirst ? "" : "md:order-1"}>
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
+          <p className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#B08CFF] sm:text-[14px]">
             {String(index + 1).padStart(2, "0")} / Co-Founder
           </p>
           <h2 className="mt-4 text-balance text-[36px] leading-[0.98] tracking-[-0.03em] text-white sm:text-[48px] md:text-[56px]">

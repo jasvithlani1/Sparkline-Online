@@ -67,7 +67,6 @@ describe("Home page", () => {
     const brandLogo = within(navbar).getByAltText(/sparkline marketing firm/i);
     const featureIntro = screen.getByTestId("feature-intro");
     const featureIntroContent = screen.getByTestId("feature-intro-content");
-    const featureIntroCta = within(featureIntro).getByRole("link", { name: /learn more/i });
     const midpageGradientBand = screen.getByTestId("midpage-gradient-band");
     const servicesSection = screen
       .getByRole("heading", { name: /how can we serve you\?/i, level: 2 })
@@ -80,24 +79,23 @@ describe("Home page", () => {
     ).toBeInTheDocument();
     expect(screen.getByTestId("hero-second-line")).toHaveTextContent(/^Marketing Supercharged$/i);
     expect(screen.getByText(/how can we serve you\?/i)).toBeInTheDocument();
-    expect(screen.getByText(/trusted by the bold/i)).toBeInTheDocument();
-    expect(screen.getByText(/^shape the future\.$/i)).toBeInTheDocument();
+    expect(screen.getByText(/trusted by visionary brands/i)).toBeInTheDocument();
+    expect(screen.getByText(/growth and shaping the future\./i)).toBeInTheDocument();
     expect(screen.queryByText(/^future\.$/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/our work/i)).toBeInTheDocument();
+    expect(screen.getByText(/work highlights/i)).toBeInTheDocument();
     expect(screen.queryByText(/haven demo:/i)).not.toBeInTheDocument();
     expect(
-      screen.getByText(/marked a major milestone with a successful deployment/i),
+      screen.getByText(/turn digital presence into measurable growth/i),
     ).toBeInTheDocument();
     expect(featureIntro).toHaveClass("bg-[#050C1E]");
-    expect(featureIntro).toHaveClass("pb-12");
-    expect(featureIntro).toHaveClass("sm:pb-14");
-    expect(featureIntro).toHaveClass("md:pb-18");
-    expect(featureIntro).toHaveClass("lg:pb-20");
+    expect(featureIntro).toHaveClass("pb-8");
+    expect(featureIntro).toHaveClass("sm:pb-10");
+    expect(featureIntro).toHaveClass("md:pb-12");
+    expect(featureIntro).toHaveClass("lg:pb-14");
     expect(featureIntroContent).toHaveClass("max-w-[1308px]");
     expect(featureIntroContent).not.toHaveClass("max-w-[415px]");
     expect(featureIntroContent).toHaveClass("text-white");
-    expect(featureIntroCta).toBeInTheDocument();
-    expect(featureIntroCta).toHaveClass("text-white/72");
+    expect(within(featureIntro).queryByRole("link", { name: /learn more/i })).not.toBeInTheDocument();
     expect(midpageGradientBand).toHaveClass("bg-[linear-gradient(180deg,#0B349F_0%,#050C1E_100%)]");
     expect(servicesSection).toHaveClass("pt-0");
     expect(servicesSection).toHaveClass("sm:pt-0");
@@ -118,18 +116,17 @@ describe("Home page", () => {
     expect(ctaButton).toHaveClass("items-center");
     expect(ctaButton).toHaveClass("justify-center");
     expect(ctaButton).toHaveClass("whitespace-nowrap");
+    expect(ctaButton).toHaveClass("px-3");
+    expect(ctaButton).toHaveClass("py-2");
+    expect(ctaButton).toHaveClass("text-[13px]");
+    expect(ctaButton).toHaveClass("sm:text-[15px]");
     expect(ctaButton).toHaveClass("text-white");
-    expect(ctaButton).toHaveStyle({
-      paddingInline: "12px",
-      paddingBlock: "10px",
-      borderRadius: "8px",
-      borderWidth: "1px",
-      borderStyle: "solid",
-      borderColor: "#FFFFFF29",
-      fontSize: "15px",
-      lineHeight: "18px",
-      fontWeight: "600",
-    });
+    expect(ctaButton.getAttribute("style")).toContain("border-radius: 8px");
+    expect(ctaButton.getAttribute("style")).toContain("border-width: 1px");
+    expect(ctaButton.getAttribute("style")).toContain("border-style: solid");
+    expect(ctaButton.getAttribute("style")).toContain("border-color: rgba(255, 255, 255, 0.16)");
+    expect(ctaButton.getAttribute("style")).toContain("line-height: 18px");
+    expect(ctaButton.getAttribute("style")).toContain("font-weight: 600");
     expect(ctaButton.getAttribute("style")).toContain(
       "linear-gradient(180deg, rgb(143, 87, 255) 0%, rgb(76, 47, 255) 100%)",
     );
@@ -195,7 +192,8 @@ describe("Home page", () => {
     const cta = screen.getByRole("link", { name: /view all projects/i });
 
     expect(cards).toHaveLength(4);
-    expect(cards[0]).toHaveClass("rounded-[28px]");
+    expect(cards[0]).toHaveClass("rounded-[32px]");
+    expect(cards[0]).toHaveClass("sm:rounded-[40px]");
     expect(cards[0]).toHaveClass("bg-[#0A1F57]");
     expect(cards[0]).not.toHaveClass("bg-[#03123A]");
     expect(cards[0]).not.toHaveClass("bg-white");
@@ -217,8 +215,9 @@ describe("Home page", () => {
     expect(carousel).toHaveClass("px-5");
     expect(track).toHaveClass("flex");
     expect(track).toHaveClass("w-max");
-    expect(cards[0]).toHaveClass("w-[min(86vw,1080px)]");
-    expect(cta).toHaveAttribute("href", "#portfolio");
+    expect(cards[0]).toHaveClass("w-[calc(100vw-2.5rem)]");
+    expect(cards[0]).toHaveClass("sm:w-[min(80vw,880px)]");
+    expect(cta).toHaveAttribute("href", "/portfolio");
     expect(cta).toHaveClass("inline-flex");
     expect(cta).toHaveClass("items-center");
     expect(cta).toHaveClass("justify-center");
@@ -269,26 +268,25 @@ describe("Home page", () => {
     expect(webmSource).toBeNull();
   });
 
-  it("renders the service options list and toggles the active service", () => {
+  it("renders the service options list as links to service detail pages", () => {
     render(<Home />);
 
-    const digitalMarketingButton = screen.getByRole("button", { name: /^digital marketing$/i });
-    const websiteButton = screen.getByRole("button", {
+    const toggle = screen.getByTestId("service-options-toggle");
+    const digitalMarketingLink = within(toggle).getByRole("link", { name: /^digital marketing$/i });
+    const websiteLink = within(toggle).getByRole("link", {
       name: /^website design & development$/i,
     });
 
-    expect(digitalMarketingButton).toHaveAttribute("aria-pressed", "true");
+    expect(digitalMarketingLink).toHaveAttribute("href", "/services/digital-marketing");
     expect(
-      within(digitalMarketingButton).getByText(
+      within(digitalMarketingLink).getByText(
         /Increase visibility, attract traffic, and drive measurable business growth\./i,
       ),
     ).toBeInTheDocument();
 
-    fireEvent.click(websiteButton);
-
-    expect(websiteButton).toHaveAttribute("aria-pressed", "true");
+    expect(websiteLink).toHaveAttribute("href", "/services/website-design-development");
     expect(
-      within(websiteButton).getByText(/Build custom websites that turn visitors into loyal customers\./i),
+      within(websiteLink).getByText(/Build custom websites that turn visitors into loyal customers\./i),
     ).toBeInTheDocument();
   });
 
@@ -298,10 +296,10 @@ describe("Home page", () => {
     const serviceHeading = screen.getByRole("heading", { name: /how can we serve you\?/i, level: 2 });
     const serviceFrame = serviceHeading.parentElement;
     const toggle = screen.getByTestId("service-options-toggle");
-    const digitalMarketingButton = screen.getByRole("button", { name: /^digital marketing$/i });
-    const iconWrapper = digitalMarketingButton.firstElementChild as HTMLElement;
-    const title = digitalMarketingButton.querySelector("span");
-    const description = digitalMarketingButton.querySelector("p");
+    const digitalMarketingLink = within(toggle).getByRole("link", { name: /^digital marketing$/i });
+    const iconWrapper = digitalMarketingLink.firstElementChild as HTMLElement;
+    const title = digitalMarketingLink.querySelector("span");
+    const description = digitalMarketingLink.querySelector("p");
     const divider = toggle.firstElementChild as HTMLElement;
 
     expect(serviceFrame).toHaveClass("min-h-[280px]");
@@ -314,8 +312,8 @@ describe("Home page", () => {
     expect(toggle).toHaveClass("md:mt-36");
     expect(toggle).toHaveClass("lg:mt-44");
     expect(divider).not.toHaveClass("divide-black/10");
-    expect(strategyButton).toHaveClass("px-3");
-    expect(strategyButton).toHaveClass("py-3");
+    expect(digitalMarketingLink).toHaveClass("px-3");
+    expect(digitalMarketingLink).toHaveClass("py-3");
     expect(iconWrapper).toHaveClass("gap-3");
     expect(title).toHaveClass("text-[13px]");
     expect(title).toHaveClass("sm:text-[15px]");
@@ -329,38 +327,33 @@ describe("Home page", () => {
       /Increase visibility, attract traffic, and drive measurable business growth\./i,
     );
 
-    const websiteButton = screen.getByRole("button", { name: /^website design & development$/i });
-    fireEvent.click(websiteButton);
-    expect(websiteButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(websiteButton).getByText(
+    const websiteLink = within(toggle).getByRole("link", { name: /^website design & development$/i });
+    expect(websiteLink).toHaveAttribute("href", "/services/website-design-development");
+    expect(within(websiteLink).getByText(
       /Build custom websites that turn visitors into loyal customers\./i,
     )).toBeInTheDocument();
 
-    const contentMarketingButton = screen.getByRole("button", { name: /^content marketing$/i });
-    fireEvent.click(contentMarketingButton);
-    expect(contentMarketingButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(contentMarketingButton).getByText(
+    const contentMarketingLink = within(toggle).getByRole("link", { name: /^content marketing$/i });
+    expect(contentMarketingLink).toHaveAttribute("href", "/services/content-marketing");
+    expect(within(contentMarketingLink).getByText(
       /Create compelling content that builds awareness and drives organic growth\./i,
     )).toBeInTheDocument();
 
-    const socialMediaButton = screen.getByRole("button", { name: /^social media management$/i });
-    fireEvent.click(socialMediaButton);
-    expect(socialMediaButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(socialMediaButton).getByText(
+    const socialMediaLink = within(toggle).getByRole("link", { name: /^social media management$/i });
+    expect(socialMediaLink).toHaveAttribute("href", "/services/social-media-management");
+    expect(within(socialMediaLink).getByText(
       /Elevate your brand, boost engagement, and grow across social platforms\./i,
     )).toBeInTheDocument();
 
-    const brandingDesignButton = screen.getByRole("button", { name: /^branding & design$/i });
-    fireEvent.click(brandingDesignButton);
-    expect(brandingDesignButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(brandingDesignButton).getByText(
+    const brandingDesignLink = within(toggle).getByRole("link", { name: /^branding & design$/i });
+    expect(brandingDesignLink).toHaveAttribute("href", "/services/branding-design");
+    expect(within(brandingDesignLink).getByText(
       /Create bold branding that builds trust and makes your business stand out\./i,
     )).toBeInTheDocument();
 
-    const brandStrategyButton = screen.getByRole("button", { name: /^brand strategy$/i });
-    fireEvent.click(brandStrategyButton);
-    expect(brandStrategyButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(brandStrategyButton).getByText(
+    const brandStrategyLink = within(toggle).getByRole("link", { name: /^brand strategy$/i });
+    expect(brandStrategyLink).toHaveAttribute("href", "/services/brand-strategy");
+    expect(within(brandStrategyLink).getByText(
       /Refresh your brand with standout visuals, logos, and design elements\./i,
     )).toBeInTheDocument();
   });

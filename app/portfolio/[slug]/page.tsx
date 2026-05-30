@@ -40,15 +40,15 @@ export default async function PortfolioProjectPage({
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
 
-      {/* Hero image — natural aspect on mobile (no crop), full viewport on lg+ */}
-      <section className="relative mt-[56px] aspect-[16/10] w-full overflow-hidden bg-[#050C1E] sm:mt-[64px] sm:aspect-[16/9] md:mt-[80px] lg:aspect-auto lg:h-[calc(100svh-80px)]">
+      {/* Hero image — natural aspect on mobile (no crop), top-anchored cinematic crop on lg+ */}
+      <section className="relative mt-[56px] aspect-[16/10] w-full overflow-hidden bg-[#050C1E] sm:mt-[64px] sm:aspect-[16/9] md:mt-[80px] lg:aspect-[16/9] lg:max-h-[calc(100svh-80px)]">
         <Image
           src={project.image}
           alt={project.name}
           fill
           priority
           sizes="100vw"
-          className={`${project.imageClassName} max-lg:!object-contain`}
+          className={`${project.imageClassName} max-lg:!object-contain lg:!object-top`}
         />
 
         {/* Bottom gradient for clean blend into next section */}

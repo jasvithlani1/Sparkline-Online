@@ -462,9 +462,6 @@ export default function PrivacyPage() {
           {sections.map((section) => (
             <article key={section.id} id={section.id} className="flex flex-col gap-5 scroll-mt-24">
               <div className="flex flex-col gap-3 border-t border-white/10 pt-8 md:pt-10">
-                <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-white/55">
-                  Section {section.number}
-                </p>
                 <h2 className="text-balance text-[24px] leading-[1.15] tracking-[-0.02em] text-white sm:text-[28px] md:text-[32px]">
                   {section.title}
                 </h2>

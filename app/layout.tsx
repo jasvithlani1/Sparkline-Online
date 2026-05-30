@@ -9,7 +9,7 @@ const calSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dockclaw",
+  title: "Sparkline Marketing Firm",
   description: "Creative Marketing Supercharged",
 };
 
