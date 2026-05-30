@@ -96,6 +96,30 @@ describe("Sanity content mapping", () => {
     expect(post.bodyBlocks).toHaveLength(1);
   });
 
+  it("fills missing portfolio fields from the static fallback by slug", () => {
+    const project = toPortfolioProject({
+      _id: "portfolioProject.firecrawl-launch",
+      slug: { current: "firecrawl-launch" },
+      name: "Firecrawl CMS",
+    });
+
+    expect(project.name).toBe("Firecrawl CMS");
+    expect(project.description).toContain("launch-ready web presence");
+    expect(project.sections.length).toBeGreaterThan(0);
+  });
+
+  it("fills missing blog fields from the static fallback by slug", () => {
+    const post = toBlogPost({
+      _id: "blogPost.how-to-build-a-high-converting-landing-page",
+      slug: { current: "how-to-build-a-high-converting-landing-page" },
+      title: "Landing Page CMS",
+    });
+
+    expect(post.title).toBe("Landing Page CMS");
+    expect(post.description).toContain("landing pages convert");
+    expect(post.bodyBlocks).toHaveLength(1);
+  });
+
   it("returns static fallback collections during tests", async () => {
     await expect(getServicesContent()).resolves.toHaveProperty("cards.length", 6);
     await expect(getPortfolioProjects()).resolves.toHaveLength(4);

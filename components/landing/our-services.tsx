@@ -8,7 +8,16 @@ const PARAGRAPH_BOLD: Record<number, readonly string[]> = {
   2: ["Branding & Design", "Social Media Management", "Content Marketing"],
 };
 
-type ServicesContent = typeof ourServices;
+type ServicesContent = {
+  eyebrow: string;
+  intro: readonly string[];
+  cards: readonly {
+    id: string;
+    title: string;
+    items: readonly string[];
+  }[];
+  ctaLabel: string;
+};
 
 type OurServicesProps = {
   content?: ServicesContent;

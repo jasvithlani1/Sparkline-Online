@@ -99,10 +99,70 @@ type SeoDocument = {
   noIndex?: boolean;
 };
 
-type ServiceCard = (typeof ourServices.cards)[number];
-type ServiceDetail = (typeof serviceDetails)[ServiceDetailSlug];
-type PortfolioProject = (typeof workGallery.projects)[number];
-type BlogPost = (typeof blogPosts)[number] & { bodyBlocks?: PortableTextBlock[] };
+type ServiceCard = {
+  id: string;
+  title: string;
+  items: string[];
+};
+
+type ServiceDetail = {
+  slug: string;
+  eyebrow: string;
+  title: string;
+  bannerTop?: string;
+  bannerBottom?: string;
+  lead: string;
+  intro: string;
+  whyUs: { heading: string; body: string };
+  problems: { heading: string; items: string[] };
+  cornerstones: { heading: string; items: string[] };
+  specialtiesHeading?: string;
+  specialties: string[];
+  process: { heading: string; body: string };
+  faq: { id: string; question: string; answer: string }[];
+  cta: { heading: string; body: string; label: string };
+};
+
+type PortfolioImage = {
+  src: string;
+  alt: string;
+  className: string;
+};
+
+type PortfolioProject = {
+  id: string;
+  slug: string;
+  name: string;
+  date: string;
+  meta: string;
+  description: string;
+  ctaLabel: string;
+  image: string;
+  imageClassName: string;
+  intro: string;
+  tagline: string;
+  summary: string;
+  services: string[];
+  sections: {
+    heading: string;
+    type: "image" | "grid";
+    images: PortfolioImage[];
+  }[];
+};
+
+type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+  description: string;
+  image: string;
+  imageClassName: string;
+  body: string;
+  bodyBlocks?: PortableTextBlock[];
+  videoId: string;
+};
 
 type ServiceEntry = {
   card: ServiceCard;
@@ -173,7 +233,7 @@ export function toServiceCard(doc: ServiceDocument): ServiceCard {
 
 export function toServiceDetail(doc: ServiceDocument): ServiceDetail {
   const slug = slugString(doc.slug, doc._id?.replace(/^service\./, "")) as ServiceDetailSlug;
-  const fallback = serviceDetails[slug];
+  const fallback = serviceDetails[slug] as unknown as ServiceDetail | undefined;
   const bannerTop = resolveCmsImage(doc.bannerTop, doc.title).src;
   const bannerBottom = resolveCmsImage(doc.bannerBottom, doc.title).src;
 
@@ -227,54 +287,65 @@ export function toServiceEntry(doc: ServiceDocument): ServiceEntry {
 
 export function toPortfolioProject(doc: PortfolioProjectDocument): PortfolioProject {
   const slug = slugString(doc.slug, doc._id?.replace(/^portfolioProject\./, ""));
-  const cover = resolveCmsImage(doc.cover, doc.name ?? slug);
+  const fallback = workGallery.projects.find((project) => project.slug === slug) as unknown as PortfolioProject | undefined;
+  const cover = resolveCmsImage(doc.cover, doc.name ?? fallback?.name ?? slug);
+  const image = cover.src || fallback?.image || "";
+  const sections = doc.sections?.length
+    ? doc.sections.map((section) => ({
+        heading: section.heading ?? "Project Section",
+        type: section.type ?? "image",
+        images: (section.images ?? []).map((imageValue) => {
+          const resolved = resolveCmsImage(imageValue, section.heading);
+          return {
+            src: resolved.src,
+            alt: resolved.alt,
+            className: resolved.className,
+          };
+        }),
+      }))
+    : (fallback?.sections ?? []);
 
   return {
-    id: doc._id ?? `portfolioProject.${slug}`,
+    id: doc._id ?? fallback?.id ?? `portfolioProject.${slug}`,
     slug,
-    name: doc.name ?? slug,
-    date: doc.date ?? "",
-    meta: doc.meta ?? "",
-    description: doc.description ?? "",
-    ctaLabel: doc.ctaLabel ?? "View Project",
-    image: cover.src,
-    imageClassName: cover.className,
-    intro: doc.intro ?? "",
-    tagline: doc.tagline ?? doc.name ?? slug,
-    summary: doc.summary ?? "",
-    services: maybeArray(doc.services),
-    sections: (doc.sections ?? []).map((section) => ({
-      heading: section.heading ?? "Project Section",
-      type: section.type ?? "image",
-      images: (section.images ?? []).map((image) => {
-        const resolved = resolveCmsImage(image, section.heading);
-        return {
-          src: resolved.src,
-          alt: resolved.alt,
-          className: resolved.className,
-        };
-      }),
-    })),
+    name: doc.name ?? fallback?.name ?? slug,
+    date: doc.date ?? fallback?.date ?? "",
+    meta: doc.meta ?? fallback?.meta ?? "",
+    description: doc.description ?? fallback?.description ?? "",
+    ctaLabel: doc.ctaLabel ?? fallback?.ctaLabel ?? "View Project",
+    image,
+    imageClassName: cover.src ? cover.className : (fallback?.imageClassName ?? cover.className),
+    intro: doc.intro ?? fallback?.intro ?? "",
+    tagline: doc.tagline ?? fallback?.tagline ?? doc.name ?? slug,
+    summary: doc.summary ?? fallback?.summary ?? "",
+    services: maybeArray(doc.services, fallback?.services),
+    sections,
   } as PortfolioProject;
 }
 
 export function toBlogPost(doc: BlogPostDocument): BlogPost {
   const slug = slugString(doc.slug, doc._id?.replace(/^blogPost\./, ""));
-  const cover = resolveCmsImage(doc.cover, doc.title ?? slug);
-  const bodyBlocks = doc.body?.length ? doc.body : textToPortableText(doc.bodyText ?? "", slug);
+  const fallback = blogPosts.find((post) => post.slug === slug);
+  const cover = resolveCmsImage(doc.cover, doc.title ?? fallback?.title ?? slug);
+  const fallbackBlocks = fallback ? textToPortableText(fallback.body, slug) : [];
+  const bodyBlocks = doc.body?.length
+    ? doc.body
+    : doc.bodyText
+      ? textToPortableText(doc.bodyText, slug)
+      : fallbackBlocks;
 
   return {
-    id: doc._id ?? `blogPost.${slug}`,
+    id: doc._id ?? fallback?.id ?? `blogPost.${slug}`,
     slug,
-    title: doc.title ?? slug,
-    date: doc.displayDate ?? doc.publishedAt ?? "",
-    category: doc.category ?? "Marketing",
-    description: doc.description ?? "",
-    image: cover.src,
-    imageClassName: cover.className,
-    body: doc.bodyText || textFromBlocks(bodyBlocks),
+    title: doc.title ?? fallback?.title ?? slug,
+    date: doc.displayDate ?? doc.publishedAt ?? fallback?.date ?? "",
+    category: doc.category ?? fallback?.category ?? "Marketing",
+    description: doc.description ?? fallback?.description ?? "",
+    image: cover.src || fallback?.image || "",
+    imageClassName: cover.src ? cover.className : (fallback?.imageClassName ?? cover.className),
+    body: doc.bodyText || textFromBlocks(bodyBlocks) || fallback?.body || "",
     bodyBlocks,
-    videoId: doc.videoId ?? "",
+    videoId: doc.videoId ?? fallback?.videoId ?? "",
   } as BlogPost;
 }
 
@@ -290,13 +361,23 @@ async function fetchSanity<T>(query: string, params?: Record<string, string>) {
 }
 
 function fallbackServiceEntries(): ServiceEntry[] {
-  return ourServices.cards
-    .map((card) => {
-      const detail = serviceDetails[card.id as ServiceDetailSlug];
-      if (!detail) return null;
-      return { card, detail };
-    })
-    .filter((entry): entry is ServiceEntry => Boolean(entry));
+  const entries: ServiceEntry[] = [];
+
+  for (const card of ourServices.cards) {
+    const detail = serviceDetails[card.id as ServiceDetailSlug] as unknown as ServiceDetail | undefined;
+    if (!detail) continue;
+
+    entries.push({
+      card: {
+        id: card.id,
+        title: card.title,
+        items: [...card.items],
+      },
+      detail,
+    });
+  }
+
+  return entries;
 }
 
 export async function getServicesContent() {

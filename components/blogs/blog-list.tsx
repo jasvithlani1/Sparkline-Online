@@ -7,7 +7,16 @@ import { blogPosts } from "@/lib/content";
 
 const ALL = "All";
 
-type BlogPost = (typeof blogPosts)[number] & { bodyBlocks?: unknown[] };
+type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+  description: string;
+  image: string;
+  imageClassName: string;
+};
 
 type BlogListProps = {
   posts?: readonly BlogPost[];

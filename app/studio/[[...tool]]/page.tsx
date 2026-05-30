@@ -1,8 +1,7 @@
-import { NextStudio } from "next-sanity/studio";
-import config from "@/sanity.config";
+import { Studio } from "./studio";
 
 export const dynamic = "force-static";
 
 export default function StudioPage() {
-  return <NextStudio config={config} />;
+  return <Studio />;
 }

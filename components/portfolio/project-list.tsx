@@ -2,7 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { workGallery } from "@/lib/content";
 
-type PortfolioProject = (typeof workGallery.projects)[number];
+type PortfolioProject = {
+  id: string;
+  slug: string;
+  name: string;
+  date: string;
+  description: string;
+  ctaLabel: string;
+  image: string;
+  imageClassName: string;
+};
 
 type ProjectListProps = {
   projects?: readonly PortfolioProject[];
