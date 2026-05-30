@@ -3,10 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { workGallery } from "@/lib/content";
+import { getPortfolioProjectBySlug, getPortfolioProjects } from "@/sanity/lib/content";
 
-export function generateStaticParams() {
-  return workGallery.projects.map((project) => ({ slug: project.slug }));
+export async function generateStaticParams() {
+  const projects = await getPortfolioProjects();
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = workGallery.projects.find((entry) => entry.slug === slug);
+  const project = await getPortfolioProjectBySlug(slug);
   if (!project) return { title: "Portfolio — Sparkline Marketing Firm" };
   return {
     title: `${project.name} — Sparkline Marketing Firm`,
@@ -29,7 +30,7 @@ export default async function PortfolioProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const projects = workGallery.projects;
+  const projects = await getPortfolioProjects();
   const index = projects.findIndex((entry) => entry.slug === slug);
   if (index === -1) notFound();
 

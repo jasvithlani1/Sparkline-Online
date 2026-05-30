@@ -1,12 +1,15 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { ProjectList } from "@/components/portfolio/project-list";
+import { getPortfolioProjects } from "@/sanity/lib/content";
 
 export const metadata = {
   title: "Portfolio — Sparkline Marketing Firm",
 };
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const projects = await getPortfolioProjects();
+
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
@@ -38,7 +41,7 @@ export default function PortfolioPage() {
         data-testid="portfolio-projects-section"
         className="pt-10 pb-0 sm:pt-12 sm:pb-0 md:pt-14 md:pb-2"
       >
-        <ProjectList />
+        <ProjectList projects={projects} />
       </section>
 
       <Footer spacing="compactTop" />

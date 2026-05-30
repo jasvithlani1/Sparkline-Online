@@ -1,12 +1,15 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { BlogList } from "@/components/blogs/blog-list";
+import { getBlogPosts } from "@/sanity/lib/content";
 
 export const metadata = {
   title: "Blog — Sparkline Marketing Firm",
 };
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const posts = await getBlogPosts();
+
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
@@ -38,7 +41,7 @@ export default function BlogsPage() {
         data-testid="blog-posts-section"
         className="pt-10 pb-0 sm:pt-12 sm:pb-0 md:pt-14 md:pb-2"
       >
-        <BlogList />
+        <BlogList posts={posts} />
       </section>
 
       <Footer spacing="compactTop" />

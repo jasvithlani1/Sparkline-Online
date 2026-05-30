@@ -1,12 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PortableText, type PortableTextComponents } from "next-sanity";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { blogPosts } from "@/lib/content";
+import { getBlogPostBySlug, getBlogPosts } from "@/sanity/lib/content";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+const portableTextComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => (
+      <p className="mt-10 text-pretty text-[17px] leading-[1.75] text-white/78 first:mt-0 sm:text-[18px] md:text-[19px] md:leading-[1.8]">
+        {children}
+      </p>
+    ),
+    h2: ({ children }) => (
+      <h2 className="mt-12 text-balance text-[28px] leading-[1.1] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+        {children}
+      </h2>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote className="mt-10 border-l-2 border-white/20 pl-5 text-[18px] leading-8 text-white/75">
+        {children}
+      </blockquote>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => <ul className="mt-8 list-disc space-y-3 pl-6 text-white/75">{children}</ul>,
+    number: ({ children }) => <ol className="mt-8 list-decimal space-y-3 pl-6 text-white/75">{children}</ol>,
+  },
+  marks: {
+    link: ({ children, value }) => {
+      const href = typeof value?.href === "string" ? value.href : "#";
+      const openInNewTab = value?.openInNewTab === true;
+      return (
+        <a
+          href={href}
+          target={openInNewTab ? "_blank" : undefined}
+          rel={openInNewTab ? "noopener noreferrer" : undefined}
+          className="text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+};
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +57,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((entry) => entry.slug === slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Blog — Sparkline Marketing Firm" };
   return {
     title: `${post.title} — Sparkline Marketing Firm`,
@@ -29,7 +71,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((entry) => entry.slug === slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
   return (
@@ -67,19 +109,27 @@ export default async function BlogPostPage({
             />
           </div>
 
-          <p className="mt-10 text-pretty text-[17px] leading-[1.75] text-white/78 sm:text-[18px] md:mt-12 md:text-[19px] md:leading-[1.8]">
-            {post.body}
-          </p>
-
-          <div className="relative mt-12 aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black md:mt-16">
-            <iframe
-              src={`https://www.youtube.com/embed/${post.videoId}`}
-              title={post.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full"
-            />
+          <div className="mt-10 md:mt-12">
+            {post.bodyBlocks?.length ? (
+              <PortableText value={post.bodyBlocks} components={portableTextComponents} />
+            ) : (
+              <p className="text-pretty text-[17px] leading-[1.75] text-white/78 sm:text-[18px] md:text-[19px] md:leading-[1.8]">
+                {post.body}
+              </p>
+            )}
           </div>
+
+          {post.videoId ? (
+            <div className="relative mt-12 aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black md:mt-16">
+              <iframe
+                src={`https://www.youtube.com/embed/${post.videoId}`}
+                title={post.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
+          ) : null}
         </div>
       </article>
 

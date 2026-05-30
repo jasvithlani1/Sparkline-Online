@@ -2,6 +2,7 @@
 
 import { render, screen } from "@testing-library/react";
 import PortfolioPage from "@/app/portfolio/page";
+import { ProjectList } from "@/components/portfolio/project-list";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -17,10 +18,40 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Portfolio page", () => {
-  it("keeps the project list close to the footer", () => {
-    const { container } = render(<PortfolioPage />);
+  it("renders injected CMS project cards", () => {
+    render(
+      <ProjectList
+        projects={[
+          {
+            id: "portfolioProject.cms-project",
+            slug: "cms-project",
+            name: "CMS Project",
+            date: "May 30, 2026",
+            meta: "Website",
+            description: "A project managed by Sanity.",
+            ctaLabel: "View Project",
+            image: "/images/work-firecrawl.png",
+            imageClassName: "object-cover object-center",
+            intro: "Intro",
+            tagline: "CMS TAGLINE",
+            summary: "Summary",
+            services: ["CMS"],
+            sections: [],
+          },
+        ]}
+      />,
+    );
 
-    const heroVideo = container.querySelector('video');
+    expect(screen.getByRole("heading", { name: /cms project/i })).toBeInTheDocument();
+    expect(screen.getByText("A project managed by Sanity.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /cms project/i })).toHaveAttribute("href", "/portfolio/cms-project");
+  });
+
+  it("keeps the project list close to the footer", async () => {
+    const page = await PortfolioPage();
+    const { container } = render(page);
+
+    const heroVideo = container.querySelector("video");
     const projectsSection = screen.getByTestId("portfolio-projects-section");
     const footerContent = screen.getByTestId("footer-content");
 

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { ourServices, serviceDetails } from "@/lib/content";
+import { getServiceBySlug, getServiceSlugs } from "@/sanity/lib/content";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 
@@ -22,18 +22,9 @@ function withBrandBold(text: string) {
   ));
 }
 
-type ServiceCard = (typeof ourServices.cards)[number];
-
-const detailEntries = ourServices.cards
-  .map((card) => {
-    const detail = serviceDetails[card.id as keyof typeof serviceDetails];
-    if (!detail) return null;
-    return { card, detail };
-  })
-  .filter((entry): entry is { card: ServiceCard; detail: (typeof serviceDetails)[keyof typeof serviceDetails] } => entry !== null);
-
-export function generateStaticParams() {
-  return detailEntries.map(({ card }) => ({ slug: card.id }));
+export async function generateStaticParams() {
+  const slugs = await getServiceSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -42,7 +33,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = detailEntries.find(({ card }) => card.id === slug);
+  const entry = await getServiceBySlug(slug);
   if (!entry) return { title: "Services — Sparkline Marketing Firm" };
   const plainTitle = entry.card.title.replace(/\n/g, " ");
   return {
@@ -57,7 +48,7 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = detailEntries.find(({ card }) => card.id === slug);
+  const entry = await getServiceBySlug(slug);
   if (!entry) notFound();
 
   const { card, detail } = entry;
