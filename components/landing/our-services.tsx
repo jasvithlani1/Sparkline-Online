@@ -8,6 +8,21 @@ const PARAGRAPH_BOLD: Record<number, readonly string[]> = {
   2: ["Branding & Design", "Social Media Management", "Content Marketing"],
 };
 
+type ServicesContent = {
+  eyebrow: string;
+  intro: readonly string[];
+  cards: readonly {
+    id: string;
+    title: string;
+    items: readonly string[];
+  }[];
+  ctaLabel: string;
+};
+
+type OurServicesProps = {
+  content?: ServicesContent;
+};
+
 function renderWithBold(text: string, phrases: readonly string[]) {
   const hits = phrases
     .map((phrase) => ({ phrase, start: text.indexOf(phrase) }))
@@ -32,7 +47,7 @@ function renderWithBold(text: string, phrases: readonly string[]) {
   return <Fragment>{parts}</Fragment>;
 }
 
-export function OurServices() {
+export function OurServices({ content = ourServices }: OurServicesProps) {
   return (
     <section
       id="our-services"
@@ -57,7 +72,7 @@ export function OurServices() {
             />
           </div>
           <div className="flex max-w-[1024px] flex-col gap-5 sm:gap-6">
-            {ourServices.intro.map((paragraph, index) => {
+            {content.intro.map((paragraph, index) => {
               const phrases = [BRAND, ...(PARAGRAPH_BOLD[index] ?? [])];
               return (
                 <p
@@ -77,7 +92,7 @@ export function OurServices() {
           data-testid="our-services-grid"
           className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:mt-16 lg:grid-cols-3"
         >
-          {ourServices.cards.map((card) => (
+          {content.cards.map((card) => (
             <article
               key={card.id}
               data-testid="our-services-card"
@@ -120,7 +135,7 @@ export function OurServices() {
                     fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
                   }}
                 >
-                  Learn More
+                  {content.ctaLabel}
                 </Link>
               </div>
             </article>

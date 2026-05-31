@@ -7,18 +7,33 @@ import { blogPosts } from "@/lib/content";
 
 const ALL = "All";
 
-export function BlogList() {
+type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+  description: string;
+  image: string;
+  imageClassName: string;
+};
+
+type BlogListProps = {
+  posts?: readonly BlogPost[];
+};
+
+export function BlogList({ posts = blogPosts }: BlogListProps) {
   const categories = useMemo(() => {
-    const unique = Array.from(new Set(blogPosts.map((post) => post.category)));
+    const unique = Array.from(new Set(posts.map((post) => post.category)));
     return [ALL, ...unique];
-  }, []);
+  }, [posts]);
 
   const [activeCategory, setActiveCategory] = useState<string>(ALL);
 
   const filtered = useMemo(() => {
-    if (activeCategory === ALL) return blogPosts;
-    return blogPosts.filter((post) => post.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === ALL) return posts;
+    return posts.filter((post) => post.category === activeCategory);
+  }, [activeCategory, posts]);
 
   return (
     <div className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">

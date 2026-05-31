@@ -3,6 +3,7 @@
 import { render, screen } from "@testing-library/react";
 import ServicesPage from "@/app/services/page";
 import ServiceDetailPage from "@/app/services/[slug]/page";
+import { OurServices } from "@/components/landing/our-services";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -18,10 +19,34 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Services pages", () => {
-  it("moves the services FAQ section upward", () => {
-    const { container } = render(<ServicesPage />);
+  it("renders injected CMS service cards", () => {
+    render(
+      <OurServices
+        content={{
+          eyebrow: "OUR SERVICES",
+          intro: ["CMS intro"],
+          ctaLabel: "Learn More",
+          cards: [
+            {
+              id: "cms-service",
+              title: "CMS\nService",
+              items: ["CMS strategy", "CMS analytics"],
+            },
+          ],
+        }}
+      />,
+    );
 
-    const heroVideo = container.querySelector('video');
+    expect(screen.getByRole("heading", { name: /cms\s+service/i })).toBeInTheDocument();
+    expect(screen.getByText("CMS strategy")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /learn more/i })).toHaveAttribute("href", "/services/cms-service");
+  });
+
+  it("moves the services FAQ section upward", async () => {
+    const page = await ServicesPage();
+    const { container } = render(page);
+
+    const heroVideo = container.querySelector("video");
     const faqSection = screen.getByTestId("faq-section");
 
     expect(heroVideo).toHaveClass("top-0");

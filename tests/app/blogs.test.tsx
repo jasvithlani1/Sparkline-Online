@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import BlogsPage from "@/app/blogs/page";
+import { BlogList } from "@/components/blogs/blog-list";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -17,8 +18,49 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Blogs page", () => {
-  it("keeps the blog list close to the footer", () => {
-    render(<BlogsPage />);
+  it("filters injected CMS posts by category", () => {
+    render(
+      <BlogList
+        posts={[
+          {
+            id: "blogPost.cms-marketing",
+            slug: "cms-marketing",
+            title: "CMS Marketing",
+            date: "May 30, 2026",
+            category: "Marketing",
+            description: "Marketing from Sanity.",
+            image: "/images/work-firecrawl.png",
+            imageClassName: "object-cover object-center",
+            body: "Body",
+            videoId: "abc123",
+          },
+          {
+            id: "blogPost.cms-design",
+            slug: "cms-design",
+            title: "CMS Design",
+            date: "May 29, 2026",
+            category: "Design",
+            description: "Design from Sanity.",
+            image: "/images/work-blackalgo.png",
+            imageClassName: "object-cover object-center",
+            body: "Body",
+            videoId: "def456",
+          },
+        ]}
+      />,
+    );
+
+    fireEvent.change(screen.getByLabelText(/filter by category/i), {
+      target: { value: "Design" },
+    });
+
+    expect(screen.getByRole("heading", { name: /cms design/i })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /cms marketing/i })).not.toBeInTheDocument();
+  });
+
+  it("keeps the blog list close to the footer", async () => {
+    const page = await BlogsPage();
+    render(page);
 
     const postsSection = screen.getByTestId("blog-posts-section");
     const footerContent = screen.getByTestId("footer-content");

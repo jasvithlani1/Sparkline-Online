@@ -2,7 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { workGallery } from "@/lib/content";
 
-export function ProjectList() {
+type PortfolioProject = {
+  id: string;
+  slug: string;
+  name: string;
+  date: string;
+  description: string;
+  ctaLabel: string;
+  image: string;
+  imageClassName: string;
+};
+
+type ProjectListProps = {
+  projects?: readonly PortfolioProject[];
+};
+
+export function ProjectList({ projects = workGallery.projects }: ProjectListProps) {
   return (
     <div data-testid="project-list" className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
       <div className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12">
@@ -15,7 +30,7 @@ export function ProjectList() {
       </div>
       <div className="h-px w-full bg-white/10" />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {workGallery.projects.map((project) => (
+        {projects.map((project) => (
           <Link
             key={project.id}
             href={`/portfolio/${project.slug}`}

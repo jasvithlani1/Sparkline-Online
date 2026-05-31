@@ -2,12 +2,15 @@ import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { OurServices } from "@/components/landing/our-services";
+import { getServicesContent } from "@/sanity/lib/content";
 
 export const metadata = {
   title: "Services — Sparkline Marketing Firm",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const servicesContent = await getServicesContent();
+
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
@@ -32,7 +35,7 @@ export default function ServicesPage() {
 
       </section>
 
-      <OurServices />
+      <OurServices content={servicesContent} />
       <Faq spacing="compactTop" />
       <Footer />
     </main>
