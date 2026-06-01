@@ -1,2 +1,8 @@
-# Raw source assets — archived locally, not needed on Vercel
+# Generated local output
+.next/**
+dist/**
+.sanity/**
+
+# Raw source assets - archived locally, not needed on Vercel
+public/videos/source/**
 public/videos/source/
