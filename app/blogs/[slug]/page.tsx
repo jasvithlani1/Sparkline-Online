@@ -82,19 +82,19 @@ export default async function BlogPostPage({
         <div className="mx-auto max-w-[1080px] px-5 sm:px-6 md:px-8">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
+            className="mx-auto inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white sm:mx-0"
           >
             <span aria-hidden="true">&larr;</span>
             All Blogs
           </Link>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px]">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 sm:justify-start sm:text-left sm:text-[12px]">
             <span>{post.date}</span>
             <span className="text-white/25">|</span>
             <span>{post.category}</span>
           </div>
 
-          <h1 className="mt-4 text-balance text-[36px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[48px] md:text-[60px]">
+          <h1 className="mt-4 text-center text-balance text-[36px] leading-[1.05] tracking-[-0.03em] text-white sm:text-left sm:text-[48px] md:text-[60px]">
             {post.title}
           </h1>
 

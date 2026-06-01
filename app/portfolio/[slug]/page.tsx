@@ -69,7 +69,7 @@ export default async function PortfolioProjectPage({
 
           <div className="mt-10 grid grid-cols-1 gap-12 md:mt-12 md:grid-cols-[2fr_1fr] md:gap-16">
             <div className="flex flex-col gap-5">
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
                 <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                   {project.tagline}
                 </h2>
@@ -84,7 +84,7 @@ export default async function PortfolioProjectPage({
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
                 <h3 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                   Services
                 </h3>
@@ -110,7 +110,7 @@ export default async function PortfolioProjectPage({
           className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14"
         >
           <div className="mx-auto max-w-[1310px]">
-            <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-12">
+            <div className="flex flex-col items-center gap-3 border-t border-white/10 pt-10 text-center sm:items-start sm:text-left md:pt-12">
               <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[40px]">
                 {section.heading}
               </h2>
@@ -178,7 +178,7 @@ export default async function PortfolioProjectPage({
                 className={`${next.imageClassName} transition-transform duration-500 group-hover:scale-[1.03]`}
               />
               <div className="absolute inset-0 bg-black/55 transition-colors duration-500 group-hover:bg-black/45" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-5 text-center sm:items-start sm:px-10 sm:text-left md:px-14">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/70 sm:text-[12px]">
                   Up Next
                 </p>
@@ -203,17 +203,17 @@ export default async function PortfolioProjectPage({
       {/* Closing CTA */}
       <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
-          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/55 sm:text-[12px]">
+          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20">
+            <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/55 sm:text-left sm:text-[12px]">
               Have a project in mind?
             </p>
-            <h2 className="hero-copy mt-4 text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
+            <h2 className="hero-copy mt-4 text-center text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-left sm:text-[44px] md:text-[56px]">
               Let&apos;s build your next standout story.
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-pretty text-[16px] leading-7 text-white/70 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto mt-5 max-w-[58ch] text-left text-pretty text-[16px] leading-7 text-white/70 sm:mx-0 sm:text-[17px] md:text-[18px]">
               Bring your goals, brand, and ambition. We&apos;ll bring the strategy, design, and execution to make it happen.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center sm:justify-start">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"

@@ -110,8 +110,8 @@ export function BlogList({ posts = blogPosts }: BlogListProps) {
                 />
               </div>
 
-              <div className="flex min-w-0 flex-1 flex-col justify-center gap-3">
-                <div className="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px]">
+              <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-3 text-center md:items-start md:text-left">
+                <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px] md:justify-start">
                   <span className="font-mono">{post.date}</span>
                   <span className="text-white/25">|</span>
                   <span className="font-mono">{post.category}</span>
@@ -121,7 +121,7 @@ export function BlogList({ posts = blogPosts }: BlogListProps) {
                   {post.title}
                 </h2>
 
-                <p className="max-w-[54ch] text-pretty text-[15px] leading-6 text-white/70 sm:text-[16px] sm:leading-7">
+                <p className="mx-auto max-w-[54ch] text-pretty text-[15px] leading-6 text-white/70 sm:text-[16px] sm:leading-7 md:mx-0">
                   {post.description}
                 </p>
 
