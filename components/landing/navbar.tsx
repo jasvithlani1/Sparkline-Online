@@ -131,7 +131,7 @@ export function Navbar() {
           <div
             id="mobile-nav-panel"
             data-testid="mobile-nav-panel"
-            className="mt-3 grid gap-1 rounded-2xl border border-white/12 bg-[#0d1730]/95 p-2 text-sm text-white/82 shadow-[0_16px_40px_rgba(0,0,0,0.28)] lg:hidden"
+            className="mt-3 grid gap-1 rounded-2xl border border-white/12 bg-[#0d1730]/95 p-2 text-center text-sm text-white/82 shadow-[0_16px_40px_rgba(0,0,0,0.28)] lg:hidden"
           >
             {navLinks.map((link) => (
               <NavLink

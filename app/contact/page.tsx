@@ -82,9 +82,9 @@ export default function ContactPage() {
 
           <div className="grid gap-12 lg:grid-cols-[340px_1fr] lg:gap-20">
             {/* Contact info — left */}
-            <div className="space-y-10">
+            <div className="space-y-10 text-center">
               <div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <span
                     aria-hidden="true"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/70"
@@ -115,7 +115,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <span
                     aria-hidden="true"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/70"
@@ -147,7 +147,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <span
                     aria-hidden="true"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/70"

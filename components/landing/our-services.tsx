@@ -52,16 +52,16 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
     <section
       id="our-services"
       data-testid="our-services"
-      className="scroll-mt-24 bg-[#050C1E] px-5 pt-12 pb-12 sm:px-6 sm:pt-14 sm:pb-14 md:scroll-mt-28 md:px-8 md:pt-16 md:pb-16 lg:pt-20 lg:pb-20"
+      className="scroll-mt-24 bg-[#050C1E] px-5 pt-0 pb-12 sm:px-6 sm:pt-0 sm:pb-14 md:scroll-mt-28 md:px-8 md:pt-0 md:pb-16 lg:pt-0 lg:pb-20"
     >
       <div className="mx-auto max-w-[1310px]">
         <div
           data-testid="our-services-header"
-          className="flex flex-col gap-6 text-white md:gap-8"
+          className="flex flex-col items-center gap-6 text-center text-white md:items-start md:gap-8 md:text-left"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-center gap-4 md:items-start">
             <h2
-              className="hero-copy text-balance text-[32px] leading-[1] tracking-[0.02em] sm:text-[48px] sm:leading-[0.95] md:text-[64px] lg:text-[80px]"
+              className="hero-copy max-w-[11ch] text-balance text-[32px] leading-[1] tracking-[0.02em] sm:max-w-none sm:text-[48px] sm:leading-[0.95] md:text-[64px] lg:text-[80px]"
               style={{ wordSpacing: "0.25em" }}
             >
               OUR CORE SERVICES
@@ -96,7 +96,7 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
             <article
               key={card.id}
               data-testid="our-services-card"
-              className="flex h-full flex-col gap-6 border-b border-white/10 px-0 py-10 last:border-b-0 sm:px-8 sm:py-12 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-child(odd)]:border-r sm:[&:nth-child(odd)]:border-r-white/10 sm:[&:nth-last-child(-n+2)]:border-b-0 md:px-10 md:py-14 lg:!border-r lg:!border-r-white/10 lg:[&:nth-child(3n)]:!border-r-0 lg:[&:nth-last-child(-n+3)]:border-b-0"
+              className="flex h-full flex-col items-center gap-6 border-b border-white/10 px-0 py-10 text-center last:border-b-0 sm:px-8 sm:py-12 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-child(odd)]:border-r sm:[&:nth-child(odd)]:border-r-white/10 sm:[&:nth-last-child(-n+2)]:border-b-0 md:items-start md:px-10 md:py-14 md:text-left lg:!border-r lg:!border-r-white/10 lg:[&:nth-child(3n)]:!border-r-0 lg:[&:nth-last-child(-n+3)]:border-b-0"
             >
               <div className="flex w-fit flex-col gap-4">
                 <h3

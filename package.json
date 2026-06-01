@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "studio": "sanity dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -16,7 +17,8 @@
     "next-sanity": "^13.0.7",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sanity": "^5.28.0"
+    "sanity": "^5.28.0",
+    "styled-components": "^6.4.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -30,6 +32,7 @@
     "jsdom": "^29.0.1",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vite": "^7.3.3",
     "vitest": "^4.1.2"
   }
 }

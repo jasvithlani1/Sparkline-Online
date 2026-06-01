@@ -20,7 +20,7 @@ type ProjectListProps = {
 export function ProjectList({ projects = workGallery.projects }: ProjectListProps) {
   return (
     <div data-testid="project-list" className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
-      <div className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12">
+      <div className="flex flex-col items-center gap-4 pb-8 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 sm:text-left md:pb-12">
         <h2
           className="hero-copy text-[36px] leading-[1] tracking-[0.02em] sm:text-[52px] sm:leading-[0.95] md:text-[68px] lg:text-[80px]"
           style={{ wordSpacing: "0.25em" }}
@@ -49,8 +49,8 @@ export function ProjectList({ projects = workGallery.projects }: ProjectListProp
             </div>
 
             {/* Details */}
-            <div className="flex flex-col gap-2 p-4">
-              <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/50 sm:text-[11px]">
+            <div className="flex flex-col items-center gap-2 p-4 text-center sm:items-start sm:text-left">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/50 sm:justify-start sm:text-[11px]">
                 <span className="font-mono">{project.date}</span>
               </div>
 
@@ -62,7 +62,7 @@ export function ProjectList({ projects = workGallery.projects }: ProjectListProp
                 {project.description}
               </p>
 
-              <div className="mt-0.5 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70 transition-colors group-hover:text-white">
+              <div className="mt-0.5 inline-flex items-center justify-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/70 transition-colors group-hover:text-white sm:justify-start">
                 {project.ctaLabel}
                 <span
                   aria-hidden="true"

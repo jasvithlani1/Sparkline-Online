@@ -61,20 +61,20 @@ export default async function ServiceDetailPage({
       <section className="px-5 pt-32 pb-10 sm:px-6 sm:pt-36 sm:pb-12 md:px-8 md:pt-44 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="flex flex-col gap-6 md:gap-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-[12px]">
+            <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-left sm:text-[12px]">
               {detail.eyebrow}
             </p>
-            <h1 className="hero-copy max-w-[22ch] text-balance text-[36px] leading-[1.05] tracking-[-0.04em] text-white sm:text-[52px] md:text-[68px] lg:text-[80px]">
+            <h1 className="hero-copy mx-auto max-w-[22ch] text-center text-balance text-[36px] leading-[1.05] tracking-[-0.04em] text-white sm:mx-0 sm:text-left sm:text-[52px] md:text-[68px] lg:text-[80px]">
               {detail.title}
             </h1>
             <span
               aria-hidden="true"
-              className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+              className="mx-auto h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)] sm:mx-0"
             />
-            <p className="text-pretty text-[17px] leading-[1.7] text-white/80 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
+            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[17px] leading-[1.7] text-white/80 sm:mx-0 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
               {withBrandBold(detail.lead)}
             </p>
-            <p className="text-pretty text-[16px] leading-[1.7] text-white/65 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[16px] leading-[1.7] text-white/65 sm:mx-0 sm:text-[17px] md:text-[18px]">
               {withBrandBold(detail.intro)}
             </p>
           </div>
@@ -85,7 +85,7 @@ export default async function ServiceDetailPage({
       <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
               <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                 {detail.whyUs.heading}
               </h2>
@@ -130,7 +130,7 @@ export default async function ServiceDetailPage({
       {/* Problems we solve */}
       <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
-          <div className="flex flex-col gap-3 border-t border-white/10 pt-10 md:pt-14">
+          <div className="flex flex-col items-center gap-3 border-t border-white/10 pt-10 text-center sm:items-start sm:text-left md:pt-14">
             <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
               {detail.problems.heading}
             </h2>
@@ -161,7 +161,7 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-10 md:grid-cols-2 md:gap-16 md:pt-14">
             <div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
                 <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
                   {detail.cornerstones.heading}
                 </h2>
@@ -186,7 +186,7 @@ export default async function ServiceDetailPage({
             </div>
 
             <div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
                 <h2 className="text-balance text-[26px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[32px] md:text-[38px]">
                   {(detail as { specialtiesHeading?: string }).specialtiesHeading ?? "Our Specialties"}
                 </h2>
@@ -240,7 +240,7 @@ export default async function ServiceDetailPage({
       <section className="px-5 pb-10 sm:px-6 sm:pb-12 md:px-8 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
           <div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pt-14">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left">
               <h2 className="text-balance text-[28px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
                 {detail.process.heading}
               </h2>
@@ -266,14 +266,14 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
-          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
-            <h2 className="hero-copy text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
+          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20">
+            <h2 className="hero-copy mx-auto max-w-[18ch] text-center text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:mx-0 sm:text-left sm:text-[44px] md:text-[56px]">
               {detail.cta.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-pretty text-[16px] leading-7 text-white/70 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto mt-5 max-w-[58ch] text-left text-pretty text-[16px] leading-7 text-white/70 sm:mx-0 sm:text-[17px] md:text-[18px]">
               {detail.cta.body}
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center sm:justify-start">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"

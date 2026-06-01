@@ -141,9 +141,7 @@ export default async function PortfolioProjectPage({
                 {section.images.map((img, i) => (
                   <div
                     key={`${img.src}-${i}`}
-                    className={`relative overflow-hidden rounded-2xl bg-[#0A1F57] ${
-                      section.images.length === 4 ? "aspect-[16/9]" : "aspect-[3/4]"
-                    }`}
+                    className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-[#0A1F57]"
                   >
                     <Image
                       src={img.src}

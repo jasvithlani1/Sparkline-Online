@@ -82,10 +82,10 @@ function FounderProfile({
         </div>
 
         <div className={imageFirst ? "" : "md:order-1"}>
-          <p className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#B08CFF] sm:text-[14px]">
+          <p className="text-center font-mono text-[13px] uppercase tracking-[0.22em] text-[#B08CFF] sm:text-[14px]">
             {String(index + 1).padStart(2, "0")} / Co-Founder
           </p>
-          <h2 className="mt-4 text-balance text-[36px] leading-[0.98] tracking-[-0.03em] text-white sm:text-[48px] md:text-[56px]">
+          <h2 className="mt-4 text-center text-balance text-[36px] leading-[0.98] tracking-[-0.03em] text-white sm:text-[48px] md:text-[56px]">
             {founder.name}
           </h2>
           <div className="mt-8 space-y-5 text-pretty text-[15px] leading-[1.85] text-white/72 sm:text-[16px]">
@@ -114,10 +114,10 @@ export default function AboutPage() {
         className="px-5 pt-32 pb-14 sm:px-6 sm:pt-36 sm:pb-16 md:px-8 md:pt-44 md:pb-20"
       >
         <div className="mx-auto max-w-[1208px]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
+          <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
             Where it all begins
           </p>
-          <h1 className="mt-5 max-w-[980px] text-balance text-[44px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[64px] md:text-[82px]">
+          <h1 className="mx-auto mt-5 max-w-[980px] text-center text-balance text-[44px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[64px] md:text-[82px]">
             Where strategy meets care.
           </h1>
           <div className="mt-8 grid gap-6 text-pretty text-[17px] leading-[1.75] text-white/76 sm:text-[18px] md:grid-cols-2 md:gap-10 md:text-[19px] md:leading-[1.8]">
@@ -145,7 +145,7 @@ export default function AboutPage() {
         className="px-5 pb-0 sm:px-6 sm:pb-0 md:px-8 md:pb-2"
       >
         <div className="mx-auto max-w-[1208px]">
-          <div className="mb-10 flex flex-col gap-3 sm:mb-12 md:mb-14">
+          <div className="mb-10 flex flex-col items-center gap-3 text-center sm:mb-12 md:mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
               Meet the founders
             </p>

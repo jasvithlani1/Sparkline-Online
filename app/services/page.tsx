@@ -15,14 +15,14 @@ export default async function ServicesPage() {
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
 
-      {/* Full-viewport video hero */}
-      <section className="relative h-screen w-full overflow-hidden">
+      {/* Video hero */}
+      <section className="relative h-[68svh] min-h-[460px] w-full overflow-hidden sm:h-[72svh] md:h-[82svh] lg:h-screen">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="pointer-events-none absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover object-center md:inset-0 md:h-[110%]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-full w-full translate-y-0 object-cover object-center md:inset-0 md:h-[110%]"
         >
           <source src="/videos/services-hero-v2.mp4" type="video/mp4" />
         </video>

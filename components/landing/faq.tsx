@@ -32,7 +32,7 @@ export function Faq({
       className={spacingClass}
     >
       <div className="mx-auto grid max-w-[1208px] grid-cols-1 gap-10 px-5 sm:px-6 md:gap-12 md:px-8 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
-        <div className="flex flex-col gap-5 lg:sticky lg:top-28 lg:self-start lg:gap-6">
+        <div className="flex flex-col items-center gap-5 text-center lg:sticky lg:top-28 lg:self-start lg:gap-6">
           <h2
             className="hero-copy text-[36px] leading-[1] tracking-[0.02em] sm:text-[48px] sm:leading-[0.95] md:text-[60px] lg:text-[72px]"
             style={{ wordSpacing: "0.25em" }}
