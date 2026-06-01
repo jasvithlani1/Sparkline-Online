@@ -37,10 +37,10 @@ const footerColumns = [
   {
     heading: "FOLLOW US",
     links: [
-      { label: "Facebook", href: "#" },
+      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61589700706177" },
       { label: "Instagram", href: "https://www.instagram.com/sparklinemarketingfirm" },
-      { label: "LinkedIn", href: "#" },
-      { label: "X", href: "#" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/sparkline-marketing-firm/?viewAsMember=true" },
+      { label: "X", href: "https://x.com/SparklineMF" },
     ],
   },
 ] as const;
