@@ -246,21 +246,21 @@ export function WorkGallery() {
                         className={project.imageClassName}
                       />
                     </div>
-                    <div className="flex min-h-full flex-col justify-between gap-8 py-2 lg:px-2">
+                    <div className="flex min-h-full flex-col items-center justify-between gap-8 py-2 text-center lg:items-start lg:px-2 lg:text-left">
                       <div className="space-y-6">
                         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/52 sm:text-[12px]">
                           {project.date}
                         </p>
                         <div className="space-y-4">
-                          <h3 className="max-w-[12ch] text-balance text-[30px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[38px]">
+                          <h3 className="mx-auto max-w-[12ch] text-balance text-[30px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[38px] lg:mx-0">
                             {project.name}
                           </h3>
-                          <p className="max-w-[48ch] text-pretty text-[15px] leading-6 text-white/80 sm:text-[17px] sm:leading-7">
+                          <p className="mx-auto max-w-[48ch] text-pretty text-[15px] leading-6 text-white/80 sm:text-[17px] sm:leading-7 lg:mx-0">
                             {project.description}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-end border-t border-white/12 pt-5">
+                      <div className="flex w-full justify-center border-t border-white/12 pt-5 lg:justify-start">
                         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/76 sm:text-[12px]">
                           {project.ctaLabel}
                         </span>
