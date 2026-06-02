@@ -71,13 +71,13 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
               className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
           </div>
-          <div className="flex max-w-[1024px] flex-col gap-5 sm:gap-6">
+          <div className="flex w-full max-w-[1024px] flex-col gap-5 sm:gap-6">
             {content.intro.map((paragraph, index) => {
               const phrases = [BRAND, ...(PARAGRAPH_BOLD[index] ?? [])];
               return (
                 <p
                   key={index}
-                  className="text-pretty text-[16px] leading-[1.7] text-white/72 sm:text-[17px] md:text-[18px] md:leading-[1.72]"
+                  className="text-left text-pretty text-[16px] leading-[1.7] text-white/72 sm:text-[17px] md:text-[18px] md:leading-[1.72]"
                 >
                   {renderWithBold(paragraph, phrases)}
                 </p>

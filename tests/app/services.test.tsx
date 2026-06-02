@@ -42,6 +42,33 @@ describe("Services pages", () => {
     expect(screen.getByRole("link", { name: /learn more/i })).toHaveAttribute("href", "/services/cms-service");
   });
 
+  it("keeps the mobile services heading centered while intro paragraphs stay left aligned", () => {
+    render(
+      <OurServices
+        content={{
+          eyebrow: "OUR SERVICES",
+          intro: ["CMS intro paragraph"],
+          ctaLabel: "Learn More",
+          cards: [
+            {
+              id: "cms-service",
+              title: "CMS\nService",
+              items: ["CMS strategy"],
+            },
+          ],
+        }}
+      />,
+    );
+
+    const header = screen.getByTestId("our-services-header");
+    const heading = screen.getByRole("heading", { name: /our core services/i });
+    const intro = screen.getByText("CMS intro paragraph");
+
+    expect(header).toHaveClass("text-center");
+    expect(heading.parentElement).toHaveClass("items-center");
+    expect(intro).toHaveClass("text-left");
+  });
+
   it("moves the services FAQ section upward", async () => {
     const page = await ServicesPage();
     const { container } = render(page);
