@@ -2,6 +2,7 @@
 
 import { fireEvent, render, screen } from "@testing-library/react";
 import BlogsPage from "@/app/blogs/page";
+import BlogPostPage from "@/app/blogs/[slug]/page";
 import { BlogList } from "@/components/blogs/blog-list";
 
 vi.mock("next/image", () => ({
@@ -75,5 +76,29 @@ describe("Blogs page", () => {
     expect(footerContent).toHaveClass("sm:pt-10");
     expect(footerContent).toHaveClass("md:pt-12");
     expect(footerContent).toHaveClass("lg:pt-14");
+  });
+
+  it("centers the blog detail top header across all screen sizes", async () => {
+    const page = await BlogPostPage({
+      params: Promise.resolve({ slug: "how-to-build-a-high-converting-landing-page" }),
+    });
+
+    render(page);
+
+    const backLink = screen.getByRole("link", { name: /all blogs/i });
+    const metaRow = screen.getByText("March 28, 2026").parentElement;
+    const heading = screen.getByRole("heading", {
+      name: /how to build a high-converting landing page/i,
+      level: 1,
+    });
+
+    expect(backLink).toHaveClass("mx-auto");
+    expect(backLink).not.toHaveClass("sm:mx-0");
+    expect(metaRow).toHaveClass("justify-center");
+    expect(metaRow).toHaveClass("text-center");
+    expect(metaRow).not.toHaveClass("sm:justify-start");
+    expect(metaRow).not.toHaveClass("sm:text-left");
+    expect(heading).toHaveClass("text-center");
+    expect(heading).not.toHaveClass("sm:text-left");
   });
 });
