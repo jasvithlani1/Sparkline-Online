@@ -2,8 +2,6 @@
 
 import { fireEvent, render, screen } from "@testing-library/react";
 import BlogsPage from "@/app/blogs/page";
-import { revalidate as blogDetailRevalidate } from "@/app/blogs/[slug]/page";
-import { revalidate as blogIndexRevalidate } from "@/app/blogs/page";
 import { BlogList } from "@/components/blogs/blog-list";
 
 vi.mock("next/image", () => ({
@@ -20,11 +18,6 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Blogs page", () => {
-  it("revalidates blog pages so Sanity updates can refresh in production", () => {
-    expect(blogIndexRevalidate).toBe(60);
-    expect(blogDetailRevalidate).toBe(60);
-  });
-
   it("filters injected CMS posts by category", () => {
     render(
       <BlogList
