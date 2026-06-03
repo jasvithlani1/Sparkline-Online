@@ -6,6 +6,9 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { getBlogPostBySlug, getBlogPosts } from "@/sanity/lib/content";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (

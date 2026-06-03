@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import * as sanityClient from "@/sanity/lib/client";
 import {
   getBlogPosts,
   getPortfolioProjects,
@@ -10,6 +11,10 @@ import {
 } from "@/sanity/lib/content";
 
 describe("Sanity content mapping", () => {
+  it("uses the live API instead of the CDN for CMS reads", () => {
+    expect((sanityClient as { useCdn?: boolean }).useCdn).toBe(false);
+  });
+
   it("maps service documents into existing service-card shape", () => {
     const card = toServiceCard({
       _id: "service.digital-marketing",
