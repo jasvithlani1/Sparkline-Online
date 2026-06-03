@@ -1,23 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { SectionHeading } from "@/components/landing/section-heading";
+import { ProjectCard, type ProjectCardProject } from "@/components/portfolio/project-card";
 import { workGallery } from "@/lib/content";
 
-type WorkGalleryProject = {
-  id: string;
-  name: string;
-  date: string;
-  description: string;
-  ctaLabel: string;
-  image: string;
-  imageClassName: string;
-};
-
 type WorkGalleryProps = {
-  projects?: readonly WorkGalleryProject[];
+  projects?: readonly ProjectCardProject[];
 };
 
 function getCarouselCards(node: HTMLDivElement) {
@@ -239,51 +229,23 @@ export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProp
           onWheel={pauseTemporarily}
           onTouchStart={pauseTemporarily}
         >
-          <div data-testid="work-gallery-track" className="flex w-max gap-6 pr-5 sm:gap-8 sm:pr-6 md:pr-8">
+          <div data-testid="work-gallery-track" className="flex w-max gap-5 pr-5 sm:gap-6 sm:pr-6 md:pr-8">
             {loopProjects.map((project, index) => {
               const isClone = index >= projectCount;
 
               return (
-                <article
+                <div
                   key={`${project.id}-${isClone ? "clone" : "real"}`}
-                  data-testid={isClone ? undefined : "work-gallery-card"}
                   data-work-gallery-index={index % projectCount}
                   aria-hidden={isClone}
-                  className="w-[calc(100vw-2.5rem)] shrink-0 overflow-hidden rounded-[32px] bg-[#0A1F57] px-4 py-4 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:w-[min(80vw,880px)] sm:rounded-[40px] sm:px-6 sm:py-6"
+                  className="w-[calc(100vw-2.5rem)] shrink-0 sm:w-[min(44vw,360px)] lg:w-[376px]"
                 >
-                  <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-stretch">
-                    <div className="relative aspect-[750/530] overflow-hidden rounded-2xl bg-[#EEF0EE] outline outline-1 -outline-offset-1 outline-white/10">
-                      <Image
-                        src={project.image}
-                        alt={project.name}
-                        fill
-                        draggable={false}
-                        sizes="(min-width: 1280px) 60vw, (min-width: 1024px) 66vw, 86vw"
-                        className={project.imageClassName}
-                      />
-                    </div>
-                    <div className="flex min-h-full flex-col items-center justify-between gap-8 py-2 text-center lg:items-start lg:px-2 lg:text-left">
-                      <div className="space-y-6">
-                        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/52 sm:text-[12px]">
-                          {project.date}
-                        </p>
-                        <div className="space-y-4">
-                          <h3 className="mx-auto max-w-[12ch] text-balance text-[30px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[38px] lg:mx-0">
-                            {project.name}
-                          </h3>
-                          <p className="mx-auto max-w-[48ch] text-pretty text-[15px] leading-6 text-white/80 sm:text-[17px] sm:leading-7 lg:mx-0">
-                            {project.description}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex w-full justify-center border-t border-white/12 pt-5 lg:justify-start">
-                        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/76 sm:text-[12px]">
-                          {project.ctaLabel}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                  <ProjectCard
+                    project={project}
+                    ctaLabel="See Project"
+                    testId={isClone ? undefined : "work-gallery-card"}
+                  />
+                </div>
               );
             })}
           </div>

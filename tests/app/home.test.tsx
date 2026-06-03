@@ -101,18 +101,29 @@ afterAll(() => {
 
 describe("Home page", () => {
   it("renders landing work gallery projects from backend content", async () => {
-    getPortfolioProjectsMock.mockResolvedValue([cmsProject()]);
+    getPortfolioProjectsMock.mockResolvedValue([
+      cmsProject(),
+      cmsProject({
+        id: "portfolioProject.cms-second-project",
+        slug: "cms-second-project",
+        name: "CMS Second Project",
+        description: "Another backend project.",
+      }),
+    ]);
 
     await renderHome();
 
     const cards = screen.getAllByTestId("work-gallery-card");
-    const dots = screen.getAllByTestId("work-gallery-dot");
 
     expect(getPortfolioProjectsMock).toHaveBeenCalledTimes(1);
-    expect(cards).toHaveLength(1);
-    expect(dots).toHaveLength(1);
+    expect(cards).toHaveLength(2);
+    expect(cards[0]).toHaveAttribute("href", "/portfolio/cms-home-project");
+    expect(cards[1]).toHaveAttribute("href", "/portfolio/cms-second-project");
     expect(within(cards[0]).getByRole("heading", { name: /cms home project/i, level: 3 })).toBeInTheDocument();
-    expect(within(cards[0]).getByText("Updated from backend.")).toBeInTheDocument();
+    expect(within(cards[0]).getByText("Updated from backend.")).toHaveClass("line-clamp-3");
+    expect(within(cards[0]).getByText(/see project/i)).toHaveClass("mt-auto");
+    expect(within(cards[1]).getByRole("heading", { name: /cms second project/i, level: 3 })).toBeInTheDocument();
+    expect(within(cards[1]).getByText("Another backend project.")).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: /firecrawl/i, level: 3 })).not.toBeInTheDocument();
   });
 
@@ -239,41 +250,41 @@ describe("Home page", () => {
     expect(workGallerySection).toHaveClass("lg:pb-16");
   });
 
-  it("renders the work gallery as an editorial carousel with masks and a CTA", async () => {
+  it("renders the work gallery as an animated backend project carousel with a CTA", async () => {
     await renderHome();
 
     const cards = screen.getAllByTestId("work-gallery-card");
     const carousel = screen.getByTestId("work-gallery-carousel");
     const track = screen.getByTestId("work-gallery-track");
+    const firstSlide = track.firstElementChild;
     const dots = screen.getAllByTestId("work-gallery-dot");
     const cta = screen.getByRole("link", { name: /view all projects/i });
 
     expect(cards).toHaveLength(4);
-    expect(cards[0]).toHaveClass("rounded-[32px]");
-    expect(cards[0]).toHaveClass("sm:rounded-[40px]");
+    expect(carousel).toHaveClass("overflow-x-auto");
+    expect(carousel).toHaveClass("cursor-grab");
+    expect(track).toHaveClass("flex");
+    expect(track).toHaveClass("w-max");
+    expect(firstSlide).toHaveClass("w-[calc(100vw-2.5rem)]");
+    expect(firstSlide).not.toHaveClass("max-w-[360px]");
+    expect(screen.getByTestId("work-gallery-dot-nav")).toBeInTheDocument();
+    expect(dots).toHaveLength(4);
+    expect(cards[0]).toHaveAttribute("href", "/portfolio/firecrawl-launch");
+    expect(cards[0]).toHaveClass("rounded-xl");
     expect(cards[0]).toHaveClass("bg-[#0A1F57]");
     expect(cards[0]).not.toHaveClass("bg-[#03123A]");
     expect(cards[0]).not.toHaveClass("bg-white");
     expect(cards[0].getAttribute("style") ?? "").not.toContain("clip-path");
-    expect(within(cards[0]).getByText(/view project/i)).toBeInTheDocument();
-    expect(within(cards[0]).getByText(/view project/i)).toHaveClass("text-white/76");
+    expect(within(cards[0]).getByText(/see project/i)).toBeInTheDocument();
+    expect(within(cards[0]).queryByText(/^view project$/i)).not.toBeInTheDocument();
+    expect(within(cards[0]).getByText(/see project/i)).toHaveClass("text-white/70");
     expect(within(cards[0]).getByRole("heading", { name: /firecrawl/i, level: 3 })).toHaveClass(
       "text-white",
     );
     expect(
       within(cards[0]).getByText(/built to make the product story easier to trust/i),
-    ).toHaveClass("text-white/80");
+    ).toHaveClass("text-white/70");
     expect(within(cards[0]).queryByText(/website · branding/i)).not.toBeInTheDocument();
-    expect(screen.getByTestId("work-gallery-dot-nav")).toBeInTheDocument();
-    expect(dots).toHaveLength(4);
-    expect(dots[0]).toHaveClass("bg-[#2C6BFF]");
-    expect(dots[1]).toHaveClass("bg-white/38");
-    expect(carousel).toHaveClass("overflow-x-auto");
-    expect(carousel).toHaveClass("px-5");
-    expect(track).toHaveClass("flex");
-    expect(track).toHaveClass("w-max");
-    expect(cards[0]).toHaveClass("w-[calc(100vw-2.5rem)]");
-    expect(cards[0]).toHaveClass("sm:w-[min(80vw,880px)]");
     expect(cta).toHaveAttribute("href", "/portfolio");
     expect(cta).toHaveClass("inline-flex");
     expect(cta).toHaveClass("items-center");
