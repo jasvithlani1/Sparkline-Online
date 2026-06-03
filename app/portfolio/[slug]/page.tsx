@@ -5,6 +5,8 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { getPortfolioProjectBySlug, getPortfolioProjects } from "@/sanity/lib/content";
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const projects = await getPortfolioProjects();
   return projects.map((project) => ({ slug: project.slug }));

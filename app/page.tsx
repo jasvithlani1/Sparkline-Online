@@ -8,6 +8,8 @@ import { ServiceBanner } from "@/components/landing/service-banner";
 import { WorkGallery } from "@/components/landing/work-gallery";
 import { getPortfolioProjects } from "@/sanity/lib/content";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const projects = await getPortfolioProjects();
 

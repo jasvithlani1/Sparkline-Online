@@ -9,6 +9,8 @@ import { getServiceBySlug, getServiceSlugs } from "@/sanity/lib/content";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 
+export const revalidate = 60;
+
 function withBrandBold(text: string) {
   const parts = text.split(BRAND);
   if (parts.length === 1) return text;

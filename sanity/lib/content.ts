@@ -351,13 +351,7 @@ export function toBlogPost(doc: BlogPostDocument): BlogPost {
 
 async function fetchSanity<T>(query: string, params?: Record<string, string>) {
   if (isTest) return null;
-
-  try {
-    return await client.fetch<T>(query, params ?? {});
-  } catch (error) {
-    console.warn("Sanity fetch failed; rendering static fallback content.", error);
-    return null;
-  }
+  return client.fetch<T>(query, params ?? {});
 }
 
 function fallbackServiceEntries(): ServiceEntry[] {

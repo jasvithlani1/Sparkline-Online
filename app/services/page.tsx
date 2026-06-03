@@ -8,6 +8,8 @@ export const metadata = {
   title: "Services — Sparkline Marketing Firm",
 };
 
+export const revalidate = 60;
+
 export default async function ServicesPage() {
   const servicesContent = await getServicesContent();
 

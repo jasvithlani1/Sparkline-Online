@@ -19,11 +19,9 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Blogs page", () => {
-  it("opts blog routes out of static prerender caching so Sanity edits refresh", () => {
-    expect((BlogIndexRoute as { dynamic?: string }).dynamic).toBe("force-dynamic");
-    expect((BlogIndexRoute as { revalidate?: number }).revalidate).toBe(0);
-    expect((BlogDetailRoute as { dynamic?: string }).dynamic).toBe("force-dynamic");
-    expect((BlogDetailRoute as { revalidate?: number }).revalidate).toBe(0);
+  it("uses ISR so Sanity edits refresh without permanently dynamic rendering", () => {
+    expect((BlogIndexRoute as { revalidate?: number }).revalidate).toBe(60);
+    expect((BlogDetailRoute as { revalidate?: number }).revalidate).toBe(60);
   });
 
   it("filters injected CMS posts by category", () => {

@@ -7,6 +7,8 @@ export const metadata = {
   title: "Portfolio — Sparkline Marketing Firm",
 };
 
+export const revalidate = 60;
+
 export default async function PortfolioPage() {
   const projects = await getPortfolioProjects();
 
