@@ -71,10 +71,10 @@ export default async function ServiceDetailPage({
               aria-hidden="true"
               className="mx-auto h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)] sm:mx-0"
             />
-            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[17px] leading-[1.7] text-white/80 sm:mx-0 sm:text-[18px] md:text-[20px] md:leading-[1.7]">
+            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[19px] leading-[1.7] text-white/80 sm:mx-0 sm:text-[20px] md:text-[22px] md:leading-[1.7]">
               {withBrandBold(detail.lead)}
             </p>
-            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[16px] leading-[1.7] text-white/65 sm:mx-0 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto max-w-[72ch] text-left text-pretty text-[18px] leading-[1.7] text-white/65 sm:mx-0 sm:text-[19px] md:text-[20px]">
               {withBrandBold(detail.intro)}
             </p>
           </div>
@@ -94,7 +94,7 @@ export default async function ServiceDetailPage({
                 className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
               />
             </div>
-            <p className="max-w-[62ch] whitespace-pre-line text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+            <p className="max-w-[62ch] whitespace-pre-line text-pretty text-[18px] leading-[1.7] text-white/75 sm:text-[19px] md:text-[20px]">
               {withBrandBold(detail.whyUs.body)}
             </p>
           </div>
@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({
               className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
           </div>
-          <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-3 text-[16px] leading-[1.55] text-white/75 sm:grid-cols-2 md:mt-10 md:text-[17px]">
+          <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-3 text-[18px] leading-[1.55] text-white/75 sm:grid-cols-2 md:mt-10 md:text-[19px]">
             {detail.problems.items.map((problem) => (
               <li
                 key={problem}
@@ -170,7 +170,7 @@ export default async function ServiceDetailPage({
                   className="h-[2px] w-10 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
                 />
               </div>
-              <ol className="mt-8 flex flex-col text-[16px] leading-[1.5] text-white/80 md:text-[17px]">
+              <ol className="mt-8 flex flex-col text-[18px] leading-[1.5] text-white/80 md:text-[19px]">
                 {detail.cornerstones.items.map((item, i) => (
                   <li
                     key={item}
@@ -199,7 +199,7 @@ export default async function ServiceDetailPage({
                 {((detail as { specialties?: readonly string[] }).specialties ?? card.items).map((item) => (
                   <li
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[14px] leading-[1.2] text-white/80 md:text-[15px]"
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[16px] leading-[1.2] text-white/80 md:text-[17px]"
                   >
                     {item}
                   </li>
@@ -249,7 +249,7 @@ export default async function ServiceDetailPage({
                 className="h-[2px] w-12 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
               />
             </div>
-            <p className="max-w-[62ch] text-pretty text-[16px] leading-[1.7] text-white/75 sm:text-[17px] md:text-[18px]">
+            <p className="max-w-[62ch] text-pretty text-[18px] leading-[1.7] text-white/75 sm:text-[19px] md:text-[20px]">
               {withBrandBold(detail.process.body)}
             </p>
           </div>
@@ -270,7 +270,7 @@ export default async function ServiceDetailPage({
             <h2 className="hero-copy mx-auto max-w-[18ch] text-center text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:mx-0 sm:text-left sm:text-[44px] md:text-[56px]">
               {detail.cta.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-left text-pretty text-[16px] leading-7 text-white/70 sm:mx-0 sm:text-[17px] md:text-[18px]">
+            <p className="mx-auto mt-5 max-w-[58ch] text-left text-pretty text-[18px] leading-7 text-white/70 sm:mx-0 sm:text-[19px] md:text-[20px]">
               {detail.cta.body}
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">

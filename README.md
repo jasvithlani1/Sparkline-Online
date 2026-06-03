@@ -13,6 +13,10 @@ npm run dev
 
 Then open `http://localhost:3000`.
 
+## Contact form email
+
+The contact form posts directly to Formspree at `https://formspree.io/f/meewjvgj`, which forwards submissions to `info@sparklinemarketingfirm.com`.
+
 ## Verification
 
 Run the automated checks with:

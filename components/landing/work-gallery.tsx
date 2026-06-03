@@ -6,22 +6,36 @@ import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } f
 import { SectionHeading } from "@/components/landing/section-heading";
 import { workGallery } from "@/lib/content";
 
+type WorkGalleryProject = {
+  id: string;
+  name: string;
+  date: string;
+  description: string;
+  ctaLabel: string;
+  image: string;
+  imageClassName: string;
+};
+
+type WorkGalleryProps = {
+  projects?: readonly WorkGalleryProject[];
+};
+
 function getCarouselCards(node: HTMLDivElement) {
   return Array.from(node.querySelectorAll<HTMLElement>("[data-work-gallery-index]"));
 }
 
-function getLoopWidth(node: HTMLDivElement) {
+function getLoopWidth(node: HTMLDivElement, projectCount: number) {
   const cards = getCarouselCards(node);
 
-  if (cards.length > workGallery.projects.length) {
-    return cards[workGallery.projects.length].offsetLeft - cards[0].offsetLeft;
+  if (projectCount > 0 && cards.length > projectCount) {
+    return cards[projectCount].offsetLeft - cards[0].offsetLeft;
   }
 
   return node.scrollWidth / 2;
 }
 
-function normalizeCarouselScroll(node: HTMLDivElement) {
-  const loopWidth = getLoopWidth(node);
+function normalizeCarouselScroll(node: HTMLDivElement, projectCount: number) {
+  const loopWidth = getLoopWidth(node, projectCount);
 
   if (node.scrollLeft <= 0) {
     node.scrollLeft += loopWidth;
@@ -58,7 +72,9 @@ function getActiveCardIndex(node: HTMLDivElement) {
   return activeIndex;
 }
 
-export function WorkGallery() {
+export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProps) {
+  const displayProjects = projects.length > 0 ? projects : workGallery.projects;
+  const projectCount = displayProjects.length;
   const carouselRef = useRef<HTMLDivElement>(null);
   const resumeTimerRef = useRef<number | undefined>(undefined);
   const dragState = useRef({
@@ -76,7 +92,7 @@ export function WorkGallery() {
       return;
     }
 
-    const sequenceWidth = getLoopWidth(node);
+    const sequenceWidth = getLoopWidth(node, projectCount);
     node.scrollLeft = sequenceWidth;
 
     let frameId = 0;
@@ -89,7 +105,7 @@ export function WorkGallery() {
       if (!isPaused) {
         node.scrollLeft -= delta * 0.03;
 
-        normalizeCarouselScroll(node);
+        normalizeCarouselScroll(node, projectCount);
         setActiveIndex(getActiveCardIndex(node));
       }
 
@@ -104,7 +120,7 @@ export function WorkGallery() {
         window.clearTimeout(resumeTimerRef.current);
       }
     };
-  }, [isPaused]);
+  }, [isPaused, projectCount]);
 
   const pauseTemporarily = () => {
     setIsPaused(true);
@@ -124,7 +140,7 @@ export function WorkGallery() {
     if (!node) {
       return;
     }
-    normalizeCarouselScroll(node);
+    normalizeCarouselScroll(node, projectCount);
     setActiveIndex(getActiveCardIndex(node));
   };
 
@@ -199,7 +215,7 @@ export function WorkGallery() {
     setActiveIndex(index);
   };
 
-  const loopProjects = [...workGallery.projects, ...workGallery.projects];
+  const loopProjects = [...displayProjects, ...displayProjects];
 
   return (
     <section
@@ -225,13 +241,13 @@ export function WorkGallery() {
         >
           <div data-testid="work-gallery-track" className="flex w-max gap-6 pr-5 sm:gap-8 sm:pr-6 md:pr-8">
             {loopProjects.map((project, index) => {
-              const isClone = index >= workGallery.projects.length;
+              const isClone = index >= projectCount;
 
               return (
                 <article
                   key={`${project.id}-${isClone ? "clone" : "real"}`}
                   data-testid={isClone ? undefined : "work-gallery-card"}
-                  data-work-gallery-index={index % workGallery.projects.length}
+                  data-work-gallery-index={index % projectCount}
                   aria-hidden={isClone}
                   className="w-[calc(100vw-2.5rem)] shrink-0 overflow-hidden rounded-[32px] bg-[#0A1F57] px-4 py-4 shadow-[0_24px_60px_rgba(4,10,32,0.28)] sm:w-[min(80vw,880px)] sm:rounded-[40px] sm:px-6 sm:py-6"
                 >
@@ -275,7 +291,7 @@ export function WorkGallery() {
       </div>
       <div className="mx-auto mt-3 flex max-w-[1208px] flex-col gap-10 px-5 sm:mt-4 sm:gap-12 sm:px-6 md:mt-5 md:gap-14 md:px-8">
         <div data-testid="work-gallery-dot-nav" className="flex justify-center gap-3">
-          {workGallery.projects.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <button
               key={`${project.id}-dot`}
               type="button"

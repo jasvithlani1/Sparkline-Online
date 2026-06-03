@@ -69,6 +69,93 @@ describe("Services pages", () => {
     expect(intro).toHaveClass("text-left");
   });
 
+  it("lets services intro paragraphs span the full section width", () => {
+    render(
+      <OurServices
+        content={{
+          eyebrow: "OUR SERVICES",
+          intro: ["CMS intro paragraph"],
+          ctaLabel: "Learn More",
+          cards: [
+            {
+              id: "cms-service",
+              title: "CMS\nService",
+              items: ["CMS strategy"],
+            },
+          ],
+        }}
+      />,
+    );
+
+    const introGroup = screen.getByText("CMS intro paragraph").parentElement;
+
+    expect(introGroup).toHaveClass("w-full");
+    expect(introGroup).not.toHaveClass("max-w-[1024px]");
+  });
+
+  it("uses 2px larger text for service card content", () => {
+    render(
+      <OurServices
+        content={{
+          eyebrow: "OUR SERVICES",
+          intro: ["CMS intro"],
+          ctaLabel: "Learn More",
+          cards: [
+            {
+              id: "cms-service",
+              title: "CMS\nService",
+              items: ["CMS strategy", "CMS analytics"],
+            },
+          ],
+        }}
+      />,
+    );
+
+    const cardContent = screen.getByText("CMS strategy").closest("ul");
+
+    expect(cardContent).toHaveClass("text-[17px]");
+    expect(cardContent).toHaveClass("md:text-[18px]");
+  });
+
+  it("uses 2px larger text for shared service detail content", async () => {
+    const page = await ServiceDetailPage({
+      params: Promise.resolve({ slug: "digital-marketing" }),
+    });
+
+    render(page);
+
+    const lead = screen.getByText(/Digital marketing helps your business reach the right audience/i);
+    const intro = screen.getByText(/Our digital marketing services combine strategy/i);
+    const whyUs = screen.getByText(/Choose a digital marketing team that blends strategy/i);
+    const problems = screen.getByText("Low website traffic and weak visibility").closest("ul");
+    const cornerstones = screen.getByText("Audience First Strategy").closest("ol");
+    const specialty = screen.getByText("Search Engine Optimisation");
+    const process = screen.getByText(/We begin by understanding your business/i);
+    const cta = screen.getByText(/Ready to scale smarter with digital marketing/i);
+
+    expect(lead).toHaveClass("text-[19px]");
+    expect(lead).toHaveClass("sm:text-[20px]");
+    expect(lead).toHaveClass("md:text-[22px]");
+    expect(intro).toHaveClass("text-[18px]");
+    expect(intro).toHaveClass("sm:text-[19px]");
+    expect(intro).toHaveClass("md:text-[20px]");
+    expect(whyUs).toHaveClass("text-[18px]");
+    expect(whyUs).toHaveClass("sm:text-[19px]");
+    expect(whyUs).toHaveClass("md:text-[20px]");
+    expect(problems).toHaveClass("text-[18px]");
+    expect(problems).toHaveClass("md:text-[19px]");
+    expect(cornerstones).toHaveClass("text-[18px]");
+    expect(cornerstones).toHaveClass("md:text-[19px]");
+    expect(specialty).toHaveClass("text-[16px]");
+    expect(specialty).toHaveClass("md:text-[17px]");
+    expect(process).toHaveClass("text-[18px]");
+    expect(process).toHaveClass("sm:text-[19px]");
+    expect(process).toHaveClass("md:text-[20px]");
+    expect(cta).toHaveClass("text-[18px]");
+    expect(cta).toHaveClass("sm:text-[19px]");
+    expect(cta).toHaveClass("md:text-[20px]");
+  });
+
   it("moves the services FAQ section upward", async () => {
     const page = await ServicesPage();
     const { container } = render(page);

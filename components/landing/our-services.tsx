@@ -71,7 +71,7 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
               className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
             />
           </div>
-          <div className="flex w-full max-w-[1024px] flex-col gap-5 sm:gap-6">
+          <div className="flex w-full flex-col gap-5 sm:gap-6">
             {content.intro.map((paragraph, index) => {
               const phrases = [BRAND, ...(PARAGRAPH_BOLD[index] ?? [])];
               return (
@@ -110,7 +110,7 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
                   className="h-[2px] w-full rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
                 />
               </div>
-              <ul className="flex flex-1 flex-col gap-2 text-[15px] leading-[1.45] text-white/70 md:text-[16px]">
+              <ul className="flex flex-1 flex-col gap-2 text-[17px] leading-[1.45] text-white/70 md:text-[18px]">
                 {card.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

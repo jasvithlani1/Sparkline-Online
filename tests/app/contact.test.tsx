@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import ContactPage, { buildContactMailtoUrl } from "@/app/contact/page";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import ContactPage from "@/app/contact/page";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -17,35 +17,16 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Contact page", () => {
-  it("builds a formatted mailto URL for contact form submissions", () => {
-    const mailtoUrl = buildContactMailtoUrl({
-      name: "Taylor Client",
-      email: "taylor@example.com",
-      subject: "Growth campaign",
-      message: "We need help with SEO and content.",
-    });
-
-    const parsed = new URL(mailtoUrl);
-
-    expect(parsed.protocol).toBe("mailto:");
-    expect(parsed.pathname).toBe("info@sparklinemarketingfirm.com");
-    expect(parsed.searchParams.get("subject")).toBe(
-      "Website enquiry: Growth campaign",
-    );
-    expect(parsed.searchParams.get("body")).toBe(
-      [
-        "Name: Taylor Client",
-        "Email: taylor@example.com",
-        "Subject: Growth campaign",
-        "",
-        "Message:",
-        "We need help with SEO and content.",
-      ].join("\n"),
-    );
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
-  it("opens a formatted mailto message when the contact form is submitted", () => {
-    const openMock = vi.spyOn(window, "open").mockImplementation(() => null);
+  it("posts contact form submissions directly to Formspree", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({ ok: true }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
 
     render(<ContactPage />);
 
@@ -63,18 +44,23 @@ describe("Contact page", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
-    expect(openMock).toHaveBeenCalledWith(
-      buildContactMailtoUrl({
-        name: "Taylor Client",
-        email: "taylor@example.com",
-        subject: "Growth campaign",
-        message: "We need help with SEO and content.",
-      }),
-      "_self",
-    );
-    expect(screen.getByText(/thank you/i)).toBeInTheDocument();
+    await waitFor(() => {
+      const [, request] = fetchMock.mock.calls[0];
+      const body = request.body as FormData;
 
-    openMock.mockRestore();
+      expect(fetchMock).toHaveBeenCalledWith(
+        "https://formspree.io/f/meewjvgj",
+        expect.objectContaining({
+          method: "POST",
+          headers: { Accept: "application/json" },
+        }),
+      );
+      expect(body.get("name")).toBe("Taylor Client");
+      expect(body.get("email")).toBe("taylor@example.com");
+      expect(body.get("subject")).toBe("Growth campaign");
+      expect(body.get("message")).toBe("We need help with SEO and content.");
+    });
+    expect(screen.getByText(/thank you/i)).toBeInTheDocument();
   });
 
   it("shows the current contact details in the main contact section and footer", () => {

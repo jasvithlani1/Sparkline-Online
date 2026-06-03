@@ -2,6 +2,8 @@
 
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
+import { workGallery } from "@/lib/content";
+import { getPortfolioProjects } from "@/sanity/lib/content";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -16,9 +18,47 @@ vi.mock("next/image", () => ({
   },
 }));
 
+vi.mock("@/sanity/lib/content", () => ({
+  getPortfolioProjects: vi.fn(),
+}));
+
 const intersectionObserverMock = vi.fn();
 const playMock = vi.fn().mockResolvedValue(undefined);
 const pauseMock = vi.fn();
+const getPortfolioProjectsMock = vi.mocked(getPortfolioProjects);
+
+type PortfolioProject = Awaited<ReturnType<typeof getPortfolioProjects>>[number];
+
+function cmsProject(overrides: Partial<PortfolioProject> = {}): PortfolioProject {
+  return {
+    id: "portfolioProject.cms-home-project",
+    slug: "cms-home-project",
+    name: "CMS Home Project",
+    date: "June 1, 2026",
+    meta: "CMS",
+    description: "Updated from backend.",
+    ctaLabel: "View Project",
+    image: "/images/work-firecrawl.png",
+    imageClassName: "object-cover object-center",
+    intro: "CMS intro",
+    tagline: "CMS tagline",
+    summary: "CMS summary",
+    services: ["CMS"],
+    sections: [],
+    ...overrides,
+  };
+}
+
+async function renderHome() {
+  const page = await Home();
+  return render(page);
+}
+
+beforeEach(() => {
+  getPortfolioProjectsMock.mockResolvedValue(
+    [...workGallery.projects] as unknown as Awaited<ReturnType<typeof getPortfolioProjects>>,
+  );
+});
 
 beforeAll(() => {
   class MockIntersectionObserver implements IntersectionObserver {
@@ -51,6 +91,7 @@ afterEach(() => {
   intersectionObserverMock.mockClear();
   playMock.mockClear();
   pauseMock.mockClear();
+  getPortfolioProjectsMock.mockReset();
 });
 
 afterAll(() => {
@@ -59,8 +100,24 @@ afterAll(() => {
 });
 
 describe("Home page", () => {
-  it("renders the approved landing page sections and copy", () => {
-    const { container } = render(<Home />);
+  it("renders landing work gallery projects from backend content", async () => {
+    getPortfolioProjectsMock.mockResolvedValue([cmsProject()]);
+
+    await renderHome();
+
+    const cards = screen.getAllByTestId("work-gallery-card");
+    const dots = screen.getAllByTestId("work-gallery-dot");
+
+    expect(getPortfolioProjectsMock).toHaveBeenCalledTimes(1);
+    expect(cards).toHaveLength(1);
+    expect(dots).toHaveLength(1);
+    expect(within(cards[0]).getByRole("heading", { name: /cms home project/i, level: 3 })).toBeInTheDocument();
+    expect(within(cards[0]).getByText("Updated from backend.")).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /firecrawl/i, level: 3 })).not.toBeInTheDocument();
+  });
+
+  it("renders the approved landing page sections and copy", async () => {
+    const { container } = await renderHome();
     const main = container.querySelector("main");
     const brandLink = screen.getByRole("link", { name: /sparkline marketing firm/i });
     const navbar = screen.getByTestId("site-navbar");
@@ -135,15 +192,15 @@ describe("Home page", () => {
     );
   });
 
-  it("does not render the temporary bottom-right service video overlay", () => {
-    render(<Home />);
+  it("does not render the temporary bottom-right service video overlay", async () => {
+    await renderHome();
 
     expect(screen.queryByTestId("service-submarine-frame")).not.toBeInTheDocument();
     expect(screen.queryByTestId("service-submarine-video")).not.toBeInTheDocument();
   });
 
-  it("renders trusted-by logos as two full-width marquee rows with opposite directions", () => {
-    render(<Home />);
+  it("renders trusted-by logos as two full-width marquee rows with opposite directions", async () => {
+    await renderHome();
 
     const marquee = screen.getByTestId("trusted-by-marquee");
     const rowOne = screen.getByTestId("trusted-by-row-0");
@@ -158,8 +215,8 @@ describe("Home page", () => {
     expect(rowTwo).toHaveClass("logo-marquee-track--reverse");
   });
 
-  it("tightens the space from trusted-by into work highlights", () => {
-    render(<Home />);
+  it("tightens the space from trusted-by into work highlights", async () => {
+    await renderHome();
 
     const trustedBySection = screen.getByTestId("trusted-by-section");
     const workGallerySection = screen.getByTestId("work-gallery-section");
@@ -182,8 +239,8 @@ describe("Home page", () => {
     expect(workGallerySection).toHaveClass("lg:pb-16");
   });
 
-  it("renders the work gallery as an editorial carousel with masks and a CTA", () => {
-    render(<Home />);
+  it("renders the work gallery as an editorial carousel with masks and a CTA", async () => {
+    await renderHome();
 
     const cards = screen.getAllByTestId("work-gallery-card");
     const carousel = screen.getByTestId("work-gallery-carousel");
@@ -244,8 +301,8 @@ describe("Home page", () => {
     );
   });
 
-  it("renders the service banner background video with the new poster and mp4 source", () => {
-    render(<Home />);
+  it("renders the service banner background video with the new poster and mp4 source", async () => {
+    await renderHome();
 
     const serviceBannerShell = screen.getByTestId("service-banner-shell");
     const serviceVideo = screen.getByTestId("service-banner-video");
@@ -268,8 +325,8 @@ describe("Home page", () => {
     expect(webmSource).toBeNull();
   });
 
-  it("renders the service options list as links to service detail pages", () => {
-    render(<Home />);
+  it("renders the service options list as links to service detail pages", async () => {
+    await renderHome();
 
     const toggle = screen.getByTestId("service-options-toggle");
     const digitalMarketingLink = within(toggle).getByRole("link", { name: /^digital marketing$/i });
@@ -290,8 +347,8 @@ describe("Home page", () => {
     ).toBeInTheDocument();
   });
 
-  it("shrinks the service toggle card footprint by about half", () => {
-    render(<Home />);
+  it("shrinks the service toggle card footprint by about half", async () => {
+    await renderHome();
 
     const serviceHeading = screen.getByRole("heading", { name: /how can we serve you\?/i, level: 2 });
     const serviceFrame = serviceHeading.parentElement;
@@ -358,8 +415,8 @@ describe("Home page", () => {
     )).toBeInTheDocument();
   });
 
-  it("gives the second hero line its own text box to avoid clipping", () => {
-    render(<Home />);
+  it("gives the second hero line its own text box to avoid clipping", async () => {
+    await renderHome();
 
     const heroSecondLine = screen.getByTestId("hero-second-line");
 
@@ -367,8 +424,8 @@ describe("Home page", () => {
     expect(heroSecondLine).toHaveClass("pb-[0.08em]");
   });
 
-  it("keeps the navbar compact and the hero readable on smaller screens", () => {
-    render(<Home />);
+  it("keeps the navbar compact and the hero readable on smaller screens", async () => {
+    await renderHome();
 
     const navbar = screen.getByTestId("site-navbar");
     const brandLogo = within(navbar).getByAltText(/sparkline marketing firm/i);
@@ -406,8 +463,8 @@ describe("Home page", () => {
     expect(within(mobileNavPanel).getByRole("link", { name: /^services$/i })).toBeInTheDocument();
   });
 
-  it("keeps the navbar fixed and darkens it after scroll", () => {
-    render(<Home />);
+  it("keeps the navbar fixed and darkens it after scroll", async () => {
+    await renderHome();
 
     const navbar = screen.getByTestId("site-navbar");
     const navbarShell = screen.getByTestId("site-navbar-shell");
@@ -427,8 +484,8 @@ describe("Home page", () => {
     expect(navbarShell).toHaveClass("shadow-[0_14px_40px_rgba(4,10,24,0.28)]");
   });
 
-  it("renders the footer from the currently selected design frame", () => {
-    render(<Home />);
+  it("renders the footer from the currently selected design frame", async () => {
+    await renderHome();
 
     const footer = screen.getByRole("contentinfo");
     const footerLogo = within(footer).getByAltText(/sparkline marketing firm/i);
@@ -480,8 +537,8 @@ describe("Home page", () => {
     );
   });
 
-  it("keeps the hero locked to a single viewport with a looping background video and no submarine image", () => {
-    render(<Home />);
+  it("keeps the hero locked to a single viewport with a looping background video and no submarine image", async () => {
+    await renderHome();
 
     const heroSection = screen.getByTestId("hero-section");
     const heroVideo = screen.getByTestId("hero-background-video");

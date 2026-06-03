@@ -4,42 +4,12 @@ import { useState } from "react";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 
-const CONTACT_FORM_RECIPIENT = "info@sparklinemarketingfirm.com";
-
-type ContactFormValues = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-function getFormValue(formData: FormData, field: keyof ContactFormValues) {
-  return String(formData.get(field) ?? "").trim();
-}
-
-export function buildContactMailtoUrl({
-  name,
-  email,
-  subject,
-  message,
-}: ContactFormValues) {
-  const normalizedSubject = subject.trim() || "New contact form message";
-  const body = [
-    `Name: ${name.trim()}`,
-    `Email: ${email.trim()}`,
-    `Subject: ${normalizedSubject}`,
-    "",
-    "Message:",
-    message.trim(),
-  ].join("\n");
-
-  return `mailto:${CONTACT_FORM_RECIPIENT}?subject=${encodeURIComponent(
-    `Website enquiry: ${normalizedSubject}`,
-  )}&body=${encodeURIComponent(body)}`;
-}
+const FORMSPREE_CONTACT_ENDPOINT = "https://formspree.io/f/meewjvgj";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050C1E]">
@@ -187,19 +157,35 @@ export default function ContactPage() {
               </div>
             ) : (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   const formData = new FormData(e.currentTarget);
-                  const mailtoUrl = buildContactMailtoUrl({
-                    name: getFormValue(formData, "name"),
-                    email: getFormValue(formData, "email"),
-                    subject: getFormValue(formData, "subject"),
-                    message: getFormValue(formData, "message"),
-                  });
 
-                  window.open(mailtoUrl, "_self");
-                  setSubmitted(true);
+                  setIsSubmitting(true);
+                  setErrorMessage("");
+
+                  try {
+                    const response = await fetch(FORMSPREE_CONTACT_ENDPOINT, {
+                      method: "POST",
+                      headers: { Accept: "application/json" },
+                      body: formData,
+                    });
+
+                    if (!response.ok) {
+                      const data = (await response.json().catch(() => null)) as { error?: string } | null;
+                      setErrorMessage(data?.error ?? "Unable to send your message right now.");
+                      setIsSubmitting(false);
+                      return;
+                    }
+
+                    setSubmitted(true);
+                  } catch {
+                    setErrorMessage("Unable to send your message right now.");
+                    setIsSubmitting(false);
+                  }
                 }}
+                action={FORMSPREE_CONTACT_ENDPOINT}
+                method="POST"
                 className="space-y-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
               >
                 <div className="grid gap-6 sm:grid-cols-2">
@@ -271,8 +257,15 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {errorMessage ? (
+                  <p role="alert" className="text-[14px] leading-6 text-red-200">
+                    {errorMessage}
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
                   style={{
                     paddingInline: "16px",
@@ -292,7 +285,7 @@ export default function ContactPage() {
                       '"Geist-SemiBold", "Geist", system-ui, sans-serif',
                   }}
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                   <span aria-hidden="true">&rarr;</span>
                 </button>
               </form>

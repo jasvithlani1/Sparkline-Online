@@ -22,7 +22,7 @@ export default async function ServicesPage() {
           loop
           muted
           playsInline
-          className="pointer-events-none absolute inset-x-0 top-0 h-full w-full translate-y-0 object-cover object-center md:inset-0 md:h-[110%]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover object-center md:inset-0 md:h-[110%]"
         >
           <source src="/videos/services-hero-v2.mp4" type="video/mp4" />
         </video>

@@ -6,8 +6,11 @@ import { LogoGrid } from "@/components/landing/logo-grid";
 import { Navbar } from "@/components/landing/navbar";
 import { ServiceBanner } from "@/components/landing/service-banner";
 import { WorkGallery } from "@/components/landing/work-gallery";
+import { getPortfolioProjects } from "@/sanity/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getPortfolioProjects();
+
   return (
     <main className="min-h-screen bg-white">
       <div className="relative">
@@ -21,7 +24,7 @@ export default function Home() {
       >
         <ServiceBanner />
         <LogoGrid />
-        <WorkGallery />
+        <WorkGallery projects={projects} />
         <Faq />
       </div>
       <Footer />
