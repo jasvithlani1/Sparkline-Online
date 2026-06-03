@@ -77,7 +77,7 @@ describe("Services pages", () => {
     const faqSection = screen.getByTestId("faq-section");
 
     expect(heroVideo).toHaveClass("top-0");
-    expect(heroVideo).toHaveClass("h-[76%]");
+    expect(heroVideo).toHaveClass("h-full");
     expect(heroVideo).toHaveClass("translate-y-0");
     expect(heroVideo).toHaveClass("md:inset-0");
     expect(heroVideo).toHaveClass("md:h-[110%]");

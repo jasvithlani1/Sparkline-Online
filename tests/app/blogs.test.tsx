@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { fireEvent, render, screen } from "@testing-library/react";
-import BlogsPage from "@/app/blogs/page";
-import BlogPostPage from "@/app/blogs/[slug]/page";
+import BlogsPage, * as BlogIndexRoute from "@/app/blogs/page";
+import BlogPostPage, * as BlogDetailRoute from "@/app/blogs/[slug]/page";
 import { BlogList } from "@/components/blogs/blog-list";
 
 vi.mock("next/image", () => ({
@@ -19,6 +19,13 @@ vi.mock("next/image", () => ({
 }));
 
 describe("Blogs page", () => {
+  it("opts blog routes out of static prerender caching so Sanity edits refresh", () => {
+    expect((BlogIndexRoute as { dynamic?: string }).dynamic).toBe("force-dynamic");
+    expect((BlogIndexRoute as { revalidate?: number }).revalidate).toBe(0);
+    expect((BlogDetailRoute as { dynamic?: string }).dynamic).toBe("force-dynamic");
+    expect((BlogDetailRoute as { revalidate?: number }).revalidate).toBe(0);
+  });
+
   it("filters injected CMS posts by category", () => {
     render(
       <BlogList

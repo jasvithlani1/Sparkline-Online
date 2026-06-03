@@ -56,15 +56,12 @@ describe("Portfolio page", () => {
     const footerContent = screen.getByTestId("footer-content");
 
     expect(heroVideo).toHaveClass("top-0");
-    expect(heroVideo).toHaveClass("h-[76%]");
+    expect(heroVideo).toHaveClass("h-full");
     expect(heroVideo).toHaveClass("translate-y-0");
     expect(heroVideo).toHaveClass("md:inset-0");
     expect(heroVideo).toHaveClass("md:h-[110%]");
-    expect(projectsSection).toHaveClass("pt-10");
+    expect(projectsSection).toHaveClass("pt-0");
     expect(projectsSection).toHaveClass("pb-0");
-    expect(projectsSection).toHaveClass("sm:pt-12");
-    expect(projectsSection).toHaveClass("sm:pb-0");
-    expect(projectsSection).toHaveClass("md:pt-14");
     expect(projectsSection).toHaveClass("md:pb-2");
     expect(footerContent).toHaveClass("pt-8");
     expect(footerContent).toHaveClass("sm:pt-10");
