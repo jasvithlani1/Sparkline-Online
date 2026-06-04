@@ -18,13 +18,13 @@ export default async function PortfolioPage() {
 
       {/* Video hero */}
       <section className="relative h-[68svh] min-h-[460px] w-full overflow-hidden sm:h-[72svh] md:h-[82svh] lg:h-screen">
-        {/* Video — cropped ~10% off bottom to hide watermark */}
+        {/* Video hero */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="pointer-events-none absolute inset-x-0 top-0 h-[76%] w-full translate-y-0 object-cover object-top md:inset-0 md:h-[110%]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-full w-full translate-y-0 object-cover object-top md:inset-0 md:h-[110%]"
         >
           <source src="/videos/portfolio-hero.webm" type="video/webm" />
           <source src="/videos/portfolio-hero.mp4" type="video/mp4" />
