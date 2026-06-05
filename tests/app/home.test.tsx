@@ -180,6 +180,10 @@ describe("Home page", () => {
     expect(brandLogo).toHaveClass("lg:w-[162px]");
     const ctaButton = screen.getByRole("link", { name: /book a call/i });
     expect(ctaButton).toBeInTheDocument();
+    expect(ctaButton).toHaveAttribute(
+      "href",
+      "https://crm.sparklinemarketingfirm.com/widget/booking/fseh3NlrLcMcooAlLbLB",
+    );
     expect(ctaButton).toHaveClass("inline-flex");
     expect(ctaButton).toHaveClass("items-center");
     expect(ctaButton).toHaveClass("justify-center");
