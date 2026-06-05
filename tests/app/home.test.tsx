@@ -214,12 +214,13 @@ describe("Home page", () => {
     expect(screen.queryByTestId("service-submarine-video")).not.toBeInTheDocument();
   });
 
-  it("renders trusted-by logos as two full-width marquee rows with opposite directions", async () => {
+  it("renders trusted-by logos as one full-width image marquee row", async () => {
     await renderHome();
 
     const marquee = screen.getByTestId("trusted-by-marquee");
     const rowOne = screen.getByTestId("trusted-by-row-0");
-    const rowTwo = screen.getByTestId("trusted-by-row-1");
+    const logoGroup = rowOne.querySelector("div");
+    const logoImages = within(rowOne).getAllByRole("img", { name: /trusted brand logo/i });
 
     expect(marquee).toHaveClass("overflow-hidden");
     expect(marquee).toHaveClass("w-screen");
@@ -227,7 +228,14 @@ describe("Home page", () => {
     expect(rowOne).toHaveClass("logo-marquee-track");
     expect(rowOne).not.toHaveClass("logo-marquee-track--reverse");
     expect(rowOne).toHaveAttribute("data-testid", "trusted-by-row-0");
-    expect(rowTwo).toHaveClass("logo-marquee-track--reverse");
+    expect(logoGroup).toHaveClass("gap-[30px]");
+    expect(logoGroup).toHaveClass("pr-[30px]");
+    expect(screen.queryByTestId("trusted-by-row-1")).not.toBeInTheDocument();
+    expect(logoImages).toHaveLength(7);
+    expect(logoImages[0]).toHaveAttribute("src", "/images/trusted-by/q1.jpeg");
+    expect(logoImages[0]).toHaveClass("aspect-square");
+    expect(logoImages[0]).toHaveClass("rounded-[8px]");
+    expect(screen.queryByText(/Antimetal/i)).not.toBeInTheDocument();
   });
 
   it("tightens the space from trusted-by into work highlights", async () => {

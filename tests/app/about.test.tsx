@@ -60,16 +60,15 @@ describe("About page", () => {
     ).toBeInTheDocument();
     expect(within(founderSections[1]).queryByText(/^co-founder$/i)).not.toBeInTheDocument();
     expect(within(founderSections[1]).getByText(/02\s*\/\s*co-founder/i)).toBeInTheDocument();
-    expect(founderSections[1]).toHaveTextContent(/over 30 countries/i);
-    expect(founderSections[1]).toHaveTextContent(/galapagos islands/i);
+    expect(founderSections[1]).toHaveTextContent(/i love what i do/i);
+    expect(founderSections[1]).toHaveTextContent(/i come from a big family/i);
+    expect(founderSections[1]).toHaveTextContent(/travel has always been my thing/i);
     expect(founderSections[1]).toHaveTextContent(/university of alabama/i);
     expect(founderSections[1]).toHaveTextContent(/marketing specialist/i);
     expect(founderSections[1]).toHaveTextContent(/pastor and his church in bermuda/i);
-    expect(founderSections[1]).toHaveTextContent(/cofounded sparkline marketing firm with my sister ashlan/i);
-    expect(founderSections[1]).toHaveTextContent(/cohesive and true/i);
-    expect(founderSections[1]).toHaveTextContent(/genuinely curious about your business/i);
-    expect(founderSections[1]).toHaveTextContent(/make people feel like they belong/i);
-    expect(founderSections[1]).toHaveTextContent(/that is what i am here to help you build/i);
+    expect(founderSections[1]).toHaveTextContent(/captured the warmth, the color and the vibrant culture/i);
+    expect(founderSections[1]).toHaveTextContent(/cofound sparkline with my sister ashlan/i);
+    expect(founderSections[1]).toHaveTextContent(/who is all in from day one/i);
 
     expect(foundersSection).toHaveClass("pb-0");
     expect(foundersSection).toHaveClass("sm:pb-0");
