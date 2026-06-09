@@ -394,11 +394,17 @@ describe("Home page", () => {
     expect(divider).not.toHaveClass("divide-black/10");
     expect(digitalMarketingLink).toHaveClass("px-3");
     expect(digitalMarketingLink).toHaveClass("py-3");
+    expect(digitalMarketingLink).toHaveClass("text-white");
+    expect(digitalMarketingLink).toHaveClass("before:opacity-0");
+    expect(digitalMarketingLink).toHaveClass("hover:text-[#9A8CFF]");
+    expect(digitalMarketingLink).toHaveClass("hover:before:opacity-100");
     expect(iconWrapper).toHaveClass("gap-3");
     expect(title).toHaveClass("text-[13px]");
     expect(title).toHaveClass("sm:text-[15px]");
     expect(title).toHaveClass("md:text-[17px]");
-    expect(title).toHaveClass("text-[#9A8CFF]");
+    expect(title).toHaveClass("text-white");
+    expect(title).toHaveClass("group-hover:text-[#9A8CFF]");
+    expect(title).not.toHaveClass("text-[#9A8CFF]");
     expect(description).toHaveClass("text-[11px]");
     expect(description).toHaveClass("sm:text-[13px]");
     expect(description).toHaveClass("max-w-[26ch]");
