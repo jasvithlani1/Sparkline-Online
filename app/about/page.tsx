@@ -40,6 +40,65 @@ const founders = [
   },
 ] as const;
 
+const aboutGalleryMoments = [
+  {
+    src: "/images/about-founders-first.png",
+    alt: "Outdoor Sparkline founder moment",
+    width: 4032,
+    height: 3024,
+    caption: "Real moments behind the work.",
+  },
+  {
+    src: "/images/about-founders-birthday.jpg",
+    alt: "Ashlan and Ruby Leazer celebrating together",
+    width: 2048,
+    height: 1365,
+    caption: "Built together, with heart.",
+  },
+  {
+    src: "/images/about-gallery-2760.jpg",
+    alt: "Sparkline family portrait outdoors",
+    width: 1800,
+    height: 1257,
+    caption: "Family first, always.",
+  },
+  {
+    src: "/images/about-gallery-3600.jpg",
+    alt: "Quiet at-home Sparkline moment",
+    width: 1350,
+    height: 1800,
+    caption: "Grounded in everyday care.",
+  },
+  {
+    src: "/images/about-gallery-4749.jpg",
+    alt: "Sparkline family moment in the mountains",
+    width: 1800,
+    height: 1200,
+    caption: "Joy we carry forward.",
+  },
+  {
+    src: "/images/about-gallery-6945.jpg",
+    alt: "Ashlan and Ruby Leazer at dinner",
+    width: 1800,
+    height: 1350,
+    caption: "Sisters beyond the screen.",
+  },
+  {
+    src: "/images/about-gallery-7356.jpg",
+    alt: "Sparkline travel memory",
+    width: 1350,
+    height: 1800,
+    caption: "Inspired by every place.",
+  },
+  {
+    src: "/images/about-gallery-9541.jpg",
+    alt: "Sparkline founder memory",
+    width: 1350,
+    height: 1800,
+    caption: "Care shows up everywhere.",
+  },
+] as const;
+
 export const metadata = {
   title: "About — Sparkline Marketing Firm",
   description:
@@ -165,39 +224,37 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1208px]">
           <div
-            data-testid="about-founders-moment-grid"
-            className="grid gap-5 md:grid-cols-2 md:gap-6"
+            data-testid="about-founders-moment-scroller"
+            className="overflow-hidden"
           >
-            <figure className="space-y-4">
-              <div className="overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
-                <Image
-                  src="/images/about-founders-first.png"
-                  alt="Outdoor Sparkline founder moment"
-                  width={4032}
-                  height={3024}
-                  sizes="(min-width: 1024px) 590px, 100vw"
-                  className="aspect-[4/3] h-auto w-full object-cover object-center"
-                />
-              </div>
-              <figcaption className="text-center text-[15px] font-medium leading-[1.5] text-white/76 sm:text-[16px]">
-                Chief Morale Officers
-              </figcaption>
-            </figure>
-            <figure className="space-y-4">
-              <div className="overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
-                <Image
-                  src="/images/about-founders-birthday.jpg"
-                  alt="Ashlan and Ruby Leazer celebrating together"
-                  width={2048}
-                  height={1365}
-                  sizes="(min-width: 1024px) 590px, 100vw"
-                  className="aspect-[4/3] h-auto w-full object-cover object-center"
-                />
-              </div>
-              <figcaption className="text-center text-[15px] font-medium leading-[1.5] text-white/76 sm:text-[16px]">
-                Built Together, With Heart
-              </figcaption>
-            </figure>
+            <div
+              data-testid="about-founders-moment-track"
+              className="about-moment-track gap-5 md:gap-6"
+            >
+              {[0, 1].map((copyIndex) =>
+                aboutGalleryMoments.map((moment) => (
+                  <figure
+                    key={`${moment.src}-${copyIndex}`}
+                    aria-hidden={copyIndex === 1 ? true : undefined}
+                    className="w-[78vw] max-w-[440px] flex-none space-y-4 sm:w-[360px] md:w-[420px] lg:w-[460px]"
+                  >
+                    <div className="aspect-[4/3] overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
+                      <Image
+                        src={moment.src}
+                        alt={copyIndex === 0 ? moment.alt : ""}
+                        width={moment.width}
+                        height={moment.height}
+                        sizes="(min-width: 1024px) 460px, (min-width: 768px) 420px, (min-width: 640px) 360px, 78vw"
+                        className="h-full w-full object-cover object-center"
+                      />
+                    </div>
+                    <figcaption className="text-center text-[15px] font-medium leading-[1.5] text-white/76 sm:text-[16px]">
+                      {moment.caption}
+                    </figcaption>
+                  </figure>
+                )),
+              )}
+            </div>
           </div>
         </div>
       </section>

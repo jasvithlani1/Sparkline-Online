@@ -94,6 +94,9 @@ describe("About page", () => {
     expect(foundersSection).toHaveClass("pb-0");
     expect(foundersSection).toHaveClass("sm:pb-0");
     expect(foundersSection).toHaveClass("md:pb-2");
+    expect(screen.getByTestId("about-founders-moment-scroller")).toHaveClass("overflow-hidden");
+    expect(screen.getByTestId("about-founders-moment-track")).toHaveClass("about-moment-track");
+    expect(screen.queryByTestId("about-founders-moment-grid")).not.toBeInTheDocument();
     expect(
       within(foundersMoment).getByRole("img", { name: /outdoor sparkline founder moment/i }),
     ).toHaveAttribute("src", "/images/about-founders-first.png");
@@ -103,9 +106,33 @@ describe("About page", () => {
     expect(
       within(foundersMoment).getByRole("img", { name: /ashlan and ruby leazer celebrating together/i }),
     ).toHaveAttribute("src", "/images/about-founders-birthday.jpg");
-    expect(screen.getByTestId("about-founders-moment-grid")).toHaveClass("md:grid-cols-2");
-    expect(foundersMoment).toHaveTextContent(/chief morale officers/i);
+    expect(within(foundersMoment).getAllByRole("img")).toHaveLength(8);
+    expect(
+      within(foundersMoment).getByRole("img", { name: /sparkline family portrait outdoors/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-2760.jpg");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /quiet at-home sparkline moment/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-3600.jpg");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /sparkline family moment in the mountains/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-4749.jpg");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /ashlan and ruby leazer at dinner/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-6945.jpg");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /sparkline travel memory/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-7356.jpg");
+    expect(
+      within(foundersMoment).getByRole("img", { name: /sparkline founder memory/i }),
+    ).toHaveAttribute("src", "/images/about-gallery-9541.jpg");
+    expect(foundersMoment).toHaveTextContent(/real moments behind the work/i);
     expect(foundersMoment).toHaveTextContent(/built together, with heart/i);
+    expect(foundersMoment).toHaveTextContent(/family first, always/i);
+    expect(foundersMoment).toHaveTextContent(/grounded in everyday care/i);
+    expect(foundersMoment).toHaveTextContent(/joy we carry forward/i);
+    expect(foundersMoment).toHaveTextContent(/sisters beyond the screen/i);
+    expect(foundersMoment).toHaveTextContent(/inspired by every place/i);
+    expect(foundersMoment).toHaveTextContent(/care shows up everywhere/i);
     expect(footerContent).toHaveClass("pt-8");
     expect(footerContent).toHaveClass("sm:pt-10");
     expect(footerContent).toHaveClass("md:pt-12");

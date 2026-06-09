@@ -167,6 +167,23 @@ body {
   animation-direction: reverse;
 }
 
+.about-moment-track {
+  display: flex;
+  width: max-content;
+  animation: logo-marquee 48s linear infinite reverse;
+  will-change: transform;
+}
+
+.about-moment-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-moment-track {
+    animation: none;
+  }
+}
+
 .hero-bottom-float {
   animation: hero-bottom-float 5.6s cubic-bezier(0.37, 0, 0.22, 1) infinite;
   transform-origin: center bottom;
