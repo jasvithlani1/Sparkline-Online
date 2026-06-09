@@ -41,12 +41,18 @@ export function BlogList({ posts = blogPosts }: BlogListProps) {
         data-testid="blog-list-header"
         className="flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pb-10 md:pb-12"
       >
-        <h2
-          className="hero-copy text-[36px] leading-[1] tracking-[0.02em] sm:text-[52px] sm:leading-[0.95] md:text-[68px] lg:text-[80px]"
-          style={{ wordSpacing: "0.25em" }}
-        >
-          BLOGS
-        </h2>
+        <div className="flex flex-col items-start gap-4">
+          <h2
+            className="hero-copy text-[36px] leading-[1] tracking-[0.02em] sm:text-[52px] sm:leading-[0.95] md:text-[68px] lg:text-[80px]"
+            style={{ wordSpacing: "0.25em" }}
+          >
+            BLOGS
+          </h2>
+          <span
+            aria-hidden="true"
+            className="h-[2px] w-20 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
+          />
+        </div>
         <label className="relative inline-flex items-center self-start sm:self-auto">
           <span className="sr-only">Filter by category</span>
           <select

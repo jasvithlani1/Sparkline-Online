@@ -131,7 +131,11 @@ describe("Services pages", () => {
     const cornerstones = screen.getByText("Audience First Strategy").closest("ol");
     const specialty = screen.getByText("Search Engine Optimisation");
     const process = screen.getByText(/We begin by understanding your business/i);
+    const ctaHeading = screen.getByRole("heading", { name: /ready to scale smarter/i });
     const cta = screen.getByText(/Ready to scale smarter with digital marketing/i);
+    const ctaButton = screen.getByRole("link", { name: /contact now/i });
+    const ctaCard = ctaHeading.parentElement!;
+    const ctaButtonRow = ctaButton.parentElement!;
 
     expect(lead).toHaveClass("text-[19px]");
     expect(lead).toHaveClass("sm:text-[20px]");
@@ -151,9 +155,18 @@ describe("Services pages", () => {
     expect(process).toHaveClass("text-[18px]");
     expect(process).toHaveClass("sm:text-[19px]");
     expect(process).toHaveClass("md:text-[20px]");
+    expect(ctaCard).toHaveClass("text-center");
+    expect(ctaHeading).toHaveClass("mx-auto");
+    expect(ctaHeading).toHaveClass("text-center");
+    expect(ctaHeading).not.toHaveClass("sm:text-left");
     expect(cta).toHaveClass("text-[18px]");
     expect(cta).toHaveClass("sm:text-[19px]");
     expect(cta).toHaveClass("md:text-[20px]");
+    expect(cta).toHaveClass("mx-auto");
+    expect(cta).toHaveClass("text-center");
+    expect(cta).not.toHaveClass("text-left");
+    expect(ctaButtonRow).toHaveClass("justify-center");
+    expect(ctaButtonRow).not.toHaveClass("sm:justify-start");
   });
 
   it("moves the services FAQ section upward", async () => {

@@ -60,6 +60,13 @@ describe("Blogs page", () => {
       target: { value: "Design" },
     });
 
+    const heading = screen.getByRole("heading", { name: /blogs/i });
+    const underline = heading.nextElementSibling;
+
+    expect(underline).toHaveClass("h-[2px]");
+    expect(underline).toHaveClass("w-20");
+    expect(underline).toHaveClass("rounded-full");
+    expect(underline).toHaveClass("bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]");
     expect(screen.getByRole("heading", { name: /cms design/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: /cms marketing/i })).not.toBeInTheDocument();
   });

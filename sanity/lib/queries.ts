@@ -39,7 +39,12 @@ export const SERVICE_DETAIL_QUERY = defineQuery(/* groq */ `
     specialtiesHeading,
     specialties,
     process,
-    faq,
+    faq[]{
+      _key,
+      id,
+      question,
+      answer
+    },
     cta,
     seo
   }

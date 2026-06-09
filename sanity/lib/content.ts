@@ -48,9 +48,16 @@ type ServiceDocument = {
   specialtiesHeading?: string;
   specialties?: string[];
   process?: { heading?: string; body?: string };
-  faq?: { id?: string; question?: string; answer?: string }[];
+  faq?: FaqDocument[];
   cta?: { heading?: string; body?: string; label?: string };
   seo?: SeoDocument;
+};
+
+type FaqDocument = {
+  _key?: string;
+  id?: string;
+  question?: string;
+  answer?: string;
 };
 
 type PortfolioProjectDocument = {
@@ -178,6 +185,16 @@ function maybeArray<T>(value: T[] | undefined, fallback: readonly T[] = []) {
   return value && value.length > 0 ? value : [...fallback];
 }
 
+function toFaqItems(items: FaqDocument[] | undefined, fallback: readonly FaqDocument[] = []) {
+  return maybeArray(items, fallback)
+    .map((item, index) => ({
+      id: item.id ?? item._key ?? `faq-${index}`,
+      question: item.question ?? "",
+      answer: item.answer ?? "",
+    }))
+    .filter((item) => item.question && item.answer);
+}
+
 function textFromBlocks(blocks: PortableTextBlock[] | undefined) {
   if (!blocks?.length) return "";
 
@@ -265,11 +282,7 @@ export function toServiceDetail(doc: ServiceDocument): ServiceDetail {
       heading: doc.process?.heading ?? fallback?.process.heading ?? "How We Deliver",
       body: doc.process?.body ?? fallback?.process.body ?? "",
     },
-    faq: (doc.faq ?? fallback?.faq ?? []).map((item) => ({
-      id: item.id ?? item.question ?? "faq",
-      question: item.question ?? "",
-      answer: item.answer ?? "",
-    })),
+    faq: toFaqItems(doc.faq, fallback?.faq),
     cta: {
       heading: doc.cta?.heading ?? fallback?.cta.heading ?? "Ready to start?",
       body: doc.cta?.body ?? fallback?.cta.body ?? "Contact Sparkline Marketing Firm to discuss your goals.",

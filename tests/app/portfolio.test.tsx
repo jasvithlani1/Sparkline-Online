@@ -42,6 +42,13 @@ describe("Portfolio page", () => {
       />,
     );
 
+    const heading = screen.getByRole("heading", { name: /^portfolio$/i });
+    const underline = heading.nextElementSibling;
+
+    expect(underline).toHaveClass("h-[2px]");
+    expect(underline).toHaveClass("w-20");
+    expect(underline).toHaveClass("rounded-full");
+    expect(underline).toHaveClass("bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]");
     expect(screen.getByRole("heading", { name: /cms project/i })).toBeInTheDocument();
     expect(screen.getByText("A project managed by Sanity.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /cms project/i })).toHaveAttribute("href", "/portfolio/cms-project");

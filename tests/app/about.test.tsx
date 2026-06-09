@@ -36,25 +36,46 @@ describe("About page", () => {
 
     expect(founderSections).toHaveLength(2);
 
-    expect(
-      within(founderSections[0]).getByRole("img", { name: /ashlan leazer/i }),
-    ).toHaveAttribute("src", "/images/about-ashlan-leazer.jpeg");
-    expect(
-      within(founderSections[0]).getByRole("img", { name: /ashlan leazer/i }),
-    ).toHaveClass("scale-[1.08]");
+    const ashlanImage = within(founderSections[0]).getByRole("img", {
+      name: /ashlan leazer/i,
+    });
+    const rubyImage = within(founderSections[1]).getByRole("img", {
+      name: /ruby leazer/i,
+    });
+
+    expect(ashlanImage).toHaveAttribute("src", "/images/about-ashlan-leazer.jpeg");
+    expect(ashlanImage).toHaveAttribute("width", "1600");
+    expect(ashlanImage).toHaveAttribute("height", "1600");
+    expect(ashlanImage).toHaveClass("h-full");
+    expect(ashlanImage).toHaveClass("w-full");
+    expect(ashlanImage).toHaveClass("scale-[1.08]");
+    expect(ashlanImage.parentElement).toHaveClass("aspect-[4/5]");
+    expect(ashlanImage.parentElement).toHaveClass("w-full");
     expect(
       within(founderSections[0]).getByRole("heading", { name: /ashlan leazer/i }),
     ).toBeInTheDocument();
     expect(within(founderSections[0]).queryByText(/^co-founder$/i)).not.toBeInTheDocument();
     expect(within(founderSections[0]).getByText(/01\s*\/\s*co-founder/i)).toBeInTheDocument();
     expect(founderSections[0]).toHaveTextContent(/aunt sassy/i);
-    expect(founderSections[0]).toHaveTextContent(/self taught marketer, designer, and creative strategist/i);
-    expect(founderSections[0]).toHaveTextContent(/cofounded sparkline marketing firm with my sister, ruby/i);
-    expect(founderSections[0]).toHaveTextContent(/carefully\. patiently\. for the long run\./i);
+    expect(founderSections[0]).toHaveTextContent(/self-taught marketer, designer, and creative strategist/i);
+    expect(founderSections[0]).toHaveTextContent(/family has always been my foundation, teaching me the value/i);
+    expect(founderSections[0]).toHaveTextContent(/lasting results come from consistency, thoughtful strategy/i);
+    expect(founderSections[0]).toHaveTextContent(/moved from relying on paid advertising/i);
+    expect(founderSections[0]).toHaveTextContent(/sustainable rather than chasing short-term wins/i);
+    expect(founderSections[0]).toHaveTextContent(/i later co-founded sparkline marketing firm with my sister, ruby/i);
+    expect(founderSections[0]).toHaveTextContent(/focused on trust, creativity, and meaningful growth/i);
+    expect(founderSections[0]).toHaveTextContent(/brands that feel authentic and reflect who they truly are/i);
+    expect(founderSections[0]).toHaveTextContent(/genuine commitment to helping your business grow for the long run/i);
+    expect(founderSections[0]).not.toHaveTextContent(/what i bring is creativity, strategy, and attention to detail/i);
+    expect(founderSections[0]).not.toHaveTextContent(/carefully\. patiently\. for the long run\./i);
 
-    expect(
-      within(founderSections[1]).getByRole("img", { name: /ruby leazer/i }),
-    ).toHaveAttribute("src", "/images/about-second-founder.jpeg");
+    expect(rubyImage).toHaveAttribute("src", "/images/about-second-founder.jpeg");
+    expect(rubyImage).toHaveAttribute("width", "1200");
+    expect(rubyImage).toHaveAttribute("height", "1600");
+    expect(rubyImage).toHaveClass("h-full");
+    expect(rubyImage).toHaveClass("w-full");
+    expect(rubyImage.parentElement).toHaveClass("aspect-[4/5]");
+    expect(rubyImage.parentElement).toHaveClass("w-full");
     expect(
       within(founderSections[1]).getByRole("heading", { name: /ruby leazer/i }),
     ).toBeInTheDocument();

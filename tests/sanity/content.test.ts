@@ -8,6 +8,7 @@ import {
   toBlogPost,
   toPortfolioProject,
   toServiceCard,
+  toServiceDetail,
 } from "@/sanity/lib/content";
 
 describe("Sanity content mapping", () => {
@@ -31,6 +32,29 @@ describe("Sanity content mapping", () => {
       title: "Digital\nMarketing",
       items: ["SEO", "Analytics"],
     });
+  });
+
+  it("maps backend service FAQ items into service detail content", () => {
+    const detail = toServiceDetail({
+      _id: "service.cms-service",
+      title: "CMS Service",
+      slug: { current: "cms-service" },
+      faq: [
+        {
+          _key: "backend-faq-one",
+          question: "Can this FAQ come from Sanity?",
+          answer: "Yes, service detail pages render FAQ items from the backend.",
+        },
+      ],
+    });
+
+    expect(detail.faq).toEqual([
+      {
+        id: "backend-faq-one",
+        question: "Can this FAQ come from Sanity?",
+        answer: "Yes, service detail pages render FAQ items from the backend.",
+      },
+    ]);
   });
 
   it("resolves seeded fallback images before Sanity assets", () => {

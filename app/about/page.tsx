@@ -5,12 +5,11 @@ import { Navbar } from "@/components/landing/navbar";
 const BRAND = "SPARKLINE MARKETING FIRM";
 
 const ashlanBio = [
-  "The most important title I hold has nothing to do with marketing. It is Aunt Sassy. My nieces gave me that name, and being their aunt has shaped me more than anything I have ever done professionally. Family is everything to me. Being an aunt has taught me how to actually care about someone past the surface, how to show up when it is not convenient, how to pay attention to the small things, and how to be someone worth looking up to.",
-  "That is also how I show up in my work. I am a self taught marketer, designer, and creative strategist. Nothing about my path was handed to me. I learned by doing, by trying things, by failing, by figuring it out, and by staying consistent long after the novelty wore off.",
-  "Early in my career, I helped build the marketing foundation for a company that went from relying on paid efforts to generating consistent organic inbound. That experience shaped how I see this work. I would rather build something real that lasts than chase quick wins that disappear the moment you stop spending.",
-  "I cofounded Sparkline Marketing Firm with my sister, Ruby. We built it with intention, care, and a long term mindset. We are not trying to be a big agency. We do not treat business owners like numbers in a pipeline. We want to work with real people running real businesses and help them grow into something they are genuinely proud of.",
-  "What I bring to that is creativity, strategy, and real attention. I care how things look. I care how they feel. I think about the actual person on the other side of the screen, not just an algorithm or a conversion rate. I think about whether what we are building sounds like you, represents you well, and will still matter a year from now.",
-  "If you decide to work with me, you will get someone who treats your business the way I treat the things I love.",
+  "The title that means the most to me has nothing to do with marketing. It is Aunt Sassy. My nieces gave me that name, and being their aunt has shaped the way I approach both life and work. Family has always been my foundation, teaching me the value of showing up, paying attention, and caring deeply about the people around me.",
+  "I am a self-taught marketer, designer, and creative strategist. My path was built through curiosity, experience, and a commitment to learning by doing. Over the years, I discovered that lasting results come from consistency, thoughtful strategy, and genuine effort.",
+  "Early in my career, I helped build the marketing foundation for a company that moved from relying on paid advertising to generating steady organic growth. That experience showed me the power of building something sustainable rather than chasing short-term wins.",
+  "I later co-founded Sparkline Marketing Firm with my sister, Ruby. Together, we built a business focused on trust, creativity, and meaningful growth. We care about helping business owners create brands that feel authentic and reflect who they truly are.",
+  "If we work together, you can expect someone who brings creativity, attention to detail, and a genuine commitment to helping your business grow for the long run.",
 ] as const;
 
 const rubyBio = [
@@ -25,14 +24,17 @@ const founders = [
   {
     name: "Ashlan Leazer",
     portrait: "/images/about-ashlan-leazer.jpeg",
+    portraitWidth: 1600,
+    portraitHeight: 1600,
     bio: ashlanBio,
-    closing: "Carefully. Patiently. For the long run.",
     imageSide: "left",
     imageClassName: "scale-[1.08]",
   },
   {
     name: "Ruby Leazer",
     portrait: "/images/about-second-founder.jpeg",
+    portraitWidth: 1200,
+    portraitHeight: 1600,
     bio: rubyBio,
     imageSide: "right",
   },
@@ -63,15 +65,15 @@ function FounderProfile({
           imageFirst ? "" : "md:grid-cols-[minmax(0,1fr)_minmax(280px,0.78fr)]"
         }`}
       >
-        <div className={imageFirst ? "" : "md:order-2"}>
-          <div className="overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
+        <div className={`w-full ${imageFirst ? "" : "md:order-2"}`}>
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
             <Image
               src={founder.portrait}
               alt={founder.name}
-              width={1600}
-              height={1600}
+              width={founder.portraitWidth}
+              height={founder.portraitHeight}
               sizes="(min-width: 1024px) 35vw, (min-width: 768px) 42vw, 100vw"
-              className={`aspect-[4/5] h-auto w-full object-cover object-center ${
+              className={`h-full w-full object-cover object-center ${
                 "imageClassName" in founder ? founder.imageClassName : ""
               }`}
               priority={index === 0}
@@ -90,11 +92,6 @@ function FounderProfile({
             {founder.bio.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            {"closing" in founder ? (
-              <p className="text-[18px] font-semibold leading-[1.4] text-white">
-                {founder.closing}
-              </p>
-            ) : null}
           </div>
         </div>
       </div>

@@ -258,9 +258,9 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {(detail as { faq?: readonly { id: string; question: string; answer: string }[] }).faq ? (
+      {detail.faq.length > 0 ? (
         <Faq
-          items={(detail as { faq: readonly { id: string; question: string; answer: string }[] }).faq}
+          items={detail.faq}
           spacing="compactTop"
         />
       ) : null}
@@ -268,14 +268,14 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="px-5 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16">
         <div className="mx-auto max-w-[1208px]">
-          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20">
-            <h2 className="hero-copy mx-auto max-w-[18ch] text-center text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:mx-0 sm:text-left sm:text-[44px] md:text-[56px]">
+          <div className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0A1740_0%,#050C1E_100%)] px-6 py-12 text-center sm:px-10 sm:py-16 md:px-16 md:py-20">
+            <h2 className="hero-copy mx-auto max-w-[18ch] text-center text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
               {detail.cta.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-left text-pretty text-[18px] leading-7 text-white/70 sm:mx-0 sm:text-[19px] md:text-[20px]">
+            <p className="mx-auto mt-5 max-w-[58ch] text-center text-pretty text-[18px] leading-7 text-white/70 sm:text-[19px] md:text-[20px]">
               {detail.cta.body}
             </p>
-            <div className="mt-8 flex justify-center sm:justify-start">
+            <div className="mt-8 flex justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
