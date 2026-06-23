@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +6,10 @@ import { notFound } from "next/navigation";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { getServiceBySlug, getServiceSlugs } from "@/sanity/lib/content";
+import Breadcrumb from "@/components/breadcrumb";
+import JsonLd from "@/components/json-ld";
+import { getServiceBySlug, getServiceSlugs, getSiteSettings } from "@/sanity/lib/content";
+import { buildMetadata, buildServiceLD, buildFaqLD, buildBreadcrumbLD } from "@/lib/seo";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 
@@ -33,15 +37,17 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const entry = await getServiceBySlug(slug);
-  if (!entry) return { title: "Services — Sparkline Marketing Firm" };
+  const [entry, settings] = await Promise.all([getServiceBySlug(slug), getSiteSettings()]);
+  if (!entry) return { title: "Services" };
   const plainTitle = entry.card.title.replace(/\n/g, " ");
-  return {
-    title: `${plainTitle} — Sparkline Marketing Firm`,
+  return buildMetadata({
+    title: plainTitle,
     description: entry.detail.lead,
-  };
+    siteSettings: settings,
+    path: `/services/${slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -50,18 +56,29 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = await getServiceBySlug(slug);
+  const [entry, settings] = await Promise.all([getServiceBySlug(slug), getSiteSettings()]);
   if (!entry) notFound();
 
   const { card, detail } = entry;
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const siteName = settings?.siteTitle ?? "Sparkline Marketing Firm";
+  const pageUrl = `${siteUrl}/services/${slug}`;
+
+  const jsonLdBlocks = [
+    buildBreadcrumbLD([{ name: "Services", url: "/services" }, { name: card.title.replace(/\n/g, " ") }], siteUrl),
+    buildServiceLD({ name: card.title.replace(/\n/g, " "), description: detail.lead, url: pageUrl, siteUrl, siteName }),
+    ...(detail.faq.length > 0 ? [buildFaqLD(detail.faq)] : []),
+  ];
 
   return (
     <main className="min-h-screen bg-[#050C1E]">
+      <JsonLd data={jsonLdBlocks} />
       <Navbar />
 
       {/* Text-only hero + intro */}
       <section className="px-5 pt-32 pb-10 sm:px-6 sm:pt-36 sm:pb-12 md:px-8 md:pt-44 md:pb-14">
         <div className="mx-auto max-w-[1208px]">
+          <Breadcrumb items={[{ name: "Services", url: "/services" }, { name: card.title.replace(/\n/g, " ") }]} variant="dark" className="mb-8" />
           <div className="flex flex-col gap-6 md:gap-8">
             <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/60 sm:text-left sm:text-[12px]">
               {detail.eyebrow}

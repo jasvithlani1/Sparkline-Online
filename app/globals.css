@@ -197,3 +197,86 @@ body {
 .work-gallery-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Booking Modal Dialog Styles */
+.booking-dialog {
+  border: none;
+  padding: 0;
+  margin: auto;
+  
+  /* Responsive sizing: spacious on large screens, fullscreen on mobile */
+  width: 96vw;
+  height: 90dvh;
+  max-width: 1100px;
+  max-height: 850px;
+  
+  background: #060b1a; /* Dark premium background matching site */
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+  transition:
+    opacity 0.28s cubic-bezier(0.34, 1.3, 0.64, 1),
+    transform 0.28s cubic-bezier(0.34, 1.3, 0.64, 1),
+    overlay 0.28s allow-discrete,
+    display 0.28s allow-discrete;
+}
+
+.booking-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Desktop style optimization */
+@media (min-width: 1024px) {
+  .booking-dialog {
+    width: 90vw;
+    height: 85vh;
+    border-radius: 24px;
+  }
+}
+
+/* Mobile full-screen layout to maximize calendar visibility */
+@media (max-width: 480px) {
+  .booking-dialog {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+@starting-style {
+  .booking-dialog[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+}
+
+.booking-dialog::backdrop {
+  background: rgba(6, 11, 26, 0);
+  backdrop-filter: blur(0px);
+  transition:
+    background-color 0.28s ease,
+    backdrop-filter 0.28s ease,
+    overlay 0.28s allow-discrete,
+    display 0.28s allow-discrete;
+}
+
+.booking-dialog[open]::backdrop {
+  background: rgba(6, 11, 26, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+@starting-style {
+  .booking-dialog[open]::backdrop {
+    background: rgba(6, 11, 26, 0);
+    backdrop-filter: blur(0px);
+  }
+}
+

@@ -1,18 +1,35 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import Breadcrumb from "@/components/breadcrumb";
+import { getContactPage, getSiteSettings } from "@/sanity/lib/content";
+import { ContactForm } from "@/components/landing/contact-form";
+import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
 
-const FORMSPREE_CONTACT_ENDPOINT = "https://formspree.io/f/meewjvgj";
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  return buildMetadata({
+    title: "Contact",
+    description: "Get in touch with Sparkline Marketing Firm. We'd love to hear about your business goals.",
+    siteSettings: settings,
+    path: "/contact",
+  });
+}
 
-export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+export default async function ContactPage() {
+  const [contactData, settings] = await Promise.all([getContactPage(), getSiteSettings()]);
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const breadcrumbLD = buildBreadcrumbLD([{ name: "Contact" }], siteUrl);
+  const details = contactData?.contactDetails;
+
+  const phone = details?.phone || "(470) 841-2335";
+  const email = details?.email || "info@sparklinemarketingfirm.com";
+  const location = details?.location || "524 Sawnee Village Boulevard, Cumming, Georgia 30040";
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050C1E]">
+      <JsonLd data={breadcrumbLD} />
       {/* Ambient background video — blended heavily into bg-[#050C1E] */}
       <div
         aria-hidden="true"
@@ -47,6 +64,7 @@ export default function ContactPage() {
         className="relative z-10 pt-32 pb-0 sm:pt-36 sm:pb-0 md:pt-40 md:pb-2"
       >
         <div className="mx-auto max-w-[1208px] px-5 sm:px-6 md:px-8">
+          <Breadcrumb items={[{ name: "Contact" }]} variant="dark" className="mb-8" />
           {/* Header */}
           <div className="mb-12 md:mb-16" />
 
@@ -76,11 +94,11 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <a
-                  href="tel:+14708412335"
+                  href={`tel:+1${phone.replace(/[^0-9]/g, "")}`}
                   style={{ color: "#ffffff" }}
                   className="mt-3 block text-[16px] transition-opacity hover:opacity-80"
                 >
-                  (470) 841-2335
+                  {phone}
                 </a>
               </div>
 
@@ -108,11 +126,11 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <a
-                  href="mailto:info@sparklinemarketingfirm.com"
+                  href={`mailto:${email}`}
                   style={{ color: "#ffffff" }}
                   className="mt-3 block break-all text-[16px] transition-opacity hover:opacity-80"
                 >
-                  info@sparklinemarketingfirm.com
+                  {email}
                 </a>
               </div>
 
@@ -140,156 +158,13 @@ export default function ContactPage() {
                   </h3>
                 </div>
                 <p className="mt-3 text-[16px] leading-7 text-white">
-                  524 Sawnee Village Boulevard, Cumming, Georgia 30040
+                  {location}
                 </p>
               </div>
             </div>
 
             {/* Form — right */}
-            {submitted ? (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] px-8 py-20 text-center">
-                <p className="text-[24px] tracking-[-0.03em] text-white sm:text-[28px]">
-                  Thank you!
-                </p>
-                <p className="mt-3 text-[15px] leading-7 text-white/60">
-                  We&apos;ll get back to you shortly.
-                </p>
-              </div>
-            ) : (
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const formData = new FormData(e.currentTarget);
-
-                  setIsSubmitting(true);
-                  setErrorMessage("");
-
-                  try {
-                    const response = await fetch(FORMSPREE_CONTACT_ENDPOINT, {
-                      method: "POST",
-                      headers: { Accept: "application/json" },
-                      body: formData,
-                    });
-
-                    if (!response.ok) {
-                      const data = (await response.json().catch(() => null)) as { error?: string } | null;
-                      setErrorMessage(data?.error ?? "Unable to send your message right now.");
-                      setIsSubmitting(false);
-                      return;
-                    }
-
-                    setSubmitted(true);
-                  } catch {
-                    setErrorMessage("Unable to send your message right now.");
-                    setIsSubmitting(false);
-                  }
-                }}
-                action={FORMSPREE_CONTACT_ENDPOINT}
-                method="POST"
-                className="space-y-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
-              >
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="mb-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-white/50"
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Your name"
-                      className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-[15px] text-white placeholder-white/30 outline-none transition-colors focus:border-white/30"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-white/50"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="you@company.com"
-                      className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-[15px] text-white placeholder-white/30 outline-none transition-colors focus:border-white/30"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="mb-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-white/50"
-                  >
-                    Subject
-                  </label>
-                  <input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    required
-                    placeholder="What's this about?"
-                    className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-[15px] text-white placeholder-white/30 outline-none transition-colors focus:border-white/30"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-white/50"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    placeholder="Tell us about your project..."
-                    className="w-full resize-none rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-[15px] text-white placeholder-white/30 outline-none transition-colors focus:border-white/30"
-                  />
-                </div>
-
-                {errorMessage ? (
-                  <p role="alert" className="text-[14px] leading-6 text-red-200">
-                    {errorMessage}
-                  </p>
-                ) : null}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
-                  style={{
-                    paddingInline: "16px",
-                    paddingBlock: "12px",
-                    borderRadius: "8px",
-                    backgroundImage:
-                      "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
-                    borderWidth: "1px",
-                    borderStyle: "solid",
-                    borderColor: "#FFFFFF29",
-                    boxShadow:
-                      "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
-                    fontSize: "15px",
-                    lineHeight: "18px",
-                    fontWeight: 600,
-                    fontFamily:
-                      '"Geist-SemiBold", "Geist", system-ui, sans-serif',
-                  }}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                  <span aria-hidden="true">&rarr;</span>
-                </button>
-              </form>
-            )}
+            <ContactForm />
           </div>
         </div>
       </section>

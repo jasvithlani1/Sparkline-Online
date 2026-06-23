@@ -1,15 +1,28 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/landing/section-heading";
-import { trustedBy } from "@/lib/content";
+import { trustedBy as fallbackTrustedBy } from "@/lib/content";
 
-export function LogoGrid() {
+type LogoGridProps = {
+  data?: {
+    eyebrow?: string;
+    lines?: string[];
+    logos?: { src: string; alt: string }[];
+  };
+};
+
+export function LogoGrid({ data }: LogoGridProps) {
+  const eyebrow = data?.eyebrow ?? fallbackTrustedBy.eyebrow;
+  const lines = data?.lines ?? fallbackTrustedBy.lines;
+  const rawLogos = data?.logos?.filter((l) => l.src) ?? [];
+  const logos = rawLogos.length > 0 ? rawLogos : fallbackTrustedBy.logos;
+
   return (
     <section
       data-testid="trusted-by-section"
       className="pt-0 pb-4 sm:pt-2 sm:pb-5 md:pt-3 md:pb-6 lg:pt-4 lg:pb-8"
     >
       <div className="mx-auto flex max-w-[1208px] flex-col items-center gap-12 px-5 sm:gap-14 sm:px-6 md:gap-16 md:px-8">
-        <SectionHeading eyebrow={trustedBy.eyebrow} lines={trustedBy.lines} tone="dark" />
+        <SectionHeading eyebrow={eyebrow} lines={lines} tone="dark" />
       </div>
       <div
         data-testid="trusted-by-marquee"
@@ -23,9 +36,9 @@ export function LogoGrid() {
                 aria-hidden={copyIndex === 1}
                 className="flex shrink-0 items-center gap-[30px] pr-[30px] sm:gap-9 sm:pr-9 md:gap-[42px] md:pr-[42px]"
               >
-                {trustedBy.logos.map((logo) => (
+                {logos.map((logo, i) => (
                   <Image
-                    key={`${logo.src}-${copyIndex}`}
+                    key={`${logo.src ?? i}-${copyIndex}`}
                     src={logo.src}
                     alt={copyIndex === 0 ? logo.alt : ""}
                     width={128}

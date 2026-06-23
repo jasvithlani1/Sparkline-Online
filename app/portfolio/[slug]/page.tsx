@@ -1,9 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { getPortfolioProjectBySlug, getPortfolioProjects } from "@/sanity/lib/content";
+import Breadcrumb from "@/components/breadcrumb";
+import JsonLd from "@/components/json-ld";
+import { getPortfolioProjectBySlug, getPortfolioProjects, getSiteSettings } from "@/sanity/lib/content";
+import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -16,14 +20,16 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getPortfolioProjectBySlug(slug);
-  if (!project) return { title: "Portfolio — Sparkline Marketing Firm" };
-  return {
-    title: `${project.name} — Sparkline Marketing Firm`,
+  const [project, settings] = await Promise.all([getPortfolioProjectBySlug(slug), getSiteSettings()]);
+  if (!project) return { title: "Portfolio" };
+  return buildMetadata({
+    title: project.name,
     description: project.description,
-  };
+    siteSettings: settings,
+    path: `/portfolio/${slug}`,
+  });
 }
 
 export default async function PortfolioProjectPage({
@@ -32,15 +38,18 @@ export default async function PortfolioProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const projects = await getPortfolioProjects();
+  const [projects, settings] = await Promise.all([getPortfolioProjects(), getSiteSettings()]);
   const index = projects.findIndex((entry) => entry.slug === slug);
   if (index === -1) notFound();
 
   const project = projects[index];
   const next = projects[(index + 1) % projects.length];
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const breadcrumbLD = buildBreadcrumbLD([{ name: "Portfolio", url: "/portfolio" }, { name: project.name }], siteUrl);
 
   return (
     <main className="min-h-screen bg-[#050C1E]">
+      <JsonLd data={breadcrumbLD} />
       <Navbar />
 
       {/* Hero image — natural aspect on mobile (no crop), top-anchored cinematic crop on lg+ */}
@@ -61,13 +70,7 @@ export default async function PortfolioProjectPage({
       {/* Tagline, summary, services */}
       <section className="px-5 py-10 sm:px-6 sm:py-12 md:px-8 md:py-14">
         <div className="mx-auto max-w-[1208px]">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
-          >
-            <span aria-hidden="true">&larr;</span>
-            Back to Portfolio
-          </Link>
+          <Breadcrumb items={[{ name: "Portfolio", url: "/portfolio" }, { name: project.name }]} variant="dark" />
 
           <div className="mt-10 grid grid-cols-1 gap-12 md:mt-12 md:grid-cols-[2fr_1fr] md:gap-16">
             <div className="flex flex-col gap-5">

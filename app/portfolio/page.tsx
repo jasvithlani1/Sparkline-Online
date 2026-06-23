@@ -1,19 +1,32 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { ProjectList } from "@/components/portfolio/project-list";
-import { getPortfolioProjects } from "@/sanity/lib/content";
-
-export const metadata = {
-  title: "Portfolio — Sparkline Marketing Firm",
-};
+import Breadcrumb from "@/components/breadcrumb";
+import { getPortfolioProjects, getSiteSettings } from "@/sanity/lib/content";
+import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
 
 export const revalidate = 60;
 
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  return buildMetadata({
+    title: "Portfolio",
+    description: "Explore Sparkline Marketing Firm's portfolio of brand, digital, and content projects.",
+    siteSettings: settings,
+    path: "/portfolio",
+  });
+}
+
 export default async function PortfolioPage() {
-  const projects = await getPortfolioProjects();
+  const [projects, settings] = await Promise.all([getPortfolioProjects(), getSiteSettings()]);
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const breadcrumbLD = buildBreadcrumbLD([{ name: "Portfolio" }], siteUrl);
 
   return (
     <main className="min-h-screen bg-[#050C1E]">
+      <JsonLd data={breadcrumbLD} />
       <Navbar />
 
       {/* Video hero */}
@@ -36,6 +49,12 @@ export default async function PortfolioPage() {
         {/* Gradient overlay for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050C1E]/60 via-transparent to-[#050C1E]" />
 
+        {/* Breadcrumb */}
+        <div className="absolute bottom-8 left-0 right-0 z-10 px-5 sm:px-6 md:px-8">
+          <div className="mx-auto max-w-[1208px]">
+            <Breadcrumb items={[{ name: "Portfolio" }]} variant="dark" />
+          </div>
+        </div>
       </section>
 
       {/* Projects */}

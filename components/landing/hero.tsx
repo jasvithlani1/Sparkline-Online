@@ -1,6 +1,12 @@
 import Image from "next/image";
 
-export function Hero() {
+type HeroProps = {
+  data?: {
+    title?: string;
+  };
+};
+
+export function Hero({ data }: HeroProps) {
   return (
     <section
       data-testid="hero-section"
@@ -47,7 +53,7 @@ export function Hero() {
             }}
           >
             <span data-testid="hero-second-line" className="inline-block pb-[0.08em]">
-              Marketing Supercharged
+              {data?.title ?? "Marketing Supercharged"}
             </span>
           </h1>
         </div>

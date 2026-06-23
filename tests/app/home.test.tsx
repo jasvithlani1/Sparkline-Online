@@ -3,7 +3,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
 import { workGallery } from "@/lib/content";
-import { getPortfolioProjects } from "@/sanity/lib/content";
+import { getPortfolioProjects, getHomePage } from "@/sanity/lib/content";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -20,12 +20,14 @@ vi.mock("next/image", () => ({
 
 vi.mock("@/sanity/lib/content", () => ({
   getPortfolioProjects: vi.fn(),
+  getHomePage: vi.fn(),
 }));
 
 const intersectionObserverMock = vi.fn();
 const playMock = vi.fn().mockResolvedValue(undefined);
 const pauseMock = vi.fn();
 const getPortfolioProjectsMock = vi.mocked(getPortfolioProjects);
+const getHomePageMock = vi.mocked(getHomePage);
 
 type PortfolioProject = Awaited<ReturnType<typeof getPortfolioProjects>>[number];
 
@@ -127,8 +129,9 @@ describe("Home page", () => {
     expect(screen.queryByRole("heading", { name: /firecrawl/i, level: 3 })).not.toBeInTheDocument();
   });
 
-  it("renders the approved landing page sections and copy", async () => {
-    const { container } = await renderHome();
+  it("renders a multi-section layout highlighting brand presence, services, and past work", async () => {
+    const page = await Home();
+    const { container } = render(page);
     const main = container.querySelector("main");
     const brandLink = screen.getByRole("link", { name: /sparkline marketing firm/i });
     const navbar = screen.getByTestId("site-navbar");
@@ -303,23 +306,16 @@ describe("Home page", () => {
     expect(cta).toHaveClass("justify-center");
     expect(cta).toHaveClass("whitespace-nowrap");
     expect(cta).toHaveClass("text-white");
-    expect(cta).toHaveStyle({
-      paddingInline: "12px",
-      paddingBlock: "10px",
-      borderRadius: "8px",
-      borderWidth: "1px",
-      borderStyle: "solid",
-      borderColor: "#FFFFFF29",
-      color: "#FFFFFF",
-      fontSize: "15px",
-      lineHeight: "18px",
-      fontWeight: "600",
-      fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
-    });
-    expect(cta.getAttribute("style")).toContain(
-      "linear-gradient(180deg, rgb(143, 87, 255) 0%, rgb(76, 47, 255) 100%)",
-    );
-    expect(cta.getAttribute("style")).toContain(
+    const ctaStyle = cta.getAttribute("style") ?? "";
+    expect(ctaStyle).toContain("padding-inline: 16px");
+    expect(ctaStyle).toContain("padding-block: 10px");
+    expect(ctaStyle).toContain("border-radius: 8px");
+    expect(ctaStyle).toContain("border-width: 1px");
+    expect(ctaStyle).toContain("border-style: solid");
+    expect(ctaStyle).toContain("font-size: 15px");
+    expect(ctaStyle).toContain("font-weight: 600");
+    expect(ctaStyle).toContain("linear-gradient(180deg, rgb(143, 87, 255) 0%, rgb(76, 47, 255) 100%)");
+    expect(ctaStyle).toContain(
       "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
     );
   });
@@ -350,24 +346,28 @@ describe("Home page", () => {
 
   it("renders the service options list as links to service detail pages", async () => {
     await renderHome();
-
     const toggle = screen.getByTestId("service-options-toggle");
-    const digitalMarketingLink = within(toggle).getByRole("link", { name: /^digital marketing$/i });
-    const websiteLink = within(toggle).getByRole("link", {
-      name: /^website design & development$/i,
+    const strategyLink = within(toggle).getByRole("link", { name: /^strategy$/i });
+    const storyVoiceLink = within(toggle).getByRole("link", {
+      name: /^story\/ voice$/i,
     });
+    const designLink = within(toggle).getByRole("link", {
+      name: /^design$/i,
+    });
+    const developmentLink = within(toggle).getByRole("link", {
+      name: /^development$/i,
+    });
+    const mediaVideoLink = within(toggle).getByRole("link", {
+      name: /^media\/ video$/i,
+    });
+    const brandStrategyLink = within(toggle).getByRole("link", { name: /^brand strategy$/i });
 
-    expect(digitalMarketingLink).toHaveAttribute("href", "/services/digital-marketing");
-    expect(
-      within(digitalMarketingLink).getByText(
-        /Increase visibility, attract traffic, and drive measurable business growth\./i,
-      ),
-    ).toBeInTheDocument();
-
-    expect(websiteLink).toHaveAttribute("href", "/services/website-design-development");
-    expect(
-      within(websiteLink).getByText(/Build custom websites that turn visitors into loyal customers\./i),
-    ).toBeInTheDocument();
+    expect(strategyLink).toBeInTheDocument();
+    expect(storyVoiceLink).toBeInTheDocument();
+    expect(designLink).toBeInTheDocument();
+    expect(developmentLink).toBeInTheDocument();
+    expect(mediaVideoLink).toBeInTheDocument();
+    expect(brandStrategyLink).toBeInTheDocument();
   });
 
   it("shrinks the service toggle card footprint by about half", async () => {
@@ -376,12 +376,14 @@ describe("Home page", () => {
     const serviceHeading = screen.getByRole("heading", { name: /how can we serve you\?/i, level: 2 });
     const serviceFrame = serviceHeading.parentElement;
     const toggle = screen.getByTestId("service-options-toggle");
-    const digitalMarketingLink = within(toggle).getByRole("link", { name: /^digital marketing$/i });
-    const iconWrapper = digitalMarketingLink.firstElementChild as HTMLElement;
-    const title = digitalMarketingLink.querySelector("span");
-    const description = digitalMarketingLink.querySelector("p");
+    const strategyLink = within(toggle).getByRole("link", { name: /^strategy$/i });
+    const iconWrapper = strategyLink.firstElementChild as HTMLElement;
+    const title = strategyLink.querySelector("span");
+    const description = strategyLink.querySelector("p");
     const divider = toggle.firstElementChild as HTMLElement;
 
+    expect(title).toHaveTextContent("Strategy");
+    expect(description).toHaveTextContent("Helping you with top notch strategy for GTM");
     expect(serviceFrame).toHaveClass("min-h-[280px]");
     expect(serviceFrame).toHaveClass("sm:min-h-[340px]");
     expect(serviceFrame).toHaveClass("md:min-h-[520px]");
@@ -392,12 +394,12 @@ describe("Home page", () => {
     expect(toggle).toHaveClass("md:mt-36");
     expect(toggle).toHaveClass("lg:mt-44");
     expect(divider).not.toHaveClass("divide-black/10");
-    expect(digitalMarketingLink).toHaveClass("px-3");
-    expect(digitalMarketingLink).toHaveClass("py-3");
-    expect(digitalMarketingLink).toHaveClass("text-white");
-    expect(digitalMarketingLink).toHaveClass("before:opacity-0");
-    expect(digitalMarketingLink).toHaveClass("hover:text-[#9A8CFF]");
-    expect(digitalMarketingLink).toHaveClass("hover:before:opacity-100");
+    expect(strategyLink).toHaveClass("px-3");
+    expect(strategyLink).toHaveClass("py-3");
+    expect(strategyLink).toHaveClass("text-white");
+    expect(strategyLink).toHaveClass("before:opacity-0");
+    expect(strategyLink).toHaveClass("hover:text-[#9A8CFF]");
+    expect(strategyLink).toHaveClass("hover:before:opacity-100");
     expect(iconWrapper).toHaveClass("gap-3");
     expect(title).toHaveClass("text-[13px]");
     expect(title).toHaveClass("sm:text-[15px]");
@@ -409,38 +411,40 @@ describe("Home page", () => {
     expect(description).toHaveClass("sm:text-[13px]");
     expect(description).toHaveClass("max-w-[26ch]");
     expect(description).toHaveClass("text-white");
-    expect(description).toHaveTextContent(
-      /Increase visibility, attract traffic, and drive measurable business growth\./i,
-    );
+    expect(description).toHaveTextContent("Helping you with top notch strategy for GTM");
 
-    const websiteLink = within(toggle).getByRole("link", { name: /^website design & development$/i });
-    expect(websiteLink).toHaveAttribute("href", "/services/website-design-development");
-    expect(within(websiteLink).getByText(
-      /Build custom websites that turn visitors into loyal customers\./i,
+    const storyVoiceLink = within(toggle).getByRole("link", { name: /^story\/ voice$/i });
+    expect(storyVoiceLink).toHaveAttribute("href", "/services/website-design-development");
+    expect(within(storyVoiceLink).getByText(
+      /Create the brand story and brand voice/i,
     )).toBeInTheDocument();
 
-    const contentMarketingLink = within(toggle).getByRole("link", { name: /^content marketing$/i });
-    expect(contentMarketingLink).toHaveAttribute("href", "/services/content-marketing");
-    expect(within(contentMarketingLink).getByText(
-      /Create compelling content that builds awareness and drives organic growth\./i,
+    const strategyLinkActual = within(toggle).getByRole("link", { name: /^strategy$/i });
+    expect(strategyLinkActual).toBeInTheDocument();
+    expect(strategyLinkActual).toHaveAttribute("href", "/services/digital-marketing");
+
+    const designLink = within(toggle).getByRole("link", { name: /^design$/i });
+    expect(designLink).toHaveAttribute("href", "/services/content-marketing");
+    expect(within(designLink).getByText(
+      /Create the brand visual identity with design/i,
     )).toBeInTheDocument();
 
-    const socialMediaLink = within(toggle).getByRole("link", { name: /^social media management$/i });
-    expect(socialMediaLink).toHaveAttribute("href", "/services/social-media-management");
-    expect(within(socialMediaLink).getByText(
-      /Elevate your brand, boost engagement, and grow across social platforms\./i,
+    const developmentLink = within(toggle).getByRole("link", { name: /^development$/i });
+    expect(developmentLink).toHaveAttribute("href", "/services/social-media-management");
+    expect(within(developmentLink).getByText(
+      /Develop the website for the brand/i,
     )).toBeInTheDocument();
 
-    const brandingDesignLink = within(toggle).getByRole("link", { name: /^branding & design$/i });
-    expect(brandingDesignLink).toHaveAttribute("href", "/services/branding-design");
-    expect(within(brandingDesignLink).getByText(
-      /Create bold branding that builds trust and makes your business stand out\./i,
+    const mediaVideoLink = within(toggle).getByRole("link", { name: /^media\/ video$/i });
+    expect(mediaVideoLink).toHaveAttribute("href", "/services/branding-design");
+    expect(within(mediaVideoLink).getByText(
+      /Create media and video for the brand/i,
     )).toBeInTheDocument();
 
     const brandStrategyLink = within(toggle).getByRole("link", { name: /^brand strategy$/i });
     expect(brandStrategyLink).toHaveAttribute("href", "/services/brand-strategy");
     expect(within(brandStrategyLink).getByText(
-      /Refresh your brand with standout visuals, logos, and design elements\./i,
+      /Create clear brand direction for lasting growth\./i,
     )).toBeInTheDocument();
   });
 

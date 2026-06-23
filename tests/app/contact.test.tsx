@@ -2,6 +2,7 @@
 
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import ContactPage from "@/app/contact/page";
+import { getContactPage } from "@/sanity/lib/content";
 
 vi.mock("next/image", () => ({
   default: ({
@@ -16,19 +17,32 @@ vi.mock("next/image", () => ({
   },
 }));
 
+vi.mock("@/sanity/lib/content", () => ({
+  getContactPage: vi.fn(),
+}));
+
+const getContactPageMock = vi.mocked(getContactPage);
+
 describe("Contact page", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getContactPageMock.mockResolvedValue(null);
+  });
+
   afterEach(() => {
     vi.unstubAllGlobals();
   });
 
   it("posts contact form submissions directly to Formspree", async () => {
+    const page = await ContactPage();
+    render(page);
+
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       json: vi.fn().mockResolvedValue({ ok: true }),
     });
     vi.stubGlobal("fetch", fetchMock);
 
-    render(<ContactPage />);
 
     fireEvent.change(screen.getByLabelText(/^name$/i), {
       target: { value: "Taylor Client" },
@@ -63,8 +77,9 @@ describe("Contact page", () => {
     expect(screen.getByText(/thank you/i)).toBeInTheDocument();
   });
 
-  it("shows the current contact details in the main contact section and footer", () => {
-    render(<ContactPage />);
+  it("shows the current contact details in the main contact section and footer", async () => {
+    const page = await ContactPage();
+    render(page);
 
     const phoneLinks = screen.getAllByRole("link", { name: /^\(470\) 841-2335$/i });
     const emailLinks = screen.getAllByRole("link", {
@@ -89,16 +104,18 @@ describe("Contact page", () => {
     ).toBeInTheDocument();
   });
 
-  it("links About Us navigation items to the About page", () => {
-    render(<ContactPage />);
+  it("links About Us navigation items to the About page", async () => {
+    const page = await ContactPage();
+    render(page);
 
     screen.getAllByRole("link", { name: /^about us$/i }).forEach((link) => {
       expect(link).toHaveAttribute("href", "/about");
     });
   });
 
-  it("keeps the contact content close to the footer", () => {
-    const { container } = render(<ContactPage />);
+  it("keeps the contact content close to the footer", async () => {
+    const page = await ContactPage();
+    const { container } = render(page);
 
     const backgroundVideo = container.querySelector('video');
     const contactSection = screen.getByTestId("contact-page-section");

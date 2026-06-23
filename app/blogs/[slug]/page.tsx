@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "next-sanity";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { getBlogPostBySlug, getBlogPosts } from "@/sanity/lib/content";
+import Breadcrumb from "@/components/breadcrumb";
+import JsonLd from "@/components/json-ld";
+import { getBlogPostBySlug, getBlogPosts, getSiteSettings } from "@/sanity/lib/content";
+import { buildMetadata, buildArticleLD, buildBreadcrumbLD } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -57,14 +61,16 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
-  if (!post) return { title: "Blog — Sparkline Marketing Firm" };
-  return {
-    title: `${post.title} — Sparkline Marketing Firm`,
+  const [post, settings] = await Promise.all([getBlogPostBySlug(slug), getSiteSettings()]);
+  if (!post) return { title: "Blog" };
+  return buildMetadata({
+    title: post.title,
     description: post.description,
-  };
+    siteSettings: settings,
+    path: `/blogs/${slug}`,
+  });
 }
 
 export default async function BlogPostPage({
@@ -73,22 +79,34 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const [post, settings] = await Promise.all([getBlogPostBySlug(slug), getSiteSettings()]);
   if (!post) notFound();
+
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const siteName = settings?.siteTitle ?? "Sparkline Marketing Firm";
+  const pageUrl = `${siteUrl}/blogs/${slug}`;
+
+  const jsonLdBlocks = [
+    buildBreadcrumbLD([{ name: "Blog", url: "/blogs" }, { name: post.title }], siteUrl),
+    buildArticleLD({
+      title: post.title,
+      description: post.description,
+      url: pageUrl,
+      imageUrl: post.image || undefined,
+      publishedAt: post.date || undefined,
+      siteUrl,
+      siteName,
+    }),
+  ];
 
   return (
     <main className="min-h-screen bg-[#050C1E]">
+      <JsonLd data={jsonLdBlocks} />
       <Navbar />
 
       <article className="pt-24 pb-20 md:pt-28 md:pb-24">
         <div className="mx-auto max-w-[1080px] px-5 sm:px-6 md:px-8">
-          <Link
-            href="/blogs"
-            className="mx-auto flex w-fit items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
-          >
-            <span aria-hidden="true">&larr;</span>
-            All Blogs
-          </Link>
+          <Breadcrumb items={[{ name: "Blog", url: "/blogs" }, { name: post.title }]} variant="dark" />
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-[12px]">
             <span>{post.date}</span>

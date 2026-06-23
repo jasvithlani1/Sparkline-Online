@@ -1,11 +1,11 @@
-import { DocumentIcon } from "@sanity/icons";
+import { CaseIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const portfolioProject = defineType({
   name: "portfolioProject",
   title: "Portfolio Project",
   type: "document",
-  icon: DocumentIcon,
+  icon: CaseIcon,
   fields: [
     defineField({ name: "name", type: "string", validation: (rule) => rule.required() }),
     defineField({

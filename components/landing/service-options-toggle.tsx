@@ -5,19 +5,38 @@ import { serviceOptions } from "@/lib/content";
 
 type ServiceOptionId = (typeof serviceOptions)[number]["id"];
 
-function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
-  switch (id) {
+function slugify(text?: string) {
+  if (!text) return "";
+  return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function ServiceOptionIcon({ id, icon }: { id: string; icon?: string }) {
+  if (icon) {
+    return (
+      <span
+        aria-hidden="true"
+        className="flex h-5 w-5 shrink-0 items-center justify-center sm:h-6 sm:w-6 md:h-7 md:w-7 [&>svg]:h-full [&>svg]:w-full"
+        dangerouslySetInnerHTML={{ __html: icon }}
+      />
+    );
+  }
+
+  const normalizedId = slugify(id);
+  switch (normalizedId) {
     case "strategy":
+    case "digital-marketing":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <circle cx="24" cy="21" r="15" fill="none" stroke="currentColor" strokeWidth="3.5" />
           <circle cx="24" cy="21" r="7" fill="currentColor" opacity="0.9" />
           <path d="M6 42H42" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
         </svg>
       );
     case "story-voice":
+    case "website-design-development":
+    case "website-design":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
             d="M11 30C8 27 6 23 6 19C6 12 12 7 20 7H28C36 7 42 12 42 19C42 26 36 31 28 31H19L10 37L11 30Z"
             fill="none"
@@ -29,8 +48,9 @@ function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
         </svg>
       );
     case "design":
+    case "content-marketing":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <rect x="7" y="9" width="14" height="14" rx="2.8" fill="none" stroke="currentColor" strokeWidth="3.2" />
           <rect x="27" y="9" width="14" height="10" rx="2.8" fill="none" stroke="currentColor" strokeWidth="3.2" />
           <rect x="7" y="27" width="14" height="12" rx="2.8" fill="none" stroke="currentColor" strokeWidth="3.2" />
@@ -38,8 +58,11 @@ function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
         </svg>
       );
     case "development":
+    case "social-media-management":
+    case "social-media-marketing":
+    case "social-media":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
             d="M8 12L18 7L28 12L38 7V35L28 40L18 35L8 40V12ZM18 7V35M28 12V40"
             fill="none"
@@ -50,8 +73,9 @@ function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
         </svg>
       );
     case "media-video":
+    case "branding-design":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <path
             d="M8 28L28 20L31 29L11 37L8 28ZM28 20L36 15L39 24L31 29M17 33L21 41M12 35L15 42"
             fill="none"
@@ -63,7 +87,7 @@ function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
       );
     case "brand-strategy":
       return (
-        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
+        <svg viewBox="0 0 48 48" aria-hidden="true" className="h-5 w-5 shrink-0 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" strokeWidth="3.2" />
           <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" strokeWidth="3.2" />
           <path
@@ -76,30 +100,33 @@ function ServiceOptionIcon({ id }: { id: ServiceOptionId }) {
           />
         </svg>
       );
+    default:
+      return null;
   }
 }
 
-export function ServiceOptionsToggle() {
+export function ServiceOptionsToggle({ options = serviceOptions }: { options?: any[] } = {}) {
+  const displayOptions = options?.length ? options : serviceOptions;
   return (
     <div
       data-testid="service-options-toggle"
       className="relative z-20 mt-24 ml-0 w-full max-w-[307px] sm:mt-28 md:mt-36 md:ml-[72px] lg:mt-44 lg:ml-[103px]"
     >
       <div>
-        {serviceOptions.map((option) => (
+        {displayOptions.map((option) => (
           <div
-            key={option.id}
+            key={option.id || option.title || Math.random()}
             className="border-b border-white/90 last:border-b-0"
           >
             <Link
-              href={option.href}
+              href={option.href || "#"}
               aria-label={option.title}
               className="group relative flex w-full flex-col items-start px-3 py-3 text-left text-white transition-[color,transform] duration-150 before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-[#7A6BFF] before:opacity-0 before:transition-opacity hover:-translate-y-0.5 hover:text-[#9A8CFF] hover:before:opacity-100 active:scale-[0.96] sm:px-4 sm:py-4 md:px-5 md:py-5"
             >
               <div className="flex items-center gap-3 sm:gap-4">
-                <ServiceOptionIcon id={option.id} />
+                <ServiceOptionIcon id={option.id || option.title} icon={option.icon} />
                 <span
-                  className="text-[13px] leading-none tracking-[-0.04em] text-white transition-colors group-hover:text-[#9A8CFF] sm:text-[15px] md:text-[17px]"
+                  className="font-semibold text-[13px] leading-none tracking-[-0.04em] text-white transition-colors group-hover:text-[#9A8CFF] sm:text-[15px] md:text-[17px]"
                 >
                   {option.title}
                 </span>

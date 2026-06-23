@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import Breadcrumb from "@/components/breadcrumb";
+import { getAboutPage, getSiteSettings } from "@/sanity/lib/content";
+import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
+
+// Crop both portrait images to exactly 800×1000 (4:5) at the Sanity CDN level so
+// both containers are filled edge-to-edge with the photo — no dark padding bars.
+//   Ashlan 1600×1600 (1:1 → 4:5): ~10 % trimmed from each side  — faces centred
+//   Ruby   1200×1600 (3:4 → 4:5): ~3 %  trimmed from top/bottom — barely perceptible
+function toPortraitSrc(url: string | null | undefined, fallback: string): string {
+  if (!url) return fallback;
+  if (!url.includes("cdn.sanity.io")) return url;
+  return `${url}?w=800&h=1000&fit=crop&crop=center`;
+}
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 
@@ -20,27 +35,26 @@ const rubyBio = [
   "If you work with me you are getting someone who is genuine, who actually cares about your business and who is all in from day one. That is just how I am wired.",
 ] as const;
 
-const founders = [
+const fallbackFounders = [
   {
     name: "Ashlan Leazer",
     portrait: "/images/about-ashlan-leazer.jpeg",
     portraitWidth: 1600,
     portraitHeight: 1600,
-    bio: ashlanBio,
+    bio: [...ashlanBio],
     imageSide: "left",
-    imageClassName: "scale-[1.08]",
   },
   {
     name: "Ruby Leazer",
     portrait: "/images/about-second-founder.jpeg",
     portraitWidth: 1200,
     portraitHeight: 1600,
-    bio: rubyBio,
+    bio: [...rubyBio],
     imageSide: "right",
   },
-] as const;
+];
 
-const aboutGalleryMoments = [
+const fallbackGalleryMoments = [
   {
     src: "/images/about-founders-first.png",
     alt: "Outdoor Sparkline founder moment",
@@ -97,19 +111,27 @@ const aboutGalleryMoments = [
     height: 1800,
     caption: "Care shows up everywhere.",
   },
-] as const;
+];
 
-export const metadata = {
-  title: "About — Sparkline Marketing Firm",
-  description:
-    "Learn about SPARKLINE MARKETING FIRM, a strategy-led marketing firm built with care, creative attention, and a long-term mindset.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [aboutData, settings] = await Promise.all([getAboutPage(), getSiteSettings()]);
+  const seo = aboutData?.seo;
+  return buildMetadata({
+    title: seo?.title ?? "About",
+    description: seo?.description ?? "Learn about SPARKLINE MARKETING FIRM, a strategy-led marketing firm built with care, creative attention, and a long-term mindset.",
+    ogImageUrl: seo?.image?.asset?.url,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
+    siteSettings: settings,
+    path: "/about",
+  });
+}
 
 function FounderProfile({
   founder,
   index,
 }: {
-  founder: (typeof founders)[number];
+  founder: any;
   index: number;
 }) {
   const imageFirst = founder.imageSide === "left";
@@ -120,21 +142,21 @@ function FounderProfile({
       className="border-t border-white/10 py-14 sm:py-16 md:py-20"
     >
       <div
-        className={`grid gap-8 md:grid-cols-[minmax(280px,0.78fr)_minmax(0,1fr)] md:items-center md:gap-12 lg:gap-16 ${
-          imageFirst ? "" : "md:grid-cols-[minmax(0,1fr)_minmax(280px,0.78fr)]"
+        className={`grid gap-8 md:items-center md:gap-12 lg:gap-16 ${
+          imageFirst
+            ? "md:grid-cols-[minmax(280px,0.78fr)_minmax(0,1fr)]"
+            : "md:grid-cols-[minmax(0,1fr)_minmax(280px,0.78fr)]"
         }`}
       >
         <div className={`w-full ${imageFirst ? "" : "md:order-2"}`}>
-          <div className="aspect-[4/5] w-full overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-[18px] bg-[#050C1E] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
             <Image
-              src={founder.portrait}
+              src={toPortraitSrc(founder.portraitUrl, founder.portrait)}
               alt={founder.name}
-              width={founder.portraitWidth}
-              height={founder.portraitHeight}
+              width={800}
+              height={1000}
               sizes="(min-width: 1024px) 35vw, (min-width: 768px) 42vw, 100vw"
-              className={`h-full w-full object-cover object-center ${
-                "imageClassName" in founder ? founder.imageClassName : ""
-              }`}
+              className="h-full w-full object-cover"
               priority={index === 0}
             />
           </div>
@@ -148,7 +170,7 @@ function FounderProfile({
             {founder.name}
           </h2>
           <div className="mt-8 space-y-5 text-pretty text-[15px] leading-[1.85] text-white/72 sm:text-[16px]">
-            {founder.bio.map((paragraph) => (
+            {founder.bio?.map((paragraph: string) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
@@ -158,9 +180,36 @@ function FounderProfile({
   );
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [aboutData, settings] = await Promise.all([getAboutPage(), getSiteSettings()]);
+  const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
+  const breadcrumbLD = buildBreadcrumbLD([{ name: "About" }], siteUrl);
+  const introEyebrow = aboutData?.introSection?.eyebrow ?? "Where it all begins";
+  const introTitle = aboutData?.introSection?.title ?? "Where strategy meets care.";
+  const introParagraphs = aboutData?.introSection?.paragraphs ?? [
+    `${BRAND} was built for business owners who want marketing that feels intentional, human and built to last. We help service based businesses build a clear, confident online presence that actually drives growth, not just noise.`,
+    "We work with brands that offer real value but struggle to communicate it online. Our role is to bring clarity to the message, structure to the strategy and consistency to how businesses show up. Because when those three things are aligned, everything changes.",
+    "Sparkline was created after years of working inside a growing business and seeing firsthand how easily strong work gets overlooked when marketing lacks clarity. The problem was never the service or the effort. It was the message. Businesses were doing everything right but showing up online without direction, consistency or confidence.",
+    "From that experience we learned that real growth does not come from chasing trends or jumping into ads too early. It comes from having a clear message, a strategy that fits the stage of your business and a presence that people can trust.",
+    "Today Sparkline exists to help businesses grow in a way that feels aligned, intentional and sustainable. We are based in Atlanta, Georgia and proud to work with businesses across the United States and beyond, including clients as far as Bermuda. Wherever you are building, we are here to help you show up with clarity, consistency and confidence."
+  ];
+
+  const foundersEyebrow = aboutData?.foundersSection?.eyebrow ?? "Meet the founders";
+  const foundersTitle = aboutData?.foundersSection?.title ?? "Two partners building with intention.";
+  const rawFounders = aboutData?.foundersSection?.founders ?? [];
+  const founders = rawFounders.length
+    ? rawFounders.map((f: any, i: number) => ({
+        ...fallbackFounders[i],
+        ...f,
+        portrait: fallbackFounders[i]?.portrait,
+      }))
+    : fallbackFounders;
+  const rawGallery = (aboutData?.gallerySection ?? []).filter((m: any) => m.src);
+  const galleryMoments = rawGallery.length ? rawGallery : fallbackGalleryMoments;
+
   return (
     <main className="min-h-screen bg-[#050C1E]">
+      <JsonLd data={breadcrumbLD} />
       <Navbar />
 
       <section
@@ -168,28 +217,25 @@ export default function AboutPage() {
         className="px-5 pt-32 pb-14 sm:px-6 sm:pt-36 sm:pb-16 md:px-8 md:pt-44 md:pb-20"
       >
         <div className="mx-auto max-w-[1208px]">
+          <Breadcrumb items={[{ name: "About" }]} variant="dark" className="mb-6" />
           <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
-            Where it all begins
+            {introEyebrow}
           </p>
           <h1 className="mx-auto mt-5 max-w-[980px] text-center text-balance text-[44px] leading-[0.95] tracking-[-0.04em] text-white sm:text-[64px] md:text-[82px]">
-            Where strategy meets care.
+            {introTitle}
           </h1>
           <div className="mt-8 grid gap-6 text-pretty text-[17px] leading-[1.75] text-white/76 sm:text-[18px] md:grid-cols-2 md:gap-10 md:text-[19px] md:leading-[1.8]">
-            <p>
-              <strong className="font-semibold text-white">{BRAND}</strong> was built for business owners who want marketing that feels intentional, human and built to last. We help service based businesses build a clear, confident online presence that actually drives growth, not just noise.
-            </p>
-            <p>
-              We work with brands that offer real value but struggle to communicate it online. Our role is to bring clarity to the message, structure to the strategy and consistency to how businesses show up. Because when those three things are aligned, everything changes.
-            </p>
-            <p>
-              Sparkline was created after years of working inside a growing business and seeing firsthand how easily strong work gets overlooked when marketing lacks clarity. The problem was never the service or the effort. It was the message. Businesses were doing everything right but showing up online without direction, consistency or confidence.
-            </p>
-            <p>
-              From that experience we learned that real growth does not come from chasing trends or jumping into ads too early. It comes from having a clear message, a strategy that fits the stage of your business and a presence that people can trust.
-            </p>
-            <p>
-              Today Sparkline exists to help businesses grow in a way that feels aligned, intentional and sustainable. We are based in Atlanta, Georgia and proud to work with businesses across the United States and beyond, including clients as far as Bermuda. Wherever you are building, we are here to help you show up with clarity, consistency and confidence.
-            </p>
+            {introParagraphs.map((paragraph: string, idx: number) => {
+              if (idx === 0 && paragraph.startsWith(BRAND)) {
+                return (
+                  <p key={idx}>
+                    <strong className="font-semibold text-white">{BRAND}</strong>
+                    {paragraph.slice(BRAND.length)}
+                  </p>
+                );
+              }
+              return <p key={idx}>{paragraph}</p>;
+            })}
           </div>
         </div>
       </section>
@@ -201,14 +247,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1208px]">
           <div className="mb-10 flex flex-col items-center gap-3 text-center sm:mb-12 md:mb-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
-              Meet the founders
+              {foundersEyebrow}
             </p>
             <h2 className="max-w-[760px] text-balance text-[32px] leading-[1.05] tracking-[-0.03em] text-white sm:text-[44px] md:text-[56px]">
-              Two partners building with intention.
+              {foundersTitle}
             </h2>
           </div>
 
-          {founders.map((founder, index) => (
+          {founders.map((founder: any, index: number) => (
             <FounderProfile
               key={`${founder.name}-${index}`}
               founder={founder}
@@ -232,7 +278,7 @@ export default function AboutPage() {
               className="about-moment-track gap-5 md:gap-6"
             >
               {[0, 1].map((copyIndex) =>
-                aboutGalleryMoments.map((moment) => (
+                galleryMoments.map((moment: any) => (
                   <figure
                     key={`${moment.src}-${copyIndex}`}
                     aria-hidden={copyIndex === 1 ? true : undefined}
@@ -241,9 +287,9 @@ export default function AboutPage() {
                     <div className="aspect-[4/3] overflow-hidden rounded-[18px] bg-white/[0.04] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
                       <Image
                         src={moment.src}
-                        alt={copyIndex === 0 ? moment.alt : ""}
-                        width={moment.width}
-                        height={moment.height}
+                        alt={copyIndex === 0 ? (moment.alt ?? "") : ""}
+                        width={moment.width || 1800}
+                        height={moment.height || 1200}
                         sizes="(min-width: 1024px) 460px, (min-width: 768px) 420px, (min-width: 640px) 360px, 78vw"
                         className="h-full w-full object-cover object-center"
                       />

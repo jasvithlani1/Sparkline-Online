@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { getPrivacyPage, type SanityLegalBlock } from "@/sanity/lib/content";
 
 export const metadata = {
   title: "Privacy Policy — Sparkline Marketing Firm",
@@ -21,7 +22,21 @@ type Section = {
   blocks: readonly Block[];
 };
 
-const sections: readonly Section[] = [
+function blockFromSanity(block: SanityLegalBlock): Block {
+  if (block._type === "legalSubheading") return { type: "subheading", text: block.text ?? "" };
+  if (block._type === "legalList") return { type: "list", items: block.items ?? [] };
+  if (block._type === "legalTable")
+    return {
+      type: "table",
+      rows: (block.rows ?? []).map((r) => ({
+        category: r.category ?? "",
+        provider: r.provider ?? "",
+      })),
+    };
+  return { type: "p", text: block.text ?? "" };
+}
+
+const FALLBACK_SECTIONS: readonly Section[] = [
   {
     id: "introduction",
     number: "1",
@@ -434,7 +449,22 @@ const sections: readonly Section[] = [
   },
 ];
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const cms = await getPrivacyPage();
+  const sections: readonly Section[] =
+    cms?.sections?.length
+      ? cms.sections.map((s) => ({
+          id: s.id ?? s._key ?? "",
+          number: s.number ?? "",
+          title: s.title ?? "",
+          blocks: (s.blocks ?? []).map(blockFromSanity),
+        }))
+      : FALLBACK_SECTIONS;
+
+  const companyName = cms?.companyName ?? "SPARKLINE MARKETING FIRM, LLC";
+  const effectiveDate = cms?.effectiveDate ?? "April 29, 2026";
+  const lastUpdated = cms?.lastUpdated ?? "April 29, 2026";
+
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <Navbar />
@@ -451,8 +481,8 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="mt-6 text-pretty text-[15px] leading-[1.7] text-white/70 sm:text-[16px] md:text-[17px]">
-            <strong className="font-semibold text-white">SPARKLINE MARKETING FIRM, LLC</strong>
-            {" · Effective Date: April 29, 2026 · Last Updated: April 29, 2026."}
+            <strong className="font-semibold text-white">{companyName}</strong>
+            {` · Effective Date: ${effectiveDate} · Last Updated: ${lastUpdated}.`}
           </p>
         </div>
       </section>

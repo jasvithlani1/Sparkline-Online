@@ -2,6 +2,13 @@
 
 import { render, screen, within } from "@testing-library/react";
 import AboutPage from "@/app/about/page";
+import { getAboutPage } from "@/sanity/lib/content";
+
+vi.mock("@/sanity/lib/content", () => ({
+  getAboutPage: vi.fn(),
+}));
+
+const getAboutPageMock = vi.mocked(getAboutPage);
 
 vi.mock("next/image", () => ({
   default: ({
@@ -16,9 +23,15 @@ vi.mock("next/image", () => ({
   },
 }));
 
-describe("About page", () => {
-  it("renders a text-first company story followed by two co-founder profile sections", () => {
-    render(<AboutPage />);
+describe("About", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getAboutPageMock.mockResolvedValue(null);
+  });
+
+  it("renders a text-first company story followed by two co-founder profile sections", async () => {
+    const page = await AboutPage();
+    render(page);
 
     const companyIntro = screen.getByTestId("about-company-intro");
     const foundersSection = screen.getByTestId("about-founders-section");

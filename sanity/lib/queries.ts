@@ -141,3 +141,183 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
     seo
   }
 `);
+
+export const HOME_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "homePage"][0] {
+    seo,
+    hero,
+    featuredIntro,
+    trustedBy {
+      eyebrow,
+      lines,
+      logos[] {
+        "src": coalesce(image.asset->url, fallbackUrl),
+        alt
+      }
+    },
+    serviceBanner {
+      title,
+      options[] {
+        id,
+        icon,
+        title,
+        description,
+        href
+      }
+    },
+    workGallerySection {
+      eyebrow,
+      lines,
+      cta {
+        label,
+        href
+      }
+    },
+    faq[]{
+      "id": _key,
+      question,
+      answer
+    }
+  }
+`);
+
+export const ABOUT_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "aboutPage"][0] {
+    seo,
+    introSection,
+    foundersSection{
+      eyebrow,
+      title,
+      founders[]{
+        name,
+        "portraitUrl": portraitImage.asset->url,
+        bio,
+        imageSide
+      }
+    },
+    gallerySection[]{
+      "src": galleryImage.asset->url,
+      alt,
+      caption
+    }
+  }
+`);
+
+export const CONTACT_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "contactPage"][0] {
+    seo,
+    contactDetails
+  }
+`);
+
+export const SERVICES_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "servicesPage"][0] {
+    heading,
+    intro,
+    faqSection {
+      eyebrow,
+      line,
+      items[] {
+        id,
+        question,
+        answer
+      }
+    },
+    seo
+  }
+`);
+
+const legalSectionsProjection = /* groq */ `
+  sections[]{
+    _key,
+    id,
+    number,
+    title,
+    blocks[]{
+      _key,
+      _type,
+      text,
+      items,
+      rows[]{
+        _key,
+        category,
+        provider
+      }
+    }
+  }
+`;
+
+export const TERMS_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "termsPage"][0] {
+    seo,
+    effectiveDate,
+    lastUpdated,
+    companyName,
+    ${legalSectionsProjection}
+  }
+`);
+
+export const PRIVACY_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "privacyPage"][0] {
+    seo,
+    effectiveDate,
+    lastUpdated,
+    companyName,
+    ${legalSectionsProjection}
+  }
+`);
+
+export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "siteSettings"][0] {
+    siteTitle,
+    siteUrl,
+    "defaultOgImageUrl": defaultOgImage.asset->url,
+    analyticsGroup {
+      gtmId,
+      gaId,
+      gscCode
+    },
+    organizationSchema {
+      type,
+      name,
+      url,
+      "logoUrl": logo.asset->url,
+      telephone,
+      email,
+      address {
+        streetAddress,
+        city,
+        state,
+        postalCode,
+        country
+      },
+      geo {
+        latitude,
+        longitude
+      },
+      openingHours,
+      priceRange,
+      sameAs,
+      areaServed
+    },
+    personSchema {
+      name,
+      jobTitle,
+      "imageUrl": image.asset->url,
+      url,
+      sameAs
+    },
+    robotsDisallow,
+    customHeaderScripts,
+    customFooterScripts,
+    llmsTxtContent
+  }
+`);
+
+export const BLOG_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "blogPost" && defined(slug.current)] { "slug": slug.current }
+`);
+
+export const PORTFOLIO_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "portfolioProject" && defined(slug.current)] { "slug": slug.current }
+`);

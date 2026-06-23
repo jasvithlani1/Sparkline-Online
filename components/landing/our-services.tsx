@@ -9,6 +9,7 @@ const PARAGRAPH_BOLD: Record<number, readonly string[]> = {
 };
 
 type ServicesContent = {
+  heading?: string;
   eyebrow: string;
   intro: readonly string[];
   cards: readonly {
@@ -64,7 +65,7 @@ export function OurServices({ content = ourServices }: OurServicesProps) {
               className="hero-copy max-w-[11ch] text-balance text-[32px] leading-[1] tracking-[0.02em] sm:max-w-none sm:text-[48px] sm:leading-[0.95] md:text-[64px] lg:text-[80px]"
               style={{ wordSpacing: "0.25em" }}
             >
-              OUR CORE SERVICES
+              {content.heading ?? "OUR CORE SERVICES"}
             </h2>
             <span
               aria-hidden="true"

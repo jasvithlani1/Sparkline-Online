@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks } from "@/lib/content";
 
+
 const NAVBAR_SCROLL_THRESHOLD = 24;
 const BOOK_CALL_URL =
   "https://crm.sparklinemarketingfirm.com/widget/booking/fseh3NlrLcMcooAlLbLB";
@@ -44,6 +45,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+
 
   useEffect(() => {
     const updateScrollState = () => {
@@ -97,6 +99,8 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={BOOK_CALL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-[13px] text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96] sm:px-3 sm:py-2.5 sm:text-[15px] md:text-base"
               style={{
                 borderRadius: "8px",

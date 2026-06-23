@@ -8,6 +8,11 @@ import { workGallery } from "@/lib/content";
 
 type WorkGalleryProps = {
   projects?: readonly ProjectCardProject[];
+  content?: {
+    eyebrow?: string;
+    lines?: string[];
+    cta?: { label?: string; href?: string };
+  };
 };
 
 function getCarouselCards(node: HTMLDivElement) {
@@ -62,8 +67,11 @@ function getActiveCardIndex(node: HTMLDivElement) {
   return activeIndex;
 }
 
-export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProps) {
+export function WorkGallery({ projects = workGallery.projects, content }: WorkGalleryProps) {
   const displayProjects = projects.length > 0 ? projects : workGallery.projects;
+  const eyebrow = content?.eyebrow ?? workGallery.eyebrow;
+  const lines = content?.lines ?? workGallery.lines;
+  const cta = content?.cta ?? workGallery.cta;
   const projectCount = displayProjects.length;
   const carouselRef = useRef<HTMLDivElement>(null);
   const resumeTimerRef = useRef<number | undefined>(undefined);
@@ -93,8 +101,6 @@ export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProp
       lastTime = time;
 
       if (!isPaused) {
-        node.scrollLeft -= delta * 0.03;
-
         normalizeCarouselScroll(node, projectCount);
         setActiveIndex(getActiveCardIndex(node));
       }
@@ -214,7 +220,7 @@ export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProp
       className="pt-6 pb-10 sm:pt-7 sm:pb-12 md:pt-8 md:pb-14 lg:pt-8 lg:pb-16"
     >
       <div className="mx-auto flex max-w-[1208px] flex-col gap-10 px-5 sm:gap-12 sm:px-6 md:gap-14 md:px-8">
-        <SectionHeading eyebrow={workGallery.eyebrow} lines={workGallery.lines} tone="dark" />
+        <SectionHeading eyebrow={eyebrow} lines={lines} tone="dark" />
       </div>
       <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2 sm:mt-12 md:mt-14">
         <div
@@ -269,10 +275,10 @@ export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProp
         </div>
         <div className="flex justify-center">
           <Link
-            href={workGallery.cta.href}
+            href={cta.href ?? "/portfolio"}
             className="inline-flex items-center justify-center whitespace-nowrap text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96]"
             style={{
-              paddingInline: "12px",
+              paddingInline: "16px",
               paddingBlock: "10px",
               borderRadius: "8px",
               backgroundImage: "linear-gradient(180deg, #8F57FF 0%, #4C2FFF 100%)",
@@ -281,14 +287,13 @@ export function WorkGallery({ projects = workGallery.projects }: WorkGalleryProp
               borderColor: "#FFFFFF29",
               boxShadow:
                 "#FFFFFF14 0px 0.5px 0.5px inset, #5F38D933 0px 1px 1px, #5F38D933 0px 1px 1px, #4C2FFF66 0px 2px 5px -2px, #4C2FFF 0px 0px 0px 1px",
-              color: "#FFFFFF",
               fontSize: "15px",
               lineHeight: "18px",
               fontWeight: 600,
               fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
             }}
           >
-            {workGallery.cta.label}
+            {cta.label ?? "View All Projects"}
           </Link>
         </div>
       </div>

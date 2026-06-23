@@ -15,9 +15,14 @@ type FaqProps = {
 export function Faq({
   eyebrow = faqSection.eyebrow,
   lines = faqSection.lines,
-  items = faqSection.items,
+  items: rawItems = faqSection.items,
   spacing = "default",
 }: FaqProps = {}) {
+  const items = rawItems.map((item, index) => ({
+    ...item,
+    id: item.id || `faq-${index}`,
+  }));
+
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
   const subline = lines.join(" ").replace(/\s+/g, " ").trim();
   const spacingClass =

@@ -1,7 +1,14 @@
 import { ServiceOptionsToggle } from "@/components/landing/service-options-toggle";
 import { ServiceBannerVideo } from "@/components/landing/service-banner-video";
 
-export function ServiceBanner() {
+type ServiceBannerProps = {
+  data?: {
+    title?: string;
+    options?: any[];
+  };
+};
+
+export function ServiceBanner({ data }: ServiceBannerProps = {}) {
   return (
     <section id="services" className="px-5 pt-0 pb-2 sm:px-6 sm:pt-0 sm:pb-3 md:px-8 md:pt-0 md:pb-4">
       <div className="relative mx-auto max-w-[1310px]">
@@ -18,9 +25,9 @@ export function ServiceBanner() {
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,25,58,0.42),rgba(10,25,58,0.24))]" />
             <h2 className="absolute left-5 top-5 max-w-[240px] text-[26px] font-medium leading-none tracking-[0.01em] text-white sm:left-7 sm:top-7 sm:max-w-[320px] sm:text-[34px] md:left-[72px] md:top-[64px] md:max-w-[520px] md:text-[42px] lg:left-[103px] lg:top-[88px] lg:max-w-[616px] lg:text-[48px]">
-              HOW CAN WE SERVE YOU?
+              {data?.title ?? "HOW CAN WE SERVE YOU?"}
             </h2>
-            <ServiceOptionsToggle />
+            <ServiceOptionsToggle options={data?.options} />
           </div>
         </div>
       </div>

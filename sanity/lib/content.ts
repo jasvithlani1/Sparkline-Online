@@ -1,6 +1,7 @@
 import type { PortableTextBlock } from "next-sanity";
 import {
   blogPosts,
+  faqSection,
   ourServices,
   serviceDetails,
   workGallery,
@@ -10,11 +11,20 @@ import { client } from "./client";
 import {
   BLOG_POST_QUERY,
   BLOG_POSTS_QUERY,
+  BLOG_SLUGS_QUERY,
   PORTFOLIO_PROJECT_QUERY,
   PORTFOLIO_PROJECTS_QUERY,
+  PORTFOLIO_SLUGS_QUERY,
   SERVICE_DETAIL_QUERY,
   SERVICE_LIST_QUERY,
   SERVICE_SLUGS_QUERY,
+  HOME_PAGE_QUERY,
+  ABOUT_PAGE_QUERY,
+  CONTACT_PAGE_QUERY,
+  SERVICES_PAGE_QUERY,
+  TERMS_PAGE_QUERY,
+  PRIVACY_PAGE_QUERY,
+  SITE_SETTINGS_QUERY,
 } from "./queries";
 
 const isTest = process.env.NODE_ENV === "test";
@@ -364,7 +374,7 @@ export function toBlogPost(doc: BlogPostDocument): BlogPost {
 
 async function fetchSanity<T>(query: string, params?: Record<string, string>) {
   if (isTest) return null;
-  return client.fetch<T>(query, params ?? {});
+  return client.fetch<T>(query, params ?? {}, { cache: "no-store" });
 }
 
 function fallbackServiceEntries(): ServiceEntry[] {
@@ -387,13 +397,40 @@ function fallbackServiceEntries(): ServiceEntry[] {
   return entries;
 }
 
-export async function getServicesContent() {
-  const docs = await fetchSanity<ServiceDocument[]>(SERVICE_LIST_QUERY);
-  if (!docs?.length) return ourServices;
+type ServicesPageDocument = {
+  heading?: string;
+  intro?: string[];
+  faqSection?: {
+    eyebrow?: string;
+    line?: string;
+    items?: { id?: string; question?: string; answer?: string }[];
+  };
+};
 
+export async function getServicesContent() {
+  const [pageDoc, serviceDocs] = await Promise.all([
+    fetchSanity<ServicesPageDocument>(SERVICES_PAGE_QUERY),
+    fetchSanity<ServiceDocument[]>(SERVICE_LIST_QUERY),
+  ]);
+
+  const cmsFaq = pageDoc?.faqSection;
   return {
-    ...ourServices,
-    cards: docs.map(toServiceCard),
+    heading: pageDoc?.heading ?? "OUR CORE SERVICES",
+    eyebrow: ourServices.eyebrow,
+    intro: pageDoc?.intro?.length ? pageDoc.intro : [...ourServices.intro],
+    cards: serviceDocs?.length ? serviceDocs.map(toServiceCard) : [...ourServices.cards],
+    ctaLabel: ourServices.ctaLabel,
+    faq: {
+      eyebrow: cmsFaq?.eyebrow ?? faqSection.eyebrow,
+      lines: cmsFaq?.line ? [cmsFaq.line] : [...faqSection.lines],
+      items: cmsFaq?.items?.length
+        ? cmsFaq.items.map((item, i) => ({
+            id: item.id ?? `faq-${i}`,
+            question: item.question ?? "",
+            answer: item.answer ?? "",
+          }))
+        : [...faqSection.items],
+    },
   };
 }
 
@@ -462,4 +499,117 @@ export async function getBlogPostBySlug(slug: string) {
     ...fallback,
     bodyBlocks: textToPortableText(fallback.body, fallback.slug),
   } as BlogPost;
+}
+
+export async function getHomePage() {
+  return fetchSanity<any>(HOME_PAGE_QUERY);
+}
+
+export async function getAboutPage() {
+  return fetchSanity<any>(ABOUT_PAGE_QUERY);
+}
+
+export async function getContactPage() {
+  return fetchSanity<any>(CONTACT_PAGE_QUERY);
+}
+
+export type SanityLegalBlock = {
+  _key?: string;
+  _type?: string;
+  text?: string;
+  items?: string[];
+  rows?: { _key?: string; category?: string; provider?: string }[];
+};
+
+export type SanityLegalSection = {
+  _key?: string;
+  id?: string;
+  number?: string;
+  title?: string;
+  blocks?: SanityLegalBlock[];
+};
+
+export type SanityLegalPage = {
+  seo?: SeoDocument;
+  effectiveDate?: string;
+  lastUpdated?: string;
+  companyName?: string;
+  sections?: SanityLegalSection[];
+};
+
+export async function getTermsPage() {
+  return fetchSanity<SanityLegalPage>(TERMS_PAGE_QUERY);
+}
+
+export async function getPrivacyPage() {
+  return fetchSanity<SanityLegalPage>(PRIVACY_PAGE_QUERY);
+}
+
+// ── Site Settings ─────────────────────────────────────────────────────────────
+
+export type SiteSettingsAnalytics = {
+  gtmId?: string;
+  gaId?: string;
+  gscCode?: string;
+};
+
+export type SiteSettingsOrg = {
+  type?: string;
+  name?: string;
+  url?: string;
+  logoUrl?: string;
+  telephone?: string;
+  email?: string;
+  address?: {
+    streetAddress?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  geo?: { latitude?: string; longitude?: string };
+  openingHours?: string[];
+  priceRange?: string;
+  sameAs?: string[];
+  areaServed?: string[];
+};
+
+export type SiteSettingsPerson = {
+  name?: string;
+  jobTitle?: string;
+  imageUrl?: string;
+  url?: string;
+  sameAs?: string[];
+};
+
+export type SiteSettings = {
+  siteTitle?: string;
+  siteUrl?: string;
+  defaultOgImageUrl?: string;
+  analyticsGroup?: SiteSettingsAnalytics;
+  organizationSchema?: SiteSettingsOrg;
+  personSchema?: SiteSettingsPerson;
+  robotsDisallow?: string[];
+  customHeaderScripts?: string;
+  customFooterScripts?: string;
+  llmsTxtContent?: string;
+};
+
+let _siteSettingsCache: SiteSettings | null | undefined;
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  if (_siteSettingsCache !== undefined) return _siteSettingsCache;
+  const result = await fetchSanity<SiteSettings>(SITE_SETTINGS_QUERY);
+  _siteSettingsCache = result ?? null;
+  return _siteSettingsCache;
+}
+
+export async function getBlogSlugs(): Promise<string[]> {
+  const docs = await fetchSanity<{ slug?: string }[]>(BLOG_SLUGS_QUERY);
+  return (docs ?? []).map((d) => d.slug).filter((s): s is string => Boolean(s));
+}
+
+export async function getPortfolioSlugs(): Promise<string[]> {
+  const docs = await fetchSanity<{ slug?: string }[]>(PORTFOLIO_SLUGS_QUERY);
+  return (docs ?? []).map((d) => d.slug).filter((s): s is string => Boolean(s));
 }

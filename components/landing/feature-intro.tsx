@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { featuredIntro } from "@/lib/content";
+import { featuredIntro as fallbackFeaturedIntro } from "@/lib/content";
 
 const BRAND = "SPARKLINE MARKETING FIRM";
 const SERVICES =
@@ -29,7 +29,15 @@ function renderWithBold(paragraph: string, phrases: readonly string[]) {
   return <Fragment>{parts}</Fragment>;
 }
 
-export function FeatureIntro() {
+type FeatureIntroProps = {
+  data?: {
+    body?: string[];
+  };
+};
+
+export function FeatureIntro({ data }: FeatureIntroProps) {
+  const body = data?.body && data.body.length > 0 ? data.body : fallbackFeaturedIntro.body;
+
   return (
     <section
       id="about-us"
@@ -41,7 +49,7 @@ export function FeatureIntro() {
         className="mx-auto flex max-w-[1308px] flex-col gap-6 px-2 text-white sm:gap-8 sm:px-4"
       >
         <div className="flex flex-col gap-5 sm:gap-6">
-          {featuredIntro.body.map((paragraph, index) => {
+          {body.map((paragraph, index) => {
             let content: React.ReactNode = paragraph;
             if (index === 0 && paragraph.startsWith(BRAND)) {
               content = (
