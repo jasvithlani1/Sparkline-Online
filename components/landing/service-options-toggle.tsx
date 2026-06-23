@@ -105,7 +105,7 @@ function ServiceOptionIcon({ id, icon }: { id: string; icon?: string }) {
   }
 }
 
-export function ServiceOptionsToggle({ options = serviceOptions }: { options?: any[] } = {}) {
+export function ServiceOptionsToggle({ options = serviceOptions }: { options?: readonly any[] } = {}) {
   const displayOptions = options?.length ? options : serviceOptions;
   return (
     <div
