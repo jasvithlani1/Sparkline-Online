@@ -374,7 +374,7 @@ export function toBlogPost(doc: BlogPostDocument): BlogPost {
 
 async function fetchSanity<T>(query: string, params?: Record<string, string>) {
   if (isTest) return null;
-  return client.fetch<T>(query, params ?? {}, { cache: "no-store" });
+  return client.fetch<T>(query, params ?? {});
 }
 
 function fallbackServiceEntries(): ServiceEntry[] {
