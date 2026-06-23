@@ -1,0 +1,25 @@
+# Sparkline Marketing Firm
+
+> Sparkline Marketing Firm helps ambitious businesses build stronger brands, reach the right audience, and turn digital presence into measurable growth.
+
+## About
+
+Sparkline Marketing Firm is a full-service digital marketing agency delivering strategic, creative, and performance-focused solutions.
+
+## Services
+
+- Digital Marketing
+- Brand Strategy
+- Website Design & Development
+- Branding & Design
+- Social Media Marketing
+- Content Marketing
+
+## Contact
+
+Website: https://www.sparklinemarketingfirm.com
+Contact page: https://www.sparklinemarketingfirm.com/contact
+
+## Sitemap
+
+https://www.sparklinemarketingfirm.com/sitemap.xml

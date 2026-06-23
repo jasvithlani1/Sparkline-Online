@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getSiteSettings } from "@/sanity/lib/content";
 
+export const dynamic = "force-static";
+
 const DEFAULT_SITE_URL = "https://www.sparklinemarketingfirm.com";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {

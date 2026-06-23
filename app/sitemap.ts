@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteSettings, getBlogSlugs, getPortfolioSlugs } from "@/sanity/lib/content";
+
+export const dynamic = "force-static";
 import { getServiceSlugs } from "@/sanity/lib/content";
 
 const DEFAULT_SITE_URL = "https://www.sparklinemarketingfirm.com";
