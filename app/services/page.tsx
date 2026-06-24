@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { OurServices } from "@/components/landing/our-services";
 import Breadcrumb from "@/components/breadcrumb";
 import { getServicesContent, getSiteSettings } from "@/sanity/lib/content";

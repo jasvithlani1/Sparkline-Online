@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { BlogList } from "@/components/blogs/blog-list";
 import Breadcrumb from "@/components/breadcrumb";
 import { getBlogPosts, getSiteSettings } from "@/sanity/lib/content";

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import Breadcrumb from "@/components/breadcrumb";
 import { getContactPage, getSiteSettings } from "@/sanity/lib/content";
 import { ContactForm } from "@/components/landing/contact-form";

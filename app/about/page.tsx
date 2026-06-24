@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import Breadcrumb from "@/components/breadcrumb";
 import { getAboutPage, getSiteSettings } from "@/sanity/lib/content";
 import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";

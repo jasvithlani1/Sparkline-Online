@@ -4,7 +4,7 @@ import { FeatureIntro } from "@/components/landing/feature-intro";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
 import { LogoGrid } from "@/components/landing/logo-grid";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { ServiceBanner } from "@/components/landing/service-banner";
 import { WorkGallery } from "@/components/landing/work-gallery";
 import { getPortfolioProjects, getHomePage, getSiteSettings } from "@/sanity/lib/content";

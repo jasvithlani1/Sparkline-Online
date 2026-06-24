@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { ProjectList } from "@/components/portfolio/project-list";
 import Breadcrumb from "@/components/breadcrumb";
 import { getPortfolioProjects, getSiteSettings } from "@/sanity/lib/content";

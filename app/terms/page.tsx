@@ -1,5 +1,5 @@
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { getTermsPage, type SanityLegalBlock } from "@/sanity/lib/content";
 
 export const metadata = {

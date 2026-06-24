@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
+import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import Breadcrumb from "@/components/breadcrumb";
 import JsonLd from "@/components/json-ld";
 import { getServiceBySlug, getServiceSlugs, getSiteSettings } from "@/sanity/lib/content";

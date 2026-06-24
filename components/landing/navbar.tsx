@@ -6,10 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks } from "@/lib/content";
 
-
 const NAVBAR_SCROLL_THRESHOLD = 24;
-const BOOK_CALL_URL =
+const DEFAULT_BOOK_CALL_URL =
   "https://crm.sparklinemarketingfirm.com/widget/booking/fseh3NlrLcMcooAlLbLB";
+const DEFAULT_LOGO = "/logos/sparkline-new-logo.svg";
+const DEFAULT_LOGO_ALT = "SPARKLINE MARKETING FIRM";
+const DEFAULT_CTA_LABEL = "Book a Call";
 
 function NavLink({
   href,
@@ -40,11 +42,23 @@ function NavLink({
   );
 }
 
-export function Navbar() {
+type NavbarProps = {
+  logoUrl?: string;
+  logoAlt?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+};
+
+export function Navbar({ logoUrl, logoAlt, ctaLabel, ctaUrl }: NavbarProps = {}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+
+  const logoSrc = logoUrl ?? DEFAULT_LOGO;
+  const logoAltText = logoAlt ?? DEFAULT_LOGO_ALT;
+  const bookCallUrl = ctaUrl ?? DEFAULT_BOOK_CALL_URL;
+  const bookCallLabel = ctaLabel ?? DEFAULT_CTA_LABEL;
 
 
   useEffect(() => {
@@ -76,8 +90,8 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-2 sm:gap-4">
           <Link href="/" className="flex items-center">
             <Image
-              src="/logos/sparkline-new-logo.svg"
-              alt="SPARKLINE MARKETING FIRM"
+              src={logoSrc}
+              alt={logoAltText}
               width={278}
               height={56}
               priority
@@ -98,7 +112,7 @@ export function Navbar() {
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
             <a
-              href={BOOK_CALL_URL}
+              href={bookCallUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-[13px] text-white transition-transform hover:-translate-y-0.5 active:scale-[0.96] sm:px-3 sm:py-2.5 sm:text-[15px] md:text-base"
@@ -115,7 +129,7 @@ export function Navbar() {
                 fontFamily: '"Geist-SemiBold", "Geist", system-ui, sans-serif',
               }}
             >
-              Book a Call
+              {bookCallLabel}
             </a>
             <button
               type="button"

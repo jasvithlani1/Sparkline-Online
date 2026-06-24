@@ -26,6 +26,7 @@ import {
   PRIVACY_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
   SITE_FOOTER_QUERY,
+  SITE_HEADER_QUERY,
 } from "./queries";
 
 const isTest = process.env.NODE_ENV === "test";
@@ -643,4 +644,19 @@ export async function getSiteFooter(): Promise<SiteFooterData | null> {
   const result = await fetchSanity<SiteFooterData>(SITE_FOOTER_QUERY);
   _siteFooterCache = result ?? null;
   return _siteFooterCache;
+}
+
+export type SiteHeaderData = {
+  logo?: { assetUrl?: string; fallbackUrl?: string; alt?: string };
+  ctaLabel?: string;
+  ctaUrl?: string;
+};
+
+let _siteHeaderCache: SiteHeaderData | null | undefined;
+
+export async function getSiteHeader(): Promise<SiteHeaderData | null> {
+  if (_siteHeaderCache !== undefined) return _siteHeaderCache;
+  const result = await fetchSanity<SiteHeaderData>(SITE_HEADER_QUERY);
+  _siteHeaderCache = result ?? null;
+  return _siteHeaderCache;
 }
