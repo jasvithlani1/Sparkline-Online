@@ -25,6 +25,7 @@ import {
   TERMS_PAGE_QUERY,
   PRIVACY_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
+  SITE_FOOTER_QUERY,
 } from "./queries";
 
 const isTest = process.env.NODE_ENV === "test";
@@ -612,4 +613,34 @@ export async function getBlogSlugs(): Promise<string[]> {
 export async function getPortfolioSlugs(): Promise<string[]> {
   const docs = await fetchSanity<{ slug?: string }[]>(PORTFOLIO_SLUGS_QUERY);
   return (docs ?? []).map((d) => d.slug).filter((s): s is string => Boolean(s));
+}
+
+type SiteFooterLink = { label: string; href: string };
+
+export type SiteFooterData = {
+  logo?: { assetUrl?: string; fallbackUrl?: string; alt?: string };
+  tagline?: string;
+  servicesColumn?: { heading?: string; links?: SiteFooterLink[] };
+  quickLinksColumn?: { heading?: string; links?: SiteFooterLink[] };
+  contactColumn?: {
+    heading?: string;
+    phone?: string;
+    phoneHref?: string;
+    email?: string;
+    emailHref?: string;
+    address?: string;
+    addressHref?: string;
+  };
+  socialColumn?: { heading?: string; links?: SiteFooterLink[] };
+  copyrightText?: string;
+  bottomGraphicUrl?: string;
+};
+
+let _siteFooterCache: SiteFooterData | null | undefined;
+
+export async function getSiteFooter(): Promise<SiteFooterData | null> {
+  if (_siteFooterCache !== undefined) return _siteFooterCache;
+  const result = await fetchSanity<SiteFooterData>(SITE_FOOTER_QUERY);
+  _siteFooterCache = result ?? null;
+  return _siteFooterCache;
 }

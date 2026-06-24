@@ -1,49 +1,9 @@
 import Image from "next/image";
+import { getSiteFooter } from "@/sanity/lib/content";
 
-const logoImageUrl =
-  "/logos/sparkline-new-logo.svg";
-const footerGraphicUrl =
+const FALLBACK_LOGO = "/logos/sparkline-new-logo.svg";
+const FALLBACK_GRAPHIC =
   "https://app.paper.design/file-assets/01KNBNYP6N270CJVTY2FR1GV5J/01KNXFZD87Z01RFEZ99922PQC3.png";
-
-const footerColumns = [
-  {
-    heading: "OUR SERVICES",
-    links: [
-      { label: "Digital Marketing", href: "/services/digital-marketing" },
-      { label: "Brand Strategy", href: "/services/brand-strategy" },
-      { label: "Website Design & Development", href: "/services/website-design-development" },
-      { label: "Branding & Design", href: "/services/branding-design" },
-      { label: "Social Media", href: "/services/social-media-management" },
-      { label: "Content Marketing", href: "/services/content-marketing" },
-    ],
-  },
-  {
-    heading: "QUICK LINKS",
-    links: [
-      { label: "About Us", href: "/about" },
-      { label: "Our Services", href: "/services" },
-      { label: "Terms & Conditions", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" },
-    ],
-  },
-  {
-    heading: "CONTACT",
-    links: [
-      { label: "(470) 841-2335", href: "tel:+14708412335" },
-      { label: "info@sparklinemarketingfirm.com", href: "mailto:info@sparklinemarketingfirm.com" },
-      { label: "524 Sawnee Village Boulevard, Cumming, Georgia 30040", href: "/contact" },
-    ],
-  },
-  {
-    heading: "FOLLOW US",
-    links: [
-      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61589700706177" },
-      { label: "Instagram", href: "https://www.instagram.com/sparklinemarketingfirm" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/sparkline-marketing-firm/?viewAsMember=true" },
-      { label: "X", href: "https://x.com/SparklineMF" },
-    ],
-  },
-] as const;
 
 function ContactIcon({ kind }: { kind: "phone" | "email" | "address" }) {
   const cls = "h-[14px] w-[14px] shrink-0";
@@ -109,7 +69,53 @@ type FooterProps = {
   spacing?: "default" | "compactTop";
 };
 
-export function Footer({ spacing = "default" }: FooterProps = {}) {
+export async function Footer({ spacing = "default" }: FooterProps = {}) {
+  const data = await getSiteFooter();
+
+  const logoUrl = data?.logo?.assetUrl ?? data?.logo?.fallbackUrl ?? FALLBACK_LOGO;
+  const logoAlt = data?.logo?.alt ?? "Sparkline Marketing Firm";
+  const tagline =
+    data?.tagline ??
+    "SPARKLINE MARKETING FIRM delivers strategic marketing, creative branding, and digital solutions that help businesses grow with confidence and clarity.";
+  const copyrightText =
+    data?.copyrightText ?? "© 2026 SPARKLINE MARKETING FIRM. All Rights Reserved.";
+  const bottomGraphicUrl = data?.bottomGraphicUrl ?? FALLBACK_GRAPHIC;
+
+  const servicesHeading = data?.servicesColumn?.heading ?? "OUR SERVICES";
+  const servicesLinks = data?.servicesColumn?.links ?? [
+    { label: "Digital Marketing", href: "/services/digital-marketing" },
+    { label: "Brand Strategy", href: "/services/brand-strategy" },
+    { label: "Website Design & Development", href: "/services/website-design-development" },
+    { label: "Branding & Design", href: "/services/branding-design" },
+    { label: "Social Media", href: "/services/social-media-management" },
+    { label: "Content Marketing", href: "/services/content-marketing" },
+  ];
+
+  const quickLinksHeading = data?.quickLinksColumn?.heading ?? "QUICK LINKS";
+  const quickLinks = data?.quickLinksColumn?.links ?? [
+    { label: "About Us", href: "/about" },
+    { label: "Our Services", href: "/services" },
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+  ];
+
+  const contactHeading = data?.contactColumn?.heading ?? "CONTACT";
+  const phone = data?.contactColumn?.phone ?? "(470) 841-2335";
+  const phoneHref = data?.contactColumn?.phoneHref ?? "tel:+14708412335";
+  const email = data?.contactColumn?.email ?? "info@sparklinemarketingfirm.com";
+  const emailHref = data?.contactColumn?.emailHref ?? "mailto:info@sparklinemarketingfirm.com";
+  const address =
+    data?.contactColumn?.address ?? "524 Sawnee Village Boulevard, Cumming, Georgia 30040";
+  const addressHref = data?.contactColumn?.addressHref ?? "/contact";
+
+  const socialHeading = data?.socialColumn?.heading ?? "FOLLOW US";
+  const socialLinks = data?.socialColumn?.links ?? [
+    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61589700706177" },
+    { label: "Instagram", href: "https://www.instagram.com/sparklinemarketingfirm" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/sparkline-marketing-firm/?viewAsMember=true" },
+    { label: "X", href: "https://x.com/SparklineMF" },
+  ];
+
   const contentSpacingClass =
     spacing === "compactTop"
       ? "pt-8 pb-20 sm:pt-10 sm:pb-24 md:pt-12 md:pb-28 lg:pt-14 lg:pb-32"
@@ -125,96 +131,130 @@ export function Footer({ spacing = "default" }: FooterProps = {}) {
         className={`mx-auto flex max-w-[1440px] flex-col px-[30px] ${contentSpacingClass}`}
       >
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-[164px]">
+          {/* Brand column */}
           <div className="w-full max-w-[320px] shrink-0">
             <Image
-              src={logoImageUrl}
-              alt="Sparkline Marketing Firm"
+              src={logoUrl}
+              alt={logoAlt}
               width={278}
               height={56}
               className="h-auto w-[190px]"
             />
             <p className="mt-4 text-pretty text-[13px] leading-[1.6] text-white/78">
-              <strong className="font-semibold text-white">SPARKLINE MARKETING FIRM</strong> delivers strategic marketing, creative branding, and digital solutions that help businesses grow with confidence and clarity.
+              {tagline}
             </p>
           </div>
 
           <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-2 lg:flex lg:items-start lg:justify-between lg:gap-x-10">
-            {footerColumns.map((column) => {
-              const fullWidthOnMobile =
-                column.heading === "CONTACT" || column.heading === "FOLLOW US";
-              return (
-              <div
-                key={column.heading}
-                className={`min-w-0 ${
-                  fullWidthOnMobile ? "col-span-2 md:col-span-1" : ""
-                }`}
-              >
-                <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
-                  {column.heading}
-                </h2>
-                {column.heading === "FOLLOW US" ? (
-                  <div className="flex items-center gap-3">
-                    {column.links.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        aria-label={link.label}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/30 hover:bg-white/[0.08] active:scale-[0.96]"
-                      >
-                        <SocialIcon name={link.label} />
-                      </a>
-                    ))}
-                  </div>
-                ) : column.heading === "CONTACT" ? (
-                  <div className="space-y-[14px]">
-                    {column.links.map((link, i) => {
-                      const kind = (["phone", "email", "address"] as const)[i] ?? "phone";
-                      return (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          className="flex items-start gap-2.5 text-[14px] leading-[1.45] text-white transition-opacity hover:opacity-80"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-[3px] inline-flex text-[#B08CFF]"
-                          >
-                            <ContactIcon kind={kind} />
-                          </span>
-                          <span className="break-words">{link.label}</span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="space-y-[17.5px]">
-                    {column.links.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        className="block text-[14px] leading-[18px] text-white transition-opacity hover:opacity-80"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
+            {/* Services column */}
+            <div className="min-w-0">
+              <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
+                {servicesHeading}
+              </h2>
+              <div className="space-y-[17.5px]">
+                {servicesLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="block text-[14px] leading-[18px] text-white transition-opacity hover:opacity-80"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links column */}
+            <div className="min-w-0">
+              <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
+                {quickLinksHeading}
+              </h2>
+              <div className="space-y-[17.5px]">
+                {quickLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="block text-[14px] leading-[18px] text-white transition-opacity hover:opacity-80"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact column */}
+            <div className="min-w-0 col-span-2 md:col-span-1">
+              <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
+                {contactHeading}
+              </h2>
+              <div className="space-y-[14px]">
+                {phone && (
+                  <a
+                    href={phoneHref}
+                    className="flex items-start gap-2.5 text-[14px] leading-[1.45] text-white transition-opacity hover:opacity-80"
+                  >
+                    <span aria-hidden="true" className="mt-[3px] inline-flex text-[#B08CFF]">
+                      <ContactIcon kind="phone" />
+                    </span>
+                    <span className="break-words">{phone}</span>
+                  </a>
+                )}
+                {email && (
+                  <a
+                    href={emailHref}
+                    className="flex items-start gap-2.5 text-[14px] leading-[1.45] text-white transition-opacity hover:opacity-80"
+                  >
+                    <span aria-hidden="true" className="mt-[3px] inline-flex text-[#B08CFF]">
+                      <ContactIcon kind="email" />
+                    </span>
+                    <span className="break-words">{email}</span>
+                  </a>
+                )}
+                {address && (
+                  <a
+                    href={addressHref}
+                    className="flex items-start gap-2.5 text-[14px] leading-[1.45] text-white transition-opacity hover:opacity-80"
+                  >
+                    <span aria-hidden="true" className="mt-[3px] inline-flex text-[#B08CFF]">
+                      <ContactIcon kind="address" />
+                    </span>
+                    <span className="break-words">{address}</span>
+                  </a>
                 )}
               </div>
-              );
-            })}
+            </div>
+
+            {/* Social column */}
+            <div className="min-w-0 col-span-2 md:col-span-1">
+              <h2 className="mb-[17.5px] bg-[linear-gradient(90deg,#B08CFF_0%,#8F57FF_100%)] bg-clip-text text-[14px] font-semibold leading-[18px] tracking-[0.06em] text-transparent">
+                {socialHeading}
+              </h2>
+              <div className="flex items-center gap-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    aria-label={link.label}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/30 hover:bg-white/[0.08] active:scale-[0.96]"
+                  >
+                    <SocialIcon name={link.label} />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="relative z-10 mt-8 border-t border-white/10 pt-6 sm:mt-10 md:mt-12 lg:mt-14">
           <p className="text-center text-[12px] leading-[1.6] text-white/60 sm:text-[13px]">
-            © 2026 <span className="font-semibold text-white/80">SPARKLINE MARKETING FIRM</span>. All Rights Reserved.
+            {copyrightText}
           </p>
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center">
         <Image
-          src={footerGraphicUrl}
+          src={bottomGraphicUrl}
           alt=""
           aria-hidden="true"
           data-testid="footer-bottom-graphic"

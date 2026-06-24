@@ -2,6 +2,8 @@ import { blogPost } from "./documents/blog-post";
 import { portfolioProject } from "./documents/portfolio-project";
 import { service } from "./documents/service";
 import { siteSettings } from "./documents/site-settings";
+import { siteHeader } from "./documents/site-header";
+import { siteFooter } from "./documents/site-footer";
 import { cmsImage } from "./objects/cms-image";
 import { faqItem } from "./objects/faq-item";
 import { projectSection } from "./objects/project-section";
@@ -36,6 +38,8 @@ export const schemaTypes = [
   legalSection,
   // singletons
   siteSettings,
+  siteHeader,
+  siteFooter,
   // documents
   service,
   portfolioProject,

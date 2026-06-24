@@ -321,3 +321,41 @@ export const BLOG_SLUGS_QUERY = defineQuery(/* groq */ `
 export const PORTFOLIO_SLUGS_QUERY = defineQuery(/* groq */ `
   *[_type == "portfolioProject" && defined(slug.current)] { "slug": slug.current }
 `);
+
+export const SITE_FOOTER_QUERY = defineQuery(/* groq */ `
+  *[_type == "siteFooter"][0] {
+    logo ${cmsImageProjection},
+    tagline,
+    servicesColumn {
+      heading,
+      links[]{ label, href }
+    },
+    quickLinksColumn {
+      heading,
+      links[]{ label, href }
+    },
+    contactColumn {
+      heading,
+      phone,
+      phoneHref,
+      email,
+      emailHref,
+      address,
+      addressHref
+    },
+    socialColumn {
+      heading,
+      links[]{ label, href }
+    },
+    copyrightText,
+    bottomGraphicUrl
+  }
+`);
+
+export const SITE_HEADER_QUERY = defineQuery(/* groq */ `
+  *[_type == "siteHeader"][0] {
+    logo ${cmsImageProjection},
+    ctaLabel,
+    ctaUrl
+  }
+`);
