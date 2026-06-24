@@ -1,2 +1,11 @@
 Options -Indexes
 DirectoryIndex index.html
+
+# Prevent LiteSpeed (and any proxy) from caching HTML pages stale
+<FilesMatch "\.(html|htm)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, must-revalidate"
+  </IfModule>
+  # LiteSpeed native cache control
+  Header set X-LiteSpeed-Cache-Control "no-cache"
+</FilesMatch>
