@@ -1,11 +1,26 @@
 Options -Indexes
 DirectoryIndex index.html
 
-# Prevent LiteSpeed (and any proxy) from caching HTML pages stale
-<FilesMatch "\.(html|htm)$">
-  <IfModule mod_headers.c>
-    Header set Cache-Control "no-cache, must-revalidate"
-  </IfModule>
-  # LiteSpeed native cache control
-  Header set X-LiteSpeed-Cache-Control "no-cache"
-</FilesMatch>
+# Prevent LiteSpeed (and any proxy) from caching HTML pages stale.
+# Two rules are needed:
+#   1. FilesMatch covers direct *.html file requests.
+#   2. RewriteRule env var covers directory-style URLs (/blogs/post/)
+#      where LiteSpeed resolves the cache key before Apache sees index.html.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Flag any request that has no file extension as an HTML page request
+  RewriteCond %{REQUEST_URI} !\.[\w\d]{1,10}$
+  RewriteRule ^ - [E=NO_CACHE:1]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Directory-style URLs (env var set above)
+  Header always set Cache-Control "no-cache, must-revalidate" env=NO_CACHE
+  Header always set X-LiteSpeed-Cache-Control "no-cache" env=NO_CACHE
+
+  # Direct .html/.htm file requests
+  <FilesMatch "\.(html|htm)$">
+    Header always set Cache-Control "no-cache, must-revalidate"
+    Header always set X-LiteSpeed-Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
