@@ -191,6 +191,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(/* groq */ `
       founders[]{
         name,
         "portraitUrl": portraitImage.asset->url,
+        portraitAlt,
         bio,
         imageSide
       }

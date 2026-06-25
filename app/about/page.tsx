@@ -152,7 +152,7 @@ function FounderProfile({
           <div className="aspect-[4/5] w-full overflow-hidden rounded-[18px] bg-[#050C1E] shadow-[0_24px_80px_rgba(0,0,0,0.34)] outline outline-1 -outline-offset-1 outline-white/10">
             <Image
               src={toPortraitSrc(founder.portraitUrl, founder.portrait)}
-              alt={founder.name}
+              alt={founder.portraitAlt || founder.name}
               width={800}
               height={1000}
               sizes="(min-width: 1024px) 35vw, (min-width: 768px) 42vw, 100vw"

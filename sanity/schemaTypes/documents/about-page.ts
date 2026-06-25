@@ -43,6 +43,12 @@ export const aboutPage = defineType({
                   options: { hotspot: true },
                   description: "Upload a portrait photo. If left empty, the default image will be used.",
                 }),
+                defineField({
+                  name: "portraitAlt",
+                  title: "Portrait Photo Alt Text",
+                  type: "string",
+                  description: "Describe the photo for accessibility and SEO (e.g. \"Jane Smith, Co-founder of Sparkline, smiling outdoors\").",
+                }),
                 defineField({ name: "bio", title: "Bio", type: "array", of: [{ type: "string" }] }),
                 defineField({
                   name: "imageSide",
