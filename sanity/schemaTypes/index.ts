@@ -4,7 +4,7 @@ import { service } from "./documents/service";
 import { siteSettings } from "./documents/site-settings";
 import { siteHeader } from "./documents/site-header";
 import { siteFooter } from "./documents/site-footer";
-import { cmsImage } from "./objects/cms-image";
+import { cmsImage } from "./objects/cms-image.tsx";
 import { faqItem } from "./objects/faq-item";
 import { projectSection } from "./objects/project-section";
 import { seo } from "./objects/seo";
