@@ -130,7 +130,7 @@ export default async function ServiceDetailPage({
                 alt={`${detail.eyebrow} hero`}
                 fill
                 sizes="(min-width: 1280px) 1310px, 100vw"
-                className="object-contain"
+                className="object-cover object-center"
               />
             </div>
           ) : (
@@ -239,7 +239,7 @@ export default async function ServiceDetailPage({
                 alt={`${detail.eyebrow} workflow`}
                 fill
                 sizes="(min-width: 1280px) 1310px, 100vw"
-                className="object-contain"
+                className="object-cover object-center"
               />
             </div>
           ) : (
