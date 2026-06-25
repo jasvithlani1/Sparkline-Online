@@ -23,7 +23,7 @@ export function ProjectCard({ project, ctaLabel = project.ctaLabel, testId = "pr
     <Link
       href={`/portfolio/${project.slug}`}
       data-testid={testId}
-      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl bg-[#0A1F57] shadow-[0_18px_44px_rgba(4,10,32,0.24)] transition-transform duration-300 hover:-translate-y-1 active:scale-[0.96]"
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl bg-[#0A1F57] shadow-[0_18px_44px_rgba(4,10,32,0.24)] outline outline-1 -outline-offset-1 outline-white/[0.13] transition-transform duration-300 hover:-translate-y-1 hover:outline-white/25 active:scale-[0.96]"
     >
       <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-[#081943] outline outline-1 -outline-offset-1 outline-white/10">
         <Image

@@ -15,6 +15,8 @@ type WorkGalleryProps = {
   };
 };
 
+const AUTO_SCROLL_PX_PER_SECOND = 60;
+
 function getCarouselCards(node: HTMLDivElement) {
   return Array.from(node.querySelectorAll<HTMLElement>("[data-work-gallery-index]"));
 }
@@ -75,13 +77,13 @@ export function WorkGallery({ projects = workGallery.projects, content }: WorkGa
   const projectCount = displayProjects.length;
   const carouselRef = useRef<HTMLDivElement>(null);
   const resumeTimerRef = useRef<number | undefined>(undefined);
+  const isPausedRef = useRef(false);
   const dragState = useRef({
     pointerId: null as number | null,
     startX: 0,
     startScrollLeft: 0,
   });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const node = carouselRef.current;
@@ -100,7 +102,8 @@ export function WorkGallery({ projects = workGallery.projects, content }: WorkGa
       const delta = time - lastTime;
       lastTime = time;
 
-      if (!isPaused) {
+      if (!isPausedRef.current) {
+        node.scrollLeft += AUTO_SCROLL_PX_PER_SECOND * (delta / 1000);
         normalizeCarouselScroll(node, projectCount);
         setActiveIndex(getActiveCardIndex(node));
       }
@@ -116,18 +119,18 @@ export function WorkGallery({ projects = workGallery.projects, content }: WorkGa
         window.clearTimeout(resumeTimerRef.current);
       }
     };
-  }, [isPaused, projectCount]);
+  }, [projectCount]);
 
   const pauseTemporarily = () => {
-    setIsPaused(true);
+    isPausedRef.current = true;
 
     if (resumeTimerRef.current !== undefined) {
       window.clearTimeout(resumeTimerRef.current);
     }
 
     resumeTimerRef.current = window.setTimeout(() => {
-      setIsPaused(false);
-    }, 1200);
+      isPausedRef.current = false;
+    }, 1500);
   };
 
   const normalizeScroll = () => {
@@ -153,7 +156,7 @@ export function WorkGallery({ projects = workGallery.projects, content }: WorkGa
       startScrollLeft: node.scrollLeft,
     };
 
-    setIsPaused(true);
+    isPausedRef.current = true;
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
@@ -204,8 +207,9 @@ export function WorkGallery({ projects = workGallery.projects, content }: WorkGa
     });
 
     pauseTemporarily();
+    // Center the card in the viewport
     node.scrollTo({
-      left: target.offsetLeft,
+      left: target.offsetLeft + target.offsetWidth / 2 - node.clientWidth / 2,
       behavior: "smooth",
     });
     setActiveIndex(index);
