@@ -140,7 +140,6 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
     videoId,
     faqs[]{
       _key,
-      id,
       question,
       answer
     },

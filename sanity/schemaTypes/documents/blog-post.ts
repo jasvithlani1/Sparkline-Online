@@ -49,7 +49,29 @@ export const blogPost = defineType({
       title: "FAQs",
       type: "array",
       description: "Frequently asked questions for this article. These appear as an accordion section below the article body.",
-      of: [defineArrayMember({ type: "faqItem" })],
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "question",
+              title: "Question",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "answer",
+              title: "Answer",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "question", subtitle: "answer" },
+          },
+        }),
+      ],
     }),
     defineField({ name: "seo", type: "seo" }),
   ],
