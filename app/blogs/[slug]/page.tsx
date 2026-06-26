@@ -22,7 +22,7 @@ const portableTextComponents: PortableTextComponents = {
       </p>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-12 text-balance text-[28px] leading-[1.1] tracking-[-0.02em] text-white sm:text-[34px] md:text-[42px]">
+      <h2 className="mt-10 text-balance text-[22px] font-semibold leading-[1.25] tracking-[-0.01em] text-white sm:text-[24px] md:text-[26px]">
         {children}
       </h2>
     ),
