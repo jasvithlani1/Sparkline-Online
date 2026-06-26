@@ -107,7 +107,7 @@ export const PORTFOLIO_PROJECT_QUERY = defineQuery(/* groq */ `
 `);
 
 export const BLOG_POSTS_QUERY = defineQuery(/* groq */ `
-  *[_type == "blogPost" && defined(slug.current)] | order(order asc, publishedAt desc, title asc) {
+  *[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc) {
     _id,
     title,
     slug,

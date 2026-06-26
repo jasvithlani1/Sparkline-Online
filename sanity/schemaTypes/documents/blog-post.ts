@@ -6,6 +6,13 @@ export const blogPost = defineType({
   title: "Blog Post",
   type: "document",
   icon: DocumentTextIcon,
+  orderings: [
+    {
+      title: "Newest First",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" as const }],
+    },
+  ],
   fields: [
     defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
     defineField({
@@ -39,6 +46,15 @@ export const blogPost = defineType({
               },
             ],
           },
+        }),
+        defineArrayMember({
+          type: "image",
+          title: "Image",
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: "alt", title: "Alt Text", type: "string" }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
+          ],
         }),
       ],
       validation: (rule) => rule.min(1).required(),

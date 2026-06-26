@@ -8,6 +8,7 @@ import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import Breadcrumb from "@/components/breadcrumb";
 import JsonLd from "@/components/json-ld";
 import { getBlogPostBySlug, getBlogPosts, getSiteSettings } from "@/sanity/lib/content";
+import { urlForImage } from "@/sanity/lib/image";
 import { buildMetadata, buildArticleLD, buildBreadcrumbLD } from "@/lib/seo";
 import { ShareButtons } from "./share-buttons";
 import { BlogFaq } from "./blog-faq";
@@ -15,6 +16,28 @@ import { BlogFaq } from "./blog-faq";
 export const revalidate = 60;
 
 const portableTextComponents: PortableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      if (!value?.asset?._ref) return null;
+      return (
+        <figure className="my-10">
+          <div className="overflow-hidden rounded-2xl outline outline-1 -outline-offset-1 outline-white/10">
+            <img
+              src={urlForImage(value).width(1080).auto("format").url()}
+              alt={value.alt ?? ""}
+              loading="lazy"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="mt-3 text-center text-[13px] italic leading-relaxed text-white/50">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+  },
   block: {
     normal: ({ children }) => (
       <p className="mt-10 text-pretty text-[17px] leading-[1.75] text-white/78 first:mt-0 sm:text-[18px] md:text-[19px] md:leading-[1.8]">
