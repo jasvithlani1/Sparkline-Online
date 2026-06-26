@@ -14,7 +14,7 @@ export const aboutPage = defineType({
       fields: [
         defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
         defineField({ name: "title", title: "Title", type: "string" }),
-        defineField({ name: "paragraphs", title: "Paragraphs", type: "array", of: [{ type: "string" }] }),
+        defineField({ name: "paragraphs", title: "Paragraphs", type: "array", of: [{ type: "text", rows: 4 }] }),
       ],
     }),
     defineField({
@@ -49,7 +49,7 @@ export const aboutPage = defineType({
                   type: "string",
                   description: "Describe the photo for accessibility and SEO (e.g. \"Jane Smith, Co-founder of Sparkline, smiling outdoors\").",
                 }),
-                defineField({ name: "bio", title: "Bio", type: "array", of: [{ type: "string" }] }),
+                defineField({ name: "bio", title: "Bio", type: "array", of: [{ type: "text", rows: 4 }] }),
                 defineField({
                   name: "imageSide",
                   title: "Image Side",
