@@ -48,13 +48,26 @@ export const blogPost = defineType({
           },
         }),
         defineArrayMember({
-          type: "image",
+          name: "imageBlock",
+          type: "object",
           title: "Image",
-          options: { hotspot: true },
           fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+              validation: (rule) => rule.required(),
+            }),
             defineField({ name: "alt", title: "Alt Text", type: "string" }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
           ],
+          preview: {
+            select: { title: "alt", subtitle: "caption", media: "image" },
+            prepare({ title, subtitle, media }: { title?: string; subtitle?: string; media?: unknown }) {
+              return { title: title || "Image", subtitle: subtitle || "", media };
+            },
+          },
         }),
       ],
       validation: (rule) => rule.min(1).required(),

@@ -17,13 +17,13 @@ export const revalidate = 60;
 
 const portableTextComponents: PortableTextComponents = {
   types: {
-    image: ({ value }) => {
-      if (!value?.asset?._ref) return null;
+    imageBlock: ({ value }) => {
+      if (!value?.image?.asset?._ref) return null;
       return (
         <figure className="my-10">
           <div className="overflow-hidden rounded-2xl outline outline-1 -outline-offset-1 outline-white/10">
             <img
-              src={urlForImage(value).width(1080).auto("format").url()}
+              src={urlForImage(value.image).width(1080).auto("format").url()}
               alt={value.alt ?? ""}
               loading="lazy"
               className="w-full h-auto object-cover"
