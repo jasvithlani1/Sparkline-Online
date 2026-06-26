@@ -117,7 +117,7 @@ export default async function BlogPostPage({
           <Breadcrumb items={[{ name: "Blog", url: "/blogs" }, { name: post.title }]} variant="dark" />
 
           {/* Two-column layout: main content + sidebar */}
-          <div className="mt-8 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10 xl:grid-cols-[1fr_320px] xl:gap-14">
+          <div className="mt-8 lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 xl:grid-cols-[1fr_320px] xl:gap-14">
 
             {/* ── Main content ─────────────────────────────── */}
             <div>
@@ -168,8 +168,8 @@ export default async function BlogPostPage({
             </div>
 
             {/* ── Sidebar ──────────────────────────────────── */}
-            <aside className="mt-10 lg:mt-0">
-              <div className="sticky top-28 flex flex-col gap-5">
+            <aside className="mt-10 lg:mt-0 lg:self-start lg:sticky lg:top-28">
+              <div className="flex flex-col gap-5">
 
                 {/* Take the Next Step */}
                 <div className="rounded-2xl bg-[#0A1628] p-6 outline outline-1 -outline-offset-1 outline-white/10">
