@@ -138,6 +138,12 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
     body,
     "bodyText": pt::text(body),
     videoId,
+    faqs[]{
+      _key,
+      id,
+      question,
+      answer
+    },
     seo
   }
 `);

@@ -10,6 +10,7 @@ import JsonLd from "@/components/json-ld";
 import { getBlogPostBySlug, getBlogPosts, getSiteSettings } from "@/sanity/lib/content";
 import { buildMetadata, buildArticleLD, buildBreadcrumbLD } from "@/lib/seo";
 import { ShareButtons } from "./share-buttons";
+import { BlogFaq } from "./blog-faq";
 
 export const revalidate = 60;
 
@@ -162,6 +163,8 @@ export default async function BlogPostPage({
                   />
                 </div>
               ) : null}
+
+              {post.faqs?.length > 0 && <BlogFaq items={post.faqs} />}
             </div>
 
             {/* ── Sidebar ──────────────────────────────────── */}

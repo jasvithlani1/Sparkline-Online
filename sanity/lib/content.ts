@@ -108,6 +108,7 @@ type BlogPostDocument = {
   body?: PortableTextBlock[];
   bodyText?: string;
   videoId?: string;
+  faqs?: FaqDocument[];
   seo?: SeoDocument;
 };
 
@@ -181,6 +182,7 @@ type BlogPost = {
   body: string;
   bodyBlocks?: PortableTextBlock[];
   videoId: string;
+  faqs: { id: string; question: string; answer: string }[];
 };
 
 type ServiceEntry = {
@@ -371,6 +373,7 @@ export function toBlogPost(doc: BlogPostDocument): BlogPost {
     body: doc.bodyText || textFromBlocks(bodyBlocks) || fallback?.body || "",
     bodyBlocks,
     videoId: doc.videoId ?? fallback?.videoId ?? "",
+    faqs: toFaqItems(doc.faqs),
   } as BlogPost;
 }
 
@@ -500,6 +503,7 @@ export async function getBlogPostBySlug(slug: string) {
   return {
     ...fallback,
     bodyBlocks: textToPortableText(fallback.body, fallback.slug),
+    faqs: [],
   } as BlogPost;
 }
 

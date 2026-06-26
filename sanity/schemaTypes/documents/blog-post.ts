@@ -44,6 +44,13 @@ export const blogPost = defineType({
       validation: (rule) => rule.min(1).required(),
     }),
     defineField({ name: "videoId", title: "YouTube video ID", type: "string" }),
+    defineField({
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      description: "Frequently asked questions for this article. These appear as an accordion section below the article body.",
+      of: [defineArrayMember({ type: "faqItem" })],
+    }),
     defineField({ name: "seo", type: "seo" }),
   ],
   preview: {
