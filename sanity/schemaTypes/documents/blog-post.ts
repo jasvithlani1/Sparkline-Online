@@ -64,7 +64,7 @@ export const blogPost = defineType({
           ],
           preview: {
             select: { title: "alt", subtitle: "caption", media: "image" },
-            prepare({ title, subtitle, media }: { title?: string; subtitle?: string; media?: unknown }) {
+            prepare({ title, subtitle, media }) {
               return { title: title || "Image", subtitle: subtitle || "", media };
             },
           },
