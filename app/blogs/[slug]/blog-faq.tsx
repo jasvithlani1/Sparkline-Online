@@ -11,9 +11,24 @@ export function BlogFaq({ items }: { items: FaqItem[] }) {
 
   return (
     <div className="mt-14 md:mt-16">
-      <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
-        FAQ
-      </p>
+      {/* Eyebrow label — matches "INFORMATION RESOURCE" style from reference */}
+      <div className="mb-3 flex items-center gap-2">
+        <svg
+          className="h-4 w-4 text-[#B08CFF]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
+          Information Resource
+        </span>
+      </div>
       <h2 className="text-balance text-[28px] leading-[1.1] tracking-[-0.02em] text-white sm:text-[34px]">
         Frequently Asked Questions
       </h2>
@@ -67,7 +82,7 @@ export function BlogFaq({ items }: { items: FaqItem[] }) {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="max-w-[60ch] pb-6 pr-12 text-pretty text-[15px] leading-[1.7] text-white/70 sm:text-[16px]">
+                  <p className="w-full pb-6 text-pretty text-[15px] leading-[1.7] text-white/70 sm:text-[16px]">
                     {item.answer}
                   </p>
                 </div>
