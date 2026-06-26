@@ -26,6 +26,11 @@ const portableTextComponents: PortableTextComponents = {
         {children}
       </h2>
     ),
+    h3: ({ children }) => (
+      <h3 className="mt-8 text-balance text-[19px] font-semibold leading-[1.3] tracking-[-0.01em] text-white sm:text-[21px] md:text-[23px]">
+        {children}
+      </h3>
+    ),
     blockquote: ({ children }) => (
       <blockquote className="mt-10 border-l-2 border-white/20 pl-5 text-[18px] leading-8 text-white/75">
         {children}
