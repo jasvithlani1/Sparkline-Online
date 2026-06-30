@@ -100,7 +100,6 @@ type BlogPostDocument = {
   _id?: string;
   title?: string;
   slug?: SlugValue;
-  order?: number;
   publishedAt?: string;
   displayDate?: string;
   category?: string;

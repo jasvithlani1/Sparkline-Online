@@ -21,7 +21,6 @@ export const blogPost = defineType({
       options: { source: "title", maxLength: 96 },
       validation: (rule) => rule.required(),
     }),
-    defineField({ name: "order", type: "number", validation: (rule) => rule.required().integer().min(0) }),
     defineField({ name: "publishedAt", title: "Published date", type: "date", validation: (rule) => rule.required() }),
     defineField({ name: "displayDate", title: "Display date", type: "string", validation: (rule) => rule.required() }),
     defineField({ name: "category", type: "string", validation: (rule) => rule.required() }),
