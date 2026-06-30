@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: seo?.title,
     description: seo?.description,
-    ogImageUrl: seo?.image?.asset?.url,
+    ogImageUrl: seo?.ogImageUrl,
     noIndex: seo?.noIndex,
     canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,

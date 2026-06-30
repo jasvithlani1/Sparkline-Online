@@ -115,8 +115,9 @@ type BlogPostDocument = {
 type SeoDocument = {
   title?: string;
   description?: string;
-  image?: unknown;
+  ogImageUrl?: string;
   noIndex?: boolean;
+  canonicalUrl?: string;
 };
 
 type ServiceCard = {
@@ -168,6 +169,7 @@ type PortfolioProject = {
     type: "image" | "grid";
     images: PortfolioImage[];
   }[];
+  seo?: SeoDocument;
 };
 
 type BlogPost = {
@@ -183,11 +185,13 @@ type BlogPost = {
   bodyBlocks?: PortableTextBlock[];
   videoId: string;
   faqs: { id: string; question: string; answer: string }[];
+  seo?: SeoDocument;
 };
 
 type ServiceEntry = {
   card: ServiceCard;
   detail: ServiceDetail;
+  seo?: SeoDocument;
 };
 
 function slugString(slug: SlugValue, fallback = "") {
@@ -309,6 +313,7 @@ export function toServiceEntry(doc: ServiceDocument): ServiceEntry {
   return {
     card: toServiceCard(doc),
     detail: toServiceDetail(doc),
+    seo: doc.seo,
   };
 }
 
@@ -347,6 +352,7 @@ export function toPortfolioProject(doc: PortfolioProjectDocument): PortfolioProj
     summary: doc.summary ?? fallback?.summary ?? "",
     services: maybeArray(doc.services, fallback?.services),
     sections,
+    seo: doc.seo,
   } as PortfolioProject;
 }
 
@@ -374,6 +380,7 @@ export function toBlogPost(doc: BlogPostDocument): BlogPost {
     bodyBlocks,
     videoId: doc.videoId ?? fallback?.videoId ?? "",
     faqs: toFaqItems(doc.faqs),
+    seo: doc.seo,
   } as BlogPost;
 }
 
@@ -408,8 +415,9 @@ type ServicesPageDocument = {
   faqSection?: {
     eyebrow?: string;
     line?: string;
-    items?: { id?: string; question?: string; answer?: string }[];
+    items?: { _key?: string; question?: string; answer?: string }[];
   };
+  seo?: SeoDocument;
 };
 
 export async function getServicesContent() {
@@ -430,12 +438,13 @@ export async function getServicesContent() {
       lines: cmsFaq?.line ? [cmsFaq.line] : [...faqSection.lines],
       items: cmsFaq?.items?.length
         ? cmsFaq.items.map((item, i) => ({
-            id: item.id ?? `faq-${i}`,
+            id: item._key ?? `faq-${i}`,
             question: item.question ?? "",
             answer: item.answer ?? "",
           }))
         : [...faqSection.items],
     },
+    seo: pageDoc?.seo,
   };
 }
 
@@ -478,7 +487,7 @@ export async function getPortfolioProjectBySlug(slug: string) {
   const doc = await fetchSanity<PortfolioProjectDocument>(PORTFOLIO_PROJECT_QUERY, { slug });
   if (doc) return toPortfolioProject(doc);
 
-  return workGallery.projects.find((project) => project.slug === slug) ?? null;
+  return (workGallery.projects.find((project) => project.slug === slug) ?? null) as PortfolioProject | null;
 }
 
 export async function getBlogPosts() {

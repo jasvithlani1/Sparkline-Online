@@ -1,13 +1,23 @@
+import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Footer } from "@/components/landing/footer";
 import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
-import { getPrivacyPage, type SanityLegalBlock } from "@/sanity/lib/content";
+import { getPrivacyPage, getSiteSettings, type SanityLegalBlock } from "@/sanity/lib/content";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy — Sparkline Marketing Firm",
-  description:
-    "How Sparkline Marketing Firm collects, uses, discloses, and protects your information.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [cms, settings] = await Promise.all([getPrivacyPage(), getSiteSettings()]);
+  const seo = cms?.seo;
+  return buildMetadata({
+    title: seo?.title ?? "Privacy Policy",
+    description: seo?.description ?? "How Sparkline Marketing Firm collects, uses, discloses, and protects your information.",
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
+    siteSettings: settings,
+    path: "/privacy",
+  });
+}
 
 type Block =
   | { type: "p"; text: string }

@@ -1,5 +1,13 @@
 import { defineQuery } from "next-sanity";
 
+export const seoProjection = /* groq */ `{
+  title,
+  description,
+  noIndex,
+  canonicalUrl,
+  "ogImageUrl": image.asset->url
+}`;
+
 export const cmsImageProjection = /* groq */ `{
   image,
   fallbackUrl,
@@ -41,12 +49,11 @@ export const SERVICE_DETAIL_QUERY = defineQuery(/* groq */ `
     process,
     faq[]{
       _key,
-      id,
       question,
       answer
     },
     cta,
-    seo
+    seo ${seoProjection}
   }
 `);
 
@@ -77,7 +84,7 @@ export const PORTFOLIO_PROJECTS_QUERY = defineQuery(/* groq */ `
       type,
       images[] ${cmsImageProjection}
     },
-    seo
+    seo ${seoProjection}
   }
 `);
 
@@ -102,7 +109,7 @@ export const PORTFOLIO_PROJECT_QUERY = defineQuery(/* groq */ `
       type,
       images[] ${cmsImageProjection}
     },
-    seo
+    seo ${seoProjection}
   }
 `);
 
@@ -143,13 +150,13 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
       question,
       answer
     },
-    seo
+    seo ${seoProjection}
   }
 `);
 
 export const HOME_PAGE_QUERY = defineQuery(/* groq */ `
   *[_type == "homePage"][0] {
-    seo,
+    seo ${seoProjection},
     hero,
     featuredIntro,
     trustedBy {
@@ -188,7 +195,7 @@ export const HOME_PAGE_QUERY = defineQuery(/* groq */ `
 
 export const ABOUT_PAGE_QUERY = defineQuery(/* groq */ `
   *[_type == "aboutPage"][0] {
-    seo,
+    seo ${seoProjection},
     introSection,
     foundersSection{
       eyebrow,
@@ -211,7 +218,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(/* groq */ `
 
 export const CONTACT_PAGE_QUERY = defineQuery(/* groq */ `
   *[_type == "contactPage"][0] {
-    seo,
+    seo ${seoProjection},
     contactDetails
   }
 `);
@@ -224,12 +231,12 @@ export const SERVICES_PAGE_QUERY = defineQuery(/* groq */ `
       eyebrow,
       line,
       items[] {
-        id,
+        _key,
         question,
         answer
       }
     },
-    seo
+    seo ${seoProjection}
   }
 `);
 
@@ -255,7 +262,7 @@ const legalSectionsProjection = /* groq */ `
 
 export const TERMS_PAGE_QUERY = defineQuery(/* groq */ `
   *[_type == "termsPage"][0] {
-    seo,
+    seo ${seoProjection},
     effectiveDate,
     lastUpdated,
     companyName,
@@ -265,7 +272,7 @@ export const TERMS_PAGE_QUERY = defineQuery(/* groq */ `
 
 export const PRIVACY_PAGE_QUERY = defineQuery(/* groq */ `
   *[_type == "privacyPage"][0] {
-    seo,
+    seo ${seoProjection},
     effectiveDate,
     lastUpdated,
     companyName,

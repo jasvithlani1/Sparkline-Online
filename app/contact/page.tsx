@@ -8,10 +8,14 @@ import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
 import JsonLd from "@/components/json-ld";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
+  const [contactData, settings] = await Promise.all([getContactPage(), getSiteSettings()]);
+  const seo = contactData?.seo;
   return buildMetadata({
-    title: "Contact",
-    description: "Get in touch with Sparkline Marketing Firm. We'd love to hear about your business goals.",
+    title: seo?.title ?? "Contact",
+    description: seo?.description ?? "Get in touch with Sparkline Marketing Firm. We'd love to hear about your business goals.",
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,
     path: "/contact",
   });

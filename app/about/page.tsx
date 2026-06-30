@@ -119,7 +119,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: seo?.title ?? "About",
     description: seo?.description ?? "Learn about SPARKLINE MARKETING FIRM, a strategy-led marketing firm built with care, creative attention, and a long-term mindset.",
-    ogImageUrl: seo?.image?.asset?.url,
+    ogImageUrl: seo?.ogImageUrl,
     noIndex: seo?.noIndex,
     canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,

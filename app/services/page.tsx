@@ -11,10 +11,14 @@ import JsonLd from "@/components/json-ld";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
+  const [servicesContent, settings] = await Promise.all([getServicesContent(), getSiteSettings()]);
+  const seo = servicesContent.seo;
   return buildMetadata({
-    title: "Services",
-    description: "Explore Sparkline Marketing Firm's full range of digital marketing, brand strategy, and content services.",
+    title: seo?.title ?? "Services",
+    description: seo?.description ?? "Explore Sparkline Marketing Firm's full range of digital marketing, brand strategy, and content services.",
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,
     path: "/services",
   });

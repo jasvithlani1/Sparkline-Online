@@ -1,12 +1,22 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/landing/footer";
 import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
-import { getTermsPage, type SanityLegalBlock } from "@/sanity/lib/content";
+import { getTermsPage, getSiteSettings, type SanityLegalBlock } from "@/sanity/lib/content";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Terms & Conditions — Sparkline Marketing Firm",
-  description:
-    "Terms and conditions governing use of the Sparkline Marketing Firm website and engagement of our services.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [cms, settings] = await Promise.all([getTermsPage(), getSiteSettings()]);
+  const seo = cms?.seo;
+  return buildMetadata({
+    title: seo?.title ?? "Terms & Conditions",
+    description: seo?.description ?? "Terms and conditions governing use of the Sparkline Marketing Firm website and engagement of our services.",
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
+    siteSettings: settings,
+    path: "/terms",
+  });
+}
 
 type Block =
   | { type: "p"; text: string }

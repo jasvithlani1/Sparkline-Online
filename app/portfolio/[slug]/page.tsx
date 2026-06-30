@@ -25,8 +25,11 @@ export async function generateMetadata({
   const [project, settings] = await Promise.all([getPortfolioProjectBySlug(slug), getSiteSettings()]);
   if (!project) return { title: "Portfolio" };
   return buildMetadata({
-    title: project.name,
-    description: project.description,
+    title: project.seo?.title ?? project.name,
+    description: project.seo?.description ?? project.description,
+    ogImageUrl: project.seo?.ogImageUrl,
+    noIndex: project.seo?.noIndex,
+    canonicalUrl: project.seo?.canonicalUrl,
     siteSettings: settings,
     path: `/portfolio/${slug}`,
   });

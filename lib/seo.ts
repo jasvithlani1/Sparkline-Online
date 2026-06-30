@@ -49,11 +49,11 @@ export function buildMetadata(input: PageSeoInput): Metadata {
   const siteUrl = siteSettings?.siteUrl ?? DEFAULT_SITE_URL;
   const resolvedOg = ogImageUrl ?? siteSettings?.defaultOgImageUrl;
 
-  const pageTitle = title ? `${title} | ${siteName}` : siteName;
+  const pageTitle = title ?? siteName;
   const canonical = canonicalUrl ?? `${siteUrl}${path}`;
 
   const metadata: Metadata = {
-    title: pageTitle,
+    title: { absolute: pageTitle },
     ...(description ? { description } : {}),
     alternates: { canonical },
     ...(noIndex ? { robots: { index: false, follow: false } } : {}),

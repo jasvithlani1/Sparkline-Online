@@ -8,12 +8,6 @@ export const faqItem = defineType({
   icon: HelpCircleIcon,
   fields: [
     defineField({
-      name: "id",
-      title: "Stable ID",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "question",
       type: "string",
       validation: (rule) => rule.required(),
@@ -26,6 +20,6 @@ export const faqItem = defineType({
     }),
   ],
   preview: {
-    select: { title: "question", subtitle: "id" },
+    select: { title: "question", subtitle: "answer" },
   },
 });

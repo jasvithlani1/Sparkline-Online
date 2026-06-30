@@ -43,8 +43,11 @@ export async function generateMetadata({
   if (!entry) return { title: "Services" };
   const plainTitle = entry.card.title.replace(/\n/g, " ");
   return buildMetadata({
-    title: plainTitle,
-    description: entry.detail.lead,
+    title: entry.seo?.title ?? plainTitle,
+    description: entry.seo?.description ?? entry.detail.lead,
+    ogImageUrl: entry.seo?.ogImageUrl,
+    noIndex: entry.seo?.noIndex,
+    canonicalUrl: entry.seo?.canonicalUrl,
     siteSettings: settings,
     path: `/services/${slug}`,
   });

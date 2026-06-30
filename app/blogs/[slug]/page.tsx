@@ -96,8 +96,11 @@ export async function generateMetadata({
   const [post, settings] = await Promise.all([getBlogPostBySlug(slug), getSiteSettings()]);
   if (!post) return { title: "Blog" };
   return buildMetadata({
-    title: post.title,
-    description: post.description,
+    title: post.seo?.title ?? post.title,
+    description: post.seo?.description ?? post.description,
+    ogImageUrl: post.seo?.ogImageUrl,
+    noIndex: post.seo?.noIndex,
+    canonicalUrl: post.seo?.canonicalUrl,
     siteSettings: settings,
     path: `/blogs/${slug}`,
   });
