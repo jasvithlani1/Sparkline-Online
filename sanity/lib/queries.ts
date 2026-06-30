@@ -84,6 +84,7 @@ export const PORTFOLIO_PROJECTS_QUERY = defineQuery(/* groq */ `
       type,
       images[] ${cmsImageProjection}
     },
+    canvaUrl,
     seo ${seoProjection}
   }
 `);
@@ -109,6 +110,7 @@ export const PORTFOLIO_PROJECT_QUERY = defineQuery(/* groq */ `
       type,
       images[] ${cmsImageProjection}
     },
+    canvaUrl,
     seo ${seoProjection}
   }
 `);

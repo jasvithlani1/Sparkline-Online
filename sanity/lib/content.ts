@@ -92,6 +92,7 @@ type PortfolioProjectDocument = {
     type?: "image" | "grid";
     images?: CmsImageDocument[];
   }[];
+  canvaUrl?: string;
   seo?: SeoDocument;
 };
 
@@ -169,6 +170,7 @@ type PortfolioProject = {
     type: "image" | "grid";
     images: PortfolioImage[];
   }[];
+  canvaUrl?: string;
   seo?: SeoDocument;
 };
 
@@ -352,6 +354,7 @@ export function toPortfolioProject(doc: PortfolioProjectDocument): PortfolioProj
     summary: doc.summary ?? fallback?.summary ?? "",
     services: maybeArray(doc.services, fallback?.services),
     sections,
+    canvaUrl: doc.canvaUrl,
     seo: doc.seo,
   } as PortfolioProject;
 }
@@ -478,7 +481,7 @@ export async function getServiceSlugs() {
 
 export async function getPortfolioProjects() {
   const docs = await fetchSanity<PortfolioProjectDocument[]>(PORTFOLIO_PROJECTS_QUERY);
-  if (!docs?.length) return [...workGallery.projects];
+  if (!docs?.length) return [...workGallery.projects] as unknown as PortfolioProject[];
 
   return docs.map(toPortfolioProject);
 }

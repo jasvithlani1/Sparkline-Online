@@ -35,6 +35,13 @@ export const portfolioProject = defineType({
       of: [defineArrayMember({ type: "projectSection" })],
       validation: (rule) => rule.min(1).required(),
     }),
+    defineField({
+      name: "canvaUrl",
+      title: "Canva Presentation URL",
+      type: "url",
+      description: "Paste the Canva smartlink for this project. When set, a 'View on Canva' button appears on the project page.",
+      validation: (rule) => rule.uri({ scheme: ["http", "https"] }),
+    }),
     defineField({ name: "seo", type: "seo" }),
   ],
   preview: {
