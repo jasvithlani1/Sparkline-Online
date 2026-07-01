@@ -35,6 +35,16 @@ export async function generateMetadata({
   });
 }
 
+function toCanvaEmbedUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    u.search = "embed";
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
 export default async function PortfolioProjectPage({
   params,
 }: {
@@ -50,6 +60,29 @@ export default async function PortfolioProjectPage({
   const siteUrl = settings?.siteUrl ?? "https://www.sparklinemarketingfirm.com";
   const breadcrumbLD = buildBreadcrumbLD([{ name: "Portfolio", url: "/portfolio" }, { name: project.name }], siteUrl);
 
+  // ── Canva embed view ──────────────────────────────────────────────────────────
+  if (project.canvaUrl) {
+    return (
+      <main className="flex min-h-screen flex-col bg-[#050C1E]">
+        <JsonLd data={breadcrumbLD} />
+        <Navbar />
+        <div className="mt-[56px] flex flex-1 flex-col sm:mt-[64px] md:mt-[80px]">
+          <iframe
+            src={toCanvaEmbedUrl(project.canvaUrl)}
+            title={project.name}
+            allow="fullscreen"
+            allowFullScreen
+            loading="lazy"
+            className="w-full flex-1 border-0"
+            style={{ minHeight: "calc(100svh - 80px)" }}
+          />
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
+  // ── Default detail view ───────────────────────────────────────────────────────
   return (
     <main className="min-h-screen bg-[#050C1E]">
       <JsonLd data={breadcrumbLD} />
@@ -106,42 +139,6 @@ export default async function PortfolioProjectPage({
                   <li key={service}>{service}</li>
                 ))}
               </ul>
-
-              {project.canvaUrl && (
-                <div className="mt-4 rounded-2xl bg-[#0A1628] p-6 outline outline-1 -outline-offset-1 outline-white/10">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#B08CFF]">
-                    Full Presentation
-                  </p>
-                  <h3 className="mt-2 text-[18px] font-semibold leading-snug tracking-[-0.02em] text-white">
-                    View the complete creative deck
-                  </h3>
-                  <p className="mt-3 text-[13px] leading-[1.65] text-white/60">
-                    Browse all design assets and project materials for this work.
-                  </p>
-                  <a
-                    href={project.canvaUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#B08CFF] px-4 py-3 text-[12px] font-bold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
-                  >
-                    View on Canva
-                    <svg
-                      className="h-3.5 w-3.5 shrink-0"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  </a>
-                </div>
-              )}
             </div>
           </div>
         </div>
