@@ -11,6 +11,10 @@ on:
   schedule:
     - cron: '0 * * * *'
 
+concurrency:
+  group: ftp-deploy
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
