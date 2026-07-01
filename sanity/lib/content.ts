@@ -78,20 +78,9 @@ type PortfolioProjectDocument = {
   slug?: SlugValue;
   order?: number;
   date?: string;
-  meta?: string;
   description?: string;
   ctaLabel?: string;
   cover?: CmsImageDocument;
-  intro?: string;
-  tagline?: string;
-  summary?: string;
-  services?: string[];
-  sections?: {
-    _key?: string;
-    heading?: string;
-    type?: "image" | "grid";
-    images?: CmsImageDocument[];
-  }[];
   canvaUrl?: string;
   seo?: SeoDocument;
 };
@@ -144,31 +133,16 @@ type ServiceDetail = {
   cta: { heading: string; body: string; label: string };
 };
 
-type PortfolioImage = {
-  src: string;
-  alt: string;
-  className: string;
-};
 
 type PortfolioProject = {
   id: string;
   slug: string;
   name: string;
   date: string;
-  meta: string;
   description: string;
   ctaLabel: string;
   image: string;
   imageClassName: string;
-  intro: string;
-  tagline: string;
-  summary: string;
-  services: string[];
-  sections: {
-    heading: string;
-    type: "image" | "grid";
-    images: PortfolioImage[];
-  }[];
   canvaUrl?: string;
   seo?: SeoDocument;
 };
@@ -323,36 +297,16 @@ export function toPortfolioProject(doc: PortfolioProjectDocument): PortfolioProj
   const fallback = workGallery.projects.find((project) => project.slug === slug) as unknown as PortfolioProject | undefined;
   const cover = resolveCmsImage(doc.cover, doc.name ?? fallback?.name ?? slug);
   const image = cover.src || fallback?.image || "";
-  const sections = doc.sections?.length
-    ? doc.sections.map((section) => ({
-        heading: section.heading ?? "Project Section",
-        type: section.type ?? "image",
-        images: (section.images ?? []).map((imageValue) => {
-          const resolved = resolveCmsImage(imageValue, section.heading);
-          return {
-            src: resolved.src,
-            alt: resolved.alt,
-            className: resolved.className,
-          };
-        }),
-      }))
-    : (fallback?.sections ?? []);
 
   return {
     id: doc._id ?? fallback?.id ?? `portfolioProject.${slug}`,
     slug,
     name: doc.name ?? fallback?.name ?? slug,
     date: doc.date ?? fallback?.date ?? "",
-    meta: doc.meta ?? fallback?.meta ?? "",
     description: doc.description ?? fallback?.description ?? "",
     ctaLabel: doc.ctaLabel ?? fallback?.ctaLabel ?? "View Project",
     image,
     imageClassName: cover.src ? cover.className : (fallback?.imageClassName ?? cover.className),
-    intro: doc.intro ?? fallback?.intro ?? "",
-    tagline: doc.tagline ?? fallback?.tagline ?? doc.name ?? slug,
-    summary: doc.summary ?? fallback?.summary ?? "",
-    services: maybeArray(doc.services, fallback?.services),
-    sections,
     canvaUrl: doc.canvaUrl,
     seo: doc.seo,
   } as PortfolioProject;

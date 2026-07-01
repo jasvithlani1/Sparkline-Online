@@ -1,5 +1,5 @@
 import { CaseIcon } from "@sanity/icons";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const portfolioProject = defineType({
   name: "portfolioProject",
@@ -16,31 +16,15 @@ export const portfolioProject = defineType({
     }),
     defineField({ name: "order", type: "number", validation: (rule) => rule.required().integer().min(0) }),
     defineField({ name: "date", type: "string", validation: (rule) => rule.required() }),
-    defineField({ name: "meta", type: "string" }),
     defineField({ name: "description", type: "text", rows: 3, validation: (rule) => rule.required() }),
     defineField({ name: "ctaLabel", title: "CTA label", type: "string", initialValue: "View Project" }),
     defineField({ name: "cover", title: "Cover image", type: "cmsImage", validation: (rule) => rule.required() }),
-    defineField({ name: "intro", type: "text", rows: 3 }),
-    defineField({ name: "tagline", type: "string", validation: (rule) => rule.required() }),
-    defineField({ name: "summary", type: "text", rows: 6, validation: (rule) => rule.required() }),
-    defineField({
-      name: "services",
-      type: "array",
-      of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.min(1).required(),
-    }),
-    defineField({
-      name: "sections",
-      type: "array",
-      of: [defineArrayMember({ type: "projectSection" })],
-      validation: (rule) => rule.min(1).required(),
-    }),
     defineField({
       name: "canvaUrl",
       title: "Canva Presentation URL",
       type: "url",
-      description: "Paste the Canva smartlink for this project. When set, a 'View on Canva' button appears on the project page.",
-      validation: (rule) => rule.uri({ scheme: ["http", "https"] }),
+      description: "Paste the Canva smartlink for this project. The full presentation will be embedded directly on the project page.",
+      validation: (rule) => rule.uri({ scheme: ["http", "https"] }).required(),
     }),
     defineField({ name: "seo", type: "seo" }),
   ],

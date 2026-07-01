@@ -70,20 +70,9 @@ export const PORTFOLIO_PROJECTS_QUERY = defineQuery(/* groq */ `
     slug,
     order,
     date,
-    meta,
     description,
     ctaLabel,
     cover ${cmsImageProjection},
-    intro,
-    tagline,
-    summary,
-    services,
-    sections[]{
-      _key,
-      heading,
-      type,
-      images[] ${cmsImageProjection}
-    },
     canvaUrl,
     seo ${seoProjection}
   }
@@ -96,20 +85,9 @@ export const PORTFOLIO_PROJECT_QUERY = defineQuery(/* groq */ `
     slug,
     order,
     date,
-    meta,
     description,
     ctaLabel,
     cover ${cmsImageProjection},
-    intro,
-    tagline,
-    summary,
-    services,
-    sections[]{
-      _key,
-      heading,
-      type,
-      images[] ${cmsImageProjection}
-    },
     canvaUrl,
     seo ${seoProjection}
   }
