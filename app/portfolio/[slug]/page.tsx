@@ -60,12 +60,12 @@ export default async function PortfolioProjectPage({
   );
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#050C1E]">
+    <main className="min-h-screen bg-[#050C1E]">
       <JsonLd data={breadcrumbLD} />
       <Navbar />
 
       {/* Canva embed */}
-      <div className="mt-[56px] flex flex-1 flex-col sm:mt-[64px] md:mt-[80px]">
+      <div className="mt-[56px] sm:mt-[64px] md:mt-[80px]">
         {project.canvaUrl ? (
           <iframe
             src={toCanvaEmbedUrl(project.canvaUrl)}
@@ -73,8 +73,8 @@ export default async function PortfolioProjectPage({
             allow="fullscreen"
             allowFullScreen
             loading="lazy"
-            className="w-full flex-1 border-0"
-            style={{ minHeight: "calc(100svh - 80px)" }}
+            className="w-full border-0"
+            style={{ height: "78svh" }}
           />
         ) : (
           <div className="flex flex-1 items-center justify-center px-5 py-24 text-center">
