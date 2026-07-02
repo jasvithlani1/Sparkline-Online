@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -54,12 +54,12 @@ export function Navbar({ logoUrl, logoAlt, ctaLabel, ctaUrl }: NavbarProps = {})
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const headerRef = useRef<HTMLElement>(null);
 
   const logoSrc = logoUrl ?? DEFAULT_LOGO;
   const logoAltText = logoAlt ?? DEFAULT_LOGO_ALT;
   const bookCallUrl = ctaUrl ?? DEFAULT_BOOK_CALL_URL;
   const bookCallLabel = ctaLabel ?? DEFAULT_CTA_LABEL;
-
 
   useEffect(() => {
     const updateScrollState = () => {
@@ -74,8 +74,27 @@ export function Navbar({ logoUrl, logoAlt, ctaLabel, ctaUrl }: NavbarProps = {})
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header
+      ref={headerRef}
       data-testid="site-navbar"
       className="fixed inset-x-0 top-0 z-40"
     >
@@ -139,11 +158,18 @@ export function Navbar({ logoUrl, logoAlt, ctaLabel, ctaUrl }: NavbarProps = {})
               onClick={() => setIsMobileMenuOpen((open) => !open)}
               className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/8 text-white transition-[background-color,transform] duration-200 hover:bg-white/12 active:scale-[0.96] sm:h-11 sm:w-11 lg:hidden"
             >
-              <span className="flex flex-col gap-1.5">
-                <span className="block h-px w-4 bg-current" />
-                <span className="block h-px w-4 bg-current" />
-                <span className="block h-px w-4 bg-current" />
-              </span>
+              {isMobileMenuOpen ? (
+                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true">
+                  <line x1="2" y1="2" x2="14" y2="14" />
+                  <line x1="14" y1="2" x2="2" y2="14" />
+                </svg>
+              ) : (
+                <span className="flex flex-col gap-1.5">
+                  <span className="block h-px w-4 bg-current" />
+                  <span className="block h-px w-4 bg-current" />
+                  <span className="block h-px w-4 bg-current" />
+                </span>
+              )}
             </button>
           </div>
         </div>
