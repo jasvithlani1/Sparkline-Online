@@ -301,7 +301,10 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
     robotsDisallow,
     customHeaderScripts,
     customFooterScripts,
-    llmsTxtContent
+    llmsTxtContent,
+    defaultDescription,
+    blogsSeo ${seoProjection},
+    portfolioSeo ${seoProjection}
   }
 `);
 

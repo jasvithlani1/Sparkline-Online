@@ -11,9 +11,13 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
+  const seo = settings?.portfolioSeo;
   return buildMetadata({
-    title: "Portfolio",
-    description: "Explore Sparkline Marketing Firm's portfolio of brand, digital, and content projects.",
+    title: seo?.title ?? "Portfolio",
+    description: seo?.description,
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,
     path: "/portfolio",
   });

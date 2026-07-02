@@ -11,9 +11,13 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
+  const seo = settings?.blogsSeo;
   return buildMetadata({
-    title: "Blog",
-    description: "Marketing insights, strategy tips, and creative inspiration from Sparkline Marketing Firm.",
+    title: seo?.title ?? "Blog",
+    description: seo?.description,
+    ogImageUrl: seo?.ogImageUrl,
+    noIndex: seo?.noIndex,
+    canonicalUrl: seo?.canonicalUrl,
     siteSettings: settings,
     path: "/blogs",
   });

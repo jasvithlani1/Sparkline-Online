@@ -553,10 +553,21 @@ export type SiteSettingsPerson = {
   sameAs?: string[];
 };
 
+type PageSeo = {
+  title?: string;
+  description?: string;
+  ogImageUrl?: string;
+  noIndex?: boolean;
+  canonicalUrl?: string;
+};
+
 export type SiteSettings = {
   siteTitle?: string;
   siteUrl?: string;
   defaultOgImageUrl?: string;
+  defaultDescription?: string;
+  blogsSeo?: PageSeo;
+  portfolioSeo?: PageSeo;
   analyticsGroup?: SiteSettingsAnalytics;
   organizationSchema?: SiteSettingsOrg;
   personSchema?: SiteSettingsPerson;

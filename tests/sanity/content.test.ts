@@ -71,33 +71,23 @@ describe("Sanity content mapping", () => {
     });
   });
 
-  it("maps portfolio project sections into current detail-page shape", () => {
+  it("maps portfolio project into current shape", () => {
     const project = toPortfolioProject({
       _id: "portfolioProject.example",
       name: "Example",
       slug: { current: "example" },
       order: 0,
       date: "May 30, 2026",
-      meta: "Website",
       description: "Project description",
       ctaLabel: "View Project",
       cover: { fallbackUrl: "/images/work-firecrawl.png", alt: "Example", className: "object-cover" },
-      intro: "Intro",
-      tagline: "TAGLINE",
-      summary: "Summary",
-      services: ["Strategy"],
-      sections: [
-        {
-          heading: "Hero",
-          type: "image",
-          images: [{ fallbackUrl: "/images/work-firecrawl.png", alt: "Hero", className: "object-cover" }],
-        },
-      ],
+      canvaUrl: "https://www.canva.com/design/example/view",
     });
 
     expect(project.slug).toBe("example");
     expect(project.image).toBe("/images/work-firecrawl.png");
-    expect(project.sections[0].images[0].src).toBe("/images/work-firecrawl.png");
+    expect(project.description).toBe("Project description");
+    expect(project.canvaUrl).toBe("https://www.canva.com/design/example/view");
   });
 
   it("maps blog Portable Text into body text and blocks", () => {
@@ -105,7 +95,6 @@ describe("Sanity content mapping", () => {
       _id: "blogPost.high-converting-page",
       title: "Landing Pages",
       slug: { current: "landing-pages" },
-      order: 0,
       displayDate: "May 30, 2026",
       category: "Marketing",
       description: "Post description",
@@ -135,7 +124,6 @@ describe("Sanity content mapping", () => {
 
     expect(project.name).toBe("Firecrawl CMS");
     expect(project.description).toContain("launch-ready web presence");
-    expect(project.sections.length).toBeGreaterThan(0);
   });
 
   it("fills missing blog fields from the static fallback by slug", () => {

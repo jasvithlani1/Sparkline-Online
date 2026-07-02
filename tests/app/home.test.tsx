@@ -37,16 +37,10 @@ function cmsProject(overrides: Partial<PortfolioProject> = {}): PortfolioProject
     slug: "cms-home-project",
     name: "CMS Home Project",
     date: "June 1, 2026",
-    meta: "CMS",
     description: "Updated from backend.",
     ctaLabel: "View Project",
     image: "/images/work-firecrawl.png",
     imageClassName: "object-cover object-center",
-    intro: "CMS intro",
-    tagline: "CMS tagline",
-    summary: "CMS summary",
-    services: ["CMS"],
-    sections: [],
     ...overrides,
   };
 }
@@ -70,7 +64,7 @@ beforeAll(() => {
 
     constructor(private readonly callback: IntersectionObserverCallback) {
       intersectionObserverMock();
-      this.callback([{ isIntersecting: true } as IntersectionObserverEntry, this] as const, this);
+      this.callback([{ isIntersecting: true } as IntersectionObserverEntry], this);
     }
 
     disconnect() {}

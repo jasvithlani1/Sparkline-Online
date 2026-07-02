@@ -37,8 +37,6 @@ describe("Blogs page", () => {
             description: "Marketing from Sanity.",
             image: "/images/work-firecrawl.png",
             imageClassName: "object-cover object-center",
-            body: "Body",
-            videoId: "abc123",
           },
           {
             id: "blogPost.cms-design",
@@ -49,8 +47,6 @@ describe("Blogs page", () => {
             description: "Design from Sanity.",
             image: "/images/work-blackalgo.png",
             imageClassName: "object-cover object-center",
-            body: "Body",
-            videoId: "def456",
           },
         ]}
       />,
