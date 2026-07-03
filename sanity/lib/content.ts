@@ -236,7 +236,7 @@ export function toServiceCard(doc: ServiceDocument): ServiceCard {
 
   return {
     id: slug,
-    title: doc.cardTitle ?? doc.title ?? slug,
+    title: (doc.cardTitle ?? doc.title ?? slug).replace(/\\n/g, "\n"),
     items: maybeArray(doc.cardItems),
   } as ServiceCard;
 }
