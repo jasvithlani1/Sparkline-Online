@@ -6,7 +6,7 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "8g3u06mk";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
 // Singleton document types — these cannot be created or deleted via the UI
-const SINGLETON_TYPES = new Set(["siteSettings", "siteHeader", "siteFooter", "homePage", "aboutPage", "contactPage", "servicesPage", "termsPage", "privacyPage"]);
+const SINGLETON_TYPES = new Set(["siteSettings", "siteHeader", "siteFooter", "homePage", "aboutPage", "contactPage", "servicesPage", "termsPage", "privacyPage", "blogsPage", "portfolioPage"]);
 
 export default defineConfig({
   name: "sparkline-cms",
@@ -74,6 +74,16 @@ export default defineConfig({
               .id("privacyPage")
               .schemaType("privacyPage")
               .child(S.document().schemaType("privacyPage").documentId("privacyPage")),
+            S.listItem()
+              .title("Blogs Overview Page")
+              .id("blogsPage")
+              .schemaType("blogsPage")
+              .child(S.document().schemaType("blogsPage").documentId("blogsPage")),
+            S.listItem()
+              .title("Portfolio Overview Page")
+              .id("portfolioPage")
+              .schemaType("portfolioPage")
+              .child(S.document().schemaType("portfolioPage").documentId("portfolioPage")),
 
             S.divider(),
 

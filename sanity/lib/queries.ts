@@ -302,9 +302,19 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
     customHeaderScripts,
     customFooterScripts,
     llmsTxtContent,
-    defaultDescription,
-    blogsSeo ${seoProjection},
-    portfolioSeo ${seoProjection}
+    defaultDescription
+  }
+`);
+
+export const BLOGS_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "blogsPage"][0] {
+    seo ${seoProjection}
+  }
+`);
+
+export const PORTFOLIO_PAGE_QUERY = defineQuery(/* groq */ `
+  *[_type == "portfolioPage"][0] {
+    seo ${seoProjection}
   }
 `);
 

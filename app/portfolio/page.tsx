@@ -3,15 +3,15 @@ import { Footer } from "@/components/landing/footer";
 import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { ProjectList } from "@/components/portfolio/project-list";
 import Breadcrumb from "@/components/breadcrumb";
-import { getPortfolioProjects, getSiteSettings } from "@/sanity/lib/content";
+import { getPortfolioProjects, getPortfolioPage, getSiteSettings } from "@/sanity/lib/content";
 import { buildMetadata, buildBreadcrumbLD } from "@/lib/seo";
 import JsonLd from "@/components/json-ld";
 
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
-  const seo = settings?.portfolioSeo;
+  const [page, settings] = await Promise.all([getPortfolioPage(), getSiteSettings()]);
+  const seo = page?.seo;
   return buildMetadata({
     title: seo?.title ?? "Portfolio",
     description: seo?.description,

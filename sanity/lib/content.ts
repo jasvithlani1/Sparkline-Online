@@ -27,6 +27,8 @@ import {
   SITE_SETTINGS_QUERY,
   SITE_FOOTER_QUERY,
   SITE_HEADER_QUERY,
+  BLOGS_PAGE_QUERY,
+  PORTFOLIO_PAGE_QUERY,
 } from "./queries";
 
 const isTest = process.env.NODE_ENV === "test";
@@ -553,7 +555,7 @@ export type SiteSettingsPerson = {
   sameAs?: string[];
 };
 
-type PageSeo = {
+export type PageSeo = {
   title?: string;
   description?: string;
   ogImageUrl?: string;
@@ -566,8 +568,6 @@ export type SiteSettings = {
   siteUrl?: string;
   defaultOgImageUrl?: string;
   defaultDescription?: string;
-  blogsSeo?: PageSeo;
-  portfolioSeo?: PageSeo;
   analyticsGroup?: SiteSettingsAnalytics;
   organizationSchema?: SiteSettingsOrg;
   personSchema?: SiteSettingsPerson;
@@ -584,6 +584,16 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   const result = await fetchSanity<SiteSettings>(SITE_SETTINGS_QUERY);
   _siteSettingsCache = result ?? null;
   return _siteSettingsCache;
+}
+
+export async function getBlogsPage(): Promise<{ seo?: PageSeo } | null> {
+  if (isTest) return null;
+  return (await fetchSanity<{ seo?: PageSeo }>(BLOGS_PAGE_QUERY)) ?? null;
+}
+
+export async function getPortfolioPage(): Promise<{ seo?: PageSeo } | null> {
+  if (isTest) return null;
+  return (await fetchSanity<{ seo?: PageSeo }>(PORTFOLIO_PAGE_QUERY)) ?? null;
 }
 
 export async function getBlogSlugs(): Promise<string[]> {

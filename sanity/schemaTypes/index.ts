@@ -14,6 +14,8 @@ import { contactPage } from "./documents/contact-page";
 import { termsPage } from "./documents/terms-page";
 import { privacyPage } from "./documents/privacy-page";
 import { servicesPage } from "./documents/services-page";
+import { blogsPage } from "./documents/blogs-page";
+import { portfolioPage } from "./documents/portfolio-page";
 import { enquiry } from "./documents/enquiry";
 import {
   legalParagraph,
@@ -50,5 +52,7 @@ export const schemaTypes = [
   termsPage,
   privacyPage,
   servicesPage,
+  blogsPage,
+  portfolioPage,
   enquiry,
 ];

@@ -38,18 +38,6 @@ export const siteSettings = defineType({
       rows: 2,
       description: "Fallback meta description used when a page has no specific description set.",
     }),
-    defineField({
-      name: "blogsSeo",
-      title: "Blog Listing Page SEO (/blogs)",
-      type: "seo",
-      options: { collapsible: true, collapsed: true },
-    }),
-    defineField({
-      name: "portfolioSeo",
-      title: "Portfolio Listing Page SEO (/portfolio)",
-      type: "seo",
-      options: { collapsible: true, collapsed: true },
-    }),
 
     // ── Analytics & Tracking ─────────────────────────────────────────────────
     defineField({
