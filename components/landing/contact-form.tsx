@@ -22,8 +22,8 @@ function buildEmailHtml(name: string, email: string, subject: string, message: s
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,#8F57FF 0%,#4C2FFF 100%);border-radius:12px 12px 0 0;padding:36px 40px;">
-              <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Sparkline Marketing Firm</p>
-              <p style="margin:10px 0 0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.02em;">New Enquiry</p>
+              <img src="https://www.sparklinemarketingfirm.com/logos/sparkline-new-logo.svg" alt="Sparkline Marketing Firm" width="160" style="display:block;height:auto;margin-bottom:20px;" />
+              <p style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.02em;">New Enquiry</p>
             </td>
           </tr>
 
