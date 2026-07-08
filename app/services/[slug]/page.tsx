@@ -217,7 +217,7 @@ export default async function ServiceDetailPage({
                   className="h-[2px] w-10 rounded-full bg-[linear-gradient(90deg,#8F57FF_0%,#4C2FFF_100%)]"
                 />
               </div>
-              <ul className="mt-8 flex flex-wrap gap-2">
+              <ul className="mt-8 flex flex-wrap justify-center gap-2 sm:justify-start">
                 {((detail as { specialties?: readonly string[] }).specialties ?? card.items).map((item) => (
                   <li
                     key={item}
