@@ -47,8 +47,7 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./out/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          dangerous-clean-slate: true
+          server-dir: public_html/
           exclude: |
             **/.git*
             **/.git*/**
