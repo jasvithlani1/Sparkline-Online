@@ -6,6 +6,72 @@ const BREVO_API = "https://api.brevo.com/v3/smtp/email";
 const SENDER = { name: "Sparkline Marketing Firm", email: "info@sparklinemarketingfirm.com" };
 const RECIPIENT = { name: "Sparkline Marketing Firm", email: "info@sparklinemarketingfirm.com" };
 
+function buildConfirmationEmailHtml(name: string, subject: string, message: string): string {
+  const escaped = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
+<body style="margin:0;padding:0;background:#f1f1f4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f1f4;padding:48px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" style="max-width:580px;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#8F57FF 0%,#4C2FFF 100%);border-radius:12px 12px 0 0;padding:36px 40px;">
+              <img src="https://www.sparklinemarketingfirm.com/logos/sparkline-new-logo.svg" alt="Sparkline Marketing Firm" width="160" style="display:block;height:auto;margin-bottom:20px;" />
+              <p style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.02em;">We've received your enquiry</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background:#ffffff;padding:36px 40px;">
+              <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#111827;">Hi ${escaped(name)},</p>
+              <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#374151;">
+                Thank you for reaching out to Sparkline Marketing Firm. We've received your message and our team will get back to you within <strong style="color:#111827;">1–2 business days</strong>.
+              </p>
+
+              <!-- Divider -->
+              <div style="height:1px;background:#f0f0f4;margin:0 0 24px;"></div>
+
+              <!-- Summary -->
+              <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#8F57FF;">Your subject</p>
+              <p style="margin:0 0 24px;font-size:16px;color:#111827;font-weight:500;">${escaped(subject)}</p>
+
+              <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#8F57FF;">Your message</p>
+              <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#374151;">${escaped(message)}</p>
+
+              <!-- Divider -->
+              <div style="height:1px;background:#f0f0f4;margin:0 0 24px;"></div>
+
+              <p style="margin:0;font-size:15px;line-height:1.6;color:#374151;">
+                In the meantime, feel free to explore our work at
+                <a href="https://www.sparklinemarketingfirm.com" style="color:#4C2FFF;text-decoration:none;">sparklinemarketingfirm.com</a>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f9f9fb;border-radius:0 0 12px 12px;padding:20px 40px;border-top:1px solid #ebebf0;">
+              <p style="margin:0;font-size:12px;color:#9ca3af;">
+                Sparkline Marketing Firm &nbsp;·&nbsp; info@sparklinemarketingfirm.com &nbsp;·&nbsp; (470) 841-2335
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 function buildEmailHtml(name: string, email: string, subject: string, message: string): string {
   const escaped = (s: string) =>
     s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
@@ -107,13 +173,16 @@ export function ContactForm() {
           const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
           if (!apiKey) throw new Error("Email service not configured.");
 
-          const response = await fetch(BREVO_API, {
+          const headers = {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "api-key": apiKey,
+          };
+
+          // Send internal notification to Sparkline team
+          const internalRes = await fetch(BREVO_API, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              "api-key": apiKey,
-            },
+            headers,
             body: JSON.stringify({
               sender: SENDER,
               to: [RECIPIENT],
@@ -123,12 +192,24 @@ export function ContactForm() {
             }),
           });
 
-          if (!response.ok) {
-            const data = (await response.json().catch(() => null)) as { message?: string } | null;
+          if (!internalRes.ok) {
+            const data = (await internalRes.json().catch(() => null)) as { message?: string } | null;
             setErrorMessage(data?.message ?? "Unable to send your message right now.");
             setIsSubmitting(false);
             return;
           }
+
+          // Send confirmation email to the customer
+          await fetch(BREVO_API, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              sender: SENDER,
+              to: [{ name, email }],
+              subject: `We've received your enquiry — Sparkline Marketing Firm`,
+              htmlContent: buildConfirmationEmailHtml(name, subject, message),
+            }),
+          });
 
           setSubmitted(true);
         } catch {
