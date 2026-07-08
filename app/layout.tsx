@@ -73,11 +73,11 @@ export default async function RootLayout({
           <meta name="google-site-verification" content={analytics.gscCode} />
         )}
 
-        {/* GTM head snippet (takes priority over standalone GA4) */}
+        {/* GTM head snippet */}
         {analytics?.gtmId && <GtmHead gtmId={analytics.gtmId} />}
 
-        {/* Standalone GA4 — only when GTM is absent */}
-        {!analytics?.gtmId && analytics?.gaId && <Ga4Head gaId={analytics.gaId} />}
+        {/* GA4 — always inject directly so tracking works even if GTM has no GA4 tag */}
+        {analytics?.gaId && <Ga4Head gaId={analytics.gaId} />}
 
         {/* Global JSON-LD: Organization, Person, WebSite */}
         {jsonLdBlocks.length > 0 && <JsonLd data={jsonLdBlocks} />}
