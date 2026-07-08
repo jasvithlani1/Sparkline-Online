@@ -47,6 +47,9 @@ jobs:
           NEXT_PUBLIC_BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
 
+      - name: Create deployment probe
+        run: echo "deploy-$(date -u +%Y%m%dT%H%M%SZ)" > ./out/probe.txt
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -62,3 +65,17 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
+
+      - name: Verify deployment reached web root
+        run: |
+          sleep 15
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://sparklinemarketingfirm.com/probe.txt)
+          CONTENT=$(curl -s https://sparklinemarketingfirm.com/probe.txt 2>/dev/null || echo "")
+          echo "HTTP status: $STATUS"
+          echo "Content: $CONTENT"
+          if [ "$STATUS" = "200" ] && echo "$CONTENT" | grep -q "deploy-"; then
+            echo "✅ FTP deployment reached the live web root"
+          else
+            echo "❌ FTP deployment did NOT reach the live web root (HTTP $STATUS)"
+            echo "   Check that FTP_SERVER and FTP_REMOTE_DIR point to the correct SiteGround server and path"
+          fi
