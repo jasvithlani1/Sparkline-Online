@@ -588,7 +588,9 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
 
 export async function getBlogsPage(): Promise<{ seo?: PageSeo } | null> {
   if (isTest) return null;
-  return (await fetchSanity<{ seo?: PageSeo }>(BLOGS_PAGE_QUERY)) ?? null;
+  const result = (await fetchSanity<{ seo?: PageSeo }>(BLOGS_PAGE_QUERY)) ?? null;
+  console.log("[BUILD DIAG] getBlogsPage result:", JSON.stringify(result));
+  return result;
 }
 
 export async function getPortfolioPage(): Promise<{ seo?: PageSeo } | null> {

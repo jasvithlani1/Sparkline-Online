@@ -32,6 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Diagnose Sanity data
+        run: |
+          node -e "
+          fetch('https://8g3u06mk.api.sanity.io/v2026-05-30/data/query/production?query=*%5B_type%3D%3D%22blogsPage%22%5D%5B0%5D%7Bseo%7Btitle%2Cdescription%7D%7D')
+            .then(r=>r.json())
+            .then(d=>console.log('[SANITY DIAG]', JSON.stringify(d.result)))
+            .catch(e=>console.error('[SANITY DIAG ERROR]', e.message));
+          "
+
       - name: Build static site
         run: npm run build
         env:
