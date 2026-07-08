@@ -21,6 +21,8 @@ const calSans = localFont({
 
 const DEFAULT_SITE_URL = "https://www.sparklinemarketingfirm.com";
 const DEFAULT_SITE_NAME = "Sparkline Marketing Firm";
+const GA_ID = "G-C5KNB4HH7Z";
+const GSC_CODE = "ZKSqyuAGi_8sTtGgB_8Z-GSUueSw4PAWJlQ3p2zrXR8";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
@@ -69,15 +71,13 @@ export default async function RootLayout({
     <html lang="en" className={`${calSans.variable} h-full antialiased`}>
       <head>
         {/* Google Search Console verification */}
-        {analytics?.gscCode && (
-          <meta name="google-site-verification" content={analytics.gscCode} />
-        )}
+        <meta name="google-site-verification" content={GSC_CODE} />
 
         {/* GTM head snippet */}
         {analytics?.gtmId && <GtmHead gtmId={analytics.gtmId} />}
 
-        {/* GA4 — always inject directly so tracking works even if GTM has no GA4 tag */}
-        {analytics?.gaId && <Ga4Head gaId={analytics.gaId} />}
+        {/* GA4 */}
+        <Ga4Head gaId={GA_ID} />
 
         {/* Global JSON-LD: Organization, Person, WebSite */}
         {jsonLdBlocks.length > 0 && <JsonLd data={jsonLdBlocks} />}
