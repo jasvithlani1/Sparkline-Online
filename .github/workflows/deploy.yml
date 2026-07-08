@@ -47,7 +47,7 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./out/
-          server-dir: /
+          server-dir: sparklinemarketingfirm.com/public_html/
           exclude: |
             **/.git*
             **/.git*/**
