@@ -282,6 +282,7 @@ export default async function ServiceDetailPage({
         <Faq
           items={detail.faq}
           spacing="compactTop"
+          lines={detail.faqSubtitle ? [detail.faqSubtitle] : undefined}
         />
       ) : null}
 

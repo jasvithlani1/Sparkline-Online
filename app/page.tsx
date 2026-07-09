@@ -44,7 +44,10 @@ export default async function Home() {
         <ServiceBanner data={homeData?.serviceBanner} />
         <LogoGrid data={homeData?.trustedBy} />
         <WorkGallery projects={projects} content={homeData?.workGallerySection} />
-        <Faq items={homeData?.faq ?? undefined} />
+        <Faq
+          items={homeData?.faq ?? undefined}
+          lines={homeData?.faqSubtitle ? [homeData.faqSubtitle] : undefined}
+        />
       </div>
       <Footer />
     </main>

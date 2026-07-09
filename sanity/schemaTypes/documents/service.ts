@@ -212,6 +212,13 @@ export const service = defineType({
 
     // ── Section 8 — FAQ ───────────────────────────────────────────────────────
     defineField({
+      name: "faqSubtitle",
+      title: "FAQ Subtitle",
+      type: "string",
+      description: "Supporting sentence shown below the FAQ eyebrow heading.",
+      initialValue: "Common questions from businesses looking to grow their brand and digital presence.",
+    }),
+    defineField({
       name: "faq",
       title: "FAQ section",
       description: "Accordion FAQ items shown below the Process section.",

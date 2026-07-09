@@ -47,6 +47,7 @@ export const SERVICE_DETAIL_QUERY = defineQuery(/* groq */ `
     specialtiesHeading,
     specialties,
     process,
+    faqSubtitle,
     faq[]{
       _key,
       question,
@@ -163,6 +164,7 @@ export const HOME_PAGE_QUERY = defineQuery(/* groq */ `
         href
       }
     },
+    faqSubtitle,
     faq[]{
       "id": _key,
       question,
