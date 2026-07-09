@@ -215,7 +215,7 @@ export function ContactForm() {
           const writeToken = process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN;
           if (writeToken) {
             try {
-              await fetch(
+              const sanityRes = await fetch(
                 "https://8g3u06mk.api.sanity.io/v2026-05-30/data/mutate/production",
                 {
                   method: "POST",
@@ -240,9 +240,17 @@ export function ContactForm() {
                   }),
                 }
               );
-            } catch {
-              // Non-critical — email was already sent
+              const sanityData = await sanityRes.json().catch(() => null);
+              if (!sanityRes.ok) {
+                console.error("[Sanity] write failed", sanityRes.status, sanityData);
+              } else {
+                console.log("[Sanity] enquiry created", sanityData);
+              }
+            } catch (err) {
+              console.error("[Sanity] fetch error", err);
             }
+          } else {
+            console.warn("[Sanity] NEXT_PUBLIC_SANITY_WRITE_TOKEN not set");
           }
 
           setSubmitted(true);
