@@ -70,6 +70,11 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${calSans.variable} h-full antialiased`}>
       <head>
+        {/* Redirect /index.html → clean URL. nginx serves static files before
+            .htaccess fires on SiteGround, so this client-side redirect is the
+            only way to strip index.html without a server-level config change. */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var p=location.pathname;if(p.endsWith('/index.html'))location.replace(p.replace(/\\/index\\.html$/,'/')||'/')})()` }} />
+
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content={GSC_CODE} />
 
