@@ -211,6 +211,40 @@ export function ContactForm() {
             }),
           });
 
+          // Save enquiry to Sanity
+          const writeToken = process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN;
+          if (writeToken) {
+            try {
+              await fetch(
+                "https://8g3u06mk.api.sanity.io/v2026-05-30/data/mutate/production",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${writeToken}`,
+                  },
+                  body: JSON.stringify({
+                    mutations: [
+                      {
+                        create: {
+                          _type: "enquiry",
+                          name,
+                          email,
+                          subject,
+                          message,
+                          submittedAt: new Date().toISOString(),
+                          status: "new",
+                        },
+                      },
+                    ],
+                  }),
+                }
+              );
+            } catch {
+              // Non-critical — email was already sent
+            }
+          }
+
           setSubmitted(true);
         } catch {
           setErrorMessage("Unable to send your message right now.");
