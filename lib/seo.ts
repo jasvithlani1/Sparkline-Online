@@ -114,7 +114,7 @@ export function buildOrganizationLD(org: SiteSettingsOrg, siteUrl: string) {
   }
 
   if (org.openingHours?.length) {
-    base.openingHoursSpecification = org.openingHours;
+    base.openingHours = org.openingHours;
   }
 
   return base;
