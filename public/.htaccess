@@ -1,6 +1,22 @@
 Options -Indexes
 DirectoryIndex index.html
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Force non-www
+  RewriteCond %{HTTP_HOST} ^www\.sparklinemarketingfirm\.com [NC]
+  RewriteRule ^(.*)$ https://sparklinemarketingfirm.com/$1 [R=301,L]
+
+  # Remove index.html from URLs
+  RewriteCond %{THE_REQUEST} \s/(.+/)?index\.html[\s?] [NC]
+  RewriteRule ^(.+/)?index\.html$ https://sparklinemarketingfirm.com/%1 [R=301,L]
+</IfModule>
+
 # Prevent LiteSpeed (and any proxy) from caching HTML pages stale.
 # Two rules are needed:
 #   1. FilesMatch covers direct *.html file requests.

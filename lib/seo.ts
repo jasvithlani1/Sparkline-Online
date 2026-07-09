@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { SiteSettings, SiteSettingsOrg, SiteSettingsPerson } from "@/sanity/lib/content";
 
-const DEFAULT_SITE_URL = "https://www.sparklinemarketingfirm.com";
+const DEFAULT_SITE_URL = "https://sparklinemarketingfirm.com";
 const DEFAULT_SITE_NAME = "Sparkline Marketing Firm";
 
 // ── Sanitisation ─────────────────────────────────────────────────────────────

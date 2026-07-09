@@ -19,7 +19,7 @@ const calSans = localFont({
   weight: "400",
 });
 
-const DEFAULT_SITE_URL = "https://www.sparklinemarketingfirm.com";
+const DEFAULT_SITE_URL = "https://sparklinemarketingfirm.com";
 const DEFAULT_SITE_NAME = "Sparkline Marketing Firm";
 const GA_ID = "G-C5KNB4HH7Z";
 const GSC_CODE = "ZKSqyuAGi_8sTtGgB_8Z-GSUueSw4PAWJlQ3p2zrXR8";
