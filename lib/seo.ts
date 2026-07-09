@@ -108,8 +108,8 @@ export function buildOrganizationLD(org: SiteSettingsOrg, siteUrl: string) {
   if (org.geo?.latitude && org.geo?.longitude) {
     base.geo = {
       "@type": "GeoCoordinates",
-      latitude: org.geo.latitude,
-      longitude: org.geo.longitude,
+      latitude: parseFloat(String(org.geo.latitude)),
+      longitude: parseFloat(String(org.geo.longitude)),
     };
   }
 

@@ -8,7 +8,8 @@ import { NavbarServer as Navbar } from "@/components/landing/navbar-server";
 import { ServiceBanner } from "@/components/landing/service-banner";
 import { WorkGallery } from "@/components/landing/work-gallery";
 import { getPortfolioProjects, getHomePage, getSiteSettings } from "@/sanity/lib/content";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, buildFaqLD } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
 
 export const revalidate = 60;
 
@@ -29,9 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const projects = await getPortfolioProjects();
   const homeData = await getHomePage();
+  const faqItems = homeData?.faq ?? [];
 
   return (
     <main className="min-h-screen bg-white">
+      {faqItems.length > 0 && <JsonLd data={buildFaqLD(faqItems)} />}
       <div className="relative">
         <Navbar />
         <Hero data={homeData?.hero} />
