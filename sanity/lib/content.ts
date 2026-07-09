@@ -62,6 +62,7 @@ type ServiceDocument = {
   specialtiesHeading?: string;
   specialties?: string[];
   process?: { heading?: string; body?: string };
+  faqSubtitle?: string;
   faq?: FaqDocument[];
   cta?: { heading?: string; body?: string; label?: string };
   seo?: SeoDocument;
@@ -131,6 +132,7 @@ type ServiceDetail = {
   specialtiesHeading?: string;
   specialties: string[];
   process: { heading: string; body: string };
+  faqSubtitle?: string;
   faq: { id: string; question: string; answer: string }[];
   cta: { heading: string; body: string; label: string };
 };
@@ -277,6 +279,9 @@ export function toServiceDetail(doc: ServiceDocument): ServiceDetail {
       heading: doc.process?.heading ?? fallback?.process.heading ?? "How We Deliver",
       body: doc.process?.body ?? fallback?.process.body ?? "",
     },
+    ...(doc.faqSubtitle ?? fallback?.faqSubtitle
+      ? { faqSubtitle: doc.faqSubtitle ?? fallback?.faqSubtitle }
+      : {}),
     faq: toFaqItems(doc.faq, fallback?.faq),
     cta: {
       heading: doc.cta?.heading ?? fallback?.cta.heading ?? "Ready to start?",
