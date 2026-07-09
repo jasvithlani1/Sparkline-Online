@@ -3,6 +3,7 @@ import type { SiteSettings, SiteSettingsOrg, SiteSettingsPerson } from "@/sanity
 
 const DEFAULT_SITE_URL = "https://sparklinemarketingfirm.com";
 const DEFAULT_SITE_NAME = "Sparkline Marketing Firm";
+const DEFAULT_OG_IMAGE = "https://sparklinemarketingfirm.com/images/og-image.jpg";
 
 // ── Sanitisation ─────────────────────────────────────────────────────────────
 
@@ -47,7 +48,7 @@ export function buildMetadata(input: PageSeoInput): Metadata {
 
   const siteName = siteSettings?.siteTitle ?? DEFAULT_SITE_NAME;
   const siteUrl = siteSettings?.siteUrl ?? DEFAULT_SITE_URL;
-  const resolvedOg = ogImageUrl ?? siteSettings?.defaultOgImageUrl;
+  const resolvedOg = ogImageUrl ?? siteSettings?.defaultOgImageUrl ?? DEFAULT_OG_IMAGE;
 
   const pageTitle = title ?? siteName;
   const canonical = canonicalUrl ?? `${siteUrl}${path}`;

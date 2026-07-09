@@ -13,8 +13,8 @@ DirectoryIndex index.html
   RewriteRule ^(.*)$ https://sparklinemarketingfirm.com/$1 [R=301,L]
 
   # Remove index.html from URLs
-  RewriteCond %{THE_REQUEST} \s/(.+/)?index\.html[\s?] [NC]
-  RewriteRule ^(.+/)?index\.html$ https://sparklinemarketingfirm.com/%1 [R=301,L]
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteRule ^(.*/)index\.html$ /$1 [R=301,L]
 </IfModule>
 
 # Prevent LiteSpeed (and any proxy) from caching HTML pages stale.
