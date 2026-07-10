@@ -86,7 +86,16 @@ export function buildOrganizationLD(org: SiteSettingsOrg, siteUrl: string) {
     "@id": `${siteUrl}/#organization`,
     name: org.name,
     url: org.url ?? siteUrl,
-    ...(org.logoUrl ? { logo: { "@type": "ImageObject", url: org.logoUrl } } : {}),
+    ...(org.logoUrl ? {
+      logo: (() => {
+        const dims = org.logoUrl.match(/-(\d+)x(\d+)\.[a-z]+$/i);
+        return {
+          "@type": "ImageObject",
+          url: org.logoUrl,
+          ...(dims ? { width: parseInt(dims[1]), height: parseInt(dims[2]) } : {}),
+        };
+      })(),
+    } : {}),
     ...(org.telephone ? { telephone: org.telephone } : {}),
     ...(org.email ? { email: org.email } : {}),
     ...(org.sameAs?.length ? { sameAs: org.sameAs } : {}),
@@ -142,7 +151,7 @@ export function buildWebSiteLD(siteName: string, siteUrl: string) {
     url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: `${siteUrl}/blogs?q={search_term_string}` },
+      target: `${siteUrl}/blogs?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
