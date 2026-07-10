@@ -179,37 +179,44 @@ export function ContactForm() {
             "api-key": apiKey,
           };
 
-          // Send internal notification to Sparkline team
-          const internalRes = await fetch(BREVO_API, {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-              sender: SENDER,
-              to: [RECIPIENT],
-              replyTo: { name, email },
-              subject: `New Enquiry: ${subject}`,
-              htmlContent: buildEmailHtml(name, email, subject, message),
+          // Fire both emails concurrently — internal notification and customer confirmation
+          const [internalRes, customerRes] = await Promise.all([
+            fetch(BREVO_API, {
+              method: "POST",
+              headers,
+              body: JSON.stringify({
+                sender: SENDER,
+                to: [RECIPIENT],
+                replyTo: { name, email },
+                subject: `New Enquiry: ${subject}`,
+                htmlContent: buildEmailHtml(name, email, subject, message),
+              }),
             }),
-          });
+            fetch(BREVO_API, {
+              method: "POST",
+              headers,
+              body: JSON.stringify({
+                sender: SENDER,
+                to: [{ name, email }],
+                subject: `We've received your enquiry — Sparkline Marketing Firm`,
+                htmlContent: buildConfirmationEmailHtml(name, subject, message),
+              }),
+            }),
+          ]);
 
+          // Internal notification failure is logged but never blocks the submission
           if (!internalRes.ok) {
-            const data = (await internalRes.json().catch(() => null)) as { message?: string } | null;
+            const d = await internalRes.json().catch(() => null);
+            console.error("[Brevo] internal notification failed", internalRes.status, d);
+          }
+
+          // Customer confirmation failure is shown to the user
+          if (!customerRes.ok) {
+            const data = (await customerRes.json().catch(() => null)) as { message?: string } | null;
             setErrorMessage(data?.message ?? "Unable to send your message right now.");
             setIsSubmitting(false);
             return;
           }
-
-          // Send confirmation email to the customer
-          await fetch(BREVO_API, {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-              sender: SENDER,
-              to: [{ name, email }],
-              subject: `We've received your enquiry — Sparkline Marketing Firm`,
-              htmlContent: buildConfirmationEmailHtml(name, subject, message),
-            }),
-          });
 
           // Save enquiry to Sanity
           const writeToken = process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN;
