@@ -36,7 +36,8 @@ export const servicesPage = defineType({
         defineField({
           name: "line",
           title: "Subheading",
-          type: "string",
+          type: "text",
+          rows: 2,
           description: "Short description shown below the heading.",
         }),
         defineField({

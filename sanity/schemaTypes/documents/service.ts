@@ -214,7 +214,8 @@ export const service = defineType({
     defineField({
       name: "faqSubtitle",
       title: "FAQ Subtitle",
-      type: "string",
+      type: "text",
+      rows: 2,
       description: "Supporting sentence shown below the FAQ eyebrow heading.",
       initialValue: "Common questions from businesses looking to grow their brand and digital presence.",
     }),
